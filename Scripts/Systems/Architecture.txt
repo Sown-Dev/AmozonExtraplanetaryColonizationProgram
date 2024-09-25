@@ -1,0 +1,6 @@
+﻿
+Item: Scriptable Object representing a type of item. Can't be null
+|
+V
+ItemStack: represents an instance of an item. Can be null
+

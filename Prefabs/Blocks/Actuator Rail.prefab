@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &46260514616324935
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5380497902503018641, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: properties.name
+      value: ActuatorRail
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654540776376871885, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7340186497895894530, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_Name
+      value: Actuator Rail
+      objectReference: {fileID: 0}
+    - target: {fileID: 9085930950661871422, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 46daf463a2e089c4788ab7320b1626c5, type: 3}
+    m_RemovedComponents:
+    - {fileID: -5380497902503018641, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7340186497895894530, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7460543281120615039}
+  m_SourcePrefab: {fileID: 100100000, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+--- !u!1 &7312100920309923141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7340186497895894530, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+  m_PrefabInstance: {fileID: 46260514616324935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-7460543281120615039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312100920309923141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9901d690651ea944c94208f711cdde42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 9129904469121213561}
+  bc: {fileID: 7937583103078697005}
+  baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
+  properties:
+    <myItem>k__BackingField: {fileID: 11400000, guid: 7bc9ff4621119434aafddd30fee4311c, type: 2}
+    name: Actuator Rail
+    indestructible: 0
+    rotateable: 0
+    actuatable: 1
+    size: {x: 1, y: 1}
+    description: 
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
+  lootTable: []
+  rotation: 0
+  origin: {x: 0, y: 0}
+  vert: {fileID: 21300000, guid: 56f67a38895bf61468d8af112b7a6608, type: 3}
+  horiz: {fileID: 21300000, guid: 9b56e53516f6faf49bb81fbb75761a21, type: 3}
+  upLeft: {fileID: 21300000, guid: 1e06456bdd469024cb130c188868c54d, type: 3}
+  upRight: {fileID: 21300000, guid: 46daf463a2e089c4788ab7320b1626c5, type: 3}
+  downLeft: {fileID: 21300000, guid: 7af309231e34bdf4f8a92503787b0e10, type: 3}
+  downRight: {fileID: 21300000, guid: 096ea0b891c112d44b486c03809340b6, type: 3}
+  myCart: {fileID: 0}
+--- !u!61 &7937583103078697005 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7963398195754777450, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+  m_PrefabInstance: {fileID: 46260514616324935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &9129904469121213561 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9085930950661871422, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
+  m_PrefabInstance: {fileID: 46260514616324935}
+  m_PrefabAsset: {fileID: 0}

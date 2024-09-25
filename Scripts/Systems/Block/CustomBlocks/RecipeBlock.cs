@@ -1,0 +1,104 @@
+﻿using System.Collections.Generic;
+using Systems.Block.CustomBlocks;
+using Systems.Items;
+using UnityEngine;
+
+namespace Systems.Block{
+    public class RecipeBlock : ProgressMachineContainerBlock{
+        public GameObject[] CraftingFX;
+    
+
+
+        public RecipeSelector recipeSelector;
+        
+        public Container input;
+        public ContainerProperties inputProperties;
+       
+        public override bool Insert(ref ItemStack s, bool simulate = false){
+            return input.Insert(ref s, simulate);
+        }
+        
+        
+        public override bool BlockDestroy(bool dropItems){
+            lootTable.AddRange(input.GetItems());
+            return base.BlockDestroy();
+        }
+
+        protected override void Awake(){
+            base.Awake();
+            
+            input = new Container(inputProperties);
+
+            input.Priority = 1;
+            progressBar.Priority = 2;
+            output.Priority = 5;
+
+        
+
+            recipeSelector.onRecipeChanged += SetRecipe;
+        }
+
+        private void Start(){
+            recipeSelector.SelectRecipe(recipeSelector.recipes[0]);
+        }
+
+        bool isCrafting = false;
+        public override void Tick(){
+            base.Tick();
+
+            foreach (GameObject fx in CraftingFX){
+                fx.SetActive(isCrafting);
+            }
+        }
+
+        public override bool CanProgress(){
+            return base.CanProgress() && CanCraft();
+            
+        }
+
+        public override void CompleteCycle(){
+            base.CompleteCycle();
+            Craft();
+        }
+
+        public virtual void Craft(){
+            if (CanCraft()){
+                foreach (ItemStack ingredient in recipeSelector.currentRecipe.ingredients){
+                    input.RemoveItem(ingredient);
+                }
+
+                foreach (ItemStack result in recipeSelector.currentRecipe.results){
+                    var itemStack = result.Clone();
+                    output.Insert(ref itemStack);
+                }
+            }
+        }
+
+        public virtual bool CanCraft(){
+            return input.Contains(recipeSelector.currentRecipe?.ingredients);
+        }
+
+        public virtual void SetRecipe(){
+            foreach (Slot s in input.containerList){
+                if(s.ItemStack != null)
+                    s.ExtractToContainer(output);
+            }
+
+            if (recipeSelector.currentRecipe != null){
+                List<Slot> newSlots = new List<Slot>();
+                for (int i = 0; i < recipeSelector.currentRecipe.ingredients.Count; i++){
+                    newSlots.Add(new Slot());
+                    newSlots[i].filter = recipeSelector.currentRecipe.ingredients[i].item;
+                }
+
+                inputProperties.size = recipeSelector.currentRecipe.ingredients.Count;
+                inputProperties.gridWidth = inputProperties.size;
+                input = new Container(inputProperties, newSlots);
+                input.blackList = true;
+            }
+            //move all input items to output
+        
+            UpdateUI?.Invoke();
+        }
+    }
+}

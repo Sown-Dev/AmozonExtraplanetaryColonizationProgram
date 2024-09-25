@@ -1,0 +1,318 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5403146967398772092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8199239802817709033}
+  m_Layer: 0
+  m_Name: FX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8199239802817709033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5403146967398772092}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.125, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1872547233348933767}
+  m_Father: {fileID: 3823172696265502063}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6892263534564227694
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8199239802817709033}
+    m_Modifications:
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807270565530169728, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+      propertyPath: m_Name
+      value: Smoke (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+--- !u!4 &1872547233348933767 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5069543428026753769, guid: f53a8ea7e8f11734d98a5a9cb58b8c26, type: 3}
+  m_PrefabInstance: {fileID: 6892263534564227694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8315561221462312179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: properties.size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: properties.size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: 'DrillFX.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5403146967398772092}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: outputProperties.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: properties.rotateable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: properties.description
+      value: Uses a 20g portable fusion generator to mine ore forever.
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: outputProperties.gridWidth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.data[1].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.data[2].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.data[2].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.data[3].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.data[3].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: DrillPositions.Array.data[4].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: properties.<myItem>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
+    - target: {fileID: -3408744771112471942, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: properties.<blockName>k__BackingField
+      value: Large Drill
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449576365950138683, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449576365950138683, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071626970990201939, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_Name
+      value: Old Drill
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560868191791535471, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 581b853d66adc3741bc0c22f2ec19635, type: 3}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7808764944778905277, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+    - {fileID: 3828771510849867596, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 582647105868872664, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8199239802817709033}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3071626970990201939, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8116314529978101516}
+  m_SourcePrefab: {fileID: 100100000, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+--- !u!4 &3823172696265502063 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+  m_PrefabInstance: {fileID: 8315561221462312179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4759302182639931804 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3560868191791535471, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+  m_PrefabInstance: {fileID: 8315561221462312179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &5951623896034721224 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2449576365950138683, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+  m_PrefabInstance: {fileID: 8315561221462312179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6468948809981823136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3071626970990201939, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+  m_PrefabInstance: {fileID: 8315561221462312179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8116314529978101516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6468948809981823136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d067a6654c09b45bb64ac54095aaf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 4759302182639931804}
+  bc: {fileID: 5951623896034721224}
+  baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
+  properties:
+    <myItem>k__BackingField: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
+    name: Old Drill
+    indestructible: 0
+    rotateable: 0
+    actuatable: 0
+    size: {x: 2, y: 1}
+    description: An onboard 20g integrated fusion reactor allows this thing to mine
+      basically forever
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
+  lootTable: []
+  rotation: 0
+  origin: {x: 0, y: 0}
+  outputProperties:
+    size: 8
+    name: 
+    gridWidth: 4
+    scaleDownGridIfSmaller: 0
+    type: 0
+  DrillTime: 40
+  DrillAmount: 0
+  DrillPositions:
+  - {x: 0, y: 0}
+  DrillFX:
+  - {fileID: 5403146967398772092}

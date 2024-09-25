@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
+  m_Name: Crate
+  m_EditorClassIdentifier: 
+  stackSize: 8
+  icon: {fileID: 21300000, guid: b5ceab370a772a24c83fdebc77d21710, type: 3}
+  category: 2
+  useCursor: 1
+  value: 6
+  tier: 3
+  description: basic storage
+  blockPrefab: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
+  blockCategory: 8

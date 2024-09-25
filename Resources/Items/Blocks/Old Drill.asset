@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
+  m_Name: Old Drill
+  m_EditorClassIdentifier: 
+  idname: industrialdrill
+  stackSize: 16
+  icon: {fileID: 21300000, guid: 581b853d66adc3741bc0c22f2ec19635, type: 3}
+  category: 2
+  useCursor: 1
+  value: 100
+  tier: 3
+  description: 
+  blockPrefab: {fileID: -8116314529978101516, guid: 551fff57797650e47917753ab276a1b1, type: 3}

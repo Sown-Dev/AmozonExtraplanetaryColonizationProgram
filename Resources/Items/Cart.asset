@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13434278d9f8f884c8d6c565d979edc0, type: 3}
+  m_Name: Cart
+  m_EditorClassIdentifier: 
+  idname: cart
+  stackSize: 32
+  icon: {fileID: 21300000, guid: 6200d0af0e0a5b84581b98a39f5817bf, type: 3}
+  category: 3
+  useCursor: 0
+  value: 120
+  tier: 3
+  description: A powered minecart with a crate for items. Place on track.
+  cartPrefab: {fileID: 6769077052568743214, guid: c690a008b26392a458978a715e632884, type: 3}

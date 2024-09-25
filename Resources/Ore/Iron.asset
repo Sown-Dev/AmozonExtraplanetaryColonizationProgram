@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df92101969073b4d92b9089f1f6b7a3, type: 3}
+  m_Name: Iron
+  m_EditorClassIdentifier: 
+  threshold: 0.87
+  scale: 0.16
+  minAmount: 900
+  maxAmount: 1600
+  variance: 200
+  ore:
+    myProperties: {fileID: 11400000}
+    oreItem: {fileID: 11400000, guid: 50c4c47b96150104da4829c44e3b81c6, type: 2}
+    tile: {fileID: 11400000, guid: 6dbb4159875c6284ab6318d5f40b5880, type: 2}
+    amount: 0

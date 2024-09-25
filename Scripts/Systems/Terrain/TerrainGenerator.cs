@@ -1,0 +1,189 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Systems.Block;
+using Systems.Items;
+using Systems.Terrain;
+using UnityEngine;
+using Random = UnityEngine.Random;
+using Terrain = Systems.Terrain.Terrain;
+
+public partial class TerrainManager
+{
+        [SerializeField] private RuleTile rockWall;
+
+    [Header("Terrain")]
+    [SerializeField] private TerrainProperties Grass;
+    [SerializeField] private TerrainProperties Stone;
+
+
+    [Header("Blocks")]
+
+    [SerializeField] private Block Tree;
+    [SerializeField] private Block Crystal;
+    [SerializeField] private Block SellBlock;
+    [SerializeField] private Block BigCrate;
+
+    //[SerializeField] private Block Rock1x;
+    [SerializeField] private Block Rock2x;
+
+
+
+
+
+    public void GenerateTerrain()
+    {
+
+
+        float noiseOffset = 50000 * Random.value + 10000;
+
+        for (int i = 0; i < 2000; i++)
+        {
+            //PlaceBlock(Rock2x, new Vector2Int(Random.Range(-200,200),Random.Range(-200,200)));
+
+        }
+
+        float centerNoise = 0;
+        for (int i = -200; i < 200; i++)
+        {
+            for (int j = -200; j < 200; j++)
+            {
+                Vector2Int position = new Vector2Int(i, j);
+
+                try
+                {
+                    // Sample Perlin noise for this position
+
+                    bool placedOre = false; 
+
+                     float perlin1 = Mathf.PerlinNoise(i * 0.2f - noiseOffset/3 * 3, j * 0.2f - noiseOffset*2) +
+                                    Random.Range(-0.01f, 0.01f);
+
+                     float perlin2 = Mathf.PerlinNoise(i * 0.095f + noiseOffset * 3, j * 0.09f + noiseOffset) +
+                                     Random.Range(-0.01f, 0.01f) + j / 1000f;
+
+                     if (i == 0 && j == 0){
+                         centerNoise = perlin2;
+                     } 
+
+                    if (perlin2 > 0.2f)
+                    {
+                        SetTerrain(position, Stone);
+                        if (perlin2 * (perlin2) > 0.45f)
+                        {
+                            SetTerrain(position, Grass);
+
+                        }
+
+                        for (int k = 0; k < ItemManager.Instance.allOres.Length; k++)
+                        {
+                            float perlinValue = Mathf.PerlinNoise(i * ItemManager.Instance.allOres[k].scale + noiseOffset + (10000 * k),
+                                j * ItemManager.Instance.allOres[k].scale + noiseOffset + (20000 * k));
+
+                            OreProperties oreProperties = ItemManager.Instance.allOres[k];
+                            if (perlinValue > oreProperties.threshold + 0.01f)
+                            {
+                                int amount = (int)(oreProperties.minAmount +
+                                                   (oreProperties.maxAmount - oreProperties.minAmount) *
+                                                   (perlinValue - oreProperties.threshold) / 0.3f +
+                                                   Random.Range(-oreProperties.variance, oreProperties.variance));
+                                SetOre(position, oreProperties.ore, amount);
+                                placedOre = true;
+                            }
+                        }
+
+                        
+
+                    }
+                    else
+                    {
+                        SetTerrain(position, Stone);
+
+                    }
+                    if (Random.value > 0.995f)
+                    {
+                        PlaceBlock(Rock2x, position - Vector2Int.one);
+
+                    }
+
+                    if (((perlin2 * perlin2)< 0.34f && perlin2>0.03f) || (perlin1 <0.5f &&perlin2<0.52f))
+                    {
+                        SetWall(rockWall, (Vector3Int)position);
+                    }
+
+
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Error at " + position + ": " + e.Message);
+                }
+            }
+        }
+
+        bool inverse=false;
+        inverse = centerNoise < 0.5f;
+        
+        int a = 18;
+        for (int i = -a; i <= a; i++){
+            for(int j = -a; j <= a; j++){
+                float perlin2 = Mathf.PerlinNoise(i * 0.095f + noiseOffset * 3, j * 0.09f + noiseOffset) +
+                                Random.Range(-0.01f, 0.01f) + j / 1000f;
+                float myDist = Mathf.Sqrt(i * i + j * (j/2));
+                float myPerlin = perlin2+ (inverse? myDist:-myDist)/(a*2);
+                if (inverse? myPerlin<0.75f: myPerlin>0.25f){
+                    SetWall(null, new Vector3Int(i, j, 0));
+                }
+            }
+        }
+
+
+        //Place seller at fixed position
+        PlaceBlock(SellBlock, new Vector2Int(0, 2));
+
+#if ALLITEMS1
+        PlaceBlock(BigCrate, new Vector2Int(0, -4));
+        ContainerBlock c = GetBlock(new Vector2Int(0, -4)) as ContainerBlock;
+
+        foreach (List<Item> list in ItemManager.Instance.itemDict.Values)
+        {
+            foreach (Item item in list)
+            {
+                ItemStack i = new ItemStack(item, 8);
+                c.output.Insert(ref i);
+            }
+        }
+#endif
+
+        //now place worldgen:
+
+        for (int i = 0; i < 800; i++){
+            Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
+            if (!IsWall((Vector3Int)pos)){
+                if (GetTerrain(pos).myProperties == Grass){
+                    PlaceBlock(Tree, pos);
+                }
+                else{
+                    PlaceBlock(Crystal, pos);
+                }
+            }
+        }
+
+        for (int i = 0; i < 20; i++){
+            Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
+            SetWall(null,(Vector3Int)pos);
+            for (int j = 0; j < 7; j++){
+                SetWall(null, (Vector3Int)pos+ Vector3Int.RoundToInt(Random.insideUnitCircle*1.5f));
+            }
+            
+
+            PlaceBlock(Crystal, pos);
+            
+        }
+
+
+
+        GC.Collect();
+
+
+    }
+}
