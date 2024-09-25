@@ -7,11 +7,30 @@ public class Burner: IBlockUI, IContainer{
     public Container fuelContainer;
     
     public int fuelTime;
-
+    public int burnRate;
     
-    public Burner(int size, Item filter = null){
+    
+    public Burner(int size,  int _burnRate, Item[] filter = null){
         fuelContainer = new Container(new ContainerProperties(size));
+        burnRate = _burnRate;
     }
+    
+    public bool Burn(){
+        if(fuelTime > 0){
+            fuelTime-=burnRate;
+            return true;
+        }else{
+            if (!fuelContainer.isEmpty()){
+                if (fuelContainer.GetExtractionSlot().Decrement()){
+                    fuelTime= 100;
+                }
+                return false;
+            }
+        }
+
+        return false;
+    }
+    
     
     
 

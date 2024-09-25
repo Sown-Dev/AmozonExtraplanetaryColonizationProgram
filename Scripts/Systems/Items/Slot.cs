@@ -11,18 +11,19 @@ namespace Systems.Items{
 
         public bool Selected;
         public Action OnChange;
-        
+
         //Temp solution for rendering performance: when changing, we mark the slot as dirty, and when we render we clean, so we only render when we change the slot
-        public bool dirty=true; //true by default so we atleast render once. worst case we render once more than needed on awake
+        public bool
+            dirty = true; //true by default so we atleast render once. worst case we render once more than needed on awake
 
         public Slot(){
             ItemStack = null;
             //OnChange += ()=>{dirty = true;};
         }
-       
-        public Slot(ItemStack i = null,int _Stacksize=64 ){
+
+        public Slot(ItemStack i = null, int _Stacksize = 64){
             ItemStack = i;
-            Stacksize= _Stacksize;
+            Stacksize = _Stacksize;
             //OnChange += ()=>{dirty = true;};
         }
 
@@ -41,30 +42,28 @@ namespace Systems.Items{
             return false;
         }
 
-    
-        public bool Insert(ref ItemStack other)
-        {
+
+        public bool Insert(ref ItemStack other){
             if (other == null || !CanAccept(other)) return false;
 
-            if (ItemStack == null)
-            {
+            if (ItemStack == null){
                 // Directly set the ItemStack if the slot is empty
                 ItemStack = other.Clone();
                 ItemStack.amount = 0; // Start with zero and combine amounts
             }
-            
+
 
             Combine(ref other);
             OnChange?.Invoke();
-            
+
             return other == null;
         }
 
-        
+
         // This method now leverages the core Insert logic for ItemStack to maintain consistency
         public bool Insert(Slot other){
-            if(!CanAccept(other.ItemStack)) return false;
-            
+            if (!CanAccept(other.ItemStack)) return false;
+
             if (other.ItemStack == null) return false;
 
             //else
@@ -81,17 +80,14 @@ namespace Systems.Items{
                 return true;
             }
             else{
-                
-                    CombineSlots(other);
+                CombineSlots(other);
 
-                    OnChange?.Invoke();
-                    return true;
-                
+                OnChange?.Invoke();
+                return true;
             }
-
         }
-        
-        
+
+
         //this will do for now. use this to insert into containers instead of their insert
         public bool ExtractToContainerBlock(IContainerBlock other){
             if (other.Insert(ref this.ItemStack)){
@@ -101,8 +97,8 @@ namespace Systems.Items{
 
             return false;
         }
-        
-        
+
+
         public bool ExtractToContainer(Container other){
             if (other.Insert(ref this.ItemStack)){
                 OnChange?.Invoke();
@@ -117,19 +113,17 @@ namespace Systems.Items{
             Combine(ref other.ItemStack);
             other.OnChange?.Invoke();
         }
-        
+
         public void Combine(ref ItemStack other){
             int size = Mathf.Min(Stacksize, ItemStack?.item.stackSize ?? 512);
-            
-            int myAmount = ItemStack?.amount ?? 0;
-            ItemStack.amount = Mathf.Min(size, other.amount+ myAmount);
-            other.amount -= ItemStack.amount -myAmount;
-            
-            if (other.amount <= 0) other= null;
-            
-            OnChange?.Invoke();
 
-            
+            int myAmount = ItemStack?.amount ?? 0;
+            ItemStack.amount = Mathf.Min(size, other.amount + myAmount);
+            other.amount -= ItemStack.amount - myAmount;
+
+            if (other.amount <= 0) other = null;
+
+            OnChange?.Invoke();
         }
 
 
@@ -141,9 +135,8 @@ namespace Systems.Items{
                 Debug.Log("Can't accept due to filter mismatch.");
                 return false;
             }
-            
-            return true;
 
+            return true;
         }
 
         public virtual bool CanAccept(ItemStack other, bool ignoreStackSize = true){
@@ -154,14 +147,14 @@ namespace Systems.Items{
                 Debug.Log("Can't accept due to filter mismatch.");
                 return false;
             }
-            
-            if(ItemStack !=null && ItemStack?.item != other.item){
+
+            if (ItemStack != null && ItemStack?.item != other.item){
                 return false;
             }
-            
+
 
             // Ignore stack size for swap operations
-            if (ignoreStackSize) 
+            if (ignoreStackSize)
                 return true;
 
             // Check against stacksize if not ignoring it
@@ -172,6 +165,19 @@ namespace Systems.Items{
 
             return false;
         }
+
+        public bool Decrement(){
+            if (ItemStack == null) return false;
+            OnChange?.Invoke();
+            ItemStack.amount--;
+            if (ItemStack.amount <= 0){
+                ItemStack = null;
+                return true;
+            }
+
+            return true;
+        }
+
 
         public bool IsEmpty(){
             if (ItemStack?.amount <= 0) ItemStack = null;
