@@ -18,7 +18,10 @@ namespace UI.BlockUI{
         [SerializeField] private GameObject progressBarUIPrefab;
         [SerializeField] private GameObject DirectionalSelectUIPrefab;
         [SerializeField] private GameObject RecipeSelectUIPrefab;
-[SerializeField] private GameObject buttonUIPrefab;
+        [SerializeField] private GameObject buttonUIPrefab;
+
+        [SerializeField] private GameObject burnerUIPrefab;
+
         
         [SerializeField] private Transform windowTransform;
         [SerializeField] private TMP_Text nameText;
@@ -85,6 +88,10 @@ namespace UI.BlockUI{
             else if (component is StringBlockUI textBlock){
                 AddText(textBlock.text);
             }
+            else if (component is Burner burner){
+                BurnerUI burnerUI= Instantiate(burnerUIPrefab, windowTransform).GetComponent<BurnerUI>();
+                burnerUI.Init(burner);
+            }
         }
         public void AddText(string text){
             TMP_Text textUI = Instantiate(nameText, windowTransform);
@@ -117,6 +124,7 @@ namespace UI.BlockUI{
             RecipeSelectUI recipeSelectUI= Instantiate(RecipeSelectUIPrefab, windowTransform).GetComponent<RecipeSelectUI>();
             recipeSelectUI.recipeSelector = r;
         }
+      
 
         public override void Close(){
             OnClose?.Invoke();

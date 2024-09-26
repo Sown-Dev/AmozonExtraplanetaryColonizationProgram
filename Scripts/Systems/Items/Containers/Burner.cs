@@ -1,4 +1,6 @@
-﻿using Systems.BlockUI;using Systems.Items;
+﻿using System.Linq;
+using Systems.BlockUI;using Systems.Items;
+using UnityEngine;
 
 public class Burner: IBlockUI, IContainer{
     public int Priority{ get; set; }
@@ -6,12 +8,15 @@ public class Burner: IBlockUI, IContainer{
     
     public Container fuelContainer;
     
-    public int fuelTime;
+    [HideInInspector]public int fuelTime;
+    public int maxFuelTime = 96;
     public int burnRate;
     
     
     public Burner(int size,  int _burnRate, Item[] filter = null){
         fuelContainer = new Container(new ContainerProperties(size));
+        fuelContainer.filterList = filter.ToList();
+        fuelContainer.blackList = false;
         burnRate = _burnRate;
     }
     
@@ -22,7 +27,7 @@ public class Burner: IBlockUI, IContainer{
         }else{
             if (!fuelContainer.isEmpty()){
                 if (fuelContainer.GetExtractionSlot().Decrement()){
-                    fuelTime= 100;
+                    fuelTime= maxFuelTime;
                 }
                 return false;
             }

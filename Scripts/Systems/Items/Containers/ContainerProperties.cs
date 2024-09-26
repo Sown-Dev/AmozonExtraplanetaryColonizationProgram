@@ -9,11 +9,11 @@ namespace Systems.Items{
         public bool scaleDownGridIfSmaller;
     
         public ContainerType type;
-        public ContainerProperties(int size){
-            this.size = size;
+        public ContainerProperties(int _size, string _name=""){
+            size = _size;
             gridWidth = 8;
             scaleDownGridIfSmaller = true;
-            name = "Container";
+            name = _name;
             type = ContainerType.FIFO;
         }
     }

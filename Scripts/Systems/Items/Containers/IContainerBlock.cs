@@ -1,7 +1,7 @@
 ﻿using Systems.Items;
 
 
-//kind of unecessary, some might even say completely retarded, but this is to have a distinction between blocks that are containers and general containers with no blocks attached to them
+//kind of unecessary, some might even say completely , but this is to have a distinction between blocks that are containers and general containers with no blocks attached to them
 public interface IContainerBlock: IContainer{
     
 }

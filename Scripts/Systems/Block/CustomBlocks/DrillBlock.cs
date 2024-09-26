@@ -50,7 +50,7 @@ namespace Systems.Block{
                 output.Insert(ref item);
         }
 
-        public bool CanMine(){
+        public virtual bool CanMine(){
             if(output.isFull()) return false;
             
             foreach (Vector2Int pos in DrillPositions){

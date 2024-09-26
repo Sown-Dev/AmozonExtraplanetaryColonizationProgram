@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fill: {fileID: 773521430464931746}
+  bg: {fileID: 4716004662865372082}
 --- !u!222 &4948806405219590957
 CanvasRenderer:
   m_ObjectHideFlags: 0
