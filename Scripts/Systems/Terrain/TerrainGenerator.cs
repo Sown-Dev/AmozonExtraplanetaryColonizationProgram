@@ -56,11 +56,11 @@ public partial class TerrainManager
 
                     bool placedOre = false; 
 
-                     float perlin1 = Mathf.PerlinNoise(i * 0.2f - noiseOffset/3 * 3, j * 0.2f - noiseOffset*2) +
+                     float perlin1 = Mathf.PerlinNoise(i * 0.2f - (noiseOffset/3 * 3), j * 0.2f - noiseOffset*2) +
                                     Random.Range(-0.01f, 0.01f);
 
-                     float perlin2 = Mathf.PerlinNoise(i * 0.095f + noiseOffset * 3, j * 0.09f + noiseOffset) +
-                                     Random.Range(-0.01f, 0.01f) + j / 1000f;
+                     float perlin2 = Mathf.PerlinNoise(i * 0.09f + (noiseOffset * 3), j * 0.09f + noiseOffset) +
+                                     Random.Range(-0.01f, 0.01f);
 
                      if (i == 0 && j == 0){
                          centerNoise = perlin2;
@@ -81,14 +81,15 @@ public partial class TerrainManager
                                 j * ItemManager.Instance.allOres[k].scale + noiseOffset + (20000 * k));
 
                             OreProperties oreProperties = ItemManager.Instance.allOres[k];
-                            if (perlinValue > oreProperties.threshold + 0.01f)
+                            if (perlinValue > oreProperties.threshold + Random.Range(-0.01f, 0.01f))
                             {
                                 int amount = (int)(oreProperties.minAmount +
                                                    (oreProperties.maxAmount - oreProperties.minAmount) *
                                                    (perlinValue - oreProperties.threshold) / 0.3f +
                                                    Random.Range(-oreProperties.variance, oreProperties.variance));
                                 SetOre(position, oreProperties.ore, amount);
-                                placedOre = true;
+                                //placedOre = true;
+                                break;
                             }
                         }
 
@@ -104,9 +105,9 @@ public partial class TerrainManager
                     {
                         PlaceBlock(Rock2x, position - Vector2Int.one);
 
-                    }
+                    } 
 
-                    if (((perlin2 * perlin2)< 0.39f && perlin2>0.03f) || (perlin1 <0.55f &&perlin2<0.52f))
+                    if ((perlin2)< 0.79f )//&& perlin2>0.03f) )) | (perlin1 <0.55f &&perlin2<0.52f
                     {
                         SetWall(rockWall, (Vector3Int)position);
                     }

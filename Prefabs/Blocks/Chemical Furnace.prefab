@@ -5129,11 +5129,87 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5557327440083354795}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5521663342123888147}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
 --- !u!4 &938380360813477098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 4850456076238693850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7047352849423587621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 4850456076238693850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5521663342123888147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047352849423587621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff64951b24f2284f83533b629052923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 8793023899972616217}
+  bc: {fileID: 7679484945097419853}
+  baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
+  properties:
+    <myItem>k__BackingField: {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
+    name: Chemical Furnace
+    indestructible: 0
+    rotateable: 0
+    actuatable: 0
+    size: {x: 2, y: 2}
+    description: Smelts using corbydine
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
+  lootTable: []
+  rotation: 0
+  tile: {fileID: 0}
+  origin: {x: 0, y: 0}
+  <baseSpeed>k__BackingField: 1
+  outputProperties:
+    size: 4
+    name: out
+    gridWidth: 4
+    scaleDownGridIfSmaller: 0
+    type: 0
+  CraftingFX:
+  - {fileID: 6821569010845340664}
+  recipeSelector:
+    recipes:
+    - {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
+    - {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
+    currentRecipe: {fileID: 0}
+  inputProperties:
+    size: 0
+    name: 
+    gridWidth: 0
+    scaleDownGridIfSmaller: 0
+    type: 0
+  fuelFilter:
+  - {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
+--- !u!61 &7679484945097419853 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 4850456076238693850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8793023899972616217 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 4850456076238693850}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6762130855237958813

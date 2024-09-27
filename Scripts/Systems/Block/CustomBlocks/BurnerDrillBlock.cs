@@ -9,6 +9,7 @@ namespace Systems.Block.CustomBlocks{
 
         protected override void Awake(){
             burner = new Burner(2, 1, fuelFilter);
+            burner.Priority = 4;
             base.Awake();
         }
 

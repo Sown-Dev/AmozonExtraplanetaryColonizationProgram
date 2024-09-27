@@ -28,10 +28,15 @@ namespace Systems.Block{
             base.Awake();
             
             input = new Container(inputProperties);
+    
+            
+            recipeSelector.Priority = 1;
 
-            input.Priority = 1;
+            input.Priority = 2;
             progressBar.Priority = 2;
-            output.Priority = 5;
+            output.Priority = 2;
+            
+            
 
         
 
