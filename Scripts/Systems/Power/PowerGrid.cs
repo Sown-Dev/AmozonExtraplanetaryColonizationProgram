@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class PowerGrid{
     public List<IPowerBlock> blocks;
@@ -7,9 +8,13 @@ public class PowerGrid{
 
     public int size{ get{ return blocks.Count + connectors.Count; } }
 
+
+    private int id = 0;
     public PowerGrid(){
         blocks = new List<IPowerBlock>();
+        connectors = new List<IPowerConnector>();
         TerrainManager.Instance.powerGrids.Add(this);
+        id = Random.Range(0, 6000);
     }
 
     public int totalPower;
@@ -41,7 +46,7 @@ public class PowerGrid{
     }
 
     public void AddBlock(IPowerBlock block){
-        block.myGrid?.RemoveBlock(block);
+        block.myGrid?.RemoveBlock(block);  //remove from old grid if any
         blocks.Add(block);
         block.myGrid = this;
     }
@@ -62,12 +67,13 @@ public class PowerGrid{
     }
 
     public void MergeGrid(PowerGrid other){
+        if(other==null) return;
         //other grid is destroyed
-        foreach (IPowerBlock block in other.blocks){
+        foreach (IPowerBlock block in other.blocks.ToList()){
             other.RemoveBlock(block);
             AddBlock(block);
         }
-        foreach (IPowerConnector connector in other.connectors){
+        foreach (IPowerConnector connector in other.connectors.ToList()){
             other.RemoveConnector(connector);
             AddConnector(connector);
         }
@@ -76,12 +82,13 @@ public class PowerGrid{
         other.KillGrid();
     }
     public void KillGrid(){
-        foreach (var block in blocks){
+        foreach (var block in blocks.ToList()){
            RemoveBlock(block);
         }
-        foreach (var connector in connectors){
+        foreach (var connector in connectors.ToList()){
             RemoveConnector(connector);
         }
         TerrainManager.Instance.powerGrids.Remove(this);
+        
     }
 }

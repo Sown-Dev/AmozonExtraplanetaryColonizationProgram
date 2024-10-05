@@ -26,20 +26,21 @@ public class CableBlock : Block, IPowerConnector{
     }
 
     public void SetGridRecursive(PowerGrid grid){
+        if(grid == null){
+            grid = new PowerGrid();
+        }
+        
         if (Visited){
             return;
         }
         else{
             Visited = true;
             if (myGrid == grid){
-                return;
+                //do nothing, still recur on children
             }
             else{
                 if (myGrid == null){
                     myGrid = grid;
-                    foreach (var connector in connectors){
-                        connector.SetGridRecursive(grid);
-                    }
                 }
                 else{
                     grid.MergeGrid(myGrid);
@@ -48,6 +49,12 @@ public class CableBlock : Block, IPowerConnector{
 
             foreach (var connector in connectors){
                 connector.SetGridRecursive(grid);
+            }
+        }
+        
+        foreach (var block in connectedBlocks){
+            if (!myGrid.HasBlock(block)){
+                myGrid.AddBlock(block);
             }
         }
     }
@@ -68,39 +75,49 @@ public class CableBlock : Block, IPowerConnector{
         connectors = adjacentBlocks.FindAll(block => block is IPowerConnector powerConnector)
             .ConvertAll(block => (IPowerConnector)block);
         foreach (var connector in connectors){
-            connectors.Add(connector);
             if (myGrid == null){
                 connector.myGrid.AddConnector(this);
             }
             else{
                 if (connector.myGrid != myGrid){
+
                     myGrid.MergeGrid(connector.myGrid);
+                    connector.myGrid = myGrid;
                 }
             }
+        }
+        if(myGrid==null){
+            myGrid = new PowerGrid();
         }
 
         foreach (var block in connectedBlocks){
             if (!myGrid.HasBlock(block)){
                 myGrid.AddBlock(block);
-                connectedBlocks.Add(block);
             }
         }
     }
 
     public override bool BlockDestroy(bool dropLoot){
-        foreach (IPowerBlock block in connectedBlocks){
-            myGrid.RemoveBlock(block);
-            //kill grid
+        if (!base.BlockDestroy(dropLoot)){
+            return false;
         }
+        myGrid?.KillGrid();
+        
 
         foreach (IPowerConnector connector in connectors){
-            connector.connectors.Remove(this);
-            myGrid.RemoveConnector(connector);
             connector.GetConnected();
+
+            //connector.connectors.Remove(this);
+            
+            connector.SetVisitedRecursive(false);
+            PowerGrid grid = new PowerGrid();
+            connector.myGrid = grid;
+            connector.SetGridRecursive(grid);
+            
         }
 
-        myGrid.RemoveConnector(this);
-        return base.BlockDestroy();
+        
+        return true;
     }
 
     public void OnDrawGizmos(){
@@ -112,7 +129,15 @@ public class CableBlock : Block, IPowerConnector{
 
         Gizmos.color = Color.red;
         foreach (var connector in connectors){
+
             Gizmos.DrawLine((Vector2)origin, (Vector2)connector.myBlock.origin);
+            Gizmos.DrawLine((Vector2)origin, (Vector2)connector.myBlock.origin+Vector2.up);
+
+        }
+        
+        if(myGrid!=null){
+            Gizmos.color = Utils.GenerateUniqueColor(myGrid);
+            Gizmos.DrawSphere( (Vector2)origin, 0.25f);
         }
     }
     

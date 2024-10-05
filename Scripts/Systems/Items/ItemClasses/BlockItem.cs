@@ -32,7 +32,7 @@ public enum BlockCategory{
     Production=2, //Creates things, including drills
     Refining=4, //crafting/refining
     Storage=8, //stores items
-    
+    Power=16, //power generation and distribution
     
     
 }

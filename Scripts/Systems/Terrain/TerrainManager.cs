@@ -184,7 +184,6 @@ public partial class TerrainManager : MonoBehaviour{
             return false;
 
 
-        blockLayer.Remove(pos);
         if(block.tile !=null){
             blockTilemap.SetTile((Vector3Int)pos, null);
             //remove adjascent tiles
@@ -284,6 +283,11 @@ public partial class TerrainManager : MonoBehaviour{
             blocks.Add(block);
         }
     }
+    
+    
+    public void BlockLayerRemove(Vector2Int pos){
+        blockLayer.Remove(pos);
+    }
 
     //------------------TICK LOGIC--------------------------------
     
@@ -314,4 +318,6 @@ public partial class TerrainManager : MonoBehaviour{
             }
         }
     }
+    
+    
 }

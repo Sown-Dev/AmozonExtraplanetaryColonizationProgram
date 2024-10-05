@@ -103,6 +103,8 @@ namespace Systems.Block{
         //true if block gets destroyed
         public virtual bool BlockDestroy(bool dropLoot = true){
             Destroy(gameObject);
+            TerrainManager.Instance.BlockLayerRemove(origin);
+
 
             if (dropLoot){
 

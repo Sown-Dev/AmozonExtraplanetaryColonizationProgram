@@ -8,7 +8,7 @@ public interface IPowerBlock: IBlockUI{
 }
 
 public interface IPowerProducer: IPowerBlock{
-    public int producing{internal get; set; }
+    public int producing{get; set; }
     public bool neededOn{ get; set; }
 }
 

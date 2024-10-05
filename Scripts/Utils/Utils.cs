@@ -154,4 +154,86 @@ public class Utils: MonoBehaviour{
             }
         }
     }
+    
+    public static Color GenerateUniqueColor(object obj)
+    {
+        // Serialize the fields of the class
+        string serializedFields = SerializeObjectFields(obj);
+
+        // Hash the serialized string
+        int hash = serializedFields.GetHashCode();
+
+        // Convert the hash to RGB values
+        return HashToColor(hash);
+    }
+
+    // Serialize object fields into a string
+    private static string SerializeObjectFields(object obj)
+    {
+        Type type = obj.GetType();
+        FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+        foreach (FieldInfo field in fields)
+        {
+            object value = field.GetValue(obj);
+            sb.Append(field.Name);
+            sb.Append(value != null ? value.ToString() : "null");
+        }
+
+        return sb.ToString();
+    }
+
+    // Convert hash to an RGB color
+    private static Color HashToColor(int hash)
+    {
+        // Generate color components using bit manipulation
+        float r = ((hash >> 16) & 0xFF) / 255f;
+        float g = ((hash >> 8) & 0xFF) / 255f;
+        float b = (hash & 0xFF) / 255f;
+
+        return new Color(r, g, b);
+    }
+    
+    
+    //Draw Arrow
+    public static void ForGizmo(Vector3 pos, Vector3 direction, float arrowHeadLength = 0.25f, float arrowHeadAngle = 20.0f)
+	{
+		Gizmos.DrawRay(pos, direction);
+		
+		Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180+arrowHeadAngle,0) * new Vector3(0,0,1);
+		Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180-arrowHeadAngle,0) * new Vector3(0,0,1);
+		Gizmos.DrawRay(pos + direction, right * arrowHeadLength);
+		Gizmos.DrawRay(pos + direction, left * arrowHeadLength);
+	}
+
+	public static void ArrowGizmo(Vector3 pos, Vector3 direction, Color color, float arrowHeadLength = 0.25f, float arrowHeadAngle = 20.0f)
+	{
+		Gizmos.color = color;
+		Gizmos.DrawRay(pos, direction);
+		
+		Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180+arrowHeadAngle,0) * new Vector3(0,0,1);
+		Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180-arrowHeadAngle,0) * new Vector3(0,0,1);
+		Gizmos.DrawRay(pos + direction, right * arrowHeadLength);
+		Gizmos.DrawRay(pos + direction, left * arrowHeadLength);
+	}
+
+	public static void ArrowDebug(Vector3 pos, Vector3 direction, float arrowHeadLength = 0.25f, float arrowHeadAngle = 20.0f)
+	{
+		Debug.DrawRay(pos, direction);
+		
+		Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180+arrowHeadAngle,0) * new Vector3(0,0,1);
+		Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180-arrowHeadAngle,0) * new Vector3(0,0,1);
+		Debug.DrawRay(pos + direction, right * arrowHeadLength);
+		Debug.DrawRay(pos + direction, left * arrowHeadLength);
+	}
+	public static void ArrowDebug(Vector3 pos, Vector3 direction, Color color, float arrowHeadLength = 0.25f, float arrowHeadAngle = 20.0f)
+	{
+		Debug.DrawRay(pos, direction, color);
+		
+		Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180+arrowHeadAngle,0) * new Vector3(0,0,1);
+		Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0,180-arrowHeadAngle,0) * new Vector3(0,0,1);
+		Debug.DrawRay(pos + direction, right * arrowHeadLength, color);
+		Debug.DrawRay(pos + direction, left * arrowHeadLength, color);
+	}
 }

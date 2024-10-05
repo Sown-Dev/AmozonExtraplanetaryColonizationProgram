@@ -149,7 +149,7 @@ public partial class TerrainManager
         {
             foreach (Item item in list)
             {
-                ItemStack i = new ItemStack(item, 8);
+                ItemStack i = new ItemStack(item, 16);
                 c.output.Insert(ref i);
             }
         }
