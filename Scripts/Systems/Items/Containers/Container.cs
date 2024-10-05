@@ -314,6 +314,32 @@ namespace Systems.Items{
 
             return items;
         }
+        
+        public List<ItemStack> SetSize(int size){
+            if (size == containerList.Length){
+                return null;
+            }
+            List<ItemStack> overflow = new List<ItemStack>();
+            Slot[] newContainerList = new Slot[size];
+            int i = 0;
+            for (; i < size; i++){
+                if (i < containerList.Length){
+                    newContainerList[i] = containerList[i];
+                }
+                else{
+                    newContainerList[i] = new Slot(null);
+                }
+            }
+            for(;i<containerList.Length;i++){
+                if(containerList[i].ItemStack!=null){
+                    overflow.Add(containerList[i].ItemStack);
+                }
+            }
+            
+
+            containerList = newContainerList;
+            return overflow;
+        }
     }
 }
 

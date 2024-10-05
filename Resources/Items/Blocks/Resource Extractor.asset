@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Resource Extractor
   m_EditorClassIdentifier: 
-  idname: extractor
   stackSize: 16
   icon: {fileID: 21300000, guid: a0faec1e7ec403d49ba103a136dc8cef, type: 3}
   category: 2
@@ -21,4 +20,4 @@ MonoBehaviour:
   tier: 3
   description: 
   blockPrefab: {fileID: 6784235016068680024, guid: 171cd17f0e65b8343b07a464f215ff0e, type: 3}
-  blockCategory: 16
+  blockCategory: 2

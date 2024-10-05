@@ -12,17 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Rail
   m_EditorClassIdentifier: 
-  idname: rail
-  name: 'Rail [WIP!]'
   stackSize: 32
   icon: {fileID: 21300000, guid: e135b8de360a9634abbea21685769131, type: 3}
   category: 2
   useCursor: 1
   value: 1
   tier: 3
+  description: 
   blockPrefab: {fileID: -5380497902503018641, guid: 2ad956d56f3c6f246a4522f737fd2810, type: 3}
-  blockProperties:
-    <myItem>k__BackingField: {fileID: 11400000}
-    indestructible: 0
-    size: {x: 1, y: 1}
-    description: i am a block
+  blockCategory: 1

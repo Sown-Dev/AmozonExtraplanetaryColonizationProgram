@@ -27,8 +27,13 @@ namespace UI{
         public void Refresh(){
             //Dwai this code
             gridLayoutGroup.constraintCount = containerRef.properties.scaleDownGridIfSmaller? Mathf.Min( containerRef.properties.gridWidth, containerRef.Size)  : containerRef.properties.gridWidth;
-            
-            nameText.text = containerRef.properties.name;
+
+            if (containerRef.properties.name.Length>0){
+                nameText.text = containerRef.properties.name;
+            }
+            else{
+                Destroy(nameText.gameObject);
+            }
             slotUIs = new List<SlotUI>();
             foreach (Transform child in gridLayoutGroup.transform){
                 Destroy(child.gameObject);

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Portable Drill
   m_EditorClassIdentifier: 
-  idname: drill
   stackSize: 16
   icon: {fileID: 21300000, guid: 68ed7a9471be6ec41bac67e86054742e, type: 3}
   category: 2
@@ -21,3 +20,4 @@ MonoBehaviour:
   tier: 3
   description: 'basic drill. '
   blockPrefab: {fileID: -5627539801661224589, guid: 84dea805e064c0a40a12ced07cab268b, type: 3}
+  blockCategory: 2

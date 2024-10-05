@@ -107,7 +107,7 @@ public partial class TerrainManager
 
                     } 
 
-                    if ((perlin2)< 0.79f )//&& perlin2>0.03f) )) | (perlin1 <0.55f &&perlin2<0.52f
+                    if (((perlin2*perlin2)< 0.32f && perlin2>0.03f) || (perlin1 <0.25f &&perlin2<0.42f))
                     {
                         SetWall(rockWall, (Vector3Int)position);
                     }

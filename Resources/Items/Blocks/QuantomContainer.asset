@@ -20,4 +20,4 @@ MonoBehaviour:
   tier: 8
   description: assembles more basic items
   blockPrefab: {fileID: -1047664874499351692, guid: 887ff25476b28a946a50680ebd79580b, type: 3}
-  blockCategory: 1
+  blockCategory: 9

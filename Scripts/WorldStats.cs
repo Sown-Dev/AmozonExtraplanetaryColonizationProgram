@@ -6,14 +6,14 @@ using Systems.Items;
 using UnityEngine;
 
 [Serializable]
-public class Stats
+public class WorldStats
 {
     public int blocksBroken = 0;
     public int itemsPickedUp = 0;
     public int moneyEarned = 0;
     public HashSet<KeyValuePair<Item, bool>> ItemsDiscovered; // Use HashSet of KeyValuePair
 
-    public Stats()
+    public WorldStats()
     {
         blocksBroken = 0;
         itemsPickedUp = 0;
@@ -22,12 +22,12 @@ public class Stats
     }
 
     // Overloading the + operator using reflection
-    public static Stats operator +(Stats a, Stats b)
+    public static WorldStats operator +(WorldStats a, WorldStats b)
     {
-        Stats result = new Stats();
+        WorldStats result = new WorldStats();
 
-        // Get all fields of the Stats class
-        FieldInfo[] fields = typeof(Stats).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        // Get all fields of the WorldStats class
+        FieldInfo[] fields = typeof(WorldStats).GetFields(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (FieldInfo field in fields)
         {

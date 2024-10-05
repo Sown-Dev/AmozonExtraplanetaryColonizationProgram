@@ -39,7 +39,7 @@ public class PlayerUI: MonoBehaviour{
 
     }
 
-
+    
     public void Update(){
         destroyBarCG.alpha = player.destroyTimer > 0 ? 1 : 0;
         if(Math.Abs(destroyBar.fillAmount - player.destroyTimer / player.destroyDuration) > 0.01f)
@@ -47,6 +47,7 @@ public class PlayerUI: MonoBehaviour{
 
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab)){
             inventoryUIWindow.Toggle();
+            inventoryUI.Refresh();
         }
 
         for (int i = 0; i < toolbarSize; i++){

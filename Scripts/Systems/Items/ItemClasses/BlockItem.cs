@@ -28,11 +28,11 @@ namespace Systems.Items{
 [Flags]
 public enum BlockCategory{
     Other=0,
-    Logistics=1,
-    BlockProduction=2,
+    Logistics=1,//moving stuff, including both inserting and extracting
+    Production=2, //Creates things, including drills
     Refining=4, //crafting/refining
-    Storage=8,
-    Extraction=16, //drills and stuff
+    Storage=8, //stores items
+    
     
     
 }

@@ -12,17 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Sell Block
   m_EditorClassIdentifier: 
-  idname: seller
-  name: Seller
   stackSize: 16
   icon: {fileID: 21300000, guid: 414f3bee52fe13342bf5eeb509ad5252, type: 3}
   category: 2
   useCursor: 1
   value: 40
   tier: 3
+  description: 
   blockPrefab: {fileID: -6250332161238803911, guid: b0d83dce5094bf44aa6bfa30470bf41b, type: 3}
-  blockProperties:
-    <myItem>k__BackingField: {fileID: 11400000}
-    indestructible: 0
-    size: {x: 1, y: 1}
-    description: i am a block
+  blockCategory: 4

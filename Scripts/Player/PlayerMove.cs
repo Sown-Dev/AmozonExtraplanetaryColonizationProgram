@@ -150,7 +150,7 @@ public partial class Player : Unit
 
 
 
-        rb.AddForce(move * moveV * Time.deltaTime * (m_Grounded ? 1f : 1.2f));
+        rb.AddForce(move * (moveV* finalStats[Statstype.Movespeed]) * Time.deltaTime * (m_Grounded ? 1f : 1.2f));
 
     }
     [HideInInspector] public float destroyTimer = 0;

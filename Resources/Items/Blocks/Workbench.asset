@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Workbench
   m_EditorClassIdentifier: 
-  idname: workbench
   stackSize: 16
   icon: {fileID: 21300000, guid: 75f5b7ea0dcafee4e8bd77219e7daf63, type: 3}
   category: 2
@@ -21,4 +20,4 @@ MonoBehaviour:
   tier: -1
   description: can be used to craft basic items.
   blockPrefab: {fileID: 2216268374412577613, guid: d395687100de82140aebe0439342dbb1, type: 3}
-  blockCategory: 2
+  blockCategory: 4

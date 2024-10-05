@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Extractor Chest
   m_EditorClassIdentifier: 
-  idname: Extraction Chest
   stackSize: 16
   icon: {fileID: 21300000, guid: 990d1c9b27a1f684f9599695a047154d, type: 3}
   category: 2
@@ -21,4 +20,4 @@ MonoBehaviour:
   tier: 4
   description: extracts items from nearby inventories and fills its own.
   blockPrefab: {fileID: 8029739942145060120, guid: a248b97823489cc41821e66abb610c4e, type: 3}
-  blockCategory: 4
+  blockCategory: 9

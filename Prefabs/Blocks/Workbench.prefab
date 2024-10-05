@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 75f5b7ea0dcafee4e8bd77219e7daf63, type: 3}
+      objectReference: {fileID: 21300000, guid: fdd3383578728db4787bfe18206b8365, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
     indestructible: 0
     rotateable: 0
     actuatable: 1
-    size: {x: 1, y: 1}
+    size: {x: 1, y: 2}
     description: 
     bso: {fileID: 0}
   currentState:
@@ -148,17 +148,13 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
+  <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 3
     name: out
     gridWidth: 3
-    scaleDownGridIfSmaller: 0
-    type: 0
-  inputProperties:
-    size: 0
-    name: in
-    gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
   CraftingFX: []
@@ -168,6 +164,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 69bc8a1197106b942ab8b861e47c11d6, type: 2}
     - {fileID: 11400000, guid: a8f0c127ea8162a4c83e763cac99657a, type: 2}
     currentRecipe: {fileID: 0}
+  inputProperties:
+    size: 0
+    name: in
+    gridWidth: 0
+    scaleDownGridIfSmaller: 0
+    type: 0
   icon: {fileID: 21300000, guid: 6931b87c552c6c14fa0028ad30f1d002, type: 3}
   TicksPerClick: 10
 --- !u!61 &5506874210771108049 stripped

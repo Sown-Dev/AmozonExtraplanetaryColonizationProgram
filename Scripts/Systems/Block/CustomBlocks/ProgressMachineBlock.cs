@@ -10,7 +10,7 @@ namespace Systems.Block.CustomBlocks{
         protected override void Awake(){
             base.Awake();
 
-            progressBar = new ProgressBar(1);
+            progressBar = new ProgressBar(21);
             progressBar.maxProgress = 100;
             progressBar.progress = 0;
         }

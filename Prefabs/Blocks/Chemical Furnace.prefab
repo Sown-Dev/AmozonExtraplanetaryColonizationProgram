@@ -5182,9 +5182,9 @@ MonoBehaviour:
   origin: {x: 0, y: 0}
   <baseSpeed>k__BackingField: 1
   outputProperties:
-    size: 4
-    name: out
-    gridWidth: 4
+    size: 2
+    name: 
+    gridWidth: 1
     scaleDownGridIfSmaller: 0
     type: 0
   CraftingFX:

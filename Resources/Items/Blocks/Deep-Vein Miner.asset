@@ -20,4 +20,4 @@ MonoBehaviour:
   tier: 3
   description: 'Extracts various resources deep below the surface. '
   blockPrefab: {fileID: 4329347407540247257, guid: 6745ce6cd063b494ba345649fad37c4c, type: 3}
-  blockCategory: 0
+  blockCategory: 2

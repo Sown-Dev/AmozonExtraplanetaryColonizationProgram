@@ -1,20 +1,20 @@
 ﻿using System;
 
 [Serializable]
-public class Statistic{
-    public Statistic(){
+public class GlobalStatistic{
+    public GlobalStatistic(){
         type = default;
         amount = 0;
-        operation = GlobalStats.StatsOperation.Add;
+        operation = Stats.StatsOperation.Add;
     }
 
-    public Statistic(Statstype _type, double amt, GlobalStats.StatsOperation op){
+    public GlobalStatistic(GStatstype _type, double amt, Stats.StatsOperation op){
         type = _type;
         amount = amt;
         operation = op;
     }
     
-    public Statstype type;
+    public GStatstype type;
     public double amount;
-    public GlobalStats.StatsOperation operation;
+    public Stats.StatsOperation operation;
 }

@@ -30,11 +30,11 @@ namespace Systems.Block{
             input = new Container(inputProperties);
     
             
-            recipeSelector.Priority = 1;
+            recipeSelector.Priority = 10;
 
-            input.Priority = 2;
-            progressBar.Priority = 2;
-            output.Priority = 2;
+            input.Priority = 20;
+            progressBar.Priority = 21;
+            output.Priority = 22;
             
             
 
@@ -100,6 +100,7 @@ namespace Systems.Block{
                 inputProperties.gridWidth = inputProperties.size;
                 input = new Container(inputProperties, newSlots);
                 input.blackList = true;
+                input.Priority = 20;
             }
             //move all input items to output
         

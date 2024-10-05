@@ -12,6 +12,7 @@ namespace UI{
         [HideInInspector]public WindowManager manager;
 
         private CanvasGroup cg;
+        protected bool DragAllow=true;
         
         public Action OnClose;
         
@@ -30,13 +31,15 @@ namespace UI{
         }
 
         public void OnDrag(PointerEventData eventData){
-
+            if(!DragAllow) return;   
+            
             transform.position = Vector3Int.RoundToInt(eventData.position - offset);
 
             OnDragging();
         }
 
         public void OnEndDrag(PointerEventData eventData){
+            if(!DragAllow) return;
             OnDragEnd();
         }
 
@@ -59,12 +62,13 @@ namespace UI{
 
         public void Hide(){
             isOpen = false;
-            Refresh();
+            CGRefresh();
         }
 
         public void Show(){
             BringToFront();
             isOpen = true;
+            CGRefresh();
             Refresh();
         }
         
@@ -73,12 +77,16 @@ namespace UI{
             else Show();
         }
 
-        public virtual void Refresh(){
+        public void CGRefresh(){
             cg.interactable = isOpen;
             cg.blocksRaycasts = isOpen;
             cg.alpha = isOpen ? 1 : 0;
             if (isOpen)
                 Canvas.ForceUpdateCanvases();
+        }
+
+        public virtual void Refresh(){
+           
             //LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent as RectTransform);
         }
     }

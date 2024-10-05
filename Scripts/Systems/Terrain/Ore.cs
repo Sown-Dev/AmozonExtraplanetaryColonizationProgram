@@ -25,9 +25,9 @@ namespace Systems.Terrain{
             
             
             //Stats stuff
-            stackAmount = Mathf.RoundToInt( stackAmount* TerrainManager.Instance.finalStats[Statstype.OreYieldMult]);
-            stackAmount +=  Mathf.RoundToInt(TerrainManager.Instance.finalStats[Statstype.OreYieldAdd]);
-            if(Random.value < TerrainManager.Instance.finalStats[Statstype.OreUseChance])
+            stackAmount = Mathf.RoundToInt( stackAmount* TerrainManager.Instance.finalStats[GStatstype.OreYieldMult]);
+            stackAmount +=  Mathf.RoundToInt(TerrainManager.Instance.finalStats[GStatstype.OreYieldAdd]);
+            if(Random.value < TerrainManager.Instance.finalStats[GStatstype.OreUseChance])
                 amount -= stackAmount;
 
             if (amount <= 0){

@@ -20,8 +20,9 @@ namespace UI.BlockUI{
         [SerializeField] private GameObject DirectionalSelectUIPrefab;
         [SerializeField] private GameObject RecipeSelectUIPrefab;
         [SerializeField] private GameObject buttonUIPrefab;
-
         [SerializeField] private GameObject burnerUIPrefab;
+        [SerializeField] private GameObject numberSelectorUIPrefab;
+        
         [SerializeField] private GameObject horizListPrefab;
 
         [SerializeField] private Transform windowTransform;
@@ -67,10 +68,10 @@ namespace UI.BlockUI{
             //convert to regular for loop
             for (int i = 0; i < componentFields.Count; i++){
                 var component = componentFields[i];
-                if (i < componentFields.Count - 1 && componentFields[i + 1].Priority == component.Priority){
+                if (i < componentFields.Count - 1 && (int)(componentFields[i + 1].Priority/10) == component.Priority/10){
                     Transform list = Instantiate(horizListPrefab, windowTransform).transform;
                     AddComponent(component, list);
-                    while (i < componentFields.Count-1 && componentFields[i+1].Priority == component.Priority){
+                    while (i < componentFields.Count-1 && (int)(componentFields[i + 1].Priority/10) == component.Priority/10){
                         AddComponent(componentFields[i+1],list );
                         i++;
                         Debug.Log("SIZE IS " + list.childCount);
@@ -118,6 +119,11 @@ namespace UI.BlockUI{
             else if (component is Burner burner){
                 BurnerUI burnerUI = Instantiate(burnerUIPrefab,  parent).GetComponent<BurnerUI>();
                 burnerUI.Init(burner);
+            }
+            else if (component is NumberSelector numberSelector){
+                NumberSelectorUI numberSelectorUI = Instantiate(numberSelectorUIPrefab,  parent)
+                    .GetComponent<NumberSelectorUI>();
+                numberSelectorUI.Init(numberSelector);
             }
         }
 

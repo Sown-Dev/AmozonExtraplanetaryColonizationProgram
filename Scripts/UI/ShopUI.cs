@@ -13,10 +13,15 @@ namespace UI{
 
         public GameObject shopItemPrefab;
         public GameObject shopTierPrefab;
+        
+        public ShopButton shopButton;
+        public ShopOffer dynamiteOffer;
 
         public override void Awake(){
             base.Awake();
             Instance = this;
+            DragAllow = false;
+            shopButton.Init(dynamiteOffer);
         }
 
         void Start(){
@@ -32,27 +37,42 @@ namespace UI{
             foreach (ShopTier t in RoundManager.Instance.shopTiers){
                 GameObject tier = Instantiate(shopTierPrefab, layoutGroup.transform);
                 tier.GetComponent<TierShopUI>().Init(t);
-                
             }
         }
     }
 
     public class ShopTier{
-        int tier;
+        public int tier;
         public ShopOffer[] logistics;
         public ShopOffer[] refinement;
-        public ShopOffer[] storage;
-        
-        
-        public ShopTier(ShopOffer[] logistics, ShopOffer[] refinement, ShopOffer[] storage, int _tier){
+        public ShopOffer[] production;
+        public ShopOffer[] misc;
+
+        public UpgradeOffer upgradeOffer;
+
+
+        public ShopTier(ShopOffer[] logistics, ShopOffer[] refinement, ShopOffer[] _production, ShopOffer[] _misc,
+            UpgradeOffer _upgrade, int _tier){
             this.logistics = logistics;
             this.refinement = refinement;
-            this.storage = storage;
+            production = _production;
+            upgradeOffer = _upgrade;
+            misc = _misc;
             tier = _tier;
         }
-        
+    }
 
+    public class UpgradeOffer{
+        public UpgradeSO upgrade;
+        public int price;
+        public bool bought;
 
+        public UpgradeOffer(UpgradeSO upgrade, int price){
+            this.upgrade = upgrade;
+            //round price to nearest 5
+            this.price = price / 5* 5;
+            bought = false;
+        }
     }
 
     [Serializable]
@@ -62,8 +82,7 @@ namespace UI{
         public int tier;
 
         public int stock;
-        
-        
+
 
         public ShopOffer(Item item, int price, int tier, int stock){
             this.item = item;

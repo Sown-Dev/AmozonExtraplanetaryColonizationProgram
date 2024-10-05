@@ -8,7 +8,7 @@ namespace Systems.Block.CustomBlocks{
         public int TicksPerClick = 10;
         protected override void Awake(){
             base.Awake();
-            craftButton = new BlockUIButton(AddProgress, icon, 3);
+            craftButton = new BlockUIButton(AddProgress, icon, 32);
         }
 
         public override void Tick(){

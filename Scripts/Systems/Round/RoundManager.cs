@@ -18,6 +18,8 @@ namespace Systems.Round{
 
         public List<ShopTier> shopTiers;
 
+        public UpgradeSO[] upgrades;
+
 
         public List<Item> sellList;
 
@@ -31,8 +33,8 @@ namespace Systems.Round{
 
         int lives = 0;
 
-        public Stats roundStats;
-        public Stats myStats;
+        public WorldStats roundStats;
+        public WorldStats myStats;
 
         public LoseGameUI loseGameUI;
 
@@ -41,7 +43,7 @@ namespace Systems.Round{
 
 
         void Awake(){
-            roundStats = new Stats();
+            roundStats = new WorldStats();
             shopTiers = new List<ShopTier>();
         }
 
@@ -64,6 +66,17 @@ namespace Systems.Round{
                 //lose game
                 LoseRound();
             }
+#if ALLITEMS1
+            if (Input.GetKey(KeyCode.F2)){
+                AddMoney(95);
+            }
+            if (Input.GetKey(KeyCode.F4)){
+                RegenerateShop();
+            }
+            if (Input.GetKey(KeyCode.F5)){
+                RegenerateRoundShop();
+            }
+#endif
         }
 
 
@@ -76,10 +89,10 @@ namespace Systems.Round{
         public void LoadStats(){
             if (PlayerPrefs.HasKey("PlayerStats")){
                 string json = PlayerPrefs.GetString("PlayerStats");
-                myStats = JsonUtility.FromJson<Stats>(json);
+                myStats = JsonUtility.FromJson<WorldStats>(json);
             }
             else{
-                myStats = new Stats(); // Default if no data is saved
+                myStats = new WorldStats(); // Default if no data is saved
             }
         }
 
@@ -146,25 +159,69 @@ namespace Systems.Round{
 
             infoUI.Refresh();
         }
+        public void RegenerateRoundShop(){
+            shopTiers[roundNum] = GenerateShop(roundNum);
+            infoUI.Refresh();
+        }
+        public void RegenerateShop(){
+            for(int i =0; i<=roundNum; i++){
+                shopTiers[i] = GenerateShop(i);
+            }
+            infoUI.Refresh();
+
+        }
 
         public ShopTier GenerateShop(int tier){
+            // Shuffle the list
             Utils.Shuffle(allOffers);
-            ShopOffer[] tierOffers = allOffers.Where(t => t.tier == tier).ToArray();
+            List<ShopOffer> tierOffers = allOffers.Where(t => t.tier == tier).ToList();
 
-            //these will be pulled from world stats when added
+// These will be pulled from world stats when added
             int logistics = 1;
-            int refine = 1;
-            int storage = 1;
+            int refine = tier == 0 ? 0 : 1;
+            int production = 1;
+            int misc = 2;
 
+// Method to calculate price adjustments
+            int AdjustPrice(int roundNum) => Random.Range(-6, 12) - roundNum;
+
+// Select offers for logistics
             ShopOffer[] logisticsOffers = tierOffers
-                .Where(t => (t.item as BlockItem).blockCategory == BlockCategory.Logistics)
-                .Select(t => new ShopOffer(t, Random.Range(-6, 12) - roundNum)).Take(logistics).ToArray();
+                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Logistics)
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Take(logistics)
+                .ToArray();
+            tierOffers.RemoveAll(x => logisticsOffers.Any(y => y.item == x.item));
+
+// Select offers for refining
             ShopOffer[] refineOffers = tierOffers
-                .Where(t => (t.item as BlockItem).blockCategory == BlockCategory.Refining)
-                .Select(t => new ShopOffer(t, Random.Range(-6, 12) - roundNum)).Take(refine).ToArray();
+                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Refining)
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Take(refine)
+                .ToArray();
+            tierOffers.RemoveAll(x => refineOffers.Any(y => y.item == x.item));
+
+// Select offers for production
+            ShopOffer[] productionOffers = tierOffers
+                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Production)
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Take(production)
+                .ToArray();
+            tierOffers.RemoveAll(x => productionOffers.Any(y => y.item == x.item));
+
+// Select misc offers
+            ShopOffer[] miscOffers = tierOffers
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Take(misc)
+                .ToArray();
+            tierOffers.RemoveAll(x => miscOffers.Any(y => y.item == x.item));
 
 
-            ShopTier t = new ShopTier(logisticsOffers, refineOffers, null, tier);
+            UpgradeOffer u = new UpgradeOffer(upgrades[Random.Range(0, upgrades.Length)],
+                ((tier + 1) * 100+Random.Range(-20, 20)));
+
+
+            ShopTier t = new ShopTier(logisticsOffers, refineOffers, productionOffers, miscOffers, u, tier);
             return t;
         }
 

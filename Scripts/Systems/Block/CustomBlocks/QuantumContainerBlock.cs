@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using Systems.Items;
+using UI.BlockUI;
 
 public class QuantumContainerBlock:ContainerBlock{
     
     public static List<Container> QuantumContainers = new List<Container>(10);
 
-
+    public NumberSelector selector;
+    
+    
+    
+        
     //Called in terrain manager
     public static void InitContainers(){
         ContainerProperties properties = new ContainerProperties();
@@ -19,13 +24,20 @@ public class QuantumContainerBlock:ContainerBlock{
         }
     }
     
-    public int myIndex;
 
 
     protected override void Awake(){
         base.Awake();
-        myIndex = 1;
         
-        output = QuantumContainers[myIndex];
+        selector = new NumberSelector(ChangeContainer,0,9);
+        selector.Priority = 21;
+        
+        output = QuantumContainers[selector.value];
+    }
+
+    public void ChangeContainer(){
+        output = QuantumContainers[selector.value];
+        /*BlockUIManager.Instance.CloseBlockUI(); for refresh, but looks ugly
+        BlockUIManager.Instance.GenerateBlockUI(this);*/
     }
 }

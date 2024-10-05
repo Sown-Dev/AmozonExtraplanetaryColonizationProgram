@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Workstation
   m_EditorClassIdentifier: 
-  idname: workstation
   stackSize: 16
   icon: {fileID: 21300000, guid: f902e8b532b49a9438e1643fff20616e, type: 3}
   category: 2
@@ -21,4 +20,4 @@ MonoBehaviour:
   tier: 5
   description: assembles more basic items
   blockPrefab: {fileID: 4510550599143360625, guid: 5276ff8e30a908b41b2ea0296d4319ab, type: 3}
-  blockCategory: 2
+  blockCategory: 6
