@@ -127,6 +127,9 @@ namespace Systems.Block{
             return TerrainManager.Instance.GetBlock(
                 Vector2Int.RoundToInt((Vector2)transform.position + rot.GetVector()));
         }
+        public List<Block> GetAdjascent(){
+            return TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y);
+        }
         
         
 

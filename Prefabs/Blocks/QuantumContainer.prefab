@@ -131,7 +131,7 @@ MonoBehaviour:
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 0}
+    <myItem>k__BackingField: {fileID: 11400000, guid: e46ad3c465c6dde4491f49ead6b4db40, type: 2}
     name: QuantumContainer
     indestructible: 0
     rotateable: 0
@@ -157,7 +157,6 @@ MonoBehaviour:
     gridWidth: 6
     scaleDownGridIfSmaller: 0
     type: 0
-  myIndex: 0
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

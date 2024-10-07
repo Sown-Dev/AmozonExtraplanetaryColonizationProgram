@@ -127,7 +127,7 @@ MonoBehaviour:
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 0}
+    <myItem>k__BackingField: {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
     name: Cable
     indestructible: 0
     rotateable: 0
@@ -147,8 +147,6 @@ MonoBehaviour:
   rotation: 0
   tile: {fileID: 0}
   origin: {x: 0, y: 0}
-  area: {x: 1, y: 1}
-  poleRange: 5
   lr: {fileID: 0}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:

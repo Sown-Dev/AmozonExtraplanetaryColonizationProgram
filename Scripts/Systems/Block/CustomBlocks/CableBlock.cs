@@ -12,7 +12,6 @@ public class CableBlock : Block, IPowerConnector{
     public bool Visited{ get; set; }
     public List<IPowerBlock> connectedBlocks{ get; set; }
     public List<IPowerConnector> connectors{ get; set; }
-    public void CheckConnections(){ }
 
     public void SetVisitedRecursive(bool visited = false){
         if (Visited == visited){
@@ -40,10 +39,11 @@ public class CableBlock : Block, IPowerConnector{
             }
             else{
                 if (myGrid == null){
-                    myGrid = grid;
+                    grid.AddConnector(this);
                 }
                 else{
                     grid.MergeGrid(myGrid);
+                    
                 }
             }
 
@@ -64,32 +64,7 @@ public class CableBlock : Block, IPowerConnector{
 
     private void Start(){
         GetConnected();
-        //then look at connected 
-    }
-
-    public void GetConnected(){
-        List<Block> adjacentBlocks =
-            TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y);
-        connectedBlocks = adjacentBlocks.FindAll(block => block is IPowerBlock powerBlock)
-            .ConvertAll(block => (IPowerBlock)block);
-        connectors = adjacentBlocks.FindAll(block => block is IPowerConnector powerConnector)
-            .ConvertAll(block => (IPowerConnector)block);
-        foreach (var connector in connectors){
-            if (myGrid == null){
-                connector.myGrid.AddConnector(this);
-            }
-            else{
-                if (connector.myGrid != myGrid){
-
-                    myGrid.MergeGrid(connector.myGrid);
-                    connector.myGrid = myGrid;
-                }
-            }
-        }
-        if(myGrid==null){
-            myGrid = new PowerGrid();
-        }
-
+        GetGrid();
         foreach (var block in connectedBlocks){
             if (!myGrid.HasBlock(block)){
                 myGrid.AddBlock(block);
@@ -97,26 +72,69 @@ public class CableBlock : Block, IPowerConnector{
         }
     }
 
+    public void GetConnected(){
+        List<Block> adjacentBlocks =
+            TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y);
+        
+        connectedBlocks = adjacentBlocks.FindAll(block => block is IPowerBlock powerBlock)
+            .ConvertAll(block => (IPowerBlock)block);
+        connectors = adjacentBlocks.FindAll(block => block is IPowerConnector powerConnector)
+            .ConvertAll(block => (IPowerConnector)block);
+        
+    }
+
+    public void GetGrid(){
+        foreach (var connector in connectors){
+            if (myGrid == null && connector.myGrid != null){
+                connector.myGrid.AddConnector(this);
+            }
+            else{
+                if (connector.myGrid != myGrid){
+
+                    myGrid.MergeGrid(connector.myGrid);
+                }
+            }
+            connector.connectors.Add(this); //needs to be both ways
+        }
+        if(myGrid==null){
+            myGrid = new PowerGrid();
+            myGrid.AddConnector(this);
+        }
+
+       
+    }
+
     public override bool BlockDestroy(bool dropLoot){
         if (!base.BlockDestroy(dropLoot)){
             return false;
         }
-        myGrid?.KillGrid();
-        
 
-        foreach (IPowerConnector connector in connectors){
-            connector.GetConnected();
+        if (connectors.Count > 1){
 
-            //connector.connectors.Remove(this);
-            
-            connector.SetVisitedRecursive(false);
-            PowerGrid grid = new PowerGrid();
-            connector.myGrid = grid;
-            connector.SetGridRecursive(grid);
-            
+            myGrid?.KillGrid();
+
+
+            foreach (IPowerConnector connector in connectors){
+                connector.GetConnected();
+                connector.SetVisitedRecursive(false);
+
+                //connector.connectors.Remove(this);
+                if (connector.myGrid == null){
+                    PowerGrid grid = new PowerGrid();
+                    grid.AddConnector(connector);
+                    connector.SetGridRecursive(grid);
+                }
+
+            }
+        }
+        else{
+            myGrid?.RemoveConnector(this);
+            foreach (var connector in connectors){
+                connector.connectors.Remove(this);
+                
+            }
         }
 
-        
         return true;
     }
 
@@ -131,7 +149,7 @@ public class CableBlock : Block, IPowerConnector{
         foreach (var connector in connectors){
 
             Gizmos.DrawLine((Vector2)origin, (Vector2)connector.myBlock.origin);
-            Gizmos.DrawLine((Vector2)origin, (Vector2)connector.myBlock.origin+Vector2.up);
+            //Gizmos.DrawLine((Vector2)origin, (Vector2)connector.myBlock.origin+Vector2.up);
 
         }
         

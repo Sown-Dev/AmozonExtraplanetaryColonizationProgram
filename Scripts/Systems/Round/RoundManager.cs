@@ -67,13 +67,18 @@ namespace Systems.Round{
                 LoseRound();
             }
 #if ALLITEMS1
+            if (Input.GetKey(KeyCode.F1)){
+                roundTime -= 1;
+
+            }
+            
             if (Input.GetKey(KeyCode.F2)){
                 AddMoney(95);
             }
-            if (Input.GetKey(KeyCode.F4)){
+            if (Input.GetKeyDown(KeyCode.F4)){
                 RegenerateShop();
             }
-            if (Input.GetKey(KeyCode.F5)){
+            if (Input.GetKeyDown(KeyCode.F5)){
                 RegenerateRoundShop();
             }
 #endif

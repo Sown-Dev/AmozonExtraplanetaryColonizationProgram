@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 26.2525, y: 0}
   m_SizeDelta: {x: 0, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5098247342219193726
@@ -188,7 +188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9169797684487031392
@@ -322,7 +322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 0}
   m_SizeDelta: {x: 0, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &69996469914660445
@@ -557,6 +557,8 @@ MonoBehaviour:
   buttonUIPrefab: {fileID: 4186738093974753184, guid: f7cb5d68af905c046a8589be1e35fa0e, type: 3}
   burnerUIPrefab: {fileID: 5205864184136404721, guid: b7f9ac4fe1726974ba5a5b9aed2ebe2e, type: 3}
   numberSelectorUIPrefab: {fileID: 5205864184136404721, guid: 4d68df796bc45b946bf95045efcfe9ba, type: 3}
+  PowerProducerUIPrefab: {fileID: 8104889433414936184, guid: 1f592cbbdb68af24588611275ec10a59, type: 3}
+  PowerConsumerUIPrefab: {fileID: 8104889433414936184, guid: 9aedc3c645a29174988277336e26a60a, type: 3}
   horizListPrefab: {fileID: 6549746029553024634, guid: da8351cb089b3ee4f9f9e0d68794a82a, type: 3}
   windowTransform: {fileID: 7589121438679032914}
   nameText: {fileID: 1757955303609185320}

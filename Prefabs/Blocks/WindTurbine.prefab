@@ -127,7 +127,7 @@ MonoBehaviour:
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 0}
+    <myItem>k__BackingField: {fileID: 11400000, guid: 570d7890fad5b1a43aa4c4321b3d6842, type: 2}
     name: WindTurbine
     indestructible: 0
     rotateable: 0

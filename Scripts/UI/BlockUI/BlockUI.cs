@@ -22,6 +22,9 @@ namespace UI.BlockUI{
         [SerializeField] private GameObject buttonUIPrefab;
         [SerializeField] private GameObject burnerUIPrefab;
         [SerializeField] private GameObject numberSelectorUIPrefab;
+        [SerializeField] private GameObject PowerProducerUIPrefab;
+        [SerializeField] private GameObject PowerConsumerUIPrefab;
+
         
         [SerializeField] private GameObject horizListPrefab;
 
@@ -81,6 +84,16 @@ namespace UI.BlockUI{
                     AddComponent(component, windowTransform);
                 }
             }
+            if (block is IPowerProducer powerProducer){
+                PowerProducerUI powerProducerUI = Instantiate(PowerProducerUIPrefab,  windowTransform)
+                    .GetComponent<PowerProducerUI>();
+                powerProducerUI.Init(powerProducer);
+            }
+            else if (block is IPowerConsumer powerConsumer){
+                PowerConsumerUI powerConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowTransform)
+                    .GetComponent<PowerConsumerUI>();
+                powerConsumerUI.Init(powerConsumer);
+            }
             
 
             nameText.text = block.properties.name;
@@ -125,6 +138,7 @@ namespace UI.BlockUI{
                     .GetComponent<NumberSelectorUI>();
                 numberSelectorUI.Init(numberSelector);
             }
+            
         }
 
       

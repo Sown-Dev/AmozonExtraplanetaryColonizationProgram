@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
-  m_Name: Windturbine
+  m_Name: Electric Hammer
   m_EditorClassIdentifier: 
   stackSize: 16
-  icon: {fileID: 21300000, guid: bc53051682af38f4cbff370bf8ad0005, type: 3}
+  icon: {fileID: 21300000, guid: 644dfee6c09f0c048a0417d3cbd02873, type: 3}
   category: 2
   useCursor: 1
-  value: 25
-  tier: 7
-  description: Turbine
-  blockPrefab: {fileID: 798097607910479710, guid: 60e21d184deeee34e99680aacc81bfa7, type: 3}
-  blockCategory: 16
+  value: 100
+  tier: 8
+  description: Smashes and flattens.
+  blockPrefab: {fileID: -3326135092744310711, guid: 463300650c03d4d46846327ad6c04587, type: 3}
+  blockCategory: 20
