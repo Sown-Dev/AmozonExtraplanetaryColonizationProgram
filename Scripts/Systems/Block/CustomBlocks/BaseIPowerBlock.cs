@@ -1,13 +1,11 @@
 ﻿namespace Systems.Block.CustomBlocks{
-    public class ElectricRecipeBlock : RecipeBlock, IPowerConsumer{
+    public class BaseIPowerBlock:TickingBlock, IPowerBlock{
+        //COPY BELOW TO ADD TO BLOCKS THAT CANT INHERIT
         public int Priority{ get; set; }
         public bool Hidden{ get; set; }
         public PowerGrid myGrid{ get; set; }
         public Block myBlock => this;
         public IPowerConnector myConnector{ get; set; }
-        
-        public int needed{ get; set; }
-        public int providedPower{ get; set; }
 
         public override void Init(Orientation orientation){
             base.Init(orientation);
@@ -32,22 +30,7 @@
 
             return true;
         }
-
-
-
-        public override bool CanCraft(){
-            if (myGrid == null){
-                return false;
-            }
-
-            needed = 100;
-            if (providedPower < needed){
-                return false;
-            }
-
-            return base.CanCraft();
-        }
-
-     
+        
+        //STOP HERE
     }
 }

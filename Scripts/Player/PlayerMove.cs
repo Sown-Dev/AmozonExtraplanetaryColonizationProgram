@@ -89,8 +89,10 @@ public partial class Player : Unit
             else
                 buildingPreview.sprite = block.blockPrefab.sr.sprite;
 
-            myCursor.buildingPreview.transform.localPosition = new Vector2(block.blockPrefab.properties.size.x % 2 == 0 ? block.blockPrefab.properties.size.x / 4f : 0, block.blockPrefab.properties.size.y % 2 == 0 ? block.blockPrefab.properties.size.y / 4f : 0);
-
+            myCursor.buildingPreview.transform.localPosition = new Vector2(
+                block.blockPrefab.properties.size.x % 2 == 0 ? (block.blockPrefab.properties.size.x / 2f) - 0.5f : 0,
+                block.blockPrefab.properties.size.y % 2 == 0 ? (block.blockPrefab.properties.size.y / 2f) - 0.5f : 0);
+            
             myCursor.directionArrow.gameObject.SetActive(block.blockPrefab.properties.rotateable);
 
         }

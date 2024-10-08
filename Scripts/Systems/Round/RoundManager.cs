@@ -143,7 +143,7 @@ namespace Systems.Round{
                 quotaRequired = 300; //low first quota to not be boring
             }
 
-            roundTime = 370f;
+            roundTime = 420f +roundNum*30;
 
             //get new sell list
             sellList = new List<Item>(ItemManager.Instance.GetRandomItemsByTier(roundNum, 3 + roundNum / 2));

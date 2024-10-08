@@ -560,7 +560,7 @@ MonoBehaviour:
   PowerProducerUIPrefab: {fileID: 8104889433414936184, guid: 1f592cbbdb68af24588611275ec10a59, type: 3}
   PowerConsumerUIPrefab: {fileID: 8104889433414936184, guid: 9aedc3c645a29174988277336e26a60a, type: 3}
   horizListPrefab: {fileID: 6549746029553024634, guid: da8351cb089b3ee4f9f9e0d68794a82a, type: 3}
-  windowTransform: {fileID: 7589121438679032914}
+  windowList: {fileID: 9169797684487031392}
   nameText: {fileID: 1757955303609185320}
   baseButton: {fileID: 21300000, guid: 6931b87c552c6c14fa0028ad30f1d002, type: 3}
 --- !u!1001 &2373490430729503068

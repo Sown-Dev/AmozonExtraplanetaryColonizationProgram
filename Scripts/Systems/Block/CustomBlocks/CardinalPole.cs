@@ -1,78 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using Systems.Block;
+using Unity.Collections;
 using UnityEngine;
 
-public class CardinalPole : Block, IPowerBlock{
-    public int Priority{ get; set; }
-    public bool Hidden{ get; set; }
+public class CardinalPole : BaseConnector{
 
     public Vector2Int area = new(2, 2); //provided value is the topleft area
     public int poleRange = 5;
 
-    public PowerGrid myGrid{ get; set; }
+    [SerializeField] private LineRenderer lr;  //can override connect to wire to blocks and shit ig
+
     
     
-    public Block myBlock{
-        get{ return this; }
-    }
 
-    List<IPowerBlock> connectedBlocks = new();
-    [SerializeField] private LineRenderer lr;
-
-    private void Start(){
-        //get adjascent poles
-        Vector2Int pos = Vector2Int.RoundToInt(transform.position);
+    //these functions sucks but don't care enough to rewrite it. doable without lists
+    public override Vector2Int[] GetConnectorCoverage(){
+        List<Vector2Int> coverage = new();
 
         foreach (Vector2Int dir in new Vector2Int[]
                      { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right }){
             for (int i = 1; i < poleRange; i++){
-                if (TerrainManager.Instance.GetBlock(pos+dir*i) is CardinalPole pole && pole != this){
-                    pole.myGrid.AddBlock(this);
-                    //might want to redo add logic
-                    pole.connectedBlocks.Add(this);
-                    connectedBlocks.Add(pole);
-                    break;
-                }
+                coverage.Add(origin+dir*i);
             }
         }
-
-        if (myGrid == null){
-            myGrid = new PowerGrid();
-            myGrid.AddBlock(this);
-        }
-
-        //get all blocks in area
-        for(int i = -area.x; i <= area.x; i++){
-            for(int j = -area.y; j <= area.y; j++){
-                if (TerrainManager.Instance.GetBlock(pos + new Vector2Int(i, j)) is IPowerBlock block){
-                    if (block.myGrid == null){
-                        myGrid.AddBlock(block);
-                        connectedBlocks.Add(block);
-                    }
-                }
+        return coverage.ToArray();
+    }
+    public override Vector2Int[] GetBlockCoverage(){
+        //get all v2ints in area, ie from -2 to 2, -2 to 2, as list in one line
+        List<Vector2Int> coverage = new();
+        for (int i = -area.x; i <= area.x; i++){
+            for (int j = -area.y; j <= area.y; j++){
+                coverage.Add(origin +new Vector2Int(i, j));
             }
         }
-        
-        
-        //draw line
-        lr.positionCount = connectedBlocks.Count*2;
-        int indx = 0;
-        foreach (IPowerBlock block in connectedBlocks){
-            lr.SetPosition(indx, transform.position + Vector3.up);
-            indx++;
-            lr.SetPosition(indx, block.myBlock.transform.position + Vector3.up);
-            indx++;
-
-        }
-        
+        return coverage.ToArray();
     }
+    
 
-    public override bool BlockDestroy(bool dropLoot){
-        foreach (IPowerBlock block in connectedBlocks){
-            myGrid.RemoveBlock(block);
-        }
-        myGrid.RemoveBlock(this);
-        return base.BlockDestroy();
-    }
+  
+
 }

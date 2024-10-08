@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Systems.Block{
     public class TickingBlock : Block{
         public virtual void Tick(){
-            if (TerrainManager.ticks % 2 == 0){
+            if (TerrainManager.totalTicksElapsed % 2 == 0){
                 actuatedThisTick = false;
                 if (properties.actuatable)
                     mat.SetColor("_AddColor", new Color(0, 0, 0, 0));

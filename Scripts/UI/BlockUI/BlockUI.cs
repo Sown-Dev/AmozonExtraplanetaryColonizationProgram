@@ -9,6 +9,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.BlockUI{
@@ -28,7 +29,7 @@ namespace UI.BlockUI{
         
         [SerializeField] private GameObject horizListPrefab;
 
-        [SerializeField] private Transform windowTransform;
+        [SerializeField] private VerticalLayoutGroup windowList;
         
         [SerializeField] private TMP_Text nameText;
 
@@ -54,7 +55,7 @@ namespace UI.BlockUI{
         }
 
         public void GenerateUIForBlock(Block block){
-            foreach (Transform child in windowTransform){
+            foreach (Transform child in windowList.transform){
                 Destroy(child.gameObject);
             }
 
@@ -72,27 +73,32 @@ namespace UI.BlockUI{
             for (int i = 0; i < componentFields.Count; i++){
                 var component = componentFields[i];
                 if (i < componentFields.Count - 1 && (int)(componentFields[i + 1].Priority/10) == component.Priority/10){
-                    Transform list = Instantiate(horizListPrefab, windowTransform).transform;
+                    Transform list = Instantiate(horizListPrefab, windowList.transform).transform;
                     AddComponent(component, list);
                     while (i < componentFields.Count-1 && (int)(componentFields[i + 1].Priority/10) == component.Priority/10){
                         AddComponent(componentFields[i+1],list );
                         i++;
-                        Debug.Log("SIZE IS " + list.childCount);
+                        //Debug.Log("SIZE IS " + list.childCount);
                     }
                 }
                 else{
-                    AddComponent(component, windowTransform);
+                    AddComponent(component, windowList.transform);
                 }
             }
             if (block is IPowerProducer powerProducer){
-                PowerProducerUI powerProducerUI = Instantiate(PowerProducerUIPrefab,  windowTransform)
+                PowerProducerUI powerProducerUI = Instantiate(PowerProducerUIPrefab,  windowList.transform)
                     .GetComponent<PowerProducerUI>();
                 powerProducerUI.Init(powerProducer);
+                windowList.padding.bottom = 32;
+
             }
             else if (block is IPowerConsumer powerConsumer){
-                PowerConsumerUI powerConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowTransform)
+                PowerConsumerUI powerConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowList.transform)
                     .GetComponent<PowerConsumerUI>();
                 powerConsumerUI.Init(powerConsumer);
+                windowList.padding.bottom = 32;
+
+
             }
             
 

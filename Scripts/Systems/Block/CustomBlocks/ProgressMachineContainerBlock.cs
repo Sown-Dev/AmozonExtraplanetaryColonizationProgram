@@ -8,6 +8,7 @@ namespace Systems.Block.CustomBlocks{
         protected override void Awake(){
             base.Awake();
             output = new Container(outputProperties);
+            output.Priority = 1;
         }
     
         public virtual bool Insert(ref ItemStack mySlot, bool simulate = false){
