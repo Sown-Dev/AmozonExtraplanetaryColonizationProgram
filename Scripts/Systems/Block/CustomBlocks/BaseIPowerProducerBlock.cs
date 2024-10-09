@@ -1,6 +1,6 @@
 ﻿using Systems.Block.CustomBlocks;
 
-public class BaseIPowerProducerBlock: BaseIPowerBlock{
+public class BaseIPowerProducerBlock: BaseIPowerBlock, IPowerProducer{
     public int producing{ get; set; }
     public bool neededOn{ get; set; }
 

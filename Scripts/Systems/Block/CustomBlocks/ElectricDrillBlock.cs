@@ -1,6 +1,6 @@
 ﻿namespace Systems.Block.CustomBlocks{
     public class ElectricDrillBlock : DrillBlock, IPowerConsumer{
-        public int Priority{ get; set; }
+        public int Priority{ get; } = 10;
         public bool Hidden{ get; set; }
         public PowerGrid myGrid{ get; set; }
         public Block myBlock => this;

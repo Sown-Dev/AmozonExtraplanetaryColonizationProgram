@@ -18,7 +18,8 @@ public class Utils: MonoBehaviour{
     
     
     public Sprite blankIcon;
-    
+
+    public GameObject EmptyUI;
     
     [SerializeField] public ItemDrop itemDropPrefab;
 

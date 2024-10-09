@@ -86,17 +86,21 @@ namespace UI.BlockUI{
                 }
             }
             if (block is IPowerProducer powerProducer){
-                PowerProducerUI powerProducerUI = Instantiate(PowerProducerUIPrefab,  windowList.transform)
-                    .GetComponent<PowerProducerUI>();
-                powerProducerUI.Init(powerProducer);
-                windowList.padding.bottom = 32;
+                GridProducerUI gridProducerUI = Instantiate(PowerProducerUIPrefab,  windowList.transform)
+                    .GetComponent<GridProducerUI>();
+                gridProducerUI.Init(powerProducer);
+                Instantiate(Utils.Instance.EmptyUI, windowList.transform);
+    
+                //windowList.padding.bottom = 12;
 
             }
             else if (block is IPowerConsumer powerConsumer){
-                PowerConsumerUI powerConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowList.transform)
-                    .GetComponent<PowerConsumerUI>();
-                powerConsumerUI.Init(powerConsumer);
-                windowList.padding.bottom = 32;
+                GridConsumerUI gridConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowList.transform)
+                    .GetComponent<GridConsumerUI>();
+                gridConsumerUI.Init(powerConsumer);
+                Instantiate(Utils.Instance.EmptyUI, windowList.transform);
+
+                //windowList.padding.bottom = 12;
 
 
             }

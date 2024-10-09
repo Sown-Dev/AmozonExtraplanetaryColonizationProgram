@@ -9,13 +9,14 @@ namespace Systems.Block{
 
         public List<Vector2Int> DrillPositions;
 
-        public ProgressBar progressBar = new ProgressBar();
+        public ProgressBar progressBar = new ProgressBar(21);
 
         public List<GameObject> DrillFX;
 
 
         protected override void Awake(){
             base.Awake();
+            
             progressBar.maxProgress = DrillTime;
         }
 

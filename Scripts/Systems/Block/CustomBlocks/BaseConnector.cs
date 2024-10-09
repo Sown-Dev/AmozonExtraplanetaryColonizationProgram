@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEngine;
 
 namespace Systems.Block{
@@ -51,17 +52,23 @@ namespace Systems.Block{
             }
         
             foreach (var block in connectedBlocks){
-                if (!myGrid.HasBlock(block)){
-                    myGrid.AddBlock(block);
-                }
+                Connect(block);
+                
             }
         }
 
         public void Connect(IPowerBlock block){
             
-            if (!connectedBlocks.Contains(block)){
+           
+
+            if ( !myGrid.HasBlock(block)){
+                
+                
                 block.myConnector?.Disconnect(block);
-                connectedBlocks.Add(block);
+                
+                if(!connectedBlocks.Contains(block))
+                    connectedBlocks.Add(block);
+                
                 myGrid.AddBlock(block);
                 block.myConnector = this;
             }
@@ -79,9 +86,7 @@ namespace Systems.Block{
             GetConnected();
             GetGrid();
             foreach (var block in connectedBlocks){
-                if (!myGrid.HasBlock(block)){
-                    myGrid.AddBlock(block);
-                }
+                Connect(block);
             }
 
             foreach (var pos in GetBlockCoverage()){
@@ -107,8 +112,15 @@ namespace Systems.Block{
             //for each block add 
             foreach (var pblock in  blocksCovered.FindAll(block => block is IPowerBlock powerBlock)
                          .ConvertAll(block => (IPowerBlock)block)){
-                Connect(pblock);
                 
+                //could also just disconnect all and then only connect  if it is null
+                if(pblock.myConnector != null){
+                    pblock.myConnector.Disconnect(pblock);
+                }   
+                connectedBlocks.Add(pblock);
+                
+                
+
             }
         
             
@@ -151,7 +163,7 @@ namespace Systems.Block{
             
             
             
-            foreach (var pblock in connectedBlocks){
+            foreach (var pblock in connectedBlocks.ToList()){
                 Disconnect(pblock);
             }
        
@@ -183,6 +195,10 @@ namespace Systems.Block{
             }
 
             return true;
+        }
+
+        public override void Use(Unit user){
+            WindowManager.Instance.CreateGridWindow(myGrid);
         }
 
         public void OnDrawGizmos(){

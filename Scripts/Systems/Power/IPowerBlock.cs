@@ -4,7 +4,7 @@ using Systems.BlockUI;
 using UnityEngine;
 
 public interface IPowerBlock{
-    public int Priority{ get; set; } //priority of consumption/production, higher consumption is more needed, ie logistics over refine, higher production is less important to be OFF ie solar
+    public int Priority{ get; } //priority of consumption/production, higher consumption is more needed, ie logistics over refine, higher production is less important to be OFF ie solar
     public PowerGrid myGrid{ get; set; } //the grid that the block is in. If null, then no grid and no power
     public Block myBlock{ get; } //stupid, but we need a reference to the block
     public IPowerConnector myConnector{ get; set; } //the connector that the block is connected to
