@@ -57,6 +57,7 @@ namespace Systems.Block{
 
             am = GetComponent<Animator>();
             mat = sr.material;
+            
             Deselect();
             mat.SetFloat("_PixelsPerUnit", sr.sprite.texture.width);
         }
@@ -103,7 +104,11 @@ namespace Systems.Block{
         //true if block gets destroyed
         public virtual bool BlockDestroy(bool dropLoot = true){
             Destroy(gameObject);
-            TerrainManager.Instance.BlockLayerRemove(origin);
+            
+            
+            foreach (var blockpos in GetPositions()){
+                TerrainManager.Instance.BlockLayerRemove(blockpos);
+            }
 
 
             if (dropLoot){
@@ -129,6 +134,10 @@ namespace Systems.Block{
         }
         public List<Block> GetAdjascent(){
             return TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y);
+        }
+
+        public List<Vector2Int> GetPositions(){
+            return TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y);
         }
         
         

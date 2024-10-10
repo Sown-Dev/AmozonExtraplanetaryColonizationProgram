@@ -108,10 +108,11 @@ public partial class TerrainManager : MonoBehaviour{
         );
         // Instantiate the block
         Block block = Instantiate(blockPrefab.gameObject, spawnPos, Quaternion.identity).GetComponent<Block>();
-        block.Init(rot);
-
         block.origin = position; // Set the block's origin
 
+        block.Init(rot);
+
+                
         // Handle ticking blocks
         if (blockPrefab is TickingBlock)
         {
@@ -155,8 +156,11 @@ public partial class TerrainManager : MonoBehaviour{
         if(block.tile !=null){
             blockTilemap.SetTile((Vector3Int)pos, null);
             //remove adjascent tiles
-
+            
         }
+
+        
+
 
         CreateBlockDebris(block.transform.position, block.baseColor);
 
@@ -379,6 +383,20 @@ public partial class TerrainManager : MonoBehaviour{
             }
         }
     }
-    
-    
+
+
+    private void OnDrawGizmos(){
+        Gizmos.color = Color.magenta;
+        
+        foreach (var pair in powerClaims){
+            Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.myBlock.origin);
+        }
+
+        Gizmos.color = Color.green;
+
+        foreach (var pair in blockLayer.GetDictionary()){
+            //Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.origin);
+
+        }
+    }
 }

@@ -13,17 +13,20 @@
 
         public override void Init(Orientation orientation){
             base.Init(orientation);
+            GetConnected();
+            
+            
+        }
 
+        public void GetConnected(){
             foreach (var pos in TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y)){
                 if (TerrainManager.Instance.powerClaims.ContainsKey(pos)){
                     TerrainManager.Instance.powerClaims[pos].Connect(this);
+                    break;
                 }
-
-                break;
-
             }
-            
         }
+        
         public override string GetDescription(){
             return $"{base.GetDescription()}\nConsumes {baseUsage}ϟW";
         }

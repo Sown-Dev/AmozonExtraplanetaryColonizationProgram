@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d21a0ec938d49d748a25c22be690d869
+guid: 028fa269cc036734d8147101337935f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8104322891140946938
-    second: Conveyor3_0
+      213: 8535887786380078763
+    second: EnergySeller_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,9 +40,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Conveyor3_0
+      name: EnergySeller_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 48
-        height: 48
+        x: 17
+        y: 14
+        width: 30
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6042a70e449a78f80800000000000000
-      internalID: -8104322891140946938
+      spriteID: baea7c577b0957670800000000000000
+      internalID: 8535887786380078763
       vertices: []
       indices: 
       edges: []
@@ -157,7 +157,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Conveyor3_0: -8104322891140946938
+      EnergySeller_0: 8535887786380078763
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -37,7 +37,7 @@ public class QuantumContainerBlock:ContainerBlock{
 
     public void ChangeContainer(){
         output = QuantumContainers[selector.value];
-        /*BlockUIManager.Instance.CloseBlockUI(); for refresh, but looks ugly
-        BlockUIManager.Instance.GenerateBlockUI(this);*/
+        BlockUIManager.Instance.CloseBlockUI();  // for refresh, but looks ugly
+        BlockUIManager.Instance.GenerateBlockUI(this);
     }
 }

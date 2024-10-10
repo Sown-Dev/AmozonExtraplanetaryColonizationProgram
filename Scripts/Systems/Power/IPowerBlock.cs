@@ -8,6 +8,7 @@ public interface IPowerBlock{
     public PowerGrid myGrid{ get; set; } //the grid that the block is in. If null, then no grid and no power
     public Block myBlock{ get; } //stupid, but we need a reference to the block
     public IPowerConnector myConnector{ get; set; } //the connector that the block is connected to
+    public void GetConnected(); //get the connected to any connectors
 }
 
 public interface IPowerProducer: IPowerBlock{
@@ -20,6 +21,7 @@ public interface IPowerConsumer: IPowerBlock{
     public int providedPower{ get; set; }//power that the block has. is set outside but only used internally
 }
 public interface IPowerConnector{
+    public int Priority{ get; }
     public Block myBlock{ get; }
     public PowerGrid myGrid{ get; set; }
     public bool Visited{ get; set; }

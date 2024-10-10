@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Systems.Block{
     public class BaseConnector : Block, IPowerConnector{
+        public int Priority{ get; } = 0;
         public Block myBlock => this;
 
         public PowerGrid myGrid{ get; set; }
@@ -61,7 +62,7 @@ namespace Systems.Block{
             
            
 
-            if ( !myGrid.HasBlock(block)){
+            //if ( !myGrid.HasBlock(block)){
                 
                 
                 block.myConnector?.Disconnect(block);
@@ -71,9 +72,11 @@ namespace Systems.Block{
                 
                 myGrid.AddBlock(block);
                 block.myConnector = this;
-            }
+                Debug.Log("Connecting "+block.myBlock.origin);
+            //}
         }
         public void Disconnect(IPowerBlock block){
+            Debug.Log("Disconnecting "+block.myBlock.origin);
             if (connectedBlocks.Contains(block)){
                 connectedBlocks.Remove(block);
                 myGrid.RemoveBlock(block);
@@ -90,8 +93,10 @@ namespace Systems.Block{
             }
 
             foreach (var pos in GetBlockCoverage()){
-                if(TerrainManager.Instance.powerClaims.ContainsKey(pos))
-                    TerrainManager.Instance.powerClaims[pos] = this;
+                if(!TerrainManager.Instance.powerClaims.ContainsKey(pos) || TerrainManager.Instance.powerClaims[pos]?.Priority>Priority){
+                    TerrainManager.Instance.powerClaims.Add(pos, this);
+                }
+                
             }
         }
 
@@ -153,18 +158,19 @@ namespace Systems.Block{
         }
 
         public override bool BlockDestroy(bool dropLoot){
-            foreach (var pos in GetBlockCoverage()){
-                if(TerrainManager.Instance.powerClaims.ContainsKey(pos) && TerrainManager.Instance.powerClaims[pos] == this)
-                    TerrainManager.Instance.powerClaims[pos] = null;
-            }
             if (!base.BlockDestroy(dropLoot)){
                 return false;
             }
             
             
+            foreach (var pos in GetBlockCoverage()){
+                if(TerrainManager.Instance.powerClaims.ContainsKey(pos) && TerrainManager.Instance.powerClaims[pos] == this)
+                    TerrainManager.Instance.powerClaims.Remove(pos);
+            }
             
             foreach (var pblock in connectedBlocks.ToList()){
                 Disconnect(pblock);
+                pblock.GetConnected();
             }
        
 

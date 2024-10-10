@@ -40,5 +40,8 @@ public class Layer<ObjectType> where ObjectType: class{
             layer.Remove(position);
         }
     }
+    public Dictionary<Vector2Int, ObjectType> GetDictionary(){
+        return layer;
+    }
 
 }
