@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: ConveyorBelt
   m_EditorClassIdentifier: 
-  stackSize: 32
+  stackSize: 64
   icon: {fileID: 21300000, guid: 139bccd75b68ea747ae556a11e88571f, type: 3}
   category: 2
   useCursor: 1

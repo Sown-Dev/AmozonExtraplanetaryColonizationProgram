@@ -15,6 +15,8 @@ public class BlockProperties{
    public bool indestructible;
    public bool rotateable = false; //used by cursor
    public bool actuatable;
+   public bool collidable = true;
+   //public float blockHeight = 1;
    public Vector2Int size= new (1,1);
 
    public string description = "";

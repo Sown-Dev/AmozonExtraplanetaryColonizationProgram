@@ -132,6 +132,12 @@ namespace Systems.Block.CustomBlocks{
             availableSlots.Add(cs.assignedSlot);
             ConveyorContainer.Remove(cs);
         }
+        
+        //burner drops
+        public override bool BlockDestroy(bool dropItems = true){
+            lootTable.AddRange(ConveyorContainer.Select(cs => cs.mySlot.ItemStack));
+            return base.BlockDestroy(dropItems);
+        }
 
 
         public class ConveyorSlot{
@@ -147,5 +153,7 @@ namespace Systems.Block.CustomBlocks{
                 assignedSlot.SetSlot(mySlot);
             }
         }
+        
+        
     }
 }

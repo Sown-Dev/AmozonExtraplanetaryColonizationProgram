@@ -17,6 +17,8 @@ namespace Systems.Block{
         public Transform arm;
     
         [SerializeField] private SlotVisualizer slotVisualizer;
+        
+        public int stackSize = 2;
 
         protected override void Awake(){
             DirSelect = new DirectionSelect();
@@ -25,7 +27,7 @@ namespace Systems.Block{
             outputProperties.size = 1;
             output = new Container(outputProperties);
             mySlot = output.GetSlot(0);
-            mySlot.Stacksize = 4;
+            mySlot.Stacksize = stackSize;
         
             slotVisualizer.SetSlot(output.GetSlot(0));
         }
@@ -78,17 +80,25 @@ namespace Systems.Block{
                 toFace = DirSelect.outputOrientation;
                 if (arm.localRotation.eulerAngles.z < DirSelect.outputOrientation.GetAngle() + 5 &&
                     arm.localRotation.eulerAngles.z > DirSelect.outputOrientation.GetAngle() - 5){
-                    GetDirection( DirSelect.outputOrientation)?.Actuate();
-                    toInsert = GetDirection( DirSelect.outputOrientation) as IContainerBlock;
-                    if(toInsert!= null)
-                        CU.Transfer(mySlot, toInsert);
                     
+                    GetDirection( DirSelect.outputOrientation)?.Actuate();
+
+                    toInsert = GetDirection( DirSelect.outputOrientation) as IContainerBlock;
+                    if (toInsert != null){
+                        CU.Transfer(mySlot, toInsert);
+
+                    }
+
                 }
             }
             if (mySlot.dirty){
                 slotVisualizer.Refresh();
                 mySlot.dirty = false;
             }  
+        }
+
+        public override string GetDescription(){
+            return properties.description + " Holds up to " + stackSize + " items";
         }
     }
 }

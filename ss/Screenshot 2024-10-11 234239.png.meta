@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cdffd056a1889044d8dfa28784148d5b
+guid: 5fdd7472270c0ca40888a527e75719bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2444442710872858435
-    second: BurnDrill_0
+      213: 7698341674914757621
+    second: Screenshot 2024-10-11 234239_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BurnDrill_0
+      name: Screenshot 2024-10-11 234239_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 32
-        height: 53
+        x: 0
+        y: 0
+        width: 1314
+        height: 764
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34f9e5fb1b76ce120800000000000000
-      internalID: 2444442710872858435
+      spriteID: 5fb31ec37f006da60800000000000000
+      internalID: 7698341674914757621
       vertices: []
       indices: 
       edges: []
@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Screenshot 2024-10-11 234239_0: 7698341674914757621
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

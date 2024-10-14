@@ -70,6 +70,9 @@ namespace Systems.Block{
             }
             UpdateSprite();
             
+            
+            bc.enabled = properties.collidable;
+            
 
         }
         public void UpdateSprite(){
@@ -117,7 +120,8 @@ namespace Systems.Block{
                 if (properties?.myItem != null)
                     Utils.Instance.CreateItemDrop(new ItemStack(properties.myItem, 1), transform.position);
                 foreach (ItemStack itemStack in lootTable){
-                    Utils.Instance.CreateItemDrop(itemStack, transform.position);
+                    Vector3 offset = new Vector3(UnityEngine.Random.Range(-0.125f, 0.125f), UnityEngine.Random.Range(-0.125f, 0.125f));
+                    Utils.Instance.CreateItemDrop(itemStack, transform.position + offset);
                 }
 
             }

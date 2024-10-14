@@ -132,6 +132,7 @@ MonoBehaviour:
     indestructible: 0
     rotateable: 0
     actuatable: 0
+    collidable: 0
     size: {x: 1, y: 1}
     description: 
     bso: {fileID: 0}
@@ -147,7 +148,6 @@ MonoBehaviour:
   rotation: 0
   tile: {fileID: 0}
   origin: {x: 0, y: 0}
-  lr: {fileID: 0}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

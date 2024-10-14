@@ -21,8 +21,11 @@ public partial class TerrainManager
 
     [SerializeField] private Block Tree;
     [SerializeField] private Block Crystal;
+    [SerializeField] private Block Mushroom;
+    
     [SerializeField] private Block SellBlock;
     [SerializeField] private Block BigCrate;
+    
 
     //[SerializeField] private Block Rock1x;
     [SerializeField] private Block Rock2x;
@@ -99,17 +102,22 @@ public partial class TerrainManager
                     else
                     {
                         SetTerrain(position, Stone);
+                       
 
+                    }
+                    
+
+                    if (((perlin2*perlin2)< 0.32f && perlin2>0.03f) || (perlin1 <0.25f &&perlin2<0.42f))
+                    {
+                        SetWall(rockWall, (Vector3Int)position);
                     }
                     if (Random.value > 0.995f)
                     {
                         PlaceBlock(Rock2x, position - Vector2Int.one);
 
-                    } 
-
-                    if (((perlin2*perlin2)< 0.32f && perlin2>0.03f) || (perlin1 <0.25f &&perlin2<0.42f))
-                    {
-                        SetWall(rockWall, (Vector3Int)position);
+                    }
+                    if(Random.value<0.032f && perlin1<0.34f){
+                        PlaceBlock(Mushroom, position);
                     }
 
 

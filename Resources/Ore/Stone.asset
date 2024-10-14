@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df92101969073b4d92b9089f1f6b7a3, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  threshold: 0.8
+  threshold: 0.82
   scale: 0.08
-  minAmount: 120
-  maxAmount: 280
+  minAmount: 160
+  maxAmount: 500
   variance: 20
   ore:
     myProperties: {fileID: 11400000}

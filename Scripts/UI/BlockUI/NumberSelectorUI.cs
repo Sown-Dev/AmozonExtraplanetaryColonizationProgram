@@ -4,15 +4,22 @@ using System.Collections.Generic;
 using Systems.BlockUI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NumberSelectorUI : MonoBehaviour{
     public NumberSelector numSelector;
 
     public TMP_Text number;
     
+    public Button buttonUp;
+    public Button buttonDown;
+    
     public void Init(NumberSelector ns){
         numSelector = ns;
         number.text = numSelector.value.ToString();
+        
+        buttonUp.onClick.AddListener(() => Change(1));
+        buttonDown.onClick.AddListener(() => Change(-1));
     }
     
     public void Change (int value){
@@ -28,6 +35,8 @@ public class NumberSelectorUI : MonoBehaviour{
                 number.text = numSelector.value.ToString();
             }
         }
+        buttonUp.interactable = numSelector.value < numSelector.max;
+        buttonDown.interactable = numSelector.value > numSelector.min;
     }
 }
 
@@ -41,7 +50,9 @@ public class NumberSelector: IBlockUI{
     public NumberSelector( Action change,int min = 0, int max = 32){
         this.min = min;
         this.max = max;
-        this.OnChange = change;
+        value = min;
+        if(change != null)
+            this.OnChange = change;
     }
     
     public void Change(int value){
@@ -52,7 +63,7 @@ public class NumberSelector: IBlockUI{
         if(this.value > max){
             this.value = max;
         }
-        OnChange();
+        OnChange?.Invoke();
     }
 
     public int Priority{ get; set; }

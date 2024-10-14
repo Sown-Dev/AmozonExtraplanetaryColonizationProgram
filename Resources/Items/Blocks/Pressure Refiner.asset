@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Pressure Refiner
   m_EditorClassIdentifier: 
-  idname: furnace
-  stackSize: 4
+  stackSize: 16
   icon: {fileID: 21300000, guid: a1f464a86a6ec2c458b2e8de054dc99e, type: 3}
   category: 2
   useCursor: 1

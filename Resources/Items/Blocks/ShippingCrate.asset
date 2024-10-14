@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: ShippingCrate
   m_EditorClassIdentifier: 
-  stackSize: 8
+  stackSize: 16
   icon: {fileID: 21300000, guid: 8ab832a61bb13c7429b186bbfae3fb22, type: 3}
   category: 2
   useCursor: 1

@@ -20,4 +20,4 @@ MonoBehaviour:
   tier: 5
   description: Wire
   blockPrefab: {fileID: 2861709995071391721, guid: 3f4579ed9af90734fb5238a0c3f0ab09, type: 3}
-  blockCategory: 4
+  blockCategory: 16

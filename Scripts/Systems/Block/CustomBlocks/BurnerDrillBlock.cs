@@ -30,5 +30,11 @@ namespace Systems.Block.CustomBlocks{
         public override string GetDescription(){
             return $"{base.GetDescription()}\nFuel Remaining: {burner.fuelTime}";
         }
+        
+        //burner drops
+        public override bool BlockDestroy(bool dropItems = true){
+            lootTable.AddRange(burner.fuelContainer.GetItems());
+            return base.BlockDestroy(dropItems);
+        }
     }
 }

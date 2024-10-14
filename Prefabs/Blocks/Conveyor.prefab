@@ -153,6 +153,8 @@ MonoBehaviour:
     indestructible: 0
     rotateable: 1
     actuatable: 0
+    collidable: 0
+    blockHeight: 0.25
     size: {x: 1, y: 1}
     description: belt of conveyors
     bso: {fileID: 0}

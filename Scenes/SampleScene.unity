@@ -541,18 +541,22 @@ MonoBehaviour:
   blocks:
   - {fileID: 11400000, guid: 96c7c17460afe15428ffb3d0c72e64f0, type: 2}
   - {fileID: 11400000, guid: 7bc9ff4621119434aafddd30fee4311c, type: 2}
+  - {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
   - {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
   - {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
+  - {fileID: 11400000, guid: a37c54c3baa1be041aad4e92846ef099, type: 2}
   - {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
   - {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
   - {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
   - {fileID: 11400000, guid: 07f6ffe6ad0a548458355c8af7792abb, type: 2}
   - {fileID: 11400000, guid: c66ca198aa4de6e47be6a6550ccb4f88, type: 2}
   - {fileID: 11400000, guid: df6fb076cd291c44cadf57d46da5d5bf, type: 2}
+  - {fileID: 11400000, guid: 7018090cc5e17fe428ee5fea18afcbf3, type: 2}
   - {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
   - {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
   - {fileID: 11400000, guid: 5061ab5c2fdeebe46bb2eda7fef02540, type: 2}
   - {fileID: 11400000, guid: eb77f476667c9cc45beb81cc499ee0aa, type: 2}
+  - {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
   - {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
   - {fileID: 11400000, guid: e994c3ac707134f46a2f4ea832717c10, type: 2}
   - {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
@@ -4714,7 +4718,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5042,7 +5046,7 @@ GameObject:
   - component: {fileID: 1155675249}
   - component: {fileID: 1155675251}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Grid (TerrainMNGR)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5096,6 +5100,7 @@ MonoBehaviour:
   Stone: {fileID: 11400000, guid: 1261bf33853fa6e4db363b3207d689a5, type: 2}
   Tree: {fileID: 5901517970904080477, guid: 45fa2436b964f7746ab5c3066082bc81, type: 3}
   Crystal: {fileID: -8526707392088505906, guid: 6a44684cb3799fe48890db7c08da980d, type: 3}
+  Mushroom: {fileID: 5901517970904080477, guid: de988ded7d7302e43ac6357319537ac7, type: 3}
   SellBlock: {fileID: -6250332161238803911, guid: b0d83dce5094bf44aa6bfa30470bf41b, type: 3}
   BigCrate: {fileID: 3466786307093648758, guid: 28873d6d1e210fd4d8a44b0a3d9199f4, type: 3}
   Rock2x: {fileID: 5901517970904080477, guid: 09d8d09e3583de74e8d85b4d944180c7, type: 3}
@@ -6652,11 +6657,11 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
     price: 30
     tier: 0
-    stock: 0
+    stock: 6
   - item: {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
     price: 50
     tier: 0
-    stock: 0
+    stock: 3
   - item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
     price: 50
     tier: 1
@@ -6675,7 +6680,7 @@ MonoBehaviour:
     stock: 0
   - item: {fileID: 11400000, guid: 07f6ffe6ad0a548458355c8af7792abb, type: 2}
     price: 320
-    tier: 1
+    tier: 4
     stock: 0
   - item: {fileID: 11400000, guid: 23117d005a935e74fbc8ecde9ddfaab7, type: 2}
     price: 400
@@ -6695,31 +6700,43 @@ MonoBehaviour:
     stock: 0
   - item: {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
     price: 50
-    tier: 1
+    tier: 0
     stock: 0
   - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
     price: 80
-    tier: 1
+    tier: 2
     stock: 0
   - item: {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
     price: 80
-    tier: 2
+    tier: 1
     stock: 0
   - item: {fileID: 11400000, guid: eb77f476667c9cc45beb81cc499ee0aa, type: 2}
-    price: 30
+    price: 35
     tier: 0
     stock: 0
   - item: {fileID: 11400000, guid: faadc0be9f59f6d4eaba188848050965, type: 2}
-    price: 65
+    price: 70
     tier: 1
     stock: 0
   - item: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
-    price: 120
+    price: 130
     tier: 1
     stock: 0
   - item: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
-    price: 18
+    price: 25
     tier: 3
+    stock: 12
+  - item: {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
+    price: 300
+    tier: 1
+    stock: 0
+  - item: {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
+    price: 320
+    tier: 4
+    stock: 3
+  - item: {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
+    price: 40
+    tier: 0
     stock: 0
   upgrades:
   - {fileID: 11400000, guid: 859ad071fca8b6c4c85d9007172d0479, type: 2}
@@ -7648,7 +7665,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 4
+    m_Top: 0
     m_Bottom: 8
   m_ChildAlignment: 4
   m_Spacing: 0
@@ -9146,7 +9163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -4, y: 0}
+  m_AnchoredPosition: {x: -2, y: 2}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &2076681210
@@ -9339,6 +9356,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3614411003593756628, guid: 56152a5742462264ead2a7ee897dfc32, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879929536737295282, guid: 56152a5742462264ead2a7ee897dfc32, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4123850395465317598, guid: 56152a5742462264ead2a7ee897dfc32, type: 3}

@@ -10,6 +10,8 @@ namespace Systems.Items{
 
         public int value;
         public int tier;
+
+        //public int fuelValue = 0;
         
         public virtual void Use(Vector2Int pos, Unit user, Slot slot){
         }
@@ -19,6 +21,8 @@ namespace Systems.Items{
          public virtual string ToString(){
              return description;
          }
+         
+         
 
 
     }

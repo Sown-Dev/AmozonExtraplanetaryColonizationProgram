@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Charcoal
   m_EditorClassIdentifier: 
-  idname: coal
   stackSize: 32
   icon: {fileID: 21300000, guid: 164fd998d2ccd974eb1a2f21d1349d13, type: 3}
   category: 1
   useCursor: 0
   value: 6
-  tier: 1
+  tier: -1
   description: some charred coal

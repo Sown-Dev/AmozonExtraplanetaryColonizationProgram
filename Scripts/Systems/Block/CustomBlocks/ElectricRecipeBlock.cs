@@ -1,12 +1,14 @@
-﻿namespace Systems.Block.CustomBlocks{
+﻿using UnityEngine;
+
+namespace Systems.Block.CustomBlocks{
     public class ElectricRecipeBlock : RecipeBlock, IPowerConsumer{
         public int Priority{ get; set; }
         public bool Hidden{ get; set; }
         public PowerGrid myGrid{ get; set; }
         public Block myBlock => this;
         public IPowerConnector myConnector{ get; set; }
-        
-        public int needed{ get; set; }
+
+        [field:SerializeField] public int needed{ get; set; } = 100;
         public int providedPower{ get; set; }
 
         public override void Init(Orientation orientation){
@@ -40,16 +42,18 @@
 
 
         public override bool CanCraft(){
+            if (!base.CanCraft()){
+                return false;
+            }
             if (myGrid == null){
                 return false;
             }
 
-            needed = 100;
             if (providedPower < needed){
                 return false;
             }
 
-            return base.CanCraft();
+            return true;
         }
 
      

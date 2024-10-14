@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
-  m_Name: ActuatorRail
+  m_Name: Actuated Mover
   m_EditorClassIdentifier: 
-  stackSize: 32
-  icon: {fileID: 21300000, guid: 56f67a38895bf61468d8af112b7a6608, type: 3}
+  stackSize: 16
+  icon: {fileID: 21300000, guid: c7dfd8709eed4564493dc8b76fd7879e, type: 3}
   category: 2
   useCursor: 1
-  value: 1
-  tier: 3
+  value: 24
+  tier: 6
   description: 
-  blockPrefab: {fileID: -7460543281120615039, guid: 43800e57a1ef2a245a51ec581d3bddc9, type: 3}
+  blockPrefab: {fileID: 7351794058265038701, guid: 468c029c71d14934c9d411a29b5ac406, type: 3}
   blockCategory: 1

@@ -14,7 +14,7 @@ namespace Systems.Block{
             }
         }
 
-        bool actuatedThisTick = false;
+        protected bool actuatedThisTick = false;
 
         public override void Actuate(){
             if (actuatedThisTick) return;
