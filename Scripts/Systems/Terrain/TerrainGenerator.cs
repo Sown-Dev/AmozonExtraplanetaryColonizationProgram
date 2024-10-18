@@ -8,84 +8,69 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Terrain = Systems.Terrain.Terrain;
 
-public partial class TerrainManager
-{
-        [SerializeField] private RuleTile rockWall;
+public partial class TerrainManager{
+    [SerializeField] private RuleTile rockWall;
 
-    [Header("Terrain")]
-    [SerializeField] private TerrainProperties Grass;
+    [Header("Terrain")] [SerializeField] private TerrainProperties Grass;
     [SerializeField] private TerrainProperties Stone;
 
 
-    [Header("Blocks")]
-
-    [SerializeField] private Block Tree;
+    [Header("Blocks")] [SerializeField] private Block Tree;
     [SerializeField] private Block Crystal;
     [SerializeField] private Block Mushroom;
-    
+    [SerializeField] private Block LootCrate;
+    [SerializeField] private Block CoalNode;
+
     [SerializeField] private Block SellBlock;
     [SerializeField] private Block BigCrate;
-    
+
 
     //[SerializeField] private Block Rock1x;
     [SerializeField] private Block Rock2x;
 
 
-
-
-
-    public void GenerateTerrain()
-    {
-
-
+    public void GenerateTerrain(){
         float noiseOffset = 50000 * Random.value + 10000;
 
-        for (int i = 0; i < 2000; i++)
-        {
+        for (int i = 0; i < 2000; i++){
             //PlaceBlock(Rock2x, new Vector2Int(Random.Range(-200,200),Random.Range(-200,200)));
-
         }
 
         float centerNoise = 0;
-        for (int i = -200; i < 200; i++)
-        {
-            for (int j = -200; j < 200; j++)
-            {
+        for (int i = -200; i < 200; i++){
+            for (int j = -200; j < 200; j++){
                 Vector2Int position = new Vector2Int(i, j);
 
-                try
-                {
+                try{
                     // Sample Perlin noise for this position
 
-                    bool placedOre = false; 
+                    bool placedOre = false;
 
-                     float perlin1 = Mathf.PerlinNoise(i * 0.2f - (noiseOffset/3 * 3), j * 0.2f - noiseOffset*2) +
+                    float perlin1 = Mathf.PerlinNoise(i * 0.2f - (noiseOffset / 3 * 3), j * 0.2f - noiseOffset * 2) +
                                     Random.Range(-0.01f, 0.01f);
 
-                     float perlin2 = Mathf.PerlinNoise(i * 0.09f + (noiseOffset * 3), j * 0.09f + noiseOffset) +
-                                     Random.Range(-0.01f, 0.01f);
+                    float perlin2 = Mathf.PerlinNoise(i * 0.088f + (noiseOffset * 3), j * 0.09f + noiseOffset) +
+                                    Random.Range(-0.01f, 0.01f);
 
-                     if (i == 0 && j == 0){
-                         centerNoise = perlin2;
-                     } 
+                    float perlin3 = Mathf.PerlinNoise(i * 0.035f - (noiseOffset), j * 0.04f + (noiseOffset / 2));
 
-                    if (perlin2 > 0.2f)
-                    {
+
+                    if (i == 0 && j == 0){
+                        centerNoise = perlin2;
+                    }
+
+                    if (perlin2 > 0.25f){
                         SetTerrain(position, Stone);
-                        if (perlin2 * (perlin2) > 0.45f)
-                        {
-                            SetTerrain(position, Grass);
+                        
+                       
 
-                        }
-
-                        for (int k = 0; k < ItemManager.Instance.allOres.Length; k++)
-                        {
-                            float perlinValue = Mathf.PerlinNoise(i * ItemManager.Instance.allOres[k].scale + noiseOffset + (10000 * k),
+                        for (int k = 0; k < ItemManager.Instance.allOres.Length; k++){
+                            float perlinValue = Mathf.PerlinNoise(
+                                i * ItemManager.Instance.allOres[k].scale + noiseOffset + (10000 * k),
                                 j * ItemManager.Instance.allOres[k].scale + noiseOffset + (20000 * k));
 
                             OreProperties oreProperties = ItemManager.Instance.allOres[k];
-                            if (perlinValue > oreProperties.threshold + Random.Range(-0.01f, 0.01f))
-                            {
+                            if (perlinValue > oreProperties.threshold + Random.Range(-0.01f, 0.01f)){
                                 int amount = (int)(oreProperties.minAmount +
                                                    (oreProperties.maxAmount - oreProperties.minAmount) *
                                                    (perlinValue - oreProperties.threshold) / 0.3f +
@@ -95,51 +80,59 @@ public partial class TerrainManager
                                 break;
                             }
                         }
-
+                    }
+                    else{
+                        if (perlin2 * (perlin2) > 0.65f + Random.Range(0, 0.05f)) //|| Random.value<0.01f)
+                        {
+                            SetTerrain(position, Grass);
+                        }else
+                            SetTerrain(position, Stone);
                         
-
                     }
-                    else
-                    {
-                        SetTerrain(position, Stone);
-                       
 
-                    }
                     
+                    //forest
+                    if (perlin3 < 0.195f + Random.Range(-0.01f, 0f)){
+                        SetTerrain(position, Grass);
+                        if (Random.Range(0, 1f) < 0.16f-perlin3/2  & perlin3 < 0.19){
+                            if (Random.value < 0.5f){
+                                PlaceBlock(Tree, position);
+                            }
+                            else
+                                PlaceBlock(Mushroom, position);
+                        }
+                    }
 
-                    if (((perlin2*perlin2)< 0.32f && perlin2>0.03f) || (perlin1 <0.25f &&perlin2<0.42f))
-                    {
+                    if (((perlin2 * perlin2 < 0.32f && perlin2 > 0.03f) || (perlin1 < 0.25f && perlin2 < 0.42f)) &&
+                        perlin3 > 0.25f){
                         SetWall(rockWall, (Vector3Int)position);
                     }
-                    if (Random.value > 0.995f)
-                    {
-                        PlaceBlock(Rock2x, position - Vector2Int.one);
 
+                    if (Random.value > 0.995f){
+                        PlaceBlock(Rock2x, position - Vector2Int.one);
                     }
-                    if(Random.value<0.032f && perlin1<0.34f){
+
+                    if (Random.value < 0.032f && perlin1 < 0.34f){
                         PlaceBlock(Mushroom, position);
                     }
-
-
                 }
-                catch (Exception e)
-                {
+                catch (Exception e){
                     Debug.LogError("Error at " + position + ": " + e.Message);
                 }
             }
         }
 
-        bool inverse=false;
+        bool inverse = false;
         inverse = centerNoise < 0.5f;
-        
+
         int a = 18;
         for (int i = -a; i <= a; i++){
-            for(int j = -a; j <= a; j++){
+            for (int j = -a; j <= a; j++){
                 float perlin2 = Mathf.PerlinNoise(i * 0.095f + noiseOffset * 3, j * 0.09f + noiseOffset) +
                                 Random.Range(-0.01f, 0.01f) + j / 1000f;
-                float myDist = Mathf.Sqrt(i * i + j * (j/2));
-                float myPerlin = perlin2+ (inverse? myDist:-myDist)/(a*2);
-                if (inverse? myPerlin<0.75f: myPerlin>0.25f){
+                float myDist = Mathf.Sqrt(i * i + j * (j / 2));
+                float myPerlin = perlin2 + (inverse ? myDist : -myDist) / (a * 2);
+                if (inverse ? myPerlin < 0.75f : myPerlin > 0.25f){
                     SetWall(null, new Vector3Int(i, j, 0));
                 }
             }
@@ -153,10 +146,8 @@ public partial class TerrainManager
         PlaceBlock(BigCrate, new Vector2Int(0, -4));
         ContainerBlock c = GetBlock(new Vector2Int(0, -4)) as ContainerBlock;
 
-        foreach (List<Item> list in ItemManager.Instance.itemDict.Values)
-        {
-            foreach (Item item in list)
-            {
+        foreach (List<Item> list in ItemManager.Instance.itemDict.Values){
+            foreach (Item item in list){
                 ItemStack i = new ItemStack(item, 16);
                 c.output.Insert(ref i);
             }
@@ -172,6 +163,9 @@ public partial class TerrainManager
                     PlaceBlock(Tree, pos);
                 }
                 else{
+                    if (Random.value > 0.6f){
+                        PlaceBlock(CoalNode, pos);
+                    }
                     PlaceBlock(Crystal, pos);
                 }
             }
@@ -179,20 +173,16 @@ public partial class TerrainManager
 
         for (int i = 0; i < 20; i++){
             Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
-            SetWall(null,(Vector3Int)pos);
+            SetWall(null, (Vector3Int)pos);
             for (int j = 0; j < 7; j++){
-                SetWall(null, (Vector3Int)pos+ Vector3Int.RoundToInt(Random.insideUnitCircle*1.5f));
+                SetWall(null, (Vector3Int)pos + Vector3Int.RoundToInt(Random.insideUnitCircle * 1.5f));
             }
-            
+
 
             PlaceBlock(Crystal, pos);
-            
         }
 
 
-
         GC.Collect();
-
-
     }
 }

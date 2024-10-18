@@ -64,5 +64,10 @@ namespace Systems.Block{
 
             return false;
         }
+
+        public override List<Vector2> GetHighlights(){
+            return DrillPositions.ConvertAll(pos => (Vector2)pos + (Vector2)origin);
+        }
     }
+    
 }

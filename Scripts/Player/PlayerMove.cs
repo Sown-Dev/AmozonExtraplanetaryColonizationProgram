@@ -13,6 +13,8 @@ public partial class Player : Unit{
     [SerializeField] protected Collider2D playerCollider; // Reference to the player's collider
     [SerializeField] private SpriteRenderer shadow;
     [SerializeField] private Animator am;
+    [SerializeField] private Transform highlights;
+    [SerializeField] private GameObject Invalid;
 
     private float moveV = 4600f;
     public float jumpVelocity = 10f; // The initial velocity applied when jumping   
@@ -85,11 +87,32 @@ public partial class Player : Unit{
         else if (move.x < 0){
             sr.transform.localScale = new Vector3(-1, 1, 1);
         }
-
+        
+        foreach (Transform child in highlights.transform){
+            Destroy(child.gameObject);
+        }
         if (SelectedSlot.ItemStack?.item is BlockItem block && PlayerUI.Instance.OnTop.childCount == 0){
             buildingPreview.color = new Color(1, 1, 1, 0.4f);
             myCursor.sr.size = block.blockPrefab.properties.size;
 
+                
+            
+            //TODO: OPTIMIZE THIS AND OVERALL REORGANIZE CURSOR LOGIC
+            foreach (Transform child in highlights.transform){
+                Destroy(child.gameObject);
+            }
+            if (block.blockPrefab.GetHighlights()?.Count > 0){
+                Utils.Instance.GenerateHighlights(myCursor.currentPos, block.blockPrefab.GetHighlights(), highlights);
+            }
+
+            foreach (var v2 in TerrainManager.Instance.GetBlockPositions(myCursor.currentPos, block.blockPrefab.properties.size.x, block.blockPrefab.properties.size.y)){
+                if (TerrainManager.Instance.GetBlock(v2) != null || TerrainManager.Instance.IsWall((Vector3Int)v2)){
+                    GameObject go = Instantiate(Invalid, highlights);
+                    go.transform.position = (Vector3Int)v2;
+                }
+
+            }
+            
 
             if ((block.blockPrefab.currentState?.rotateable ?? false) && block.blockPrefab.currentState
                     .rotations[(int)myCursor.cursorRotation].sprites.Length > 0){

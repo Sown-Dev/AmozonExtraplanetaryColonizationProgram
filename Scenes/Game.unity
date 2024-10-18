@@ -510,6 +510,7 @@ MonoBehaviour:
   conveyor: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
   dynamight: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
   copperOre: {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}
+  highlightSprite: {fileID: 3017160607117403154, guid: 9f4aa65cd8fe4714bbc9ee33e4c98d55, type: 3}
 --- !u!4 &138860715
 Transform:
   m_ObjectHideFlags: 0
@@ -554,6 +555,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7018090cc5e17fe428ee5fea18afcbf3, type: 2}
   - {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
   - {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
+  - {fileID: 11400000, guid: 77b6ef5cfd14fdf41b4f3623b6f13055, type: 2}
   - {fileID: 11400000, guid: 5061ab5c2fdeebe46bb2eda7fef02540, type: 2}
   - {fileID: 11400000, guid: eb77f476667c9cc45beb81cc499ee0aa, type: 2}
   - {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
@@ -2138,6 +2140,8 @@ MonoBehaviour:
   playerCollider: {fileID: 352239784}
   shadow: {fileID: 1410434819}
   am: {fileID: 1872625551}
+  highlights: {fileID: 976374545}
+  Invalid: {fileID: 3017160607117403154, guid: 95555d6bef5d2f74c9499e220c8f22b4, type: 3}
   jumpVelocity: 14
   gravity: -32
   destroyTimer: 0
@@ -2390,7 +2394,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409658067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 200c212286a08ba4681bf5ef45b5d025, type: 3}
   m_Name: 
@@ -3046,6 +3050,10 @@ PrefabInstance:
     - target: {fileID: 998994346645280636, guid: 85ff4e5988e3f0941b42511dfa283f72, type: 3}
       propertyPath: m_Spacing
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985447820304163178, guid: 85ff4e5988e3f0941b42511dfa283f72, type: 3}
+      propertyPath: m_Alpha
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2136716963940755184, guid: 85ff4e5988e3f0941b42511dfa283f72, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3717,6 +3725,7 @@ Transform:
   m_Children:
   - {fileID: 1465964599}
   - {fileID: 159801768}
+  - {fileID: 976374545}
   m_Father: {fileID: 25563650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &645194704
@@ -3763,7 +3772,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2000
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 0.5019608}
+  m_Color: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 0.54901963}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4343,6 +4352,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridWindowPrefab: {fileID: 6103878211779316357, guid: 5563e520e4a44c24f884990ef5560168, type: 3}
   currentGridUI: {fileID: 0}
+--- !u!1 &976374544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976374545}
+  m_Layer: 0
+  m_Name: Highlights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976374545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976374544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 645194703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1000057634
 GameObject:
   m_ObjectHideFlags: 0
@@ -4718,7 +4758,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d8390f4f675642643abf833abd7946db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5098,9 +5138,11 @@ MonoBehaviour:
   rockWall: {fileID: 11400000, guid: 2d9f92616c4be354e952cc646b51aba8, type: 2}
   Grass: {fileID: 11400000, guid: 7e85de4112d07d04ca7f1210d1e4715e, type: 2}
   Stone: {fileID: 11400000, guid: 1261bf33853fa6e4db363b3207d689a5, type: 2}
-  Tree: {fileID: 5901517970904080477, guid: 45fa2436b964f7746ab5c3066082bc81, type: 3}
+  Tree: {fileID: -8526707392088505906, guid: 1b4774ae127334c42b741e3b1b32a598, type: 3}
   Crystal: {fileID: -8526707392088505906, guid: 6a44684cb3799fe48890db7c08da980d, type: 3}
   Mushroom: {fileID: 5901517970904080477, guid: de988ded7d7302e43ac6357319537ac7, type: 3}
+  LootCrate: {fileID: 0}
+  CoalNode: {fileID: -8526707392088505906, guid: fd51c20b19bc34042b986d6fda42e091, type: 3}
   SellBlock: {fileID: -6250332161238803911, guid: b0d83dce5094bf44aa6bfa30470bf41b, type: 3}
   BigCrate: {fileID: 3466786307093648758, guid: 28873d6d1e210fd4d8a44b0a3d9199f4, type: 3}
   Rock2x: {fileID: 5901517970904080477, guid: 09d8d09e3583de74e8d85b4d944180c7, type: 3}
@@ -6645,6 +6687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoUI: {fileID: 1448693638}
+  RoundCompleteUIPrefab: {fileID: 6103878211779316357, guid: 0c04243e68fe9694d8f08625d79df9a1, type: 3}
   allOffers:
   - item: {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
     price: 30
@@ -6664,7 +6707,7 @@ MonoBehaviour:
     stock: 3
   - item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
     price: 50
-    tier: 1
+    tier: 0
     stock: 0
   - item: {fileID: 11400000, guid: 478f0b9d2ac77a84a8f214e627aba144, type: 2}
     price: 200
@@ -6703,7 +6746,7 @@ MonoBehaviour:
     tier: 0
     stock: 0
   - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
-    price: 80
+    price: 120
     tier: 2
     stock: 0
   - item: {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
@@ -6728,15 +6771,19 @@ MonoBehaviour:
     stock: 12
   - item: {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
     price: 300
-    tier: 1
+    tier: 2
     stock: 0
   - item: {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
     price: 320
     tier: 4
     stock: 3
   - item: {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
-    price: 40
-    tier: 0
+    price: 60
+    tier: 1
+    stock: 0
+  - item: {fileID: 11400000, guid: 77b6ef5cfd14fdf41b4f3623b6f13055, type: 2}
+    price: 600
+    tier: 3
     stock: 0
   upgrades:
   - {fileID: 11400000, guid: 859ad071fca8b6c4c85d9007172d0479, type: 2}
@@ -6764,7 +6811,7 @@ Transform:
   m_GameObject: {fileID: 1504162445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -90.590805, y: 31.307892, z: -0.41131663}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7665,7 +7712,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 8
     m_Bottom: 8
   m_ChildAlignment: 4
   m_Spacing: 0

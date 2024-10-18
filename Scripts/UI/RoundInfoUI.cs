@@ -21,7 +21,7 @@ public class RoundInfoUI:MonoBehaviour{
     public GameObject sellUIPrefab;
 
     public void Update(){
-                timeText.text = string.Format("{0}:{1:00}", (int)(RoundManager.Instance.roundTime/ 60), (int)(RoundManager.Instance.roundTime % 60));
+        timeText.text =$"{(int)(RoundManager.Instance.roundTime / 60)}:{(int)(RoundManager.Instance.roundTime / 60):00}";
     }
 
     public void Refresh(){

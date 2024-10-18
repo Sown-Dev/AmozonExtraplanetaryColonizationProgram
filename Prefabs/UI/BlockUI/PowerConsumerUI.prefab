@@ -8,9 +8,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2086570217495824148, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086570217495824148, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086570217495824148, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086570217495824148, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5205864184136404721, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
       propertyPath: m_Name
       value: PowerConsumerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223116474093578580, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223116474093578580, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223116474093578580, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223116474093578580, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043381806938391949, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+      propertyPath: m_text
+      value: 'Consuming:'
       objectReference: {fileID: 0}
     - target: {fileID: 8266828927137835426, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
       propertyPath: m_Pivot.x
@@ -111,6 +147,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3638960535296053704 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 775893783066589505, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+  m_PrefabInstance: {fileID: 4054550399580022921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8104889433414936184 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5205864184136404721, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
@@ -131,3 +178,4 @@ MonoBehaviour:
   plug: {fileID: 522236179464556434}
   plugOn: {fileID: 21300000, guid: 17702fda5db3bf34295d981957b0bbbb, type: 3}
   plugOff: {fileID: 21300000, guid: 80cf134f36634c84c8772d19535c9493, type: 3}
+  powerText: {fileID: 3638960535296053704}

@@ -28,7 +28,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BottomTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LeftTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RightTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TopTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -36,14 +52,22 @@ Material:
     m_Floats:
     - PixelSnap: 1
     - _BlendAmount: 0.5
+    - _BlendBottom: 0
+    - _BlendLeft: 0
+    - _BlendMargin: 1.64
     - _BlendRange: 0.05
+    - _BlendRight: 0
+    - _BlendTop: 0
     - _BorderSize: 4
+    - _EdgeWidth: 2
     - _EnableExternalAlpha: 0
+    - _GrowthAmount: 0
     - _Offset: 8
-    - _RandomSeed: 0
+    - _RandomSeed: 836.03
     - _Seed: 0
-    - _TileSize: 16
-    - _TransparencyRatio: 0.1
+    - _TileSize: 1
+    - _TransparencyRatio: 0.25
+    - _TransparencySize: 0.125
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

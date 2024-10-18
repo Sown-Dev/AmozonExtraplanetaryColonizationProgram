@@ -144,6 +144,11 @@ namespace Systems.Block{
             return TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y);
         }
         
+        public virtual List<Vector2> GetHighlights(){
+            return new List<Vector2>();
+        }
+        
+        
         
 
         public Action UpdateUI;

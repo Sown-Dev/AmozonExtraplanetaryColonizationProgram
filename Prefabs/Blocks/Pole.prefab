@@ -268,13 +268,28 @@ MonoBehaviour:
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 0}
+    <myItem>k__BackingField: {fileID: 11400000, guid: e994c3ac707134f46a2f4ea832717c10, type: 2}
+    name: Pole
     indestructible: 0
     rotateable: 0
+    actuatable: 0
+    collidable: 1
+    destroyTime: 1
     size: {x: 1, y: 1}
     description: Power Pole
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
+  origin: {x: 0, y: 0}
   area: {x: 2, y: 2}
   poleRange: 5
   lr: {fileID: 6668078719648602223}

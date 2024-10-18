@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 0.19
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 0.19
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -42,16 +42,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Size.x
-      value: 0.19
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Size.y
-      value: 0.19
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 093583f8d279b8d43bc756c7c6e37bb9, type: 3}
+      objectReference: {fileID: 21300000, guid: 5bfe39bcc20339e4b843bb1fdbbaa7a6, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -136,8 +136,9 @@ MonoBehaviour:
     rotateable: 0
     actuatable: 1
     collidable: 1
-    size: {x: 1, y: 1}
-    description: Crushes down materials with
+    destroyTime: 1
+    size: {x: 1, y: 2}
+    description: Crushes down materials when actuated
     bso: {fileID: 0}
   currentState:
     baseSprite:

@@ -16,8 +16,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 581b853d66adc3741bc0c22f2ec19635, type: 3}
   category: 2
   useCursor: 1
-  value: 100
-  tier: 3
+  value: 120
+  tier: -1
   description: 
   blockPrefab: {fileID: -8116314529978101516, guid: 551fff57797650e47917753ab276a1b1, type: 3}
   blockCategory: 2

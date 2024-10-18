@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Raw Iron
   m_EditorClassIdentifier: 
-  idname: rawiron
   stackSize: 64
   icon: {fileID: 21300000, guid: 9eda6ab36990adc4491cccbbd5655b5c, type: 3}
   category: 1
   useCursor: 0
-  value: 2
+  value: 3
   tier: 0
   description: don't eat it

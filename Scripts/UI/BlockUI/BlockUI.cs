@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -86,8 +86,8 @@ namespace UI.BlockUI{
                 }
             }
             if (block is IPowerProducer powerProducer){
-                GridProducerUI gridProducerUI = Instantiate(PowerProducerUIPrefab,  windowList.transform)
-                    .GetComponent<GridProducerUI>();
+                PowerProducerUI gridProducerUI = Instantiate(PowerProducerUIPrefab,  windowList.transform)
+                    .GetComponent<PowerProducerUI>();
                 gridProducerUI.Init(powerProducer);
                 Instantiate(Utils.Instance.EmptyUI, windowList.transform);
     
@@ -95,8 +95,8 @@ namespace UI.BlockUI{
 
             }
             else if (block is IPowerConsumer powerConsumer){
-                GridConsumerUI gridConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowList.transform)
-                    .GetComponent<GridConsumerUI>();
+               PowerConsumerUI gridConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowList.transform)
+                    .GetComponent<PowerConsumerUI>();
                 gridConsumerUI.Init(powerConsumer);
                 Instantiate(Utils.Instance.EmptyUI, windowList.transform);
 

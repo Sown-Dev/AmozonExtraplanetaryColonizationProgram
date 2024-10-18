@@ -5161,33 +5161,47 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
+    name: Furnace
     indestructible: 0
     rotateable: 0
+    actuatable: 0
+    collidable: 1
+    destroyTime: 1
     size: {x: 1, y: 1}
     description: uses heat to melt and burn things
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
+  <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 4
     name: Output
     gridWidth: 2
     scaleDownGridIfSmaller: 1
     type: 0
+  CraftingFX:
+  - {fileID: 6821569010845340664}
+  recipeSelector:
+    recipes:
+    - {fileID: 11400000, guid: c792facad87fd9947b731c5ddbd1a971, type: 2}
+    - {fileID: 11400000, guid: 0990a755434b49042a20aafb535f5070, type: 2}
+    currentRecipe: {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
   inputProperties:
     size: 2
     name: Input
     gridWidth: 3
     scaleDownGridIfSmaller: 1
     type: 0
-  CraftingFX:
-  - {fileID: 6821569010845340664}
-  recipeSelector:
-    recipes:
-    - {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
-    - {fileID: 11400000, guid: c792facad87fd9947b731c5ddbd1a971, type: 2}
-    - {fileID: 11400000, guid: 0990a755434b49042a20aafb535f5070, type: 2}
-    currentRecipe: {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
 --- !u!61 &7679484945097419853 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

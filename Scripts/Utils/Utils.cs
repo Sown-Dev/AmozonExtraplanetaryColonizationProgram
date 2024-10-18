@@ -132,6 +132,26 @@ public class Utils: MonoBehaviour{
     }
     #endif
 
+    public GameObject highlightSprite;
+    
+    public void GenerateHighlights(Vector2 origin, List<Vector2> positions, Transform parent){
+        foreach (Vector2 pos in positions){
+            //generate highlight: sprite if not ui, otherwise image
+            
+            GameObject highlight = Instantiate(highlightSprite, parent);
+            highlight.transform.position = pos + origin;
+            //set color if block is valid and no wall
+            if (TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(origin + pos)) == null && !TerrainManager.Instance.IsWall(Vector3Int.RoundToInt(origin + pos))){
+                highlight.GetComponent<SpriteRenderer>().color = new Color(0.5f, 1, 0,0.75f);
+
+            }
+            else{
+                highlight.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.1f, 0.1f, 0.7f);
+            }
+            
+        }
+    }
+
 
     public static void Actuate(Block b)
     {

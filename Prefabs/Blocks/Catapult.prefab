@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bc52a7c5877f271498aed214345b0fc4, type: 3}
+      objectReference: {fileID: 21300000, guid: 9682f3b4dfad63943b7be4e66adfc377, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -136,16 +136,14 @@ MonoBehaviour:
     rotateable: 1
     actuatable: 0
     collidable: 1
-    size: {x: 3, y: 1}
+    destroyTime: 1
+    size: {x: 1, y: 3}
     description: throws items
     bso: {fileID: 0}
   currentState:
     baseSprite:
       sprites:
-      - {fileID: 21300000, guid: ba28b609675242048b0e369a06abdf95, type: 3}
-      - {fileID: 21300000, guid: 5dd5882725fa98440aba166f6216958b, type: 3}
       - {fileID: 21300000, guid: 9682f3b4dfad63943b7be4e66adfc377, type: 3}
-      - {fileID: 21300000, guid: 7a00e1a8ffc8bd24f97a13c47c498864, type: 3}
     rotateable: 0
     orientation: 0
     rotations:

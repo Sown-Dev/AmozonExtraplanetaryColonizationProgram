@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Manual Crusher
   m_EditorClassIdentifier: 
   stackSize: 16
-  icon: {fileID: 21300000, guid: 093583f8d279b8d43bc756c7c6e37bb9, type: 3}
+  icon: {fileID: 21300000, guid: 5bfe39bcc20339e4b843bb1fdbbaa7a6, type: 3}
   category: 2
   useCursor: 1
   value: 35

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BurnerUI : MonoBehaviour{
     public SlicedFilledImage fill;
     public ContainerUI containerUI;
-
+    
     public Burner burner;
 
     public void Init(Burner b){

@@ -289,9 +289,11 @@ MonoBehaviour:
     indestructible: 0
     rotateable: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
     size: {x: 2, y: 1}
-    description: An onboard 20g integrated fusion reactor allows this thing to mine
-      basically forever
+    description: An onboard 100g MicroReactor allows this thing to mine basically
+      forever
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -303,6 +305,7 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   outputProperties:
     size: 8

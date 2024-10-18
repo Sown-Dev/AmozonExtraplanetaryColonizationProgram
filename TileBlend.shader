@@ -1,18 +1,24 @@
-Shader "Custom/TilemapExpandAndRandomizeShader"
+Shader "Custom/TileInnerTransparency"
 {
     Properties
     {
-        _MainTex ("Tilemap Texture", 2D) = "white" {}
-        _RandomSeed ("Random Seed", Range(0.0, 100.0)) = 0.0 // Seed for random transparency
+        _MainTex ("Texture", 2D) = "white" {}
+        _TransparencyRatio ("Transparency Ratio", Range(0, 0.5)) = 0.1
     }
+
     SubShader
     {
-        Tags { "RenderType" = "Opaque" }
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
         LOD 100
+
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
 
         Pass
         {
-            CGPROGRAM
+            Name "TRANSPARENCY"
+
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
@@ -30,51 +36,49 @@ Shader "Custom/TilemapExpandAndRandomizeShader"
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_TexelSize;
-            float _RandomSeed;
+            float4 _MainTex_ST;
 
-            v2f vert (appdata_t v)
+            float _TransparencyRatio;
+
+            v2f vert(appdata_t v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
-
-            float4 frag (v2f i) : SV_Target
+            float random(float2 co)
             {
-                // Calculate the 16x16 tile size and the expanded size
-                float2 tileSize = float2(16.0, 16.0);
-                float2 expandedSize = tileSize + 4.0; // Expand by 2 pixels
+                return frac(sin(dot(co.xy, float2(12.9898,78.233))) * 43758.5453);
+            }
+            float4 frag(v2f i) : SV_Target
+            {
+                // Sample the texture
+                float4 texColor = tex2D(_MainTex, i.uv);
+                
+                // Get the UV coordinates
+                float2 uv = i.uv * 16; // Assuming tiles are 16x16 pixels
 
-                // Calculate UVs for expanded tile
-                float2 expandedUV = i.uv * expandedSize;
+                // Calculate inner transparency based on UV coordinates
+                float transparency = 0.0;
 
-                // Sample the main texture
-                float4 color = tex2D(_MainTex, expandedUV);
-
-                // Get the inner pixel coordinates (14x14) and check for transparency
-                int2 innerPixelCoord = int2(floor(expandedUV));
-                bool isInnerBorder = (innerPixelCoord.x >= 2 && innerPixelCoord.x < 14) &&
-                                     (innerPixelCoord.y >= 2 && innerPixelCoord.y < 14);
-
-                // Randomly determine if the pixel should be transparent
-                if (isInnerBorder)
+                // Randomly choose to set inner pixels to transparent
+                if (uv.x < _TransparencyRatio * 16 || uv.x >= (1 - _TransparencyRatio) * 16 ||
+                    uv.y < _TransparencyRatio * 16 || uv.y >= (1 - _TransparencyRatio) * 16)
                 {
-                    // Use a simple hash function for randomness based on pixel coordinates and seed
-                    float randomValue = frac(sin(dot(float2(innerPixelCoord.x, innerPixelCoord.y), float2(12.9898, 78.233))) * 43758.5453 + _RandomSeed);
+                    //make transparency chance  higher further from edge
                     
-                    // Set pixel to transparent with a certain probability (e.g., 20%)
-                    if (randomValue < 0.2)
-                    {
-                        color.a = 0.0; // Make transparent
+                    if(random(i.uv*100)<0.5){//-0.5*abs(uv.x-8)/8-0.5*abs(uv.y-8)/8 ){
+                        transparency = 1.0; // Fully transparent
                     }
                 }
 
-                return color;
+                // Apply transparency to the color
+                texColor.a *= (1 - transparency);
+                
+                return texColor;
             }
-            ENDCG
+            ENDHLSL
         }
     }
-    FallBack "Diffuse"
 }

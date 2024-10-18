@@ -3,7 +3,7 @@ using Systems.BlockUI;using Systems.Items;
 using UnityEngine;
 
 public class Burner: IBlockUI, IContainer{
-    public int Priority{ get; set; }
+    public int Priority{ get; set; } = 100;
     public bool Hidden{ get; set; }
     
     public Container fuelContainer;

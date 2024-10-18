@@ -3,6 +3,7 @@ using System.Linq;
 using Systems.Items;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Systems.Round{
     public class RoundManager : MonoBehaviour{
@@ -12,6 +13,8 @@ namespace Systems.Round{
         //References
         [SerializeField] private RoundInfoUI infoUI;
 
+        //Prefabs
+        [SerializeField] private GameObject RoundCompleteUIPrefab;
 
         //Round info
         public List<ShopOffer> allOffers;
@@ -27,7 +30,7 @@ namespace Systems.Round{
         public int quota;
 
         public int money;
-        private int roundNum;
+        public int roundNum{ private set; get; }
 
         public float roundTime;
 
@@ -69,15 +72,16 @@ namespace Systems.Round{
 #if ALLITEMS1
             if (Input.GetKey(KeyCode.F1)){
                 roundTime -= 1;
-
             }
-            
+
             if (Input.GetKey(KeyCode.F2)){
                 AddMoney(95);
             }
+
             if (Input.GetKeyDown(KeyCode.F4)){
                 RegenerateShop();
             }
+
             if (Input.GetKeyDown(KeyCode.F5)){
                 RegenerateRoundShop();
             }
@@ -115,9 +119,8 @@ namespace Systems.Round{
             money += amount;
             quota += amount;
             if (quota >= quotaRequired){
-                quota = 0;
-                //next round;
-                StartRound();
+                //trigger quota reached
+                QuotaReach();
             }
 
             infoUI.Refresh();
@@ -133,17 +136,30 @@ namespace Systems.Round{
             return false;
         }
 
+        //Triggers when we have reached the quota
+        public void QuotaReach(){
+                        CursorManager.Instance.OpenUI();
+
+
+            RoundCompleteUI rc = Instantiate(RoundCompleteUIPrefab, infoUI.transform.parent)
+                .GetComponent<RoundCompleteUI>();
+            
+            rc.Init(quota, roundTime);
+        }
+
         public void StartRound(){
+            CursorManager.Instance.CloseUI();
+            
             roundNum++;
             quota = 0;
             if (roundNum > 0){
-                quotaRequired = 600 * ((roundNum + 1) * roundNum + 1);
+                quotaRequired = (int)(500f * ((roundNum + 1f) * (roundNum / 2f)));
             }
             else{
                 quotaRequired = 300; //low first quota to not be boring
             }
 
-            roundTime = 420f +roundNum*30;
+            roundTime = 420f + roundNum * 30;
 
             //get new sell list
             sellList = new List<Item>(ItemManager.Instance.GetRandomItemsByTier(roundNum, 3 + roundNum / 2));
@@ -164,16 +180,18 @@ namespace Systems.Round{
 
             infoUI.Refresh();
         }
+
         public void RegenerateRoundShop(){
             shopTiers[roundNum] = GenerateShop(roundNum);
             infoUI.Refresh();
         }
+
         public void RegenerateShop(){
-            for(int i =0; i<=roundNum; i++){
+            for (int i = 0; i <= roundNum; i++){
                 shopTiers[i] = GenerateShop(i);
             }
-            infoUI.Refresh();
 
+            infoUI.Refresh();
         }
 
         public ShopTier GenerateShop(int tier){
@@ -223,7 +241,7 @@ namespace Systems.Round{
 
 
             UpgradeOffer u = new UpgradeOffer(upgrades[Random.Range(0, upgrades.Length)],
-                ((tier + 1) * 100+Random.Range(-20, 20)));
+                ((tier + 1) * 100 + Random.Range(-20, 20)));
 
 
             ShopTier t = new ShopTier(logisticsOffers, refineOffers, productionOffers, miscOffers, u, tier);

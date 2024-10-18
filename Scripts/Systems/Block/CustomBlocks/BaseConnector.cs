@@ -72,11 +72,11 @@ namespace Systems.Block{
                 
                 myGrid.AddBlock(block);
                 block.myConnector = this;
-                Debug.Log("Connecting "+block.myBlock.origin);
+                //Debug.Log("Connecting "+block.myBlock.origin);
             //}
         }
         public void Disconnect(IPowerBlock block){
-            Debug.Log("Disconnecting "+block.myBlock.origin);
+            //Debug.Log("Disconnecting "+block.myBlock.origin);
             if (connectedBlocks.Contains(block)){
                 connectedBlocks.Remove(block);
                 myGrid.RemoveBlock(block);
@@ -202,6 +202,10 @@ namespace Systems.Block{
 
             return true;
         }
+        //for adjusting graphics
+        public virtual void BlockUpdate(){
+            
+        }
 
         public override void Use(Unit user){
             WindowManager.Instance.CreateGridWindow(myGrid);
@@ -227,7 +231,9 @@ namespace Systems.Block{
                 Gizmos.DrawSphere( (Vector2)origin, 0.25f);
             }
         }
-    
-   
+
+        public override List<Vector2> GetHighlights(){
+            return GetConnectorCoverage().Select(x => (Vector2)x).ToList();
+        }
     }
 }

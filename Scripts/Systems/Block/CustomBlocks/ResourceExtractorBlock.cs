@@ -1,20 +1,25 @@
-﻿using Systems.Items;
+﻿using System.Collections.Generic;
+using Systems.Items;
+using UnityEngine;
 
 namespace Systems.Block.CustomBlocks{
     public class ResourceExtractorBlock: ContainerBlock{
         public int DrillTime = 80;
         public int DrillAmount;
 
-        public int hardness = 0;
 
 
         public ProgressBar progressBar = new ProgressBar();
+        
+        public List<Vector2Int> ExtractPositions;
 
-        private ResourceBlock myResource;
+        private ResourceBlock currentResource;
         
         public override void Tick(){
             base.Tick();
-            if (myResource == null) return;     
+            if (currentResource == null){
+                if(FindResource()==null) return;
+            }
             
             progressBar.progress++;
 
@@ -25,14 +30,29 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public void Extract(){
-            ItemStack s = myResource.Extract(DrillAmount);
+            ItemStack s = currentResource.Extract(DrillAmount);
             if (s != null)
                 output.Insert(ref s);
+            
         }
 
         public override void Init( Orientation orientation){
             base.Init( orientation);
-            myResource = GetDirection(orientation) as ResourceBlock;
+            currentResource = GetDirection(orientation) as ResourceBlock;
+        }
+        public ResourceBlock FindResource(){
+            foreach (Vector2Int pos in ExtractPositions){
+                if (TerrainManager.Instance.GetBlock(origin + pos) is ResourceBlock block){
+                    currentResource = block;
+                    return block;
+                }
+            }
+
+            return null;
+        }
+        
+        public override List<Vector2> GetHighlights(){
+            return ExtractPositions.ConvertAll(pos => (Vector2)pos + (Vector2)origin);
         }
 
         

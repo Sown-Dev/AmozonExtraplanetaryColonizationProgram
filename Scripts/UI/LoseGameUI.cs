@@ -20,7 +20,7 @@ public class LoseGameUI : MonoBehaviour
     }
     public void LoseScreen(int moneyEarned, List<Item> discovered)
     {
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0f;
         cg.alpha = 1;
         cg.interactable = true;
         cg.blocksRaycasts = true;
