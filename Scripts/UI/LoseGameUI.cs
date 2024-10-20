@@ -20,7 +20,7 @@ public class LoseGameUI : MonoBehaviour
     }
     public void LoseScreen(int moneyEarned, List<Item> discovered)
     {
-        Time.timeScale = 0f;
+        CursorManager.Instance.OpenUI();
         cg.alpha = 1;
         cg.interactable = true;
         cg.blocksRaycasts = true;
@@ -33,7 +33,7 @@ public class LoseGameUI : MonoBehaviour
 
     public void ConfirmSign()
     {
-        Time.timeScale = 1;
+        CursorManager.Instance.CloseUI();
         cg.alpha = 0;
         cg.interactable = false;
         cg.blocksRaycasts = false;

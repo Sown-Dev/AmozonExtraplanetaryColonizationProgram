@@ -153,29 +153,46 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 0}
+    name: Crystal Grower
     indestructible: 0
     rotateable: 0
+    actuatable: 0
+    collidable: 1
+    destroyTime: 1
     size: {x: 1, y: 1}
     description: Grows crystals out of coal using electricity.
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
+  origin: {x: 0, y: 0}
+  <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 2
     name: Output
     gridWidth: 2
     scaleDownGridIfSmaller: 1
     type: 0
+  CraftingFX: []
+  recipeSelector:
+    recipes:
+    - {fileID: 11400000, guid: ef12f978ed5c7e64e8438a90ea436bc0, type: 2}
+    currentRecipe: {fileID: 0}
   inputProperties:
     size: 2
     name: Input
     gridWidth: 3
     scaleDownGridIfSmaller: 1
     type: 0
-  CraftingFX: []
-  recipeSelector:
-    recipes:
-    - {fileID: 11400000, guid: ef12f978ed5c7e64e8438a90ea436bc0, type: 2}
-    currentRecipe: {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
+  <needed>k__BackingField: 100
 --- !u!212 &8640077656265709875 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8793023899972616217, guid: 2b61cfb4d5a444648a434f62d1d2cfbf, type: 3}

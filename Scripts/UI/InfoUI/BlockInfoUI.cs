@@ -23,7 +23,7 @@ namespace UI{
                 cg.blocksRaycasts = true;
                 cg.interactable = true;
                 nameText.text = block.properties.name;
-                descText.text = block.GetDescription();
+                descText.text = block.GetDescription().ToString();
                 icon.sprite = block.sr.sprite;
                 icon.SetNativeSize();
                 layoutElement.ignoreLayout = false;

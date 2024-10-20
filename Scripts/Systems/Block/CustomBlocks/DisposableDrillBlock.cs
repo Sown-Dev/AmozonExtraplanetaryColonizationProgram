@@ -1,4 +1,6 @@
-﻿namespace Systems.Block.CustomBlocks{
+﻿using System.Text;
+
+namespace Systems.Block.CustomBlocks{
     public class DisposableDrillBlock:DrillBlock{
     
         
@@ -18,8 +20,8 @@
         }
 
 
-        public override string GetDescription(){
-            return $"{base.GetDescription()}\nDurability: {Durability}";
+        public override StringBuilder GetDescription(){
+            return base.GetDescription().Append("\nDurability: ").Append(Durability);
         }
     }
 }

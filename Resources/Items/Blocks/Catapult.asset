@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Catapult
   m_EditorClassIdentifier: 
   stackSize: 16
-  icon: {fileID: 21300000, guid: bc52a7c5877f271498aed214345b0fc4, type: 3}
+  icon: {fileID: 21300000, guid: 9682f3b4dfad63943b7be4e66adfc377, type: 3}
   category: 2
   useCursor: 1
   value: 32

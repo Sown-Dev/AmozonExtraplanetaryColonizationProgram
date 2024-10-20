@@ -42,7 +42,7 @@ namespace Systems.Block.CustomBlocks{
                     if(!mySlot.IsEmpty()){
                         state = CatapultState.Loading;
                         slotVisualizer.transform.position =
-                            transform.position + (Vector3)(rotation.GetOpposite().GetVector() * 1.5f);
+                            transform.position + (Vector3)(rotation.GetOpposite().GetVector2() * 1.5f);
                     }
                     
                     
@@ -50,10 +50,10 @@ namespace Systems.Block.CustomBlocks{
                 case CatapultState.Loading:
                     timeElapsed++;
 
-                    goToPoint = transform.position + (Vector3)(rotation.GetOpposite().GetVector() * 1f);
+                    goToPoint = transform.position + (Vector3)(rotation.GetOpposite().GetVector2() * 1f);
 
                     slotVisualizer.transform.position = Vector3.Lerp(
-                        transform.position + (Vector3)(rotation.GetOpposite().GetVector() * 1.6f), goToPoint,
+                        transform.position + (Vector3)(rotation.GetOpposite().GetVector2() * 1.6f), goToPoint,
                         (float)timeElapsed / 18);
 
                     if (timeElapsed>22){
@@ -65,10 +65,10 @@ namespace Systems.Block.CustomBlocks{
                 case CatapultState.Firing:
                     timeElapsed++; //not outside since we dont want to increase in idle, could cause overflow
 
-                    Vector2 target = (origin + (rotation.GetVector() * selector.value));
+                    Vector2 target = (origin + (rotation.GetVector2() * selector.value));
                     
                     //give parabolic trajectory, with 24 ticks to reach target, inclduing height
-                    slotVisualizer.transform.position = Vector3.Lerp( transform.position + (Vector3)(rotation.GetOpposite().GetVector() * 1f), target, (float)timeElapsed / 24)
+                    slotVisualizer.transform.position = Vector3.Lerp( transform.position + (Vector3)(rotation.GetOpposite().GetVector2() * 1f), target, (float)timeElapsed / 24)
                                                         + new Vector3(0, Mathf.Sin((float)timeElapsed / 24 * Mathf.PI) * 2, 0);
                     
                     if (timeElapsed == 24){

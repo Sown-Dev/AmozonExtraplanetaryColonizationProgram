@@ -1,4 +1,5 @@
-﻿using Systems.Block.CustomBlocks;
+﻿using System.Text;
+using Systems.Block.CustomBlocks;
 
 public class BaseIPowerProducerBlock: BaseIPowerBlock, IPowerProducer{
     public int producing{ get; set; }
@@ -6,7 +7,7 @@ public class BaseIPowerProducerBlock: BaseIPowerBlock, IPowerProducer{
 
     public int baseRate = 50;
 
-    public override string GetDescription(){
-        return $"{base.GetDescription()}\nProducing: {producing}W";
+    public override StringBuilder GetDescription(){
+        return base.GetDescription().Append("\nProducing: ").Append(producing);
     }
 }

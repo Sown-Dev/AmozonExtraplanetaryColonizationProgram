@@ -25,6 +25,20 @@ namespace UI.BlockUI{
         public Button leftExtract;
         public Button rightExtract;
 
+        private void Start(){
+            //set button actions
+            upInsert.onClick.AddListener(() => SetInputOrientation((int)Orientation.Up));
+            downInsert.onClick.AddListener(() => SetInputOrientation((int)Orientation.Down));
+            leftInsert.onClick.AddListener(() => SetInputOrientation((int)Orientation.Left));
+            rightInsert.onClick.AddListener(() => SetInputOrientation((int)Orientation.Right));
+
+            // Set button actions for extract buttons
+            upExtract.onClick.AddListener(() => SetOutputOrientation((int)Orientation.Up));
+            downExtract.onClick.AddListener(() => SetOutputOrientation((int)Orientation.Down));
+            leftExtract.onClick.AddListener(() => SetOutputOrientation((int)Orientation.Left));
+            rightExtract.onClick.AddListener(() => SetOutputOrientation((int)Orientation.Right));
+        }
+
         private void Update(){
             upInsert.image.sprite = directionSelect.inputOrientation == Orientation.Up ? insertButtonOn : insertButtonOff;
             downInsert.image.sprite = directionSelect.inputOrientation == Orientation.Down ? insertButtonOn : insertButtonOff;

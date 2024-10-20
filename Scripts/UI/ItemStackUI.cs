@@ -29,10 +29,12 @@ public class ItemStackUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void OnPointerEnter(PointerEventData eventData){
-        ItemInfoUI.Instance.Select(myItemStack);
+        //ItemInfoUI.Instance.Select(myItemStack);
+        TooltipManager.Instance.ShowItem(myItemStack.item, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData){
-        ItemInfoUI.Instance.Deselect();
+        //ItemInfoUI.Instance.Deselect();
+        TooltipManager.Instance.Hide();
     }
 }

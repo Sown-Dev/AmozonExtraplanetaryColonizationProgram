@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -97,12 +97,24 @@ PrefabInstance:
       value: Mushroom
       objectReference: {fileID: 0}
     - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: lootTable.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: properties.collidable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: properties.description
       value: doesn't look edible
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: lootTable.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 0fe1fb369b9640f48820cc810a6aa325, type: 2}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: lootTable.Array.data[0].amount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

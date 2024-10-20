@@ -39,8 +39,8 @@ namespace Systems.Block.CustomBlocks{
 
         //transfer items from input to container, then from container to output
         public void Click(){
-            Block prevBlock = TerrainManager.Instance.GetBlock(origin + rotation.GetVectorInt());
-            Block nextBlock = TerrainManager.Instance.GetBlock(origin + rotation.GetOpposite().GetVectorInt());
+            Block prevBlock = TerrainManager.Instance.GetBlock(origin + rotation.GetOpposite().GetVectorInt());
+            Block nextBlock = TerrainManager.Instance.GetBlock(origin + rotation.GetVectorInt());
 
 
             if (nextBlock != null){
@@ -67,7 +67,7 @@ namespace Systems.Block.CustomBlocks{
                 if (prevBlock is IContainerBlock prevCon){
                     bool t = CU.Transfer(prevCon, this);
                     if (prevBlock is not ActuatedMoverBlock actuatedMoverBlock && t){
-                        Animate(rotation.GetVector() + origin);
+                        Animate(rotation.GetVector2() + origin);
                     }
                 }
             }

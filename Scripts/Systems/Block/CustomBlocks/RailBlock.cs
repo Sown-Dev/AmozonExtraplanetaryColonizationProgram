@@ -28,7 +28,7 @@ namespace Systems.Block{
 
 
             foreach (Orientation dir in directions){
-                Block block = TerrainManager.Instance.GetBlock(pos + Vector2Int.RoundToInt(dir.GetVector()));
+                Block block = TerrainManager.Instance.GetBlock(pos + Vector2Int.RoundToInt(dir.GetVector2()));
                 if (block != null){
                     if (block is RailBlock railBlock){
                         if (railBlock.next == null){
@@ -186,11 +186,11 @@ namespace Systems.Block{
         private void OnDrawGizmos(){
             Gizmos.color = Color.red;
             if (next != null)
-                Gizmos.DrawLine(transform.position, transform.position + (Vector3)next.orientation.GetVector() / 4f);
+                Gizmos.DrawLine(transform.position, transform.position + (Vector3)next.orientation.GetVector2() / 4f);
             Gizmos.color = Color.blue;
             if (previous != null)
                 Gizmos.DrawLine(transform.position,
-                    transform.position + (Vector3)previous.orientation.GetVector() / 4f);
+                    transform.position + (Vector3)previous.orientation.GetVector2() / 4f);
         }
 
         [HideInInspector] public Cart myCart;

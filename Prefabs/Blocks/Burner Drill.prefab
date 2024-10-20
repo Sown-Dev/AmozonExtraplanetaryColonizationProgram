@@ -198,6 +198,8 @@ MonoBehaviour:
     indestructible: 0
     rotateable: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
     size: {x: 3, y: 2}
     description: uses fuel to drill
     bso: {fileID: 0}
@@ -231,8 +233,16 @@ MonoBehaviour:
   - {fileID: 1155815059171592075}
   - {fileID: 6851408089109659832}
   - {fileID: 2625709457039232128}
-  fuelFilter:
-  - {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
+  burner:
+    fuelTime: 0
+    burnTimeTotal: 0
+    burnRate: 0
+    properties:
+      size: 1
+      name: fuel
+      gridWidth: 2
+      scaleDownGridIfSmaller: 1
+      type: 0
 --- !u!212 &8503269141988542947 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3560868191791535471, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}

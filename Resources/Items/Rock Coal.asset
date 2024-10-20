@@ -18,4 +18,5 @@ MonoBehaviour:
   useCursor: 0
   value: 12
   tier: 2
+  fuelValue: 400
   description: more like coal rock

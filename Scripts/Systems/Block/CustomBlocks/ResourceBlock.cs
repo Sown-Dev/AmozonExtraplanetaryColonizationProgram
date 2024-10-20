@@ -1,4 +1,5 @@
-﻿using Systems.Items;
+﻿using System.Text;
+using Systems.Items;
 using UnityEngine;
 
 namespace Systems.Block.CustomBlocks{
@@ -39,8 +40,9 @@ namespace Systems.Block.CustomBlocks{
 
         }
 
-        public override string GetDescription(){
-            return base.GetDescription()+ "\nAmount: " + amount;;
+        public override StringBuilder GetDescription(){
+            
+            return base.GetDescription().Append( "\nAmount: ").Append(amount);
         }
         
     }

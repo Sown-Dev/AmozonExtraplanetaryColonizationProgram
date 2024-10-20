@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Systems.Items;
 using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Systems.Round{
     public class RoundManager : MonoBehaviour{
@@ -58,9 +60,11 @@ namespace Systems.Round{
 
             money = 100;
             infoUI.Refresh();
+            
+            CursorManager.Instance.uiDepth = 0;
         }
 
-        private void Update(){
+        private void FixedUpdate(){
             if (roundTime >= 0){
                 roundTime -= Time.deltaTime;
             }
@@ -115,12 +119,16 @@ namespace Systems.Round{
             return sellList.Contains(stack.item);
         }
 
-        public void AddMoney(int amount){
+        public void AddMoney(int amount, bool countTowardsQuota=true){
             money += amount;
-            quota += amount;
-            if (quota >= quotaRequired){
-                //trigger quota reached
-                QuotaReach();
+            if (countTowardsQuota){
+                quota += amount;
+                if (quota >= quotaRequired){
+                    //trigger quota reached
+                    if (!roundComplete)
+                        QuotaReach();
+                }
+                
             }
 
             infoUI.Refresh();
@@ -135,7 +143,9 @@ namespace Systems.Round{
 
             return false;
         }
-
+        
+        
+        bool roundComplete;
         //Triggers when we have reached the quota
         public void QuotaReach(){
                         CursorManager.Instance.OpenUI();
@@ -145,10 +155,11 @@ namespace Systems.Round{
                 .GetComponent<RoundCompleteUI>();
             
             rc.Init(quota, roundTime);
+            roundComplete = true;
         }
 
         public void StartRound(){
-            CursorManager.Instance.CloseUI();
+            roundComplete = false;
             
             roundNum++;
             quota = 0;
@@ -201,6 +212,7 @@ namespace Systems.Round{
 
 // These will be pulled from world stats when added
             int logistics = 1;
+            int electrical =  tier >= 2 ? 1 : 0;
             int refine = tier == 0 ? 0 : 1;
             int production = 1;
             int misc = 2;
@@ -215,6 +227,15 @@ namespace Systems.Round{
                 .Take(logistics)
                 .ToArray();
             tierOffers.RemoveAll(x => logisticsOffers.Any(y => y.item == x.item));
+            
+// Select offers for electrical
+
+            ShopOffer[] electricalOffers = tierOffers
+                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Electrical)
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Take(electrical)
+                .ToArray();
+            tierOffers.RemoveAll(x => electricalOffers.Any(y => y.item == x.item));
 
 // Select offers for refining
             ShopOffer[] refineOffers = tierOffers
@@ -244,7 +265,7 @@ namespace Systems.Round{
                 ((tier + 1) * 100 + Random.Range(-20, 20)));
 
 
-            ShopTier t = new ShopTier(logisticsOffers, refineOffers, productionOffers, miscOffers, u, tier);
+            ShopTier t = new ShopTier(logisticsOffers, electricalOffers,refineOffers, productionOffers, miscOffers, u, tier);
             return t;
         }
 
@@ -262,6 +283,11 @@ namespace Systems.Round{
                 ls.transform.SetAsLastSibling();
                 ls.LoseScreen(roundStats.moneyEarned, roundStats.ItemsDiscovered.Select(pair => pair.Key).ToList());
             }
+        }
+
+        private void OnValidate(){
+            //sort by tier.
+            allOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
         }
     }
 }

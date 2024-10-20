@@ -5203,8 +5203,16 @@ MonoBehaviour:
     gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
-  fuelFilter:
-  - {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
+  burner:
+    fuelTime: 0
+    burnTimeTotal: 0
+    burnRate: 0
+    properties:
+      size: 1
+      name: fuel
+      gridWidth: 2
+      scaleDownGridIfSmaller: 1
+      type: 0
 --- !u!61 &7679484945097419853 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

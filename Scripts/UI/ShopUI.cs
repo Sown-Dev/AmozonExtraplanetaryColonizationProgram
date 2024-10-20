@@ -44,6 +44,7 @@ namespace UI{
     public class ShopTier{
         public int tier;
         public ShopOffer[] logistics;
+        public ShopOffer[] electrical;
         public ShopOffer[] refinement;
         public ShopOffer[] production;
         public ShopOffer[] misc;
@@ -51,10 +52,11 @@ namespace UI{
         public UpgradeOffer upgradeOffer;
 
 
-        public ShopTier(ShopOffer[] logistics, ShopOffer[] refinement, ShopOffer[] _production, ShopOffer[] _misc,
+        public ShopTier(ShopOffer[] _logistics, ShopOffer[] _electrical, ShopOffer[] _refinement, ShopOffer[] _production, ShopOffer[] _misc,
             UpgradeOffer _upgrade, int _tier){
-            this.logistics = logistics;
-            this.refinement = refinement;
+            logistics = _logistics;
+            electrical = _electrical;
+            refinement = _refinement;
             production = _production;
             upgradeOffer = _upgrade;
             misc = _misc;
@@ -96,7 +98,7 @@ namespace UI{
             this.item = old.item;
             this.price = old.price + addPrice;
             this.tier = old.tier;
-            stock = Random.Range(3, 9);
+            stock = old.stock + Random.Range(1, old.stock/2) + Random.Range(-1, 1);
         }
     }
 }

@@ -18,4 +18,5 @@ MonoBehaviour:
   useCursor: 0
   value: 5
   tier: 0
+  fuelValue: 100
   description: This alien material works great as a fuel and can take many forms

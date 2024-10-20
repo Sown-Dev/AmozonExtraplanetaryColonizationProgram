@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using JetBrains.Annotations;
 using Systems.Block;
@@ -80,8 +81,15 @@ public partial class TerrainManager : MonoBehaviour{
 
     public bool PlaceBlock(Block blockPrefab, Vector2Int position, Orientation rot = Orientation.Up)
     {
+        //Debug.Log("Placing block w rot" + rot);
         int sizex = blockPrefab.properties.size.x;
         int sizey = blockPrefab.properties.size.y;
+        
+        if((rot == Orientation.Left || rot == Orientation.Right) && blockPrefab.properties.rotateable){
+            //swap dimensions
+            (sizex, sizey) = (sizey, sizex);
+           (sizex, sizey) = (sizey, sizex);
+        }
 
         if (sizex < 1 || sizex > 32 || sizey < 1 || sizey > 32)
         {
@@ -89,12 +97,12 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
         // Get the block positions using the new helper function
-        List<Vector2Int> positions = GetBlockPositions(position, sizex, sizey);
+        List<Vector2Int> positions = GetBlockPositions(position, sizex, sizey); //don't use rotation here since we already swapped dimensions
 
         // Check if all the positions are valid (e.g., not overlapping with other blocks or tiles)
         foreach (Vector2Int pos in positions)
         {
-            if (terrainLayer.Get(pos) != null && blockLayer.Get(pos) == null && wallTilemap.GetTile((Vector3Int)pos) == null)
+            if (/*terrainLayer.Get(pos) != null && */blockLayer.Get(pos) == null && wallTilemap.GetTile((Vector3Int)pos) == null) //remove terrain check bc its pointless
             {
                 // Valid position, continue
             }
@@ -111,6 +119,7 @@ public partial class TerrainManager : MonoBehaviour{
         );
         // Instantiate the block
         Block block = Instantiate(blockPrefab.gameObject, spawnPos, Quaternion.identity).GetComponent<Block>();
+        block.properties.size = new Vector2Int(sizex, sizey); // Set the block's size incase rotated
         block.origin = position; // Set the block's origin
 
         block.Init(rot);
@@ -221,7 +230,7 @@ public partial class TerrainManager : MonoBehaviour{
     /// <summary>
     /// Gets the positions for placing a block based on its size and position.
     /// </summary>
-    public List<Vector2Int> GetBlockPositions(Vector2Int position, int sizex, int sizey)
+    public List<Vector2Int> GetBlockPositions(Vector2Int position, int sizex, int sizey, Orientation rot = Orientation.Up)
     {
         List<Vector2Int> positions = new List<Vector2Int>();
 
@@ -270,7 +279,8 @@ public partial class TerrainManager : MonoBehaviour{
             }
         }
 
-        return positions;
+        return positions.RotateList(rot, position).ToList();
+
     }
 
     
@@ -392,6 +402,7 @@ public partial class TerrainManager : MonoBehaviour{
         Gizmos.color = Color.magenta;
         
         foreach (var pair in powerClaims){
+            Debug.Log("Drawing power claim for"+ pair.Value.myBlock.name);
             Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.myBlock.origin);
         }
 

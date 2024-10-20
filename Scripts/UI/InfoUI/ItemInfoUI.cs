@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI{
+    [Obsolete("use TooltipManager instead")]
     public class ItemInfoUI: MonoBehaviour{
         
         public static ItemInfoUI Instance;

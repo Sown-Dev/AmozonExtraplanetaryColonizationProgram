@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Crafting;
 using Systems.Items;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Recipe: ScriptableObject{
     public Sprite icon;
     
     public List<ItemStack> ingredients;
+    public List<ItemWrapper> newIngredients;
     public List<ItemStack> results;
     
     [Header("Crafting time in ticks")]
@@ -17,6 +19,10 @@ public class Recipe: ScriptableObject{
     private void OnValidate(){
         if (icon == null){
             icon = results[0].item.icon;
+        }
+        newIngredients = new List<ItemWrapper>();
+        foreach (ItemStack itemStack in ingredients){
+            newIngredients.Add(new ItemWrapper(itemStack.item));
         }
     }
 }

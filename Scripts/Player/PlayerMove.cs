@@ -57,7 +57,7 @@ public partial class Player : Unit{
 
             //Conveyor
             if (standingBlock is ConveyorBeltBlock conveyor){
-                rb.velocity += ((conveyor.rotation.GetOpposite().GetVector() * (conveyor.Speed * 16 * Time.deltaTime)));
+                rb.velocity += ((conveyor.rotation.GetOpposite().GetVector2() * (conveyor.Speed * 16 * Time.deltaTime)));
                 sr.sortingOrder = 2;
                 shadow.sortingOrder = 1;
             }
@@ -91,9 +91,21 @@ public partial class Player : Unit{
         foreach (Transform child in highlights.transform){
             Destroy(child.gameObject);
         }
+      
+        
         if (SelectedSlot.ItemStack?.item is BlockItem block && PlayerUI.Instance.OnTop.childCount == 0){
-            buildingPreview.color = new Color(1, 1, 1, 0.4f);
-            myCursor.sr.size = block.blockPrefab.properties.size;
+            
+              
+            int sx = block.blockPrefab.properties.size.x;
+            int sy = block.blockPrefab.properties.size.y;
+            
+            if(( myCursor.cursorRotation== Orientation.Right || myCursor.cursorRotation== Orientation.Left) && block.blockPrefab.properties.rotateable){
+                (sx,sy) = (sy,sx);
+            }
+
+            buildingPreview.color = new Color(1, 1, 1, 0.5f);
+            myCursor.sr.size = Vector2.Lerp( myCursor.sr.size, new Vector2(sx,sy),Time.deltaTime * 12);
+            
 
                 
             
@@ -121,10 +133,10 @@ public partial class Player : Unit{
             }
             else
                 buildingPreview.sprite = block.blockPrefab.sr.sprite;
-
+          
             myCursor.buildingPreview.transform.localPosition = new Vector2(
-                block.blockPrefab.properties.size.x % 2 == 0 ? (block.blockPrefab.properties.size.x / 2f) - 0.5f : 0,
-                block.blockPrefab.properties.size.y % 2 == 0 ? (block.blockPrefab.properties.size.y / 2f) - 0.5f : 0);
+                sx % 2 == 0 ? (sx / 2f) - 0.5f : 0,
+                sy% 2 == 0 ? (sy / 2f) - 0.5f : 0);
 
             myCursor.directionArrow.gameObject.SetActive(block.blockPrefab.properties.rotateable);
         }

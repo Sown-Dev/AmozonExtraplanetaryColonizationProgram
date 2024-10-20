@@ -18,4 +18,5 @@ MonoBehaviour:
   useCursor: 0
   value: 2
   tier: -1
-  description: you get this from trees
+  fuelValue: 40
+  description: you get this from trees. Not a good fuel source

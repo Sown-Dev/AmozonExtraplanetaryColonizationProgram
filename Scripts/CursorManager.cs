@@ -31,27 +31,14 @@ public class CursorManager : MonoBehaviour{
     }
     //Added delay for animations and difficulty
     public IEnumerator CloseUICR(){
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.25f);
 
     }
     
     private void Update(){
-        if (crosshairEnabled){
-            crosshairActive = uiDepth <= 0;
-
-            //UnityEngine.Cursor.visible = !crosshairActive;
-            //crosshair.SetActive(crosshairActive);
-            
-            Time.timeScale = crosshairActive ? 1 : 0;
-
-        }
-        else{
-            //UnityEngine.Cursor.visible = true;
-            crosshair.SetActive(false);
+        Time.timeScale = uiDepth>0 ? 0 : 1;
         
-            Time.timeScale = 1;
-
-        }
+        
 
        
     }

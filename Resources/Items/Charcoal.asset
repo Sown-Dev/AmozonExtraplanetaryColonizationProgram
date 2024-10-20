@@ -17,5 +17,6 @@ MonoBehaviour:
   category: 1
   useCursor: 0
   value: 6
-  tier: -1
+  tier: 1
+  fuelValue: 200
   description: some charred coal

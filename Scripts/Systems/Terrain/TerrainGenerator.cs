@@ -32,9 +32,23 @@ public partial class TerrainManager{
     public void GenerateTerrain(){
         float noiseOffset = 50000 * Random.value + 10000;
 
-        for (int i = 0; i < 2000; i++){
-            //PlaceBlock(Rock2x, new Vector2Int(Random.Range(-200,200),Random.Range(-200,200)));
+
+        //Start by placing important blocks first, so their positions can't be occupied
+
+        PlaceBlock(SellBlock, new Vector2Int(0, 2));
+
+#if ALLITEMS1
+        PlaceBlock(BigCrate, new Vector2Int(0, -4));
+        ContainerBlock c = GetBlock(new Vector2Int(0, -4)) as ContainerBlock;
+
+        foreach (List<Item> list in ItemManager.Instance.itemDict.Values){
+            foreach (Item item in list){
+                ItemStack i = new ItemStack(item, 16);
+                c.output.Insert(ref i);
+            }
         }
+#endif
+
 
         float centerNoise = 0;
         for (int i = -200; i < 200; i++){
@@ -61,8 +75,12 @@ public partial class TerrainManager{
 
                     if (perlin2 > 0.25f){
                         SetTerrain(position, Stone);
-                        
-                       
+                        if (perlin2 * (perlin2) > 0.65f + Random.Range(0, 0.05f)){
+                            SetTerrain(position, Grass);
+                        }
+                        else
+                            SetTerrain(position, Stone);
+
 
                         for (int k = 0; k < ItemManager.Instance.allOres.Length; k++){
                             float perlinValue = Mathf.PerlinNoise(
@@ -82,20 +100,15 @@ public partial class TerrainManager{
                         }
                     }
                     else{
-                        if (perlin2 * (perlin2) > 0.65f + Random.Range(0, 0.05f)) //|| Random.value<0.01f)
-                        {
-                            SetTerrain(position, Grass);
-                        }else
-                            SetTerrain(position, Stone);
-                        
+                        SetTerrain(position, Stone);
                     }
 
-                    
+
                     //forest
                     if (perlin3 < 0.195f + Random.Range(-0.01f, 0f)){
                         SetTerrain(position, Grass);
-                        if (Random.Range(0, 1f) < 0.16f-perlin3/2  & perlin3 < 0.19){
-                            if (Random.value < 0.5f){
+                        if (Random.Range(0, 1f) < 0.16f - perlin3 / 3 & perlin3 < 0.19){
+                            if (Random.value < 0.6f){
                                 PlaceBlock(Tree, position);
                             }
                             else
@@ -126,8 +139,8 @@ public partial class TerrainManager{
         inverse = centerNoise < 0.5f;
 
         int a = 18;
-        for (int i = -a; i <= a; i++){
-            for (int j = -a; j <= a; j++){
+        for (int i = -a - 4; i <= a + 4; i++){
+            for (int j = -a - 4; j <= a + 4; j++){
                 float perlin2 = Mathf.PerlinNoise(i * 0.095f + noiseOffset * 3, j * 0.09f + noiseOffset) +
                                 Random.Range(-0.01f, 0.01f) + j / 1000f;
                 float myDist = Mathf.Sqrt(i * i + j * (j / 2));
@@ -138,21 +151,6 @@ public partial class TerrainManager{
             }
         }
 
-
-        //Place seller at fixed position
-        PlaceBlock(SellBlock, new Vector2Int(0, 2));
-
-#if ALLITEMS1
-        PlaceBlock(BigCrate, new Vector2Int(0, -4));
-        ContainerBlock c = GetBlock(new Vector2Int(0, -4)) as ContainerBlock;
-
-        foreach (List<Item> list in ItemManager.Instance.itemDict.Values){
-            foreach (Item item in list){
-                ItemStack i = new ItemStack(item, 16);
-                c.output.Insert(ref i);
-            }
-        }
-#endif
 
         //now place worldgen:
 
@@ -166,6 +164,7 @@ public partial class TerrainManager{
                     if (Random.value > 0.6f){
                         PlaceBlock(CoalNode, pos);
                     }
+
                     PlaceBlock(Crystal, pos);
                 }
             }

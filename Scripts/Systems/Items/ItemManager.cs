@@ -17,6 +17,7 @@ namespace Systems.Items{
 
         public OreProperties[] allOres;
         public List<Item> ores;
+        public List<Item> burnables;
     
         void Awake(){
             Instance = this;
@@ -40,6 +41,10 @@ namespace Systems.Items{
                     itemDict.Add(item.tier, new List<Item>());
                 }
                 itemDict[item.tier].Add(item);
+                
+                if (item.fuelValue > 0){
+                    burnables.Add(item);
+                }
             
             
             }

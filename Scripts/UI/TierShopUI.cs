@@ -13,6 +13,7 @@ public class TierShopUI : MonoBehaviour{
     public Transform ProductionList;
     public Transform MiscList;
     public Transform RefineList;
+    public Transform ElectricalList;
 
     public Transform UpgradeList;
 
@@ -47,6 +48,8 @@ public class TierShopUI : MonoBehaviour{
                 button.Init(offer);
             }
         }
+        
+        
 
         if (tier.production.Length == 0){
             Destroy(ProductionList.gameObject);
@@ -54,6 +57,16 @@ public class TierShopUI : MonoBehaviour{
         else{
             foreach (ShopOffer offer in tier.production){
                 ShopButton button = Instantiate(shopItemPrefab, ProductionList).GetComponent<ShopButton>();
+                button.Init(offer);
+            }
+        }
+        
+        if (tier.electrical.Length == 0){
+            Destroy(ElectricalList.gameObject);
+        }
+        else{
+            foreach (ShopOffer offer in tier.electrical){
+                ShopButton button = Instantiate(shopItemPrefab, ElectricalList).GetComponent<ShopButton>();
                 button.Init(offer);
             }
         }

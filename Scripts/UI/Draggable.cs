@@ -81,14 +81,16 @@ public class Draggable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         //Debug.Log("Mouse over");
         mouseOver = true;
         if(mySlot.Slot.ItemStack!=null)
-            ItemInfoUI.Instance.Select(mySlot.Slot.ItemStack);
+            TooltipManager.Instance.ShowItem(mySlot.Slot.ItemStack.item, transform.position);
+            //ItemInfoUI.Instance.Select(mySlot.Slot.ItemStack);
 
     }
 
     public void OnPointerExit(PointerEventData eventData){
         //Debug.Log("Mouse exit");
         mouseOver = false;
-        ItemInfoUI.Instance.Deselect();
+        TooltipManager.Instance.Hide();
+        //ItemInfoUI.Instance.Deselect();
     }
     private bool IsPointerOverUIObject()
     {

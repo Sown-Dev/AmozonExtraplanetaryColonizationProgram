@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Systems.Items;
 
 namespace Systems.Block.CustomBlocks{
     public class BurnerDrillBlock:DrillBlock{
     
         public Burner burner;
-        public Item[] fuelFilter;
 
         protected override void Awake(){
-            burner = new Burner(2, 1, fuelFilter);
+            burner.Init();
             burner.Priority = 4;
             base.Awake();
         }
@@ -27,8 +27,10 @@ namespace Systems.Block.CustomBlocks{
         }
 
 
-        public override string GetDescription(){
-            return $"{base.GetDescription()}\nFuel Remaining: {burner.fuelTime}";
+        public override StringBuilder GetDescription(){
+            return burner == null
+                ? base.GetDescription()
+                : base.GetDescription().Append("\nFuel Remaining:").Append(burner.fuelTime);
         }
         
         //burner drops

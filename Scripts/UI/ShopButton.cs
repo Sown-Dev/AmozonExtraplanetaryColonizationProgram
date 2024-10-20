@@ -2,10 +2,11 @@ using Systems.Items;
 using Systems.Round;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI{
-    public class ShopButton: MonoBehaviour{
+    public class ShopButton: MonoBehaviour,IPointerEnterHandler, IPointerExitHandler{
         public ShopOffer myOffer;
         
 
@@ -43,7 +44,6 @@ namespace UI{
             }
 
             
-            
             Refresh();
         }
         
@@ -70,6 +70,14 @@ namespace UI{
             
             
             
+        }
+
+        public void OnPointerEnter(PointerEventData eventData){
+            TooltipManager.Instance.ShowItem(myOffer.item, transform.position+new Vector3(0, -32, 0));
+        }
+
+        public void OnPointerExit(PointerEventData eventData){
+            TooltipManager.Instance.Hide();
         }
     }
 }

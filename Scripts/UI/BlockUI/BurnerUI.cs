@@ -17,6 +17,6 @@ public class BurnerUI : MonoBehaviour{
     private void Update(){
         if (burner == null)
             return;
-        fill.fillAmount = (float)burner.fuelTime / (float)burner.maxFuelTime;
+        fill.fillAmount = (float)burner.fuelTime / (float)burner.burnTimeTotal;
     }
 }

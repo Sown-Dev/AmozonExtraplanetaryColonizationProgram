@@ -4,6 +4,7 @@ using Systems.Block;
 using Systems.Items;
 using Systems.Terrain;
 using UI;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -75,8 +76,13 @@ public class Cursor : MonoBehaviour{
        
 
         //rotate in 2d
-        //sr.transform.Rotate( new Vector3(0,0, Mathf.Lerp(sr.transform.rotation.eulerAngles.z, cursorRotation.GetAngle(), Time.deltaTime*16f)-sr.transform.rotation.eulerAngles.z));
-        directionArrow.transform.Rotate( new Vector3(0,0, Mathf.Lerp(directionArrow.transform.rotation.eulerAngles.z, cursorRotation.GetAngle(), Time.deltaTime*24f)-directionArrow.transform.rotation.eulerAngles.z));
+        // Get the current rotation (as a quaternion) and the target rotation angle
+        Quaternion currentRotation = directionArrow.transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, cursorRotation.GetAngle());
+
+// Slerp between the current rotation and the target rotation
+        directionArrow.transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * 24f);
+
     }
 
     void Refresh(){
@@ -100,5 +106,9 @@ public class Cursor : MonoBehaviour{
 
 
         lookingTerrain = TerrainManager.Instance.GetTerrain(currentPos);
+    }
+
+    private void OnDrawGizmos(){
+        Handles.Label(transform.position, cursorRotation.ToString());
     }
 }

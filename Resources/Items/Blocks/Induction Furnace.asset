@@ -20,4 +20,4 @@ MonoBehaviour:
   tier: -1
   description: 
   blockPrefab: {fileID: -3326135092744310711, guid: c09fc081b5645ad4d94ded2290a89a6f, type: 3}
-  blockCategory: 4
+  blockCategory: 20

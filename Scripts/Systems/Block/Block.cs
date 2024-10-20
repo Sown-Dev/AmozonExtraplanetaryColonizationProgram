@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Systems.Block.BlockStates;
 using Systems.Items;
+using UnityEditor;
 using UnityEngine;
 
 namespace Systems.Block{
@@ -128,13 +130,13 @@ namespace Systems.Block{
             return true;
         }
         
-        public virtual string GetDescription(){
-            return properties.description;
+        public virtual StringBuilder GetDescription(){
+            return new StringBuilder(properties.description);
         }
 
         public Block GetDirection(Orientation rot){
             return TerrainManager.Instance.GetBlock(
-                Vector2Int.RoundToInt((Vector2)transform.position + rot.GetVector()));
+                Vector2Int.RoundToInt((Vector2)transform.position + rot.GetVector2()));
         }
         public List<Block> GetAdjascent(){
             return TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y);
@@ -153,6 +155,10 @@ namespace Systems.Block{
 
         public Action UpdateUI;
         
+        void OnDrawGizmos() 
+        {
+            Handles.Label(transform.position, rotation.ToString());
+        }
         
     }
 
@@ -164,7 +170,7 @@ namespace Systems.Block{
     }
 
     public static class OrientationFunction{
-        public static Vector2 GetVector(this Orientation orientation){
+        public static Vector2 GetVector2(this Orientation orientation){
             switch (orientation){
                 case Orientation.Up:
                     return Vector2.up;
@@ -230,13 +236,13 @@ namespace Systems.Block{
         public static float GetAngle(this Orientation orientation){
             switch (orientation){
                 case Orientation.Up:
-                    return 90;
-                case Orientation.Down:
-                    return 270;
-                case Orientation.Left:
-                    return 180;
-                case Orientation.Right:
                     return 0;
+                case Orientation.Down:
+                    return 180;
+                case Orientation.Left:
+                    return 90;
+                case Orientation.Right: 
+                    return -90;
                 default:
                     return 0;
             }
@@ -288,6 +294,45 @@ namespace Systems.Block{
                 default:
                     return Orientation.Up;
             }
+        }
+        
+        /// <summary>
+        /// Rotates a list of Vector2 points around a given origin based on the provided orientation.
+        /// </summary>
+        /// <param name="points">The list of Vector2 points to rotate.</param>
+        /// <param name="orientation">The orientation to rotate to (in increments of 90 degrees).</param>
+        /// <param name="origin">The point around which the rotation occurs.</param>
+        /// <returns>The rotated list of Vector2 points.</returns>
+        public static IEnumerable<Vector2Int> RotateList(this IEnumerable<Vector2Int> points, Orientation orientation, Vector2Int origin)
+        {
+            float angle = orientation.GetAngle(); // Get the angle in degrees based on the orientation
+            float radians = angle * Mathf.Deg2Rad; // Convert the angle to radians
+        
+            return points.Select(point => RotatePointAroundOrigin(point, radians, origin));
+        }
+
+        /// <summary>
+        /// Rotates a single Vector2 point around a given origin by the specified angle.
+        /// </summary>
+        /// <param name="point">The Vector2 point to rotate.</param>
+        /// <param name="radians">The angle in radians to rotate by.</param>
+        /// <param name="origin">The origin point around which the rotation occurs.</param>
+        /// <returns>The rotated Vector2 point.</returns>
+        private static Vector2Int RotatePointAroundOrigin(Vector2Int point, float radians, Vector2Int origin)
+        {
+            // Translate point to origin
+            Vector2Int translatedPoint = point - origin;
+
+            // Rotate the point
+            float cosTheta = Mathf.Cos(radians);
+            float sinTheta = Mathf.Sin(radians);
+            float xNew = translatedPoint.x * cosTheta - translatedPoint.y * sinTheta;
+            float yNew = translatedPoint.x * sinTheta + translatedPoint.y * cosTheta;
+
+            // Translate the point back to the original position
+            Vector2Int rotatedPoint = Vector2Int.RoundToInt( new Vector2(xNew, yNew) + origin);
+
+            return rotatedPoint;
         }
 
     }

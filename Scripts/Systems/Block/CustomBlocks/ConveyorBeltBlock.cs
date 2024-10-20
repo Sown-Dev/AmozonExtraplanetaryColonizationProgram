@@ -35,7 +35,7 @@ namespace Systems.Block.CustomBlocks{
             //the reason the numbers are so stupid is bc 0.333 in the shader is 1 pixel. idk how it happened though prob bc base size for this is 48x48 not 16x16 which it was made for
             mat.SetVector("_AreaSize" , rotation.isVertical()? new Vector4(4,5.333333f,0,0) : new Vector4(5.333333f,4,0,0));
             mat.SetVector("_AreaOffset" , rotation.isVertical()? new Vector4(6,6,0,0) :  new Vector4(5.333333f,6.666666f,0,0));
-            mat.SetVector("_Direction", rotation.GetVector() / 3);
+            mat.SetVector("_Direction", rotation.GetVector3() / 3);
             
         }
 
@@ -91,7 +91,7 @@ namespace Systems.Block.CustomBlocks{
             for (int i = ConveyorContainer.Count - 1; i >= 0; i--){
                 ConveyorSlot cs = ConveyorContainer[i];
                 if (cs.distance <= 17){
-                    Vector3 direction = rotation.GetOpposite().GetVector();
+                    Vector3 direction = rotation.GetOpposite().GetVector3();
 
                     if (i + 1 < ConveyorContainer.Count){
                         if (ConveyorContainer[i + 1].distance >= cs.distance + 4){
@@ -132,12 +132,6 @@ namespace Systems.Block.CustomBlocks{
             availableSlots.Add(cs.assignedSlot);
             ConveyorContainer.Remove(cs);
         }
-        
-        //burner drops
-        public override bool BlockDestroy(bool dropItems = true){
-            lootTable.AddRange(ConveyorContainer.Select(cs => cs.mySlot.ItemStack));
-            return base.BlockDestroy(dropItems);
-        }
 
 
         public class ConveyorSlot{
@@ -153,7 +147,5 @@ namespace Systems.Block.CustomBlocks{
                 assignedSlot.SetSlot(mySlot);
             }
         }
-        
-        
     }
 }

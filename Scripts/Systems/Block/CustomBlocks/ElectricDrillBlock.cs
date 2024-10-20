@@ -1,4 +1,6 @@
-﻿namespace Systems.Block.CustomBlocks{
+﻿using System.Text;
+
+namespace Systems.Block.CustomBlocks{
     public class ElectricDrillBlock : DrillBlock, IPowerConsumer{
         public int Priority{ get; } = 10;
         public bool Hidden{ get; set; }
@@ -27,8 +29,8 @@
             }
         }
         
-        public override string GetDescription(){
-            return $"{base.GetDescription()}\nConsumes {baseUsage}ϟW";
+        public override StringBuilder GetDescription(){
+            return base.GetDescription().Append("\nConsumes: ").Append(baseUsage);
         }
 
         public override bool BlockDestroy(bool dropLoot = true){

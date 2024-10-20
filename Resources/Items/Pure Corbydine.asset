@@ -18,4 +18,5 @@ MonoBehaviour:
   useCursor: 0
   value: 50
   tier: 3
+  fuelValue: 300
   description: shiny...
