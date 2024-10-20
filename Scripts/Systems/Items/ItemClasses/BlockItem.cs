@@ -23,6 +23,7 @@ namespace Systems.Items{
         public override string ToString(){
             return blockPrefab.properties.description;
         }
+        
     }
 }
 [Flags]

@@ -99,7 +99,7 @@ public partial class Player : Unit{
             int sx = block.blockPrefab.properties.size.x;
             int sy = block.blockPrefab.properties.size.y;
             
-            if(( myCursor.cursorRotation== Orientation.Right || myCursor.cursorRotation== Orientation.Left) && block.blockPrefab.properties.rotateable){
+            if(( myCursor.cursorRotation== Orientation.Right || myCursor.cursorRotation== Orientation.Left) && block.blockPrefab.properties.rotatable){
                 (sx,sy) = (sy,sx);
             }
 
@@ -138,7 +138,7 @@ public partial class Player : Unit{
                 sx % 2 == 0 ? (sx / 2f) - 0.5f : 0,
                 sy% 2 == 0 ? (sy / 2f) - 0.5f : 0);
 
-            myCursor.directionArrow.gameObject.SetActive(block.blockPrefab.properties.rotateable);
+            myCursor.directionArrow.gameObject.SetActive(block.blockPrefab.properties.rotatable);
         }
         else{
             myCursor.sr.size = Vector2.one;

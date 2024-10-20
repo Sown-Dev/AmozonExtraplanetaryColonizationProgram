@@ -29,7 +29,7 @@ namespace Systems.Block{
 
         [HideInInspector]public Vector2Int origin; // the origin is kind of the center, except since we can have even sized objects, it 
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR  // i know this looks pointless, since it doesnt run in builds anyways, but this is more so it doesnt happen while running the game in editor
         private void OnValidate(){
             baseColor = /* TODO: MAYBE FIX THIS??? Utils.FindMostProminentColor(sr.sprite) ??*/
                 new Color(0.35f, 0.32f, 0.27f);
@@ -47,7 +47,7 @@ namespace Systems.Block{
                // Debug.LogError("Block " + name + " does not have a corresponding item");
             }
         }
-#endif
+//#endif
 
         protected virtual void Awake(){
             if(currentState == null || currentState?.baseSprite.sprites?.Length == 0){
@@ -66,7 +66,7 @@ namespace Systems.Block{
 
         public virtual void Init(Orientation orientation){
             bc.size = new Vector2(properties.size.x - 1 / 8f, properties.size.y - 1 / 8f); //remove 1 pixel on each
-            rotation = orientation;
+            rotation = properties.invertRotation && properties.rotatable ? orientation.GetOpposite() : orientation;
             if(currentState.rotateable){
                 currentState.SetOrientation(rotation);
             }

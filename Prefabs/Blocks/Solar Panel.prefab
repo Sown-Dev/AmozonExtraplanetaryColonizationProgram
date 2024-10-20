@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: SolarPanel
+      value: Solar Panel
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -128,10 +128,13 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
-    name: SolarPanel
+    name: Solar Panel
     indestructible: 0
     rotateable: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 1
     size: {x: 3, y: 3}
     description: Produces electricity using the sun!
     bso: {fileID: 0}

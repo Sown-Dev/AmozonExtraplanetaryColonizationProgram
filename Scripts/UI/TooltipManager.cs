@@ -30,6 +30,8 @@ namespace UI{
         [SerializeField]private GameObject rotatable;
         [SerializeField]private GameObject fuel;
         [SerializeField]private GameObject burner;
+        [SerializeField]private GameObject electric;
+        [SerializeField]private GameObject container;
         
         
         
@@ -109,8 +111,17 @@ namespace UI{
                 
                 
                 //block attributes
-                if (blockItem.blockPrefab.properties.rotateable){
-                    GameObject go = Instantiate(rotatable, attributeHolder);
+                if (blockItem.blockPrefab.properties.rotatable){
+                    Instantiate(rotatable, attributeHolder);
+                }
+                if (blockItem.blockPrefab.properties.ttFlags.HasFlag(TooltipFlags.isBurner)){
+                    Instantiate(burner, attributeHolder);
+                }
+                if (blockItem.blockPrefab.properties.ttFlags.HasFlag(TooltipFlags.isElectric)){
+                    Instantiate(electric, attributeHolder);
+                }
+                if (blockItem.blockPrefab.properties.ttFlags.HasFlag(TooltipFlags.isContainer)){
+                    Instantiate(container, attributeHolder);
                 }
 
                 

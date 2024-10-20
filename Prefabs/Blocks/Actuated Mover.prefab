@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: ActuatedMover
+      value: Actuated Mover
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -118,7 +118,7 @@ PrefabInstance:
       addedObject: {fileID: 7845240300976606728}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 7351794058265038701}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
 --- !u!61 &2617854964096732619 stripped
@@ -148,10 +148,14 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 96c7c17460afe15428ffb3d0c72e64f0, type: 2}
-    name: ActuatedMover
+    name: Actuated Mover
     indestructible: 0
-    rotateable: 1
+    rotatable: 1
+    invertRotation: 0
     actuatable: 1
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: 'When Actuated, this contraption will move its item to the forward
       container, and extract from the previous. It also Actuates those blocks, allowing
@@ -176,6 +180,7 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   outputProperties:
     size: 1
@@ -184,6 +189,7 @@ MonoBehaviour:
     scaleDownGridIfSmaller: 0
     type: 0
   SlotVisualizer: {fileID: 4731648285037132209}
+  StackSize: 8
 --- !u!212 &3801151613052395935 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

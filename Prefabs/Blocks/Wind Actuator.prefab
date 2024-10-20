@@ -141,6 +141,9 @@ MonoBehaviour:
     indestructible: 0
     rotateable: 0
     actuatable: 1
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 8
     size: {x: 2, y: 1}
     description: Actuates surrounding blocks every few ticks. Powered by air
     bso: {fileID: 0}
@@ -157,5 +160,6 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   <baseSpeed>k__BackingField: 1

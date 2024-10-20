@@ -74,7 +74,7 @@ namespace Systems.Block.CustomBlocks{
 
             //activate prev last
             try{
-                prevBlock.Actuate();
+                prevBlock?.Actuate();
             }
             catch (Exception e){
                 Debug.LogError(e);

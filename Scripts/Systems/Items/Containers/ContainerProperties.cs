@@ -8,7 +8,6 @@ namespace Systems.Items{
         public string name;
         public int gridWidth;
         public bool scaleDownGridIfSmaller;
-        public TooltipFlags ttFlags;
         
         //not currently being used
         [HideInInspector]public ContainerType type;
@@ -18,14 +17,8 @@ namespace Systems.Items{
             scaleDownGridIfSmaller = true;
             name = _name;
             type = ContainerType.FIFO;
-            ttFlags = new TooltipFlags();
         }
     }
 
-    public class TooltipFlags{
-        private bool isBurner;
-        private bool isElectric;
-        private bool isContainer;
-        
-    }
+    
 }

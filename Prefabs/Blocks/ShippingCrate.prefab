@@ -136,6 +136,9 @@ MonoBehaviour:
     indestructible: 0
     rotateable: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 2
     size: {x: 3, y: 2}
     description: the most basic of storage solutions
     bso: {fileID: 0}

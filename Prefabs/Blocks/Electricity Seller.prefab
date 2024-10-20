@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: properties.size.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.ttFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

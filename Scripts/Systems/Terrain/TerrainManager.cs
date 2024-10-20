@@ -85,7 +85,7 @@ public partial class TerrainManager : MonoBehaviour{
         int sizex = blockPrefab.properties.size.x;
         int sizey = blockPrefab.properties.size.y;
         
-        if((rot == Orientation.Left || rot == Orientation.Right) && blockPrefab.properties.rotateable){
+        if((rot == Orientation.Left || rot == Orientation.Right) && blockPrefab.properties.rotatable){
             //swap dimensions
             (sizex, sizey) = (sizey, sizex);
            (sizex, sizey) = (sizey, sizex);

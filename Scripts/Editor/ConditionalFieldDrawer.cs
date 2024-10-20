@@ -8,34 +8,47 @@ public class ConditionalFieldDrawer : PropertyDrawer
     {
         ConditionalFieldAttribute conditional = (ConditionalFieldAttribute)attribute;
 
-        // Find the boolean field
-        SerializedProperty conditionProperty = property.serializedObject.FindProperty(conditional.ConditionBool);
-        if (conditionProperty != null && conditionProperty.propertyType == SerializedPropertyType.Boolean)
+        // Check if we should display the property
+        bool showProperty = ShouldShowProperty(property, conditional.ConditionFieldName);
+
+        if (showProperty)
         {
-            // Show the field only if the boolean is true
-            if (conditionProperty.boolValue)
-            {
-                EditorGUI.PropertyField(position, property, label, true);
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"ConditionalField: Couldn't find a boolean property with name {conditional.ConditionBool}");
-            EditorGUI.PropertyField(position, property, label, true); // Fallback to showing the field
+            EditorGUI.PropertyField(position, property, label, true);
         }
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         ConditionalFieldAttribute conditional = (ConditionalFieldAttribute)attribute;
-        SerializedProperty conditionProperty = property.serializedObject.FindProperty(conditional.ConditionBool);
+
+        // Determine whether to show the property or not
+        bool showProperty = ShouldShowProperty(property, conditional.ConditionFieldName);
+
+        if (showProperty)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, true);
+        }
+        else
+        {
+            return 0; // Hide the property by reducing the height to 0
+        }
+    }
+
+    private bool ShouldShowProperty(SerializedProperty property, string conditionFieldName)
+    {
+        // Navigate to the parent serialized property using the full property path
+        string propertyPath = property.propertyPath; // e.g., "myNestedObject.someField"
+        string conditionPath = propertyPath.Replace(property.name, conditionFieldName); // e.g., "myNestedObject.showField"
+
+        // Find the condition property
+        SerializedProperty conditionProperty = property.serializedObject.FindProperty(conditionPath);
 
         if (conditionProperty != null && conditionProperty.propertyType == SerializedPropertyType.Boolean)
         {
-            // Show height only if the condition is met
-            return conditionProperty.boolValue ? EditorGUI.GetPropertyHeight(property, label) : 0f;
+            return conditionProperty.boolValue;
         }
 
-        return EditorGUI.GetPropertyHeight(property, label); // Fallback if no condition
+        Debug.LogWarning($"ConditionalField: Couldn't find boolean field '{conditionFieldName}' at path '{conditionPath}'");
+        return true; // Default to showing the field if the condition is not found
     }
 }

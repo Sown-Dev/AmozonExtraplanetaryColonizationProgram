@@ -151,10 +151,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
     name: Conveyor
     indestructible: 0
-    rotateable: 1
+    rotatable: 1
+    invertRotation: 1
     actuatable: 0
     collidable: 0
-    blockHeight: 0.25
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: belt of conveyors
     bso: {fileID: 0}

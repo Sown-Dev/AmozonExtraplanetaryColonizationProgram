@@ -5163,10 +5163,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
     name: Chemical Furnace
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 4
     size: {x: 2, y: 2}
     description: Smelts using corbydine
     bso: {fileID: 0}

@@ -5167,6 +5167,7 @@ MonoBehaviour:
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 4
     size: {x: 3, y: 2}
     description: Crushes rock by burning fuel
     bso: {fileID: 0}

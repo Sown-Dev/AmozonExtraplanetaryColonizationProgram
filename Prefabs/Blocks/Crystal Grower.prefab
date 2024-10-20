@@ -159,6 +159,7 @@ MonoBehaviour:
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 1
     size: {x: 1, y: 1}
     description: Grows crystals out of coal using electricity.
     bso: {fileID: 0}

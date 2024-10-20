@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -90,6 +90,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.name
+      value: Block1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.rotatable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.rotateable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.invertRotation
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

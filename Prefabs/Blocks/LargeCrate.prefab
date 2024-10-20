@@ -77,6 +77,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
+      propertyPath: properties.ttFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: outputProperties.size
       value: 60
       objectReference: {fileID: 0}

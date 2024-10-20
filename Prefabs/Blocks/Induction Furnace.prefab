@@ -138,6 +138,7 @@ MonoBehaviour:
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 1
     size: {x: 4, y: 4}
     description: 
     bso: {fileID: 0}

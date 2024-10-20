@@ -284,10 +284,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
     name: Inserter
     indestructible: 0
-    rotateable: 1
+    rotatable: 1
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: moves items between nearby inventories by rotating
     bso: {fileID: 0}
