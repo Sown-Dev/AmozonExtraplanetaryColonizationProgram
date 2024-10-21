@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 25
-  tier: 5
+  tier: -1
+  fuelValue: 0
   description: Wire
   blockPrefab: {fileID: 5180771883565756091, guid: b52ff9b3a6944294ea1b274d8ac7ac61, type: 3}
   blockCategory: 16

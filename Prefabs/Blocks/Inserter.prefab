@@ -285,7 +285,7 @@ MonoBehaviour:
     name: Inserter
     indestructible: 0
     rotatable: 1
-    invertRotation: 0
+    invertRotation: 1
     actuatable: 0
     collidable: 1
     destroyTime: 1
@@ -314,7 +314,6 @@ MonoBehaviour:
   toFace: 0
   arm: {fileID: 5125982082512480245}
   slotVisualizer: {fileID: 8571372903449190745}
-  stackSize: 2
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

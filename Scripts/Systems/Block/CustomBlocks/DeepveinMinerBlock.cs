@@ -10,7 +10,7 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public override bool CanProgress(){
-            return base.CanProgress() && !output.isEmpty();
+            return base.CanProgress() && !output.isFull();
         }
 
         public override void CompleteCycle(){

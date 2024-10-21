@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Steel Bar
   m_EditorClassIdentifier: 
+  <description>k__BackingField: The backbone of industry
+  <icon>k__BackingField: {fileID: 21300000, guid: ad872020f3a6a944d81b3a9f55181ff4, type: 3}
   stackSize: 32
-  icon: {fileID: 21300000, guid: ad872020f3a6a944d81b3a9f55181ff4, type: 3}
   category: 1
   useCursor: 0
   value: 100
   tier: 3
-  description: The backbone of industry.
+  fuelValue: 0

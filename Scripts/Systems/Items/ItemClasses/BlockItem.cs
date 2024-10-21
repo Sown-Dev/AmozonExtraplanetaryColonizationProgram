@@ -23,7 +23,12 @@ namespace Systems.Items{
         public override string ToString(){
             return blockPrefab.properties.description;
         }
-        
+
+        private void OnValidate(){
+            if(icon == null){
+                icon = blockPrefab.sr.sprite;
+            }
+        }
     }
 }
 [Flags]

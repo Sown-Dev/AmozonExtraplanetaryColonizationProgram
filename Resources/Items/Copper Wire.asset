@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Copper Wire
   m_EditorClassIdentifier: 
+  <description>k__BackingField: wire we even doing this?
+  <icon>k__BackingField: {fileID: 21300000, guid: cfb2799e10bed114ca1a4a8a076920de, type: 3}
   stackSize: 64
-  icon: {fileID: 21300000, guid: cfb2799e10bed114ca1a4a8a076920de, type: 3}
   category: 1
   useCursor: 0
   value: 50
   tier: 3
-  description: A most valuable resource.
+  fuelValue: 0

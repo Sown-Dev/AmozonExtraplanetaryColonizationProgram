@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Crystal Grower
   m_EditorClassIdentifier: 
-  idname: crystalgrower
+  <description>k__BackingField: 
+  <icon>k__BackingField: {fileID: 21300000, guid: a028c3c0f44ac3c4a997bec0e6ce3678, type: 3}
   stackSize: 16
-  icon: {fileID: 21300000, guid: a028c3c0f44ac3c4a997bec0e6ce3678, type: 3}
   category: 2
   useCursor: 1
   value: 2
-  tier: 3
-  description: uses coal to grow crystals
+  tier: -1
+  fuelValue: 0
   blockPrefab: {fileID: 6102254685564439975, guid: f5156b29489497946bc32ced0aea08da, type: 3}
-  blockCategory: 4
+  blockCategory: 20

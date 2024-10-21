@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  idname: stone
+  <description>k__BackingField: rokc
+  <icon>k__BackingField: {fileID: 21300000, guid: d04e38da50a2f394c9ff8c9e2c25d28b, type: 3}
   stackSize: 64
-  icon: {fileID: 21300000, guid: d04e38da50a2f394c9ff8c9e2c25d28b, type: 3}
   category: 1
   useCursor: 0
   value: 1
   tier: 0
-  description: i thought it was called rock
+  fuelValue: 0

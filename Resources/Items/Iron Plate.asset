@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Iron Plate
   m_EditorClassIdentifier: 
+  <description>k__BackingField: Iron metal that has been pressed into a flat shape
+  <icon>k__BackingField: {fileID: 21300000, guid: 459ec5d321756364899c683288818fff, type: 3}
   stackSize: 64
-  icon: {fileID: 21300000, guid: 459ec5d321756364899c683288818fff, type: 3}
   category: 1
   useCursor: 0
   value: 24
   tier: 3
-  description: plate of iron
+  fuelValue: 0

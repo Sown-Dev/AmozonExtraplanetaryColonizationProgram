@@ -1,10 +1,8 @@
 ﻿using System;
-using Systems.Items;
 using UI.BlockUI;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Systems.Block.CustomBlocks{
+namespace Systems.Block{
     public class ActuatedMoverBlock : ContainerBlock{
         public BlockUIButton button;
 

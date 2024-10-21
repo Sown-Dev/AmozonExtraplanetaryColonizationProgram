@@ -26,10 +26,17 @@ public class PowerGrid{
 
     public void GridTick(){
         totalPower = 0;
-
-
-        foreach (IPowerProducer generator in blocks.OfType<IPowerProducer>()){
+        int powerNeeded = 0;
+        
+        foreach (IPowerConsumer block in blocks.OfType<IPowerConsumer>()){
+            powerNeeded += block.needed;
+        }
+        
+        foreach (IPowerProducer generator in blocks.OfType<IPowerProducer>().OrderBy(x => x.Priority)){
+            generator.neededOn = totalPower < powerNeeded;
+            //idea: could maybe put a function in between here that lets us get our power production based on whether we need it or not
             totalPower += generator.producing;
+
         }
 
         availablePower = totalPower;

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
+  m_Name: Portable Generator
+  m_EditorClassIdentifier: 
+  stackSize: 16
+  icon: {fileID: 21300000, guid: 7306a850a03fa8d41853e8f959db16e2, type: 3}
+  category: 2
+  useCursor: 1
+  value: 80
+  tier: -1
+  fuelValue: 0
+  description: 
+  blockPrefab: {fileID: 3222647626167649067, guid: cef52991c428f4447b1673a5f515d89c, type: 3}
+  blockCategory: 16

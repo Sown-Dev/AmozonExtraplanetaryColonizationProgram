@@ -18,6 +18,7 @@ MonoBehaviour:
   useCursor: 1
   value: 40
   tier: -1
+  fuelValue: 0
   description: can be used to craft basic items.
   blockPrefab: {fileID: 2216268374412577613, guid: d395687100de82140aebe0439342dbb1, type: 3}
   blockCategory: 4

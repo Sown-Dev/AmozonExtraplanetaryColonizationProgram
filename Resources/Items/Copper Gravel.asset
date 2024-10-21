@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Copper Gravel
   m_EditorClassIdentifier: 
+  <description>k__BackingField: Pulverized copper ore
+  <icon>k__BackingField: {fileID: 21300000, guid: 3a8f534c8df1c4d4188239d82f5f8972, type: 3}
   stackSize: 32
-  icon: {fileID: 21300000, guid: 3a8f534c8df1c4d4188239d82f5f8972, type: 3}
   category: 1
   useCursor: 0
-  value: 4
+  value: 5
   tier: 1
-  description: fine chunks of copper ore
+  fuelValue: 0

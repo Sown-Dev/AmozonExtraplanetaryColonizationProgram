@@ -18,7 +18,7 @@ namespace Systems.Block.CustomBlocks{
         public override void Tick(){
             base.Tick();
             if (!CanProgress()){
-                progressBar.progress=0;
+                //progressBar.progress=0; TODO idk if this is necessary, but well see
                 return;
             }
             

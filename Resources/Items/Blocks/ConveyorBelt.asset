@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 6
-  tier: 5
+  tier: -1
+  fuelValue: 0
   description: conveyor conveyor, don't be a delayer
   blockPrefab: {fileID: 3813270775841659842, guid: 8597b695a1032e14a8f56950226f9605, type: 3}
   blockCategory: 1

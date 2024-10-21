@@ -16,7 +16,13 @@ MonoBehaviour:
   ingredients:
   - item: {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}
     amount: 4
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}
+    name: 
+    icon: {fileID: 0}
   results:
   - item: {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
     amount: 1
-  craftTime: 96
+  craftTime: 60

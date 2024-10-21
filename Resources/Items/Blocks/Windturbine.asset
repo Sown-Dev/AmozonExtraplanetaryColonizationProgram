@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 25
-  tier: 7
+  tier: -1
+  fuelValue: 0
   description: Turbine
   blockPrefab: {fileID: 798097607910479710, guid: 60e21d184deeee34e99680aacc81bfa7, type: 3}
   blockCategory: 16

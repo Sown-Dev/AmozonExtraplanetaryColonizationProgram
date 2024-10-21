@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 0
-  tier: 3
+  tier: -1
+  fuelValue: 0
   description: bigger storage
   blockPrefab: {fileID: 8785166793706096183, guid: 053b218873c0b24459b1c46d19d994ef, type: 3}
   blockCategory: 8

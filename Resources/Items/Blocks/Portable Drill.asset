@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 0
-  tier: 3
+  tier: -1
+  fuelValue: 0
   description: 'basic drill. '
   blockPrefab: {fileID: -5627539801661224589, guid: 84dea805e064c0a40a12ced07cab268b, type: 3}
   blockCategory: 2

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Systems.Block{
     public class DrillBlock : ContainerBlock{
         public int DrillTime = 80;
-        public int DrillAmount;
+        public int DrillAmount=1;
 
         public List<Vector2Int> DrillPositions;
 

@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 0
-  tier: 5
+  tier: -1
+  fuelValue: 0
   description: 
   blockPrefab: {fileID: 4510550599143360625, guid: 55c483e6dc6b08b45a33307a8ba349e3, type: 3}
   blockCategory: 5

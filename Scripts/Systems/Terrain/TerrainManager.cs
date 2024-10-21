@@ -25,7 +25,7 @@ public partial class TerrainManager : MonoBehaviour{
     private Layer<Terrain> terrainLayer;
     private Layer<Ore> oreLayer;
     private List<TickingBlock> tickingBlocks;
-    public Dictionary<Vector2Int, IPowerConnector> powerClaims;
+    public Dictionary<Vector2Int, IPowerConnector> powerClaims = new Dictionary<Vector2Int, IPowerConnector>();
 
     [SerializeField] private Tilemap terrainTilemap;
     [SerializeField] private Tilemap oreTilemap;
@@ -401,7 +401,7 @@ public partial class TerrainManager : MonoBehaviour{
     private void OnDrawGizmos(){
         Gizmos.color = Color.magenta;
         
-        foreach (var pair in powerClaims){
+        foreach (var pair in powerClaims !=null? powerClaims: new  Dictionary<Vector2Int, IPowerConnector>()){
             Debug.Log("Drawing power claim for"+ pair.Value.myBlock.name);
             Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.myBlock.origin);
         }

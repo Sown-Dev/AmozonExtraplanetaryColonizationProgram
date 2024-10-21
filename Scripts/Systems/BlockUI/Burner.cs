@@ -33,6 +33,8 @@ public class Burner : IBlockUI, IContainer{
         fuelContainer = new Container(properties);
         fuelContainer.filterList = ItemManager.Instance.burnables.ToList();
         fuelContainer.blackList = false;
+        burnTimeTotal = 20;
+        fuelTime = 0;
     }
 
     public bool Burn(){
@@ -43,7 +45,7 @@ public class Burner : IBlockUI, IContainer{
         else{
             if (!fuelContainer.isEmpty()){
                 Slot s;
-                if ((s = fuelContainer.GetExtractionSlot()).ItemStack?.item.fuelValue > 0){
+                if ((s = fuelContainer.GetExtractionSlot())?.ItemStack?.item.fuelValue > 0){
                     if (s.Decrement()){
                         fuelTime = s.ItemStack.item.fuelValue;
                         burnTimeTotal = fuelTime + 1;

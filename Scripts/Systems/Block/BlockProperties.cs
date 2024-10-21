@@ -34,8 +34,8 @@ public class BlockProperties{
 [Flags]
 public enum TooltipFlags{
    None=0,
-   isElectric=1,
-   isContainer=2,
+   //used to be electric, but we dont need it just use item category.
+ 
    isBurner=4,
    isActuatable=8,
    

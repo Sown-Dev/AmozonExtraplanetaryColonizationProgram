@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: outputProperties.size
-      value: 60
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.description
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: outputProperties.gridWidth
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.<myItem>k__BackingField

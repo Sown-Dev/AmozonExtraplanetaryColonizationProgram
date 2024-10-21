@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 using Systems.Block.CustomBlocks;
 
 public class BaseIPowerProducerBlock: BaseIPowerBlock, IPowerProducer{
@@ -8,6 +9,6 @@ public class BaseIPowerProducerBlock: BaseIPowerBlock, IPowerProducer{
     public int baseRate = 50;
 
     public override StringBuilder GetDescription(){
-        return base.GetDescription().Append("\nProducing: ").Append(producing);
+        return base.GetDescription().AppendFormat("\nProducing: {0}/{1}", producing, baseRate);
     }
 }

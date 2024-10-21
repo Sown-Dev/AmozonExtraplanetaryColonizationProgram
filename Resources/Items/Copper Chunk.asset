@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Copper Chunk
   m_EditorClassIdentifier: 
+  <description>k__BackingField: Copper that has been melted into a crude and unrefined
+    chunk
+  <icon>k__BackingField: {fileID: 21300000, guid: 2b66353534ea08345bc9f85fdb4cfb49, type: 3}
   stackSize: 32
-  icon: {fileID: 21300000, guid: 2b66353534ea08345bc9f85fdb4cfb49, type: 3}
   category: 1
   useCursor: 0
   value: 10
   tier: 1
-  description: This copper has been refined just a bit
+  fuelValue: 0

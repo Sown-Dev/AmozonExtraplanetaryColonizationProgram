@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Corbydine Chunk
   m_EditorClassIdentifier: 
+  <description>k__BackingField: This alien material works great as a fuel and can
+    take many forms.
+  <icon>k__BackingField: {fileID: 21300000, guid: 7a8a39986f9da8c41b8481d446f1bbe2, type: 3}
   stackSize: 32
-  icon: {fileID: 21300000, guid: 7a8a39986f9da8c41b8481d446f1bbe2, type: 3}
   category: 1
   useCursor: 0
-  value: 5
+  value: 4
   tier: 0
   fuelValue: 100
-  description: This alien material works great as a fuel and can take many forms

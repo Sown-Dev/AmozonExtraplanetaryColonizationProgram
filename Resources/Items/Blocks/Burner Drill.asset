@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 100
-  tier: 5
+  tier: -1
+  fuelValue: 0
   description: drill that  burns fuel
   blockPrefab: {fileID: -1295267030692666904, guid: 7d30c4e2363bab54e97635978deecc74, type: 3}
   blockCategory: 2

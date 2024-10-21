@@ -13,7 +13,7 @@ namespace Systems.Block.CustomBlocks{
             base.Awake();
         }
 
-        public override bool CanCraft(){
+        public override bool CanProgress(){
             if (base.CanCraft())
                 return burner.Burn();
             return false;

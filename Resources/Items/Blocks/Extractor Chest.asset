@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 46
-  tier: 4
+  tier: -1
+  fuelValue: 0
   description: extracts items from nearby inventories and fills its own.
   blockPrefab: {fileID: 8029739942145060120, guid: a248b97823489cc41821e66abb610c4e, type: 3}
   blockCategory: 9

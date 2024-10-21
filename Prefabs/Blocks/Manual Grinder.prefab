@@ -133,10 +133,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
     name: Manual Grinder
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 1
     collidable: 1
     destroyTime: 1
+    ttFlags: 8
     size: {x: 1, y: 2}
     description: Crushes down materials when actuated
     bso: {fileID: 0}

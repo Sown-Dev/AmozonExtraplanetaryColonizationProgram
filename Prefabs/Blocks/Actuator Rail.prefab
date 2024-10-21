@@ -93,8 +93,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 7bc9ff4621119434aafddd30fee4311c, type: 2}
     name: Actuator Rail
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 1
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 8
     size: {x: 1, y: 1}
     description: 
     bso: {fileID: 0}
@@ -108,6 +112,7 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   vert: {fileID: 21300000, guid: 56f67a38895bf61468d8af112b7a6608, type: 3}
   horiz: {fileID: 21300000, guid: 9b56e53516f6faf49bb81fbb75761a21, type: 3}

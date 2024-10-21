@@ -18,6 +18,7 @@ MonoBehaviour:
   useCursor: 1
   value: 35
   tier: -1
+  fuelValue: 0
   description: can be used to crush rock
   blockPrefab: {fileID: 2216268374412577613, guid: 6ff31e83a1c3e054ea9682dd10a1b865, type: 3}
   blockCategory: 4

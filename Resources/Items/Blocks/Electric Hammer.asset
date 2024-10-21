@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 100
-  tier: 8
+  tier: -1
+  fuelValue: 0
   description: Smashes and flattens.
   blockPrefab: {fileID: -3326135092744310711, guid: 463300650c03d4d46846327ad6c04587, type: 3}
   blockCategory: 20

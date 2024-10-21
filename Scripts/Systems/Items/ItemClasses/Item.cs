@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Systems.Items{
     [CreateAssetMenu(fileName = "ItemBase", menuName = "ScriptableObjects/Items/Item", order = 0)]
-    public class Item: ScriptableObject{
+    public class Item: DescriptableSo{
         public int stackSize= 32;
-        public Sprite icon;
         public ItemCategory category;
         public bool useCursor;
 
@@ -15,15 +16,10 @@ namespace Systems.Items{
         
         public virtual void Use(Vector2Int pos, Unit user, Slot slot){
         }
-        
-         [TextArea(3,5)]public string description;
 
          public virtual string ToString(){
              return description;
          }
-         
-         
-
 
     }
     public enum ItemCategory{

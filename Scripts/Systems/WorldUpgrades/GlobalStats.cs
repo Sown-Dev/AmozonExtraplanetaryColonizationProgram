@@ -7,6 +7,8 @@ public enum GStatstype{
     OreUseChance,
     OreYieldMult,
     OreYieldAdd,
+    BonusTickRate,
+    
     
 }
 

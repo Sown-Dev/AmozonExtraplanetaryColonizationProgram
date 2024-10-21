@@ -21,7 +21,7 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public ItemStack Extract(int amt){
-            if (amount - amt <= 0) return null;
+            if (amount - amt < 0) return null;
             amount -= amt;
             //create block debris
             TerrainManager.Instance.CreateBlockDebris(origin, color);

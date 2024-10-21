@@ -287,10 +287,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
     name: Old Drill
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 0
     size: {x: 2, y: 1}
     description: An onboard 100g MicroReactor allows this thing to mine basically
       forever
@@ -313,8 +315,8 @@ MonoBehaviour:
     gridWidth: 4
     scaleDownGridIfSmaller: 0
     type: 0
-  DrillTime: 40
-  DrillAmount: 0
+  DrillTime: 80
+  DrillAmount: 1
   DrillPositions:
   - {x: 0, y: 0}
   DrillFX:

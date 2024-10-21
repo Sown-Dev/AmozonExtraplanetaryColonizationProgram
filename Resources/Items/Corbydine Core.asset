@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Corbydine Core
   m_EditorClassIdentifier: 
+  <description>k__BackingField: A key component to complex machinery
+  <icon>k__BackingField: {fileID: 21300000, guid: 5c1ad4d132cec584fb7fed446fd02b13, type: 3}
   stackSize: 32
-  icon: {fileID: 21300000, guid: 5c1ad4d132cec584fb7fed446fd02b13, type: 3}
   category: 1
   useCursor: 0
   value: 32
   tier: 3
-  description: A key component to complex machinery
+  fuelValue: 0

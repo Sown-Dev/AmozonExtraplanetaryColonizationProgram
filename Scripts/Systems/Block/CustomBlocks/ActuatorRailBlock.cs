@@ -1,4 +1,4 @@
-﻿namespace Systems.Block.CustomBlocks{
+﻿namespace Systems.Block{
     public class ActuatorRailBlock:RailBlock{
         public override void OnCartEnter(Cart cart){
             base.OnCartEnter(cart);

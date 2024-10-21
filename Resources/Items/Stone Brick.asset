@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: Stone Brick
   m_EditorClassIdentifier: 
+  <description>k__BackingField: Bricked up stone.
+  <icon>k__BackingField: {fileID: 21300000, guid: 37d1531b937776f4886212b9219f46e4, type: 3}
   stackSize: 32
-  icon: {fileID: 21300000, guid: 37d1531b937776f4886212b9219f46e4, type: 3}
   category: 1
   useCursor: 0
   value: 50
   tier: 2
-  description: a rigid brick suitable for construction
+  fuelValue: 0

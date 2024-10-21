@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Deep-Vein Miner
   m_EditorClassIdentifier: 
+  <description>k__BackingField: 
+  <icon>k__BackingField: {fileID: 21300000, guid: 0a0651214de4aee40aa3dc4e5f718f51, type: 3}
   stackSize: 16
-  icon: {fileID: 21300000, guid: a8f99b995a030e146a13705891306a77, type: 3}
   category: 2
   useCursor: 1
   value: 300
-  tier: 3
-  description: 'Extracts various resources deep below the surface. '
+  tier: -1
+  fuelValue: 0
   blockPrefab: {fileID: 4329347407540247257, guid: 6745ce6cd063b494ba345649fad37c4c, type: 3}
-  blockCategory: 2
+  blockCategory: 18

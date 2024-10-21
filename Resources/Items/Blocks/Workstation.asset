@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 0
-  tier: 5
+  tier: -1
+  fuelValue: 0
   description: assembles more basic items
   blockPrefab: {fileID: 4510550599143360625, guid: 5276ff8e30a908b41b2ea0296d4319ab, type: 3}
   blockCategory: 6

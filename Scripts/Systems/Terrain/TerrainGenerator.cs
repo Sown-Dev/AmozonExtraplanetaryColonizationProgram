@@ -15,11 +15,14 @@ public partial class TerrainManager{
     [SerializeField] private TerrainProperties Stone;
 
 
-    [Header("Blocks")] [SerializeField] private Block Tree;
+    [Header("Blocks")] 
+    [SerializeField] private Block Tree;
+    [SerializeField] private Block Sapling;
     [SerializeField] private Block Crystal;
     [SerializeField] private Block Mushroom;
     [SerializeField] private Block LootCrate;
     [SerializeField] private Block CoalNode;
+    
 
     [SerializeField] private Block SellBlock;
     [SerializeField] private Block BigCrate;
@@ -107,12 +110,15 @@ public partial class TerrainManager{
                     //forest
                     if (perlin3 < 0.195f + Random.Range(-0.01f, 0f)){
                         SetTerrain(position, Grass);
-                        if (Random.Range(0, 1f) < 0.16f - perlin3 / 3 & perlin3 < 0.19){
-                            if (Random.value < 0.6f){
+                        if (Random.Range(0, 1.5f) < 0.18f - perlin3 / 3 && perlin3 < 0.19){
+                            if (Random.value < 0.3f){
                                 PlaceBlock(Tree, position);
                             }
-                            else
+                            else if (Random.value > 0.4f){
                                 PlaceBlock(Mushroom, position);
+                            }else{
+                                PlaceBlock(Sapling, position);
+                            }
                         }
                     }
 

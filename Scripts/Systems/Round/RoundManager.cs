@@ -164,7 +164,7 @@ namespace Systems.Round{
             roundNum++;
             quota = 0;
             if (roundNum > 0){
-                quotaRequired = (int)(500f * ((roundNum + 1f) * (roundNum / 2f)));
+                quotaRequired = (int)((400f * ((roundNum + 1f) * (roundNum / 1.5f)) +200)/50)*50;
             }
             else{
                 quotaRequired = 300; //low first quota to not be boring

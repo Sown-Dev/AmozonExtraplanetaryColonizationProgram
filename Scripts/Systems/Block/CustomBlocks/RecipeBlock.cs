@@ -48,8 +48,17 @@ namespace Systems.Block{
         }
 
         bool isCrafting = false;
+        
+        // we dont use base tick bc we want to only reset progress if we cant craft, but keep progress if we can progress, mainly for burner items
         public override void Tick(){
-            base.Tick();
+            if (CanCraft()){
+                if (CanProgress()){
+                    Progress();
+                }
+            }
+            else{
+                progressBar.progress = 0;
+            }
 
             foreach (GameObject fx in CraftingFX){
                 fx.SetActive(isCrafting);

@@ -17,7 +17,8 @@ MonoBehaviour:
   category: 2
   useCursor: 1
   value: 0
-  tier: 3
+  tier: -1
+  fuelValue: 0
   description: moves items between nearby inventories by rotating
   blockPrefab: {fileID: 4528264930813948543, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
   blockCategory: 1

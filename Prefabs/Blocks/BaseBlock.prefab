@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5644562763396864304}
   - component: {fileID: 6474919723315122417}
   - component: {fileID: 4131859953494582723}
-  - component: {fileID: 4579859132762535254}
   - component: {fileID: 3009331184047638935}
   m_Layer: 0
   m_Name: BaseBlock
@@ -52,12 +51,28 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 0}
+    name: BaseBlock
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
+    actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: 
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
 --- !u!212 &4131859953494582723
 SpriteRenderer:
@@ -113,28 +128,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4579859132762535254
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2494275154875350271}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &3009331184047638935
 BoxCollider2D:
   m_ObjectHideFlags: 0

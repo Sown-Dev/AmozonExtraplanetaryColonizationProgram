@@ -10,15 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
-  m_Name: Smelt Copper Wood
+  m_Name: Chop Wood
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 2b66353534ea08345bc9f85fdb4cfb49, type: 3}
+  icon: {fileID: 21300000, guid: 80e3404794e9c7b4487c71bf0da5b712, type: 3}
   ingredients:
-  - item: {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}
-    amount: 4
   - item: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
-    amount: 1
+    amount: 4
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
+    name: 
+    icon: {fileID: 0}
   results:
-  - item: {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
+  - item: {fileID: 11400000, guid: 7015589ffc44cd04ea006b5df0442071, type: 2}
     amount: 1
-  craftTime: 96
+  craftTime: 100
