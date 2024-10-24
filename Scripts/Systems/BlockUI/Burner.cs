@@ -11,12 +11,17 @@ public class Burner : IBlockUI, IContainer{
 
     public Container fuelContainer;
 
-    [HideInInspector] public int fuelTime;
+    [HideInInspector] public int fuelTime = 0;
     [HideInInspector] public int burnTimeTotal = 100;
-    [HideInInspector] public int burnRate;
+     public int burnRate=1;
     public ContainerProperties properties;
     
-
+    
+    public Burner(){
+        properties = new ContainerProperties( 1);
+        Init();
+    }
+    
     [Obsolete("Not currently used. we rely on setting the burner properties in the block itself")]
     public Burner( int _burnRate, Item[] filter = null){
         fuelContainer = new Container(properties);
@@ -26,7 +31,8 @@ public class Burner : IBlockUI, IContainer{
             fuelContainer.blackList = false;
         //}
 
-        burnRate = _burnRate;
+        //burnRate = _burnRate;
+        
     }
     
     public void Init(){
@@ -35,20 +41,25 @@ public class Burner : IBlockUI, IContainer{
         fuelContainer.blackList = false;
         burnTimeTotal = 20;
         fuelTime = 0;
+
+        Priority = 100; 
     }
+    
 
     public bool Burn(){
+        burnRate = 1;
+
         if (fuelTime > 0){
             fuelTime -= burnRate;
             return true;
         }
         else{
             if (!fuelContainer.isEmpty()){
-                Slot s;
-                if ((s = fuelContainer.GetExtractionSlot())?.ItemStack?.item.fuelValue > 0){
+                Slot s= fuelContainer.GetExtractionSlot();
+                if (s !=null  && s.ItemStack?.item.fuelValue > 0){
                     if (s.Decrement()){
                         fuelTime = s.ItemStack.item.fuelValue;
-                        burnTimeTotal = fuelTime + 1;
+                        burnTimeTotal = fuelTime;
                         return true;
                     }
                 }

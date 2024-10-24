@@ -463,6 +463,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82379986}
   m_CullTransparentMesh: 1
+--- !u!1 &91045883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 91045884}
+  m_Layer: 0
+  m_Name: ImportantUI (Death, round complete, contracts)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &91045884
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91045883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1184063708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &99962524
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,6 +658,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
   - {fileID: 11400000, guid: a37c54c3baa1be041aad4e92846ef099, type: 2}
   - {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
+  - {fileID: 11400000, guid: 1fbd5bd4884329c4fbfbe38d925aaa89, type: 2}
   - {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
   - {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
   - {fileID: 11400000, guid: 07f6ffe6ad0a548458355c8af7792abb, type: 2}
@@ -645,6 +681,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 478f0b9d2ac77a84a8f214e627aba144, type: 2}
   - {fileID: 11400000, guid: 1a087115b055a7d47af03e2f7cfe8b0b, type: 2}
   - {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
+  - {fileID: 11400000, guid: c66de7e1e83f50e42a3d7fe6672055a7, type: 2}
   - {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
   - {fileID: 11400000, guid: faadc0be9f59f6d4eaba188848050965, type: 2}
   - {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
@@ -4242,7 +4279,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 362, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: 0, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697341387
 MonoBehaviour:
@@ -4290,7 +4327,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b9a664f1bd88bd94e9b0b0e8cfb1abac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d3b8d1714b0a544f803c052e739ceaa, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4700,8 +4737,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Item Name Name Name. Text text text text texttext. Today is a good day!
-    A good day indeed!
+  m_text: Item Name Name Name. Text text text !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ac9fb987b73617419bfb0c5ca9c6e2c, type: 2}
   m_sharedMaterial: {fileID: -1804899757545243514, guid: 1ac9fb987b73617419bfb0c5ca9c6e2c, type: 2}
@@ -6042,6 +6078,7 @@ RectTransform:
   - {fileID: 1448693635}
   - {fileID: 318923881}
   - {fileID: 62928246}
+  - {fileID: 91045884}
   - {fileID: 760875087}
   - {fileID: 1833015281}
   m_Father: {fileID: 1459143559}
@@ -7227,7 +7264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41553932, g: 0.5471698, b: 0.5073457, a: 1}
+  m_Color: {r: 0.46417764, g: 0.5249604, b: 0.5754717, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7714,28 +7751,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoUI: {fileID: 1448693638}
+  importantUIs: {fileID: 91045884}
   RoundCompleteUIPrefab: {fileID: 6103878211779316357, guid: 0c04243e68fe9694d8f08625d79df9a1, type: 3}
   allOffers:
   - item: {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
-    price: 30
-    tier: 0
-    stock: 5
-  - item: {fileID: 11400000, guid: eb77f476667c9cc45beb81cc499ee0aa, type: 2}
     price: 35
     tier: 0
-    stock: 5
+    stock: 8
+  - item: {fileID: 11400000, guid: eb77f476667c9cc45beb81cc499ee0aa, type: 2}
+    price: 40
+    tier: 0
+    stock: 8
   - item: {fileID: 11400000, guid: 96c7c17460afe15428ffb3d0c72e64f0, type: 2}
-    price: 24
+    price: 20
     tier: 0
-    stock: 12
+    stock: 17
   - item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
-    price: 50
+    price: 55
     tier: 0
-    stock: 3
+    stock: 8
   - item: {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
     price: 50
     tier: 0
-    stock: 3
+    stock: 5
   - item: {fileID: 11400000, guid: ecd58e4f51e43064a90593c9da0698c5, type: 2}
     price: 45
     tier: 0
@@ -7748,22 +7786,10 @@ MonoBehaviour:
     price: 30
     tier: 0
     stock: 6
-  - item: {fileID: 11400000, guid: 478f0b9d2ac77a84a8f214e627aba144, type: 2}
-    price: 200
-    tier: 1
-    stock: 2
-  - item: {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
-    price: 60
-    tier: 1
-    stock: 4
   - item: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
-    price: 130
+    price: 90
     tier: 1
     stock: 7
-  - item: {fileID: 11400000, guid: faadc0be9f59f6d4eaba188848050965, type: 2}
-    price: 70
-    tier: 1
-    stock: 4
   - item: {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
     price: 80
     tier: 1
@@ -7772,68 +7798,89 @@ MonoBehaviour:
     price: 32
     tier: 1
     stock: 5
-  - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
-    price: 120
-    tier: 2
-    stock: 3
-  - item: {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
-    price: 300
-    tier: 2
+  - item: {fileID: 11400000, guid: 478f0b9d2ac77a84a8f214e627aba144, type: 2}
+    price: 200
+    tier: 1
     stock: 4
-  - item: {fileID: 11400000, guid: 15e2e0242bf63674ca5a71295ba7a85e, type: 2}
-    price: 160
-    tier: 2
-    stock: 2
+  - item: {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
+    price: 60
+    tier: 1
+    stock: 8
+  - item: {fileID: 11400000, guid: c66de7e1e83f50e42a3d7fe6672055a7, type: 2}
+    price: 50
+    tier: 1
+    stock: 9
+  - item: {fileID: 11400000, guid: faadc0be9f59f6d4eaba188848050965, type: 2}
+    price: 70
+    tier: 1
+    stock: 4
   - item: {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
     price: 20
     tier: 2
+    stock: 60
+  - item: {fileID: 11400000, guid: 1a087115b055a7d47af03e2f7cfe8b0b, type: 2}
+    price: 190
+    tier: 2
+    stock: 10
+  - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
+    price: 225
+    tier: 2
+    stock: 6
+  - item: {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
+    price: 300
+    tier: 2
     stock: 12
+  - item: {fileID: 11400000, guid: 08dc00519e6c18e4280f1a0008359605, type: 2}
+    price: 160
+    tier: 2
+    stock: 10
   - item: {fileID: 11400000, guid: c66ca198aa4de6e47be6a6550ccb4f88, type: 2}
-    price: 240
+    price: 350
     tier: 3
-    stock: 1
+    stock: 6
   - item: {fileID: 11400000, guid: 77b6ef5cfd14fdf41b4f3623b6f13055, type: 2}
     price: 600
     tier: 3
-    stock: 2
+    stock: 8
   - item: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
     price: 25
     tier: 3
-    stock: 12
+    stock: 80
   - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
-    price: 600
+    price: 800
     tier: 3
-    stock: 1
-  - item: {fileID: 11400000, guid: df6fb076cd291c44cadf57d46da5d5bf, type: 2}
-    price: 500
-    tier: 4
     stock: 2
+  - item: {fileID: 11400000, guid: 07f6ffe6ad0a548458355c8af7792abb, type: 2}
+    price: 300
+    tier: 3
+    stock: 12
   - item: {fileID: 11400000, guid: 23117d005a935e74fbc8ecde9ddfaab7, type: 2}
     price: 600
     tier: 4
-    stock: 2
+    stock: 8
   - item: {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
     price: 320
     tier: 4
-    stock: 8
-  - item: {fileID: 11400000, guid: 570d7890fad5b1a43aa4c4321b3d6842, type: 2}
-    price: 250
-    tier: 4
-    stock: 4
-  - item: {fileID: 11400000, guid: 07f6ffe6ad0a548458355c8af7792abb, type: 2}
-    price: 3200
-    tier: 4
-    stock: 4
+    stock: 10
   - item: {fileID: 11400000, guid: df6fb076cd291c44cadf57d46da5d5bf, type: 2}
     price: 500
     tier: 4
-    stock: 2
+    stock: 6
+  - item: {fileID: 11400000, guid: 570d7890fad5b1a43aa4c4321b3d6842, type: 2}
+    price: 250
+    tier: 4
+    stock: 8
+  - item: {fileID: 11400000, guid: e46ad3c465c6dde4491f49ead6b4db40, type: 2}
+    price: 450
+    tier: 4
+    stock: 8
+  - item: {fileID: 11400000, guid: 1fbd5bd4884329c4fbfbe38d925aaa89, type: 2}
+    price: 50
+    tier: 1
+    stock: 8
   upgrades:
   - {fileID: 11400000, guid: 859ad071fca8b6c4c85d9007172d0479, type: 2}
   - {fileID: 11400000, guid: 8a42a3c3bc7dba345a380c43fb699f15, type: 2}
-  sellList: []
-  quotaRequired: 0
-  quota: 0
   money: 0
   roundTime: 0
   roundStats:
@@ -7870,7 +7917,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1532966364}
   - component: {fileID: 1532966366}
-  - component: {fileID: 1532966365}
   m_Layer: 0
   m_Name: Quota
   m_TagString: Untagged
@@ -7898,36 +7944,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 140, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1532966365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1532966363}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.75047463, g: 0.7042542, b: 0.7735849, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 18f0fa5f7ab83aa40982421bc81a29bb, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1532966366
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10137,7 +10153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994318871}
   - component: {fileID: 1994318870}
-  - component: {fileID: 1994318869}
+  - component: {fileID: 1994318872}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -10145,26 +10161,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1994318869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994318868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &1994318870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10195,6 +10191,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1994318872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994318868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1001 &2000280407
 PrefabInstance:
   m_ObjectHideFlags: 0

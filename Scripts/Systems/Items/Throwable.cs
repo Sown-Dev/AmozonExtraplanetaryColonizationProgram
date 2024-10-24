@@ -8,6 +8,8 @@ public class Throwable:MonoBehaviour{
 
     public GameObject onCollide;
     
+    public bool DestroyOnCollide = true;
+    
     public void Throw(Vector3 pos, float vel,float _yVel){
          rb.velocity =( pos-transform.position ).normalized * vel;
         yVel = _yVel;
@@ -22,6 +24,8 @@ public class Throwable:MonoBehaviour{
         }
         else{
             Collide();
+            if(!DestroyOnCollide)
+                Destroy(gameObject); //still kill on fall??
         }
     }
     
@@ -30,8 +34,10 @@ public class Throwable:MonoBehaviour{
     }
     
     public virtual void Collide(){
-        Instantiate(onCollide, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        if(onCollide)
+            Instantiate(onCollide, transform.position, Quaternion.identity);
+        if(DestroyOnCollide)
+            Destroy(gameObject);
     }
 
 }

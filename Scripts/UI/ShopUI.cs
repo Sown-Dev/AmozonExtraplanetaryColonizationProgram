@@ -94,11 +94,11 @@ namespace UI{
         }
 
 
-        public ShopOffer(ShopOffer old, int addPrice){
+        public ShopOffer(ShopOffer old, int addPrice, int addStock=0){
             this.item = old.item;
             this.price = old.price + addPrice;
             this.tier = old.tier;
-            stock = old.stock + Random.Range(1, old.stock/2) + Random.Range(-1, 1);
+            stock = old.stock + Random.Range(1, old.stock/2) + Random.Range(-1, 1)+addStock;
         }
     }
 }

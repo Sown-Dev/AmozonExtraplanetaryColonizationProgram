@@ -14,12 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 4b00b6622262a794f99ba1bf2217ed63, type: 3}
   ingredients:
-  - item: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
-    amount: 24
+  - item: {fileID: 11400000, guid: 7015589ffc44cd04ea006b5df0442071, type: 2}
+    amount: 6
   - item: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
-    amount: 12
-  - item: {fileID: 11400000, guid: 50c4c47b96150104da4829c44e3b81c6, type: 2}
-    amount: 12
+    amount: 10
+  - item: {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
+    amount: 4
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: 7015589ffc44cd04ea006b5df0442071, type: 2}
+    name: 
+    icon: {fileID: 0}
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
+    name: 
+    icon: {fileID: 0}
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
+    name: 
+    icon: {fileID: 0}
   results:
   - item: {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
     amount: 1

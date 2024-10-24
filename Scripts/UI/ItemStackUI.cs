@@ -30,7 +30,7 @@ public class ItemStackUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData){
         //ItemInfoUI.Instance.Select(myItemStack);
-        TooltipManager.Instance.ShowItem(myItemStack.item, transform.position);
+        TooltipManager.Instance.ShowItem(myItemStack.item, transform.position, gameObject);
     }
 
     public void OnPointerExit(PointerEventData eventData){

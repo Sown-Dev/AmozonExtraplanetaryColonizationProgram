@@ -143,7 +143,7 @@ MonoBehaviour:
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 0}
+    <myItem>k__BackingField: {fileID: 11400000, guid: c66de7e1e83f50e42a3d7fe6672055a7, type: 2}
     name: Sapling
     indestructible: 0
     rotatable: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   rotation: 0
   tile: {fileID: 0}
   origin: {x: 0, y: 0}
-  treePrefab: {fileID: 0}
+  treePrefab: {fileID: -8526707392088505906, guid: 1b4774ae127334c42b741e3b1b32a598, type: 3}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

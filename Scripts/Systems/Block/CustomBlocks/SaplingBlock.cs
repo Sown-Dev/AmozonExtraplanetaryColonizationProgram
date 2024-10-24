@@ -10,20 +10,27 @@ public class SaplingBlock: TickingBlock{
     public override void Init(Orientation orientation){
         base.Init(orientation);
         growTime = Random.Range(3000, 6000) + Random.Range(-1500, 7000);
+        timeElapsed = Random.Range(0, growTime/4);
     }
 
     public override void Tick(){
         base.Tick();
         timeElapsed++;
         if (timeElapsed >= growTime){
-            timeElapsed = 0;
+            timeElapsed = -2;
             //grow tree
-            BlockDestroy(false);
+            TerrainManager.Instance.RemoveBlock(origin, false);
             TerrainManager.Instance.PlaceBlock( treePrefab, origin,rotation);
+
         }
+        
+    }
+
+    public override bool BlockDestroy(bool dropLoot = true){
+        return base.BlockDestroy(false); //never drop yourself
     }
 
     public override StringBuilder GetDescription(){
-        return base.GetDescription().AppendFormat("This tree is {0}s old. Trees grow up after an average of 225 seconds, although it varies.", timeElapsed/20f%00.0);
+        return base.GetDescription().AppendFormat("This sapling is {0}s old.\nSaplings grow up after an average of 5 minutes, although it varies a lot.", (int)(timeElapsed/20f *10) /10);
     }
 }

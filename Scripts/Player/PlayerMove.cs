@@ -26,6 +26,8 @@ public partial class Player : Unit{
 
     private void Update(){
         Block standingBlock = TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(transform.position));
+        
+        handVisualizer.Refresh();
 
         
         sr.sortingOrder = 0;

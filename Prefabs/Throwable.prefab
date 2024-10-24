@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5565713375893892327}
   - component: {fileID: 8368856016182629934}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: -2191679372146513533}
   - component: {fileID: -8526604435466743775}
   - component: {fileID: 5800216070653744165}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Throwable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,9 +161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0a21b09554b9b47b15cee6001495bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  sr: {fileID: 0}
+  rb: {fileID: -4788089487448818009}
+  sr: {fileID: 5800216070653744165}
   onCollide: {fileID: 0}
+  DestroyOnCollide: 1
 --- !u!58 &-8526604435466743775
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
   m_Name: Crush Copper
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9bdf5a34518a1544db8afe168870d174, type: 3}
+  icon: {fileID: 21300000, guid: 3a8f534c8df1c4d4188239d82f5f8972, type: 3}
   ingredients:
   - item: {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}
     amount: 2

@@ -38,7 +38,7 @@ public partial class TerrainManager{
 
         //Start by placing important blocks first, so their positions can't be occupied
 
-        PlaceBlock(SellBlock, new Vector2Int(0, 2));
+        PlaceBlock(SellBlock, new Vector2Int(0, 1));
 
 #if ALLITEMS1
         PlaceBlock(BigCrate, new Vector2Int(0, -4));
@@ -46,7 +46,7 @@ public partial class TerrainManager{
 
         foreach (List<Item> list in ItemManager.Instance.itemDict.Values){
             foreach (Item item in list){
-                ItemStack i = new ItemStack(item, 16);
+                ItemStack i = new ItemStack(item, item.stackSize);
                 c.output.Insert(ref i);
             }
         }
@@ -160,7 +160,7 @@ public partial class TerrainManager{
 
         //now place worldgen:
 
-        for (int i = 0; i < 800; i++){
+        for (int i = 0; i < 600; i++){
             Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
             if (!IsWall((Vector3Int)pos)){
                 if (GetTerrain(pos).myProperties == Grass){
@@ -180,7 +180,7 @@ public partial class TerrainManager{
             Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
             SetWall(null, (Vector3Int)pos);
             for (int j = 0; j < 7; j++){
-                SetWall(null, (Vector3Int)pos + Vector3Int.RoundToInt(Random.insideUnitCircle * 1.5f));
+                SetWall(null, (Vector3Int)pos + Vector3Int.RoundToInt(Random.insideUnitCircle * Random.Range(0.5f,2f)));
             }
 
 

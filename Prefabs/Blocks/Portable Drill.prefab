@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3071626970990201939, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
       propertyPath: m_Name
-      value: PortableDrill
+      value: Portable Drill
       objectReference: {fileID: 0}
     - target: {fileID: 3560868191791535471, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
       propertyPath: m_Sprite
@@ -285,10 +285,14 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
-    name: PortableDrill
+    name: Portable Drill
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: Has an internal battery that limits lifespan. Cannot be picked up.
     bso: {fileID: 0}
@@ -302,6 +306,7 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   outputProperties:
     size: 4
@@ -309,7 +314,7 @@ MonoBehaviour:
     gridWidth: 2
     scaleDownGridIfSmaller: 0
     type: 0
-  DrillTime: 60
+  DrillTime: 80
   DrillAmount: 0
   DrillPositions:
   - {x: 0, y: 0}

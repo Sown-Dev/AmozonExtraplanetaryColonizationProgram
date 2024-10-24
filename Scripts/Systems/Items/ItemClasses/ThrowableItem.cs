@@ -8,6 +8,7 @@ namespace Systems.Items.ItemClasses{
         public override void Use(Vector2Int pos, Unit user, Slot slot){
             Throwable throwObject = Instantiate(throwPrefab.gameObject, (Vector2)user.transform.position, Quaternion.identity).GetComponent<Throwable>();
             throwObject.Throw((Vector2)pos, velocity, velocity);
+            Destroy(throwObject.gameObject, 5);
             slot.ItemStack.amount--;
             if (slot.ItemStack.amount <= 0){
                 slot.ItemStack = null;

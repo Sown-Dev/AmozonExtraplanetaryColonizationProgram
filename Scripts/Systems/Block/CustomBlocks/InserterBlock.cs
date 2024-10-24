@@ -25,7 +25,7 @@ namespace Systems.Block{
             outputProperties.size = 1;
             output = new Container(outputProperties);
             mySlot = output.GetSlot(0);
-            mySlot.Stacksize = 4;
+            mySlot.Stacksize = 2;
         
             slotVisualizer.SetSlot(output.GetSlot(0));
         }

@@ -23,10 +23,20 @@ public class RoundCompleteUI : MonoBehaviour{
     private float toRemaining;
     private float timeBonus;
     private int realTimeBonus;
+
+    public CanvasGroup rewardCG;
+    public TMP_Text rewardText;
+
     
+    public CanvasGroup totalCG;
+    public TMP_Text totalText;
+
     public Button continueButton;
 
-
+    
+    
+    public GameObject ContractSelectUIPrefab;
+    
     private void Awake(){
         continueButton.onClick.AddListener(Continue);
     }
@@ -34,8 +44,9 @@ public class RoundCompleteUI : MonoBehaviour{
     public void Init(int earn, float time){
         //set all elements to hide
         earnedBarCG.alpha = 0;
-        
         timeCG.alpha = 0;
+        rewardCG.alpha = 0;
+        totalCG.alpha = 0;
         
         continueButton.interactable = false;
         
@@ -48,12 +59,20 @@ public class RoundCompleteUI : MonoBehaviour{
         StartEarned(_earned);
         yield return new WaitForSecondsRealtime(1f);
         lerpEarn = true;
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(2.5f);
         StartTime(_timeRemaining);
         yield return new WaitForSecondsRealtime(1f);
         lerpTime = true;
         yield return new WaitForSecondsRealtime(1.5f);
-        RoundManager.Instance.AddMoney( realTimeBonus, false);
+        int totalBonus = realTimeBonus + RoundManager.Instance.currentContract.reward;
+
+        rewardText.text = $"Contract Reward: <color=#118811ff>${RoundManager.Instance.currentContract.reward}</color>";
+        rewardCG.alpha = 1;
+        yield return new WaitForSecondsRealtime(1.5f);
+        totalCG.alpha = 1;
+        totalText.text = $"Total Bonus:    <color=#118811ff>${totalBonus}</color>";
+        
+        RoundManager.Instance.AddMoney( totalBonus, false);
         yield return new WaitForSecondsRealtime(1f);
         continueButton.interactable = true;
     }
@@ -65,9 +84,9 @@ public class RoundCompleteUI : MonoBehaviour{
 
     private void Update(){
         
-        earnedBarText.text = (int)earned + " / " + RoundManager.Instance.quotaRequired;
+        earnedBarText.text = (int)earned + " / " + RoundManager.Instance.currentContract.requiredQuota;
         earnedBarFill.rectTransform.offsetMax =
-            new Vector2(-2 + ((1-(earned / RoundManager.Instance.quotaRequired)) * -156), -2);
+            new Vector2(-2 + ((1-(earned / RoundManager.Instance.currentContract.requiredQuota)) * -156), -2);
 
         
         timeText.text =
@@ -112,10 +131,14 @@ public class RoundCompleteUI : MonoBehaviour{
     }
 
     public void Continue(){
-        Destroy(gameObject);
-        RoundManager.Instance.StartRound();
+        
+        ContractSelectUI ui = Instantiate(ContractSelectUIPrefab, transform.parent).GetComponent<ContractSelectUI>();
+        ui.Init(RoundManager.Instance.GenerateNewContracts( 3));
+       
+                
         CursorManager.Instance.CloseUI();
         
+        Destroy(gameObject);
 
     }
 }

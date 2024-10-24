@@ -16,7 +16,10 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public override bool BlockDestroy(bool dropItems = true){
-            return base.BlockDestroy(false);
+            //remove self from drops    
+            lootTable = lootTable.FindAll(i => i.item != properties.myItem); 
+            
+            return base.BlockDestroy(dropItems);
         }
 
 

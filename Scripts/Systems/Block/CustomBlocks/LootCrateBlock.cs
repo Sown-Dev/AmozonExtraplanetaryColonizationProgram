@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Systems.Items;
 using Systems.Round;
 using UnityEngine;
@@ -9,21 +10,26 @@ namespace Systems.Block.CustomBlocks{
     public class LootCrateBlock: Block,IContainerBlock{
         [HideInInspector] private List<ItemStack> loot;
 
-        public Drop[][] drops;   
+        public Drop[] drops;   
         //generation logic
         public void GenerateLoot(){
             
             int lootAmount  = 2+Random.Range(0,3) + RoundManager.Instance.roundNum;
-            for(int i=RoundManager.Instance.roundNum; i>=0; i--){
+            
+            //add loot going from curent tier to 0
+            drops.OrderBy( x => x.tier);
+            
+            for (int i = drops.Length-1; i >= 0 && lootAmount>0; i--){
+                if(drops[i].tier>RoundManager.Instance.roundNum) continue;
                 
-                Utils.Shuffle(drops[i]);
-                foreach(Drop d in drops[i]){
-                    if(Random.value<d.chance && lootAmount>0){
-                        lootAmount--;
-                        loot.Add(d.item);
-                    }
+                //if(Random.value<0.3f) continue; //random chance to skip
+                if (drops[i].chance < Random.value){
+                    ItemStack s = drops[i].item;
+                    loot.Add(s);
+                    lootAmount--;
                 }
             }
+            
         }
         
         

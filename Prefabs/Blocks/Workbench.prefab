@@ -133,8 +133,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: ecd58e4f51e43064a90593c9da0698c5, type: 2}
     name: Workbench
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 1
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 2}
     description: 
     bso: {fileID: 0}
@@ -161,8 +165,8 @@ MonoBehaviour:
   recipeSelector:
     recipes:
     - {fileID: 11400000, guid: fc0b37c940a086c44a0aafd76f1f8035, type: 2}
+    - {fileID: 11400000, guid: 8f8da8449f443d747987930603d2d032, type: 2}
     - {fileID: 11400000, guid: 69bc8a1197106b942ab8b861e47c11d6, type: 2}
-    - {fileID: 11400000, guid: a8f0c127ea8162a4c83e763cac99657a, type: 2}
     currentRecipe: {fileID: 0}
   inputProperties:
     size: 0

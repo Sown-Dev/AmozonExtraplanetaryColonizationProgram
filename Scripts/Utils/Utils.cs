@@ -29,7 +29,7 @@ public class Utils: MonoBehaviour{
     
     
     public ItemDrop CreateItemDrop(ItemStack item, Vector3 pos){
-        ItemDrop drop = Instantiate(itemDropPrefab, pos + new Vector3(0,Random.Range(-0.001f,0.001f),0), Quaternion.identity);
+        ItemDrop drop = Instantiate(itemDropPrefab, pos + (Vector3)(Random.insideUnitCircle*0.2f), Quaternion.identity);
         drop.Init(item.Clone());
         return drop;
     }

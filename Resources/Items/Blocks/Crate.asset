@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Crate
   m_EditorClassIdentifier: 
+  <description>k__BackingField: 
+  <icon>k__BackingField: {fileID: 21300000, guid: 9b98c85daf607b943b5d1a7acfc1dcfb, type: 3}
   stackSize: 16
-  icon: {fileID: 21300000, guid: b5ceab370a772a24c83fdebc77d21710, type: 3}
   category: 2
   useCursor: 1
-  value: 6
-  tier: -1
+  value: 24
+  tier: 1
   fuelValue: 0
-  description: basic storage
   blockPrefab: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
   blockCategory: 8

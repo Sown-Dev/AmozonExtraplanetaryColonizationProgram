@@ -73,7 +73,7 @@ namespace UI{
         }
 
         public void OnPointerEnter(PointerEventData eventData){
-            TooltipManager.Instance.ShowItem(myOffer.item, transform.position+new Vector3(0, -32, 0));
+            TooltipManager.Instance.ShowItem(myOffer.item, transform.position+new Vector3(0, -32, 0),gameObject);
         }
 
         public void OnPointerExit(PointerEventData eventData){

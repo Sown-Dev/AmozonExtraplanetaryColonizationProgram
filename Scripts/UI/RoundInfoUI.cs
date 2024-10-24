@@ -26,8 +26,8 @@ public class RoundInfoUI:MonoBehaviour{
 
     public void Refresh(){
         //Update the quota bar 
-        quotaFill.fillAmount = (float)RoundManager.Instance.quota / RoundManager.Instance.quotaRequired;
-        quotaText.text = RoundManager.Instance.quota + "/" + RoundManager.Instance.quotaRequired;
+        quotaFill.fillAmount = (float)RoundManager.Instance.currentContract.quota/ RoundManager.Instance.currentContract.requiredQuota;
+        quotaText.text = RoundManager.Instance.currentContract.quota + "/" + RoundManager.Instance.currentContract.requiredQuota;
         
         //Update the money text
         moneyText.text = "$" + RoundManager.Instance.money;
@@ -40,7 +40,7 @@ public class RoundInfoUI:MonoBehaviour{
             
         }
 
-        foreach (Item i in RoundManager.Instance.sellList){
+        foreach (Item i in RoundManager.Instance.currentContract.sellList){
             ItemStackUI ui = GameObject.Instantiate(sellUIPrefab, sellList.transform).GetComponent<ItemStackUI>();
             ui.Init(i);
         }

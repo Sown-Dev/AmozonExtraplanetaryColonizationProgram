@@ -38,6 +38,7 @@ namespace UI{
         [SerializeField] private GameObject actuatable;
         [SerializeField] private GameObject logistics;
 
+        private GameObject tooltipCaller; //the object that called the tooltip. we keep track of it to hide the tooltip when it is destroyed or hidden
 
         private bool isOpen;
         private int width = 228;
@@ -51,13 +52,19 @@ namespace UI{
 
         private void Update(){
             // cg.alpha = isOpen ? 1 : 0;
-            cg.alpha = Mathf.Lerp(cg.alpha, isOpen ? 1 : 0, Time.deltaTime * 24);
+            cg.alpha = Mathf.Lerp(cg.alpha, isOpen ? 1 : 0, Time.unscaledDeltaTime * 24);
 
             cg.alpha = cg.alpha < 0.1f && !isOpen ? 0 : cg.alpha;
 
             if (isOpen){
-                rt.anchoredPosition = Vector2.Lerp(rt.anchoredPosition, toPos, Time.deltaTime * 24);
+                rt.anchoredPosition = Vector2.Lerp(rt.anchoredPosition, toPos, Time.unscaledDeltaTime * 24);
+                
+                if (tooltipCaller == null || !tooltipCaller.activeSelf){
+                    Hide();
+                }
             }
+            
+            
         }
 
 
@@ -79,7 +86,7 @@ namespace UI{
             }
 
             //do the same for y
-            if (canvasPosition.y - rt.sizeDelta.y < -screenDimensions.y / 2){
+            if (canvasPosition.y - rt.sizeDelta.y -32 < -screenDimensions.y / 2){
                 canvasPosition.y = -screenDimensions.y / 2 + (rt.sizeDelta.y + 64);
                 canvasPosition.x += 32;
             }
@@ -106,7 +113,7 @@ namespace UI{
             costText.transform.parent.gameObject.SetActive(false);
         }
 
-        public void ShowItem(Item item, Vector2 screenPosition, bool useOffset = true){
+        public void ShowItem(Item item, Vector2 screenPosition,GameObject caller, bool useOffset = true){
             OnShow(screenPosition, useOffset);
 
             title.text = item.name;
@@ -114,6 +121,10 @@ namespace UI{
 
             costText.text = "$" + item.value;
             costText.transform.parent.gameObject.SetActive(item.value > 0);
+
+            if (caller){
+                tooltipCaller = caller;
+            }
 
             if (item is BlockItem blockItem){
                 //blockitem
@@ -163,7 +174,7 @@ namespace UI{
 
 
         public void Hide(){
-            
+            tooltipCaller = null;
             isOpen = TTmouseOver && isOpen; //only close if we are not hovering over the tooltip
         }
 

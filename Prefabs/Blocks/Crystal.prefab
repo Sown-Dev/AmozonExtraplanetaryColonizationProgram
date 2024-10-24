@@ -134,7 +134,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
-      insertIndex: 3
+      insertIndex: 1
       addedObject: {fileID: -8526707392088505906}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
 --- !u!61 &2449576365950138683 stripped
@@ -166,8 +166,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 0}
     name: Crystal
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: shiny crystal. oooh
     bso: {fileID: 0}
@@ -186,8 +190,8 @@ MonoBehaviour:
   origin: {x: 0, y: 0}
   item: {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
   baseYield: 1
-  baseAmount: 100
-  range: 24
+  baseAmount: 260
+  range: 120
   color: {r: 0.5377358, g: 0.18009079, b: 0.455237, a: 0}
   hardness: 0
 --- !u!212 &3560868191791535471 stripped

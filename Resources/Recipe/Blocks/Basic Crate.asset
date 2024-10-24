@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
-  m_Name: Crate 2
+  m_Name: Basic Crate
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: b5ceab370a772a24c83fdebc77d21710, type: 3}
   ingredients:

@@ -14,6 +14,7 @@ namespace Systems.Round{
 
         //References
         [SerializeField] private RoundInfoUI infoUI;
+        [SerializeField] private Transform importantUIs;
 
         //Prefabs
         [SerializeField] private GameObject RoundCompleteUIPrefab;
@@ -25,11 +26,7 @@ namespace Systems.Round{
 
         public UpgradeSO[] upgrades;
 
-
-        public List<Item> sellList;
-
-        public int quotaRequired;
-        public int quota;
+        public Contract currentContract;
 
         public int money;
         public int roundNum{ private set; get; }
@@ -55,12 +52,15 @@ namespace Systems.Round{
         private void Start(){
             Instance = this;
             roundNum = -1;
-            StartRound();
+            StartRound(new Contract{
+                quota = 0, requiredQuota = 300, sellList = ItemManager.Instance.GetRandomItemsByTier(0, 3).ToList(), reward = 50,
+                signBonus = 0, TimeGiven = 450, sponsor = Sponsor.Amozon
+            });
 
 
             money = 100;
             infoUI.Refresh();
-            
+
             CursorManager.Instance.uiDepth = 0;
         }
 
@@ -116,19 +116,18 @@ namespace Systems.Round{
         }
 
         public bool CanSell(ItemStack stack){
-            return sellList.Contains(stack.item);
+            return currentContract.sellList.Contains(stack.item);
         }
 
-        public void AddMoney(int amount, bool countTowardsQuota=true){
+        public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
             if (countTowardsQuota){
-                quota += amount;
-                if (quota >= quotaRequired){
+                currentContract.quota += amount;
+                if (currentContract.quota >= currentContract.requiredQuota){
                     //trigger quota reached
                     if (!roundComplete)
                         QuotaReach();
                 }
-                
             }
 
             infoUI.Refresh();
@@ -143,48 +142,32 @@ namespace Systems.Round{
 
             return false;
         }
-        
-        
+
+
         bool roundComplete;
+
         //Triggers when we have reached the quota
         public void QuotaReach(){
-                        CursorManager.Instance.OpenUI();
+            CursorManager.Instance.OpenUI();
 
 
-            RoundCompleteUI rc = Instantiate(RoundCompleteUIPrefab, infoUI.transform.parent)
+            RoundCompleteUI rc = Instantiate(RoundCompleteUIPrefab, importantUIs)
                 .GetComponent<RoundCompleteUI>();
-            
-            rc.Init(quota, roundTime);
+
+            rc.Init(currentContract.quota, roundTime);
             roundComplete = true;
         }
 
-        public void StartRound(){
+        public void StartRound(Contract newContract){
             roundComplete = false;
-            
+
             roundNum++;
-            quota = 0;
-            if (roundNum > 0){
-                quotaRequired = (int)((400f * ((roundNum + 1f) * (roundNum / 1.5f)) +200)/50)*50;
-            }
-            else{
-                quotaRequired = 300; //low first quota to not be boring
-            }
 
-            roundTime = 420f + roundNum * 30;
+            currentContract = newContract;
 
-            //get new sell list
-            sellList = new List<Item>(ItemManager.Instance.GetRandomItemsByTier(roundNum, 3 + roundNum / 2));
 
-            //get new shop list
-            /*shopList = new List<ShopOffer>();
+            roundTime = currentContract.TimeGiven;
 
-            //delete this if its slow
-            Utils.Shuffle(allOffers);
-
-            shopList.AddRange(allOffers.Where(t => t.tier == roundNum).Take(Random.Range(3, 5)).Select(t => new ShopOffer(t, Random.Range(-6, 12) - roundNum)));
-            shopList.AddRange(allOffers.Where(t => t.tier == roundNum - 1).Take(1).Select(t => new ShopOffer(t, Random.Range(-6, 12) - roundNum)));
-            shopList.Add(new ShopOffer( Utils.Instance.dynamight, 100, roundNum, roundNum*3+3 ));
-            allOffers.Sort((a, b) => a.tier.CompareTo(b.tier));*/
 
             shopTiers.Add(GenerateShop(roundNum));
 
@@ -212,7 +195,7 @@ namespace Systems.Round{
 
 // These will be pulled from world stats when added
             int logistics = 1;
-            int electrical =  tier >= 2 ? 1 : 0;
+            int electrical = tier >= 2 ? 1 : 0;
             int refine = tier == 0 ? 0 : 1;
             int production = 1;
             int misc = 2;
@@ -223,16 +206,16 @@ namespace Systems.Round{
 // Select offers for logistics
             ShopOffer[] logisticsOffers = tierOffers
                 .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Logistics)
-                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier * 2))
                 .Take(logistics)
                 .ToArray();
             tierOffers.RemoveAll(x => logisticsOffers.Any(y => y.item == x.item));
-            
+
 // Select offers for electrical
 
             ShopOffer[] electricalOffers = tierOffers
                 .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Electrical)
-                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(electrical)
                 .ToArray();
             tierOffers.RemoveAll(x => electricalOffers.Any(y => y.item == x.item));
@@ -240,7 +223,7 @@ namespace Systems.Round{
 // Select offers for refining
             ShopOffer[] refineOffers = tierOffers
                 .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Refining)
-                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(refine)
                 .ToArray();
             tierOffers.RemoveAll(x => refineOffers.Any(y => y.item == x.item));
@@ -248,14 +231,14 @@ namespace Systems.Round{
 // Select offers for production
             ShopOffer[] productionOffers = tierOffers
                 .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Production)
-                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(production)
                 .ToArray();
             tierOffers.RemoveAll(x => productionOffers.Any(y => y.item == x.item));
 
 // Select misc offers
             ShopOffer[] miscOffers = tierOffers
-                .Select(t => new ShopOffer(t, AdjustPrice(roundNum)))
+                .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(misc)
                 .ToArray();
             tierOffers.RemoveAll(x => miscOffers.Any(y => y.item == x.item));
@@ -265,7 +248,8 @@ namespace Systems.Round{
                 ((tier + 1) * 100 + Random.Range(-20, 20)));
 
 
-            ShopTier t = new ShopTier(logisticsOffers, electricalOffers,refineOffers, productionOffers, miscOffers, u, tier);
+            ShopTier t = new ShopTier(logisticsOffers, electricalOffers, refineOffers, productionOffers, miscOffers, u,
+                tier);
             return t;
         }
 
@@ -279,15 +263,111 @@ namespace Systems.Round{
             else{
                 lostGame = true;
                 //lose for real
-                var ls = Instantiate(loseGameUI.gameObject, infoUI.transform.parent).GetComponent<LoseGameUI>();
+                var ls = Instantiate(loseGameUI.gameObject, importantUIs).GetComponent<LoseGameUI>();
                 ls.transform.SetAsLastSibling();
                 ls.LoseScreen(roundStats.moneyEarned, roundStats.ItemsDiscovered.Select(pair => pair.Key).ToList());
             }
         }
 
+        //generates new contracts for next round
+        public Contract[] GenerateNewContracts(int numContracts){
+            Contract[] contracts = new Contract[numContracts];
+            for (int i = 0; i < numContracts; i++){
+                contracts[i] = new Contract(roundNum + 1, Random.Range(2, 4));
+            }
+
+            return contracts;
+        }
+
         private void OnValidate(){
             //sort by tier.
-            allOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
+            //allOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
         }
+    }
+
+    public class Contract{
+        public int quota;
+        public int requiredQuota;
+        public List<Item> sellList;
+        public int reward;
+        public int signBonus;
+
+        public int TimeGiven;
+        public Sponsor sponsor;
+
+        public Contract(){ }
+
+        public Contract(int tier, int itemsAmt){
+            requiredQuota = (int)((400f * ((tier + 1f) * (tier / 2f)) + 300) / 50) * 50;
+            
+            sponsor = (Sponsor)Random.Range(0, Sponsor.GetValues(typeof(Sponsor)).Length);
+            
+            quota = 0;
+
+            
+
+            // Generate random items to be part of the contract
+            sellList = ItemManager.Instance.GetRandomItemsByTier(tier, itemsAmt).ToList();
+
+            // Randomly generate reward and sign bonus for the contract
+            reward = (Random.Range(80, 160) + (3-sellList.Count)*40) * tier;
+            signBonus = 0;
+
+            TimeGiven = 420 + (tier * (90+Random.Range(-60, 45)));
+
+            switch ( sponsor){
+                case Sponsor.CorbCO:
+                    requiredQuota = (int)(requiredQuota * 1.1f);
+                    reward += 100;
+                    TimeGiven += 10;
+                    break;
+                case Sponsor.Anogen:
+                    reward /= 2;
+                    requiredQuota += 100;
+                    TimeGiven += 80;
+                    signBonus += 40;
+                    break;
+                case Sponsor.Silus:
+                    TimeGiven -= 25;
+                    reward *= 2;
+                    requiredQuota -= 100;
+                    sellList.RemoveAt(0);
+                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier+1, 1));
+                    
+                    break;
+                case Sponsor.Toyoma:
+                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier-1, 1));
+                    TimeGiven -= 15;
+                    reward = 0;
+
+                    break;
+                case Sponsor.Amozon:
+                    reward += 25; //Partner bonus
+                    break;
+                case Sponsor.Pivot:
+                    sellList.RemoveRange(1, sellList.Count - 1);
+                    TimeGiven -= 45;
+                    reward += 500 * tier;
+                    requiredQuota/=2;
+                    requiredQuota += 200;
+                    
+                    break;
+            }
+            
+            TimeGiven =  Mathf.RoundToInt(TimeGiven / 15f) * 15;
+            requiredQuota = requiredQuota / 50 * 50;
+            reward = reward / 10 * 10;
+           // Debug.Log($"New contract generated for tier {tier} with {itemsAmt} items. Required quota: {requiredQuota}, Reward: {reward}, SignBonus: {signBonus}");
+        }
+
+        
+    }
+    public enum Sponsor{
+        CorbCO,
+        Anogen,
+        Silus,
+        Toyoma,
+        Amozon,
+        Pivot,
     }
 }

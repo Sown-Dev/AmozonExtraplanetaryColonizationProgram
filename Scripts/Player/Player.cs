@@ -74,7 +74,6 @@ public partial class Player : Unit{
         SelectedSlot.Selected = true;
         
         handVisualizer.mySlot = SelectedSlot;
-        handVisualizer.Refresh();
     }
 
 

@@ -10,6 +10,7 @@ namespace Systems.Items{
         public void Init(ItemStack item){
             myItem = item;
             sr.sprite = item.item.icon;
+            transform.localPosition += new Vector3(Random.Range(-0.125f, 0.125f), Random.Range(-0.125f, 0.125f), 0);
         }
 
         public virtual ItemStack Collect(){

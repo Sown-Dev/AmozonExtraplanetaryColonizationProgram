@@ -2,11 +2,13 @@
 using UnityEngine;
 
 namespace Systems.Block.CustomBlocks{
-    public class DeepveinMinerBlock:ProgressMachineContainerBlock{
-        
+    public class DeepveinMinerBlock:ElectricProgressBlock{
+        public int miningTime = 50;
+        public int powerConsumption = 200;
         protected override void Awake(){
             base.Awake();
-            progressBar.maxProgress = 40;
+            progressBar.maxProgress = miningTime;
+            needed = powerConsumption;
         }
 
         public override bool CanProgress(){
@@ -15,10 +17,10 @@ namespace Systems.Block.CustomBlocks{
 
         public override void CompleteCycle(){
             base.CompleteCycle();
-            if(output.isEmpty()) return;
+            if(output.isFull()) return;
             
             ItemStack itemStack = new ItemStack(ItemManager.Instance.ores[Random.Range(0,ItemManager.Instance.ores.Count)], 1);
-            output.Insert(ref itemStack);
+            Insert(ref itemStack);
              
         }
     }

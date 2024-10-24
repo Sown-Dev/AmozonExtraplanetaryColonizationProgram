@@ -133,8 +133,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 0}
     name: Drill Base
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: 
     bso: {fileID: 0}
@@ -148,9 +152,10 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   outputProperties:
-    size: 4
+    size: 2
     name: out
     gridWidth: 2
     scaleDownGridIfSmaller: 0

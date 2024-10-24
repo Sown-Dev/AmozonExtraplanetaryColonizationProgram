@@ -107,8 +107,9 @@ public class Cursor : MonoBehaviour{
 
         lookingTerrain = TerrainManager.Instance.GetTerrain(currentPos);
     }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos(){
         Handles.Label(transform.position, cursorRotation.ToString());
     }
+#endif
 }

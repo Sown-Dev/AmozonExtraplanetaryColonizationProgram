@@ -74,6 +74,10 @@ namespace Systems.Block{
             
             
             bc.enabled = properties.collidable;
+
+            if (properties.myItem){
+                lootTable.Add(new ItemStack(properties.myItem, 1));
+            }
             
 
         }
@@ -119,8 +123,8 @@ namespace Systems.Block{
             if (dropLoot){
 
 
-                if (properties?.myItem != null)
-                    Utils.Instance.CreateItemDrop(new ItemStack(properties.myItem, 1), transform.position);
+                /*if (properties?.myItem != null)  We no longer do this. instead add itemdrop to loot table on init
+                    Utils.Instance.CreateItemDrop(new ItemStack(properties.myItem, 1));*/
                 foreach (ItemStack itemStack in lootTable){
                     Vector3 offset = new Vector3(UnityEngine.Random.Range(-0.125f, 0.125f), UnityEngine.Random.Range(-0.125f, 0.125f));
                     Utils.Instance.CreateItemDrop(itemStack, transform.position + offset);
@@ -155,11 +159,12 @@ namespace Systems.Block{
 
         public Action UpdateUI;
         
+#if UNITY_EDITOR
         void OnDrawGizmos() 
         {
             Handles.Label(transform.position, rotation.ToString());
         }
-        
+        #endif
     }
 
     public enum Orientation{
@@ -179,7 +184,7 @@ namespace Systems.Block{
                 case Orientation.Left:
                     return Vector2.left;
                 case Orientation.Right:
-                    return Vector2.right;
+                    return Vector2.right;    
                 default:
                     return Vector2.zero;
             }
@@ -242,7 +247,7 @@ namespace Systems.Block{
                 case Orientation.Left:
                     return 90;
                 case Orientation.Right: 
-                    return -90;
+                    return 270;
                 default:
                     return 0;
             }
@@ -284,12 +289,12 @@ namespace Systems.Block{
         public static Orientation next(this Orientation orientation){
             switch (orientation){
                 case Orientation.Up:
-                    return Orientation.Right;
-                case Orientation.Right:
-                    return Orientation.Down;
-                case Orientation.Down:
                     return Orientation.Left;
                 case Orientation.Left:
+                    return Orientation.Down;
+                case Orientation.Down:
+                    return Orientation.Right;
+                case Orientation.Right:
                     return Orientation.Up;
                 default:
                     return Orientation.Up;

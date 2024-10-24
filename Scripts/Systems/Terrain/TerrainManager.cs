@@ -380,7 +380,7 @@ public partial class TerrainManager : MonoBehaviour{
         if (tickTimer >= tickTime){
             tickTimer -= tickTime;
             totalTicksElapsed++;
-            foreach (TickingBlock tickingBlock in tickingBlocks){
+            foreach (TickingBlock tickingBlock in tickingBlocks.ToList()){  //tolist could be very bad. idk the performance impact, but need some way otherwise to destroy blocks at end frame
 
                 tickingBlock.Tick();
                 /*try{
@@ -407,7 +407,8 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
         Gizmos.color = Color.green;
-
+         if(blockLayer == null)
+             return;
         foreach (var pair in blockLayer.GetDictionary()){
             //Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.origin);
 

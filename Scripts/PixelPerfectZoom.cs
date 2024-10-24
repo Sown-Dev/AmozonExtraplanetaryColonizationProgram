@@ -31,6 +31,8 @@ public class PixelPerfectCameraZoom : MonoBehaviour{
 
 
     void Update(){
+        if(Time.timeScale <= 0) return;
+        
         if (Input.mouseScrollDelta.y != 0){
             // Determine the direction to zoom based on mouse scroll direction
             bool zoomIn = Input.mouseScrollDelta.y < 0;

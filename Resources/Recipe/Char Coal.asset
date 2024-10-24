@@ -25,4 +25,4 @@ MonoBehaviour:
   results:
   - item: {fileID: 11400000, guid: 732b2f58216f5854281079899f7baa01, type: 2}
     amount: 1
-  craftTime: 160
+  craftTime: 80
