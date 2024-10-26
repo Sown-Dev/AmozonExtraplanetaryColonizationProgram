@@ -2,10 +2,11 @@ using Systems.Items;
 using Systems.Round;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI{
-    public class UpgradeButton: MonoBehaviour{
+    public class UpgradeButton: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
         public UpgradeOffer myOffer;
         public TMP_Text priceText;
         public Image UpgradeImage;
@@ -38,5 +39,13 @@ namespace UI{
             
         }
 
+        public void OnPointerEnter(PointerEventData eventData){
+            
+            TooltipManager.Instance.Show(myOffer.upgrade.u, transform.position + new Vector3(0,-32), this.gameObject);
+        }
+
+        public void OnPointerExit(PointerEventData eventData){
+           TooltipManager.Instance.Hide();
+        }
     }
 }

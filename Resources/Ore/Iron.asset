@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df92101969073b4d92b9089f1f6b7a3, type: 3}
   m_Name: Iron
   m_EditorClassIdentifier: 
-  threshold: 0.87
+  threshold: 0.86
   scale: 0.16
   minAmount: 900
   maxAmount: 1600

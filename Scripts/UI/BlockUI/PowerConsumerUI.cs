@@ -20,6 +20,6 @@ public class PowerConsumerUI : MonoBehaviour
    }
    
    void Update(){
-       powerText.text = producer.providedPower + "W";
+       powerText.text =  producer.providedPower >0 ? $"{producer.providedPower}W/{producer.needed}W" : $"{producer.providedPower}W/{producer.needed}W";
    }
 }

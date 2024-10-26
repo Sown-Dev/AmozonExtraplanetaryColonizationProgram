@@ -15,7 +15,13 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c10d0bec08c828f468d44fb170e35437, type: 3}
   ingredients:
   - item: {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
-    amount: 5
+    amount: 4
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
+    name: 
+    icon: {fileID: 0}
   results:
   - item: {fileID: 11400000, guid: 4075fb42b6fde334c9757caddad4a6c6, type: 2}
     amount: 1

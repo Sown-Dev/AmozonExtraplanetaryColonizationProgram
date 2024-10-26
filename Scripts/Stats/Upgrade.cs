@@ -3,9 +3,8 @@ using Systems;
 using UnityEngine;
 
 [Serializable]
-public class Upgrade: ICloneable{
-    
-    public Sprite icon;
+public class Upgrade: ICloneable, IToolTippable{
+    [field:SerializeField]public string name{get;set;}
     
     public Stats stats;
 
@@ -21,4 +20,9 @@ public class Upgrade: ICloneable{
         clone.stats = (Stats) stats.Clone();
         return clone;
     }
+
+    
+    
+    [field:SerializeField]public string description{ get; set; }
+    [field:SerializeField]public Sprite icon{ get; set; }
 }

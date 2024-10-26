@@ -30,7 +30,7 @@ namespace Systems.Block.CustomBlocks{
         }
         
         public override StringBuilder GetDescription(){
-            return base.GetDescription().Append("\nConsumes: ").Append(baseUsage);
+            return base.GetDescription().AppendFormat("\nConsuming: {0}W/{1}W", providedPower, needed);
         }
 
         public override bool BlockDestroy(bool dropLoot = true){
@@ -46,11 +46,12 @@ namespace Systems.Block.CustomBlocks{
 
 
         public override bool CanMine(){
+            needed = baseUsage;
             if (myGrid == null){
                 return false;
             }
 
-            needed = 100;
+            needed = baseUsage;
             if (providedPower < needed){
                 return false;
             }

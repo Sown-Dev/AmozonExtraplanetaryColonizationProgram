@@ -52,6 +52,8 @@ public class RoundCompleteUI : MonoBehaviour{
         
         StartCoroutine(StartSequence(earn, time));
     }
+
+    private int totalBonus = 0;
     //coroutine to start each element in order
     IEnumerator StartSequence(int _earned, float _timeRemaining){
         //TODO play sound on each start
@@ -64,7 +66,7 @@ public class RoundCompleteUI : MonoBehaviour{
         yield return new WaitForSecondsRealtime(1f);
         lerpTime = true;
         yield return new WaitForSecondsRealtime(1.5f);
-        int totalBonus = realTimeBonus + RoundManager.Instance.currentContract.reward;
+        totalBonus = realTimeBonus + RoundManager.Instance.currentContract.reward;
 
         rewardText.text = $"Contract Reward: <color=#118811ff>${RoundManager.Instance.currentContract.reward}</color>";
         rewardCG.alpha = 1;
@@ -72,7 +74,6 @@ public class RoundCompleteUI : MonoBehaviour{
         totalCG.alpha = 1;
         totalText.text = $"Total Bonus:    <color=#118811ff>${totalBonus}</color>";
         
-        RoundManager.Instance.AddMoney( totalBonus, false);
         yield return new WaitForSecondsRealtime(1f);
         continueButton.interactable = true;
     }
@@ -124,14 +125,15 @@ public class RoundCompleteUI : MonoBehaviour{
     public void StartTime(float _timeRemaining){
         timeRemaining = _timeRemaining;
         toRemaining = 0;
-        realTimeBonus = (int)timeRemaining  * (RoundManager.Instance.roundNum+1);
+        realTimeBonus = (int)(timeRemaining)  * (RoundManager.Instance.roundNum+1);
         timeBonus = 0;
         
         timeCG.alpha = 1;
     }
 
     public void Continue(){
-        
+        RoundManager.Instance.AddMoney( totalBonus, false);
+
         ContractSelectUI ui = Instantiate(ContractSelectUIPrefab, transform.parent).GetComponent<ContractSelectUI>();
         ui.Init(RoundManager.Instance.GenerateNewContracts( 3));
        

@@ -134,7 +134,8 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 77b6ef5cfd14fdf41b4f3623b6f13055, type: 2}
     name: Induction Furnace
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
@@ -177,7 +178,7 @@ MonoBehaviour:
     gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
-  <needed>k__BackingField: 500
+  baseUsage: 400
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

@@ -205,7 +205,7 @@ namespace Systems.Round{
 
 // Select offers for logistics
             ShopOffer[] logisticsOffers = tierOffers
-                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Logistics)
+                .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Logistics) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier * 2))
                 .Take(logistics)
                 .ToArray();
@@ -214,7 +214,7 @@ namespace Systems.Round{
 // Select offers for electrical
 
             ShopOffer[] electricalOffers = tierOffers
-                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Electrical)
+                .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Electrical) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(electrical)
                 .ToArray();
@@ -222,7 +222,7 @@ namespace Systems.Round{
 
 // Select offers for refining
             ShopOffer[] refineOffers = tierOffers
-                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Refining)
+                .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Refining) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(refine)
                 .ToArray();
@@ -230,7 +230,7 @@ namespace Systems.Round{
 
 // Select offers for production
             ShopOffer[] productionOffers = tierOffers
-                .Where(t => (t.item as BlockItem)?.blockCategory == BlockCategory.Production)
+                .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Production) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(production)
                 .ToArray();

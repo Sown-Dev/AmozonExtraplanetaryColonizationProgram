@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
   m_Name: Crush Sand
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9bdf5a34518a1544db8afe168870d174, type: 3}
+  icon: {fileID: 21300000, guid: 481a073333d312b41a63ebe8806412ee, type: 3}
   ingredients:
   - item: {fileID: 11400000, guid: 36ed01c65fbe70c43a7cbefd9f55f92d, type: 2}
     amount: 1
@@ -25,4 +25,4 @@ MonoBehaviour:
   results:
   - item: {fileID: 11400000, guid: 38e206629554f554fad0036485653864, type: 2}
     amount: 1
-  craftTime: 40
+  craftTime: 80

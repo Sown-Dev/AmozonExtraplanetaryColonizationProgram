@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -134,8 +134,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: df6fb076cd291c44cadf57d46da5d5bf, type: 2}
     name: Electric Hammer
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 4, y: 2}
     description: 
     bso: {fileID: 0}
@@ -143,7 +147,6 @@ MonoBehaviour:
     baseSprite:
       sprites:
       - {fileID: 21300000, guid: 644dfee6c09f0c048a0417d3cbd02873, type: 3}
-      - {fileID: 21300000, guid: 373fb3c2de558874d83129bc03227c37, type: 3}
     rotateable: 0
     orientation: 0
     rotations: []
@@ -174,6 +177,7 @@ MonoBehaviour:
     gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
+  baseUsage: 40
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

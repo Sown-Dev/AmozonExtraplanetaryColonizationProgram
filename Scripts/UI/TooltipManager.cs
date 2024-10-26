@@ -103,9 +103,12 @@ namespace UI{
 
         Vector2 screenDimensions = new Vector2(640, 360);
 
-        public void Show(IToolTippable desc, Vector2 screenPosition, bool useOffset = true){
+        public void Show(IToolTippable desc, Vector2 screenPosition,GameObject caller, bool useOffset = true){
             OnShow(screenPosition, useOffset);
-
+            
+            if (caller){
+                tooltipCaller = caller;
+            }
 
             title.text = desc.name;
             description.text = desc.description;

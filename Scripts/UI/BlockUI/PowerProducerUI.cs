@@ -20,6 +20,6 @@ public class PowerProducerUI : MonoBehaviour
    }
    
    void Update(){
-       powerText.text = producer.producing + "W";
+       powerText.text =  producer.producing >0 ? $"{producer.producing}W" :$"{producer.producing}W";
    }
 }

@@ -653,20 +653,22 @@ MonoBehaviour:
   blocks:
   - {fileID: 11400000, guid: 96c7c17460afe15428ffb3d0c72e64f0, type: 2}
   - {fileID: 11400000, guid: 7bc9ff4621119434aafddd30fee4311c, type: 2}
+  - {fileID: 11400000, guid: 23117d005a935e74fbc8ecde9ddfaab7, type: 2}
   - {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
   - {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
   - {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
   - {fileID: 11400000, guid: a37c54c3baa1be041aad4e92846ef099, type: 2}
+  - {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
   - {fileID: 11400000, guid: 16a2a493e1d76bd46a74aaee6fa5d4ff, type: 2}
   - {fileID: 11400000, guid: 1fbd5bd4884329c4fbfbe38d925aaa89, type: 2}
   - {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
   - {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
   - {fileID: 11400000, guid: 07f6ffe6ad0a548458355c8af7792abb, type: 2}
   - {fileID: 11400000, guid: c66ca198aa4de6e47be6a6550ccb4f88, type: 2}
+  - {fileID: 11400000, guid: d30994e50df07ca42870d6d29369701a, type: 2}
   - {fileID: 11400000, guid: df6fb076cd291c44cadf57d46da5d5bf, type: 2}
   - {fileID: 11400000, guid: 7018090cc5e17fe428ee5fea18afcbf3, type: 2}
   - {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
-  - {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
   - {fileID: 11400000, guid: 77b6ef5cfd14fdf41b4f3623b6f13055, type: 2}
   - {fileID: 11400000, guid: 5061ab5c2fdeebe46bb2eda7fef02540, type: 2}
   - {fileID: 11400000, guid: eb77f476667c9cc45beb81cc499ee0aa, type: 2}
@@ -688,7 +690,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
   - {fileID: 11400000, guid: 570d7890fad5b1a43aa4c4321b3d6842, type: 2}
   - {fileID: 11400000, guid: ecd58e4f51e43064a90593c9da0698c5, type: 2}
-  - {fileID: 11400000, guid: 23117d005a935e74fbc8ecde9ddfaab7, type: 2}
   allOres: []
   ores: []
   burnables: []
@@ -1911,7 +1912,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 186, y: 72}
+  m_SizeDelta: {x: 186, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &329455794
 CanvasGroup:
@@ -2938,9 +2939,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.083333336
+    width: 0.5
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -3050,10 +3051,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1066179662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -4}
-  m_SizeDelta: {x: 0, y: 46}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 1, y: -6}
+  m_SizeDelta: {x: 6, y: -12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &522371132
 MonoBehaviour:
@@ -5944,11 +5945,11 @@ RectTransform:
   - {fileID: 522371131}
   m_Father: {fileID: 329455793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: 0}
-  m_SizeDelta: {x: 128, y: 60}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 24, y: -2.0000267}
+  m_SizeDelta: {x: -56, y: -8}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1155675248
 GameObject:
   m_ObjectHideFlags: 0
@@ -7757,7 +7758,7 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
     price: 35
     tier: 0
-    stock: 8
+    stock: 10
   - item: {fileID: 11400000, guid: eb77f476667c9cc45beb81cc499ee0aa, type: 2}
     price: 40
     tier: 0
@@ -7777,15 +7778,15 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: ecd58e4f51e43064a90593c9da0698c5, type: 2}
     price: 45
     tier: 0
-    stock: 3
+    stock: 4
   - item: {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
     price: 50
     tier: 0
     stock: 3
   - item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
-    price: 30
+    price: 32
     tier: 0
-    stock: 6
+    stock: 9
   - item: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
     price: 90
     tier: 1
@@ -7797,7 +7798,7 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
     price: 32
     tier: 1
-    stock: 5
+    stock: 25
   - item: {fileID: 11400000, guid: 478f0b9d2ac77a84a8f214e627aba144, type: 2}
     price: 200
     tier: 1
@@ -7815,7 +7816,7 @@ MonoBehaviour:
     tier: 1
     stock: 4
   - item: {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
-    price: 20
+    price: 10
     tier: 2
     stock: 60
   - item: {fileID: 11400000, guid: 1a087115b055a7d47af03e2f7cfe8b0b, type: 2}
@@ -7876,8 +7877,16 @@ MonoBehaviour:
     stock: 8
   - item: {fileID: 11400000, guid: 1fbd5bd4884329c4fbfbe38d925aaa89, type: 2}
     price: 50
-    tier: 1
+    tier: 0
     stock: 8
+  - item: {fileID: 11400000, guid: d30994e50df07ca42870d6d29369701a, type: 2}
+    price: 185
+    tier: 2
+    stock: 12
+  - item: {fileID: 11400000, guid: e994c3ac707134f46a2f4ea832717c10, type: 2}
+    price: 60
+    tier: 3
+    stock: 38
   upgrades:
   - {fileID: 11400000, guid: 859ad071fca8b6c4c85d9007172d0479, type: 2}
   - {fileID: 11400000, guid: 8a42a3c3bc7dba345a380c43fb699f15, type: 2}

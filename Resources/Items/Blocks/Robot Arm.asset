@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
   m_Name: Robot Arm
   m_EditorClassIdentifier: 
+  <description>k__BackingField: 
+  <icon>k__BackingField: {fileID: 21300000, guid: 28cdd17ab9bffa44cb5d96a7214ae320, type: 3}
   stackSize: 16
-  icon: {fileID: 21300000, guid: 0b846b2baa26da6418c6e3d6fcc280c6, type: 3}
   category: 2
   useCursor: 1
-  value: 0
-  tier: -1
+  value: 64
+  tier: 5
   fuelValue: 0
-  description: moves items between nearby inventories by rotating
   blockPrefab: {fileID: 4528264930813948543, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
   blockCategory: 1

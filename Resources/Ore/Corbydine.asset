@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df92101969073b4d92b9089f1f6b7a3, type: 3}
   m_Name: Corbydine
   m_EditorClassIdentifier: 
-  threshold: 0.85
-  scale: 0.4
+  threshold: 0.84
+  scale: 0.5
   minAmount: 300
   maxAmount: 500
   variance: 100

@@ -100,7 +100,7 @@ MonoBehaviour:
     destroyTime: 1
     ttFlags: 8
     size: {x: 1, y: 1}
-    description: 
+    description: Actuates nearby blocks when ran over by a minecart
     bso: {fileID: 0}
   currentState:
     baseSprite:

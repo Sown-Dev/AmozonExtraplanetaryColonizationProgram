@@ -12,14 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
   m_Name: Actuated Rail
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e135b8de360a9634abbea21685769131, type: 3}
+  icon: {fileID: 21300000, guid: 56f67a38895bf61468d8af112b7a6608, type: 3}
   ingredients:
   - item: {fileID: 11400000, guid: 649fe6bfda548aa438fe7eba8b2efd7d, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
     amount: 2
   - item: {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
-    amount: 8
+    amount: 1
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: 649fe6bfda548aa438fe7eba8b2efd7d, type: 2}
+    name: 
+    icon: {fileID: 0}
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
+    name: 
+    icon: {fileID: 0}
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
+    name: 
+    icon: {fileID: 0}
   results:
   - item: {fileID: 11400000, guid: 7bc9ff4621119434aafddd30fee4311c, type: 2}
     amount: 1

@@ -17,7 +17,7 @@ MonoBehaviour:
   stackSize: 16
   category: 2
   useCursor: 1
-  value: 24
+  value: 30
   tier: 1
   fuelValue: 0
   blockPrefab: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}

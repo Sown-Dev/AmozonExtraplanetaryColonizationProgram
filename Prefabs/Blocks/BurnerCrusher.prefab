@@ -5163,7 +5163,8 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
     name: BurnerCrusher
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
@@ -5196,6 +5197,7 @@ MonoBehaviour:
     recipes:
     - {fileID: 11400000, guid: fedf26971bfa3674e9b20b0e9c595d23, type: 2}
     - {fileID: 11400000, guid: 9dc977d2f813be44daec8dd420bbad5a, type: 2}
+    - {fileID: 11400000, guid: 4b802d3e047627c42a9666acfeaa8ec6, type: 2}
     - {fileID: 11400000, guid: 20d05e5b7c658074c922f075f4a2b202, type: 2}
     currentRecipe: {fileID: 0}
   inputProperties:

@@ -8,8 +8,10 @@ namespace Systems.Block.CustomBlocks{
         public Block myBlock => this;
         public IPowerConnector myConnector{ get; set; }
 
-        [field:SerializeField] public int needed{ get; set; } = 100;
+         public int needed{ get; set; } = 0;
         public int providedPower{ get; set; }
+
+        public int baseUsage = 100;
 
         public override void Init(Orientation orientation){
             base.Init(orientation);
@@ -38,11 +40,14 @@ namespace Systems.Block.CustomBlocks{
 
             return true;
         }
+        
+        public override void Tick(){
+            needed = CanCraft() ? baseUsage: 0;
+            base.Tick();
+        }
 
-
-
-        public override bool CanCraft(){
-            if (!base.CanCraft()){
+        public override bool CanProgress(){
+            if (!base.CanProgress()){
                 return false;
             }
             if (myGrid == null){
@@ -55,6 +60,10 @@ namespace Systems.Block.CustomBlocks{
 
             return true;
         }
+        
+
+
+       
 
      
     }
