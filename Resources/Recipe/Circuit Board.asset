@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
+  m_Name: Circuit Board
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 3f8d5c9b72086c24d9bd67313537e1e2, type: 3}
+  ingredients:
+  - item: {fileID: 11400000, guid: 205d652552f067a4db476edfeb821e82, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: a4afcbcd36681e24a83430c1ec1485e8, type: 2}
+    amount: 4
+  - item: {fileID: 11400000, guid: 4075fb42b6fde334c9757caddad4a6c6, type: 2}
+    amount: 2
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: 205d652552f067a4db476edfeb821e82, type: 2}
+    name: 
+    icon: {fileID: 0}
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: a4afcbcd36681e24a83430c1ec1485e8, type: 2}
+    name: 
+    icon: {fileID: 0}
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: 4075fb42b6fde334c9757caddad4a6c6, type: 2}
+    name: 
+    icon: {fileID: 0}
+  results:
+  - item: {fileID: 11400000, guid: aeea3c289d368ec429faf6a434e9884e, type: 2}
+    amount: 2
+  craftTime: 240
