@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: LootCrate
+      value: Old Crate
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b90ce2389b4709a4887aafeb9746e5e3, type: 3}
+      objectReference: {fileID: 21300000, guid: f2ecbd71268228540a3285393fe530e3, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -144,7 +144,7 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 0}
-    name: LootCrate
+    name: Old Crate
     indestructible: 0
     rotatable: 0
     invertRotation: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
     destroyTime: 1
     ttFlags: 0
     size: {x: 1, y: 1}
-    description: 
+    description: Contains random junk left behind by past visitors.
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -167,7 +167,143 @@ MonoBehaviour:
   rotation: 0
   tile: {fileID: 0}
   origin: {x: 0, y: 0}
-  drops: []
+  outputProperties:
+    size: 8
+    name: loot!
+    gridWidth: 4
+    scaleDownGridIfSmaller: 0
+    type: 0
+  drops:
+  - item:
+      item: {fileID: 11400000, guid: 66bc1101b67357444b94e68a451f0c08, type: 2}
+      amount: 1
+    chance: 0.15
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
+      amount: 1
+    chance: 0.15
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
+      amount: 2
+    chance: 0.01
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: c66de7e1e83f50e42a3d7fe6672055a7, type: 2}
+      amount: 1
+    chance: 0.05
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
+      amount: 8
+    chance: 0.1
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
+      amount: 2
+    chance: 0.1
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
+      amount: 10
+    chance: 0.12
+    tier: 2
+  - item:
+      item: {fileID: 11400000, guid: e994c3ac707134f46a2f4ea832717c10, type: 2}
+      amount: 2
+    chance: 0.1
+    tier: 3
+  - item:
+      item: {fileID: 11400000, guid: 08dc00519e6c18e4280f1a0008359605, type: 2}
+      amount: 1
+    chance: 0.1
+    tier: 3
+  - item:
+      item: {fileID: 11400000, guid: 1fbd5bd4884329c4fbfbe38d925aaa89, type: 2}
+      amount: 1
+    chance: 0.08
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
+      amount: 1
+    chance: 0.08
+    tier: 3
+  - item:
+      item: {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
+      amount: 2
+    chance: 0.08
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 96c7c17460afe15428ffb3d0c72e64f0, type: 2}
+      amount: 3
+    chance: 0.1
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 5ccfdc5997f0a674daba36a7e2378d92, type: 2}
+      amount: 2
+    chance: 0.11
+    tier: 1
+  - item:
+      item: {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
+      amount: 6
+    chance: 0.08
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 081f0a82a1910e44693054f6e1ed1284, type: 2}
+      amount: 4
+    chance: 0.07
+    tier: 1
+  - item:
+      item: {fileID: 11400000, guid: 732b2f58216f5854281079899f7baa01, type: 2}
+      amount: 4
+    chance: 0.05
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
+      amount: 2
+    chance: 0.08
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
+      amount: 1
+    chance: 0.08
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
+      amount: 3
+    chance: 0.06
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: 64fb303351946f04282aaad0b294ca91, type: 2}
+      amount: 5
+    chance: 0.05
+    tier: 2
+  - item:
+      item: {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
+      amount: 1
+    chance: 0.04
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: e46ad3c465c6dde4491f49ead6b4db40, type: 2}
+      amount: 2
+    chance: 0.02
+    tier: 3
+  - item:
+      item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
+      amount: 2
+    chance: 0.02
+    tier: 0
+  - item:
+      item: {fileID: 11400000, guid: c66ca198aa4de6e47be6a6550ccb4f88, type: 2}
+      amount: 2
+    chance: 0.04
+    tier: 3
+  - item:
+      item: {fileID: 11400000, guid: 23117d005a935e74fbc8ecde9ddfaab7, type: 2}
+      amount: 2
+    chance: 0.04
+    tier: 3
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

@@ -5141,10 +5141,14 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
     name: Extractor Chest
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 2, y: 1}
-    description: i am a block
+    description: extracts items from nearby inventories every few seconds.
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -5156,6 +5160,7 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   <baseSpeed>k__BackingField: 1
   outputProperties:

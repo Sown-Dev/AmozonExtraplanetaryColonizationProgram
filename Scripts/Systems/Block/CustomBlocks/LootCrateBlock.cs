@@ -7,51 +7,45 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Systems.Block.CustomBlocks{
-    public class LootCrateBlock: Block,IContainerBlock{
-        [HideInInspector] private List<ItemStack> loot;
-
+    public class LootCrateBlock:ContainerBlock{
+bool hasGenerated = false;
         public Drop[] drops;   
         //generation logic
         public void GenerateLoot(){
-            
+            if(hasGenerated) return;
+            hasGenerated = true;
             int lootAmount  = 2+Random.Range(0,3) + RoundManager.Instance.roundNum;
             
-            //add loot going from curent tier to 0
+            Utils.Shuffle(drops);
             drops.OrderBy( x => x.tier);
             
-            for (int i = drops.Length-1; i >= 0 && lootAmount>0; i--){
-                if(drops[i].tier>RoundManager.Instance.roundNum) continue;
-                
-                //if(Random.value<0.3f) continue; //random chance to skip
-                if (drops[i].chance < Random.value){
-                    ItemStack s = drops[i].item;
-                    loot.Add(s);
-                    lootAmount--;
+            //add loot going from curent tier to 0
+            while (lootAmount > 0){
+
+
+                for (int i = drops.Length - 1; i >= 0 && lootAmount > 0; i--){
+                    if (drops[i].tier > RoundManager.Instance.roundNum) continue;
+
+                    //if(Random.value<0.3f) continue; //random chance to skip
+                    if (drops[i].chance > Random.value){
+                        ItemStack s = drops[i].item;
+                        output.Insert(s);
+                        lootAmount--;
+                    }
                 }
+                
             }
-            
         }
         
         
         public override void Use(Unit user){
-            //base.Use(user)
-            BlockDestroy(false);
-            //ui 
-            foreach (ItemStack s in loot){
-                user.Inventory.Insert(s);
-            }
+            GenerateLoot();
+            base.Use(user);
         }
         
-        public bool Insert(ref ItemStack s, bool simulate = false){
-            if(!simulate && loot?.Count<32){ //dont want it to be infinite storage
-                loot.Add(s);
-                return true;
-            }
-
-            return false;
-        }
+        
         //Can't extract
-        public ItemStack Extract(){
+        public override ItemStack Extract(){
             return null;
         }
     }

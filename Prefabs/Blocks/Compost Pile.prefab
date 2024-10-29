@@ -157,8 +157,7 @@ MonoBehaviour:
     gridWidth: 1
     scaleDownGridIfSmaller: 1
     type: 0
-  CraftingFX:
-  - {fileID: 0}
+  CraftingFX: []
   recipeSelector:
     recipes:
     - {fileID: 11400000, guid: bf48785acf8dd9e4da71dec7f15d4ebb, type: 2}

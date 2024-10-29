@@ -103,14 +103,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8403949625327379415}
+      addedObject: {fileID: 5312898226386135576}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
 --- !u!1 &7047352849423587621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 4850456076238693850}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8403949625327379415
+--- !u!114 &5312898226386135576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,20 +119,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 7047352849423587621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a96ef7731336134aa18bdfafc8f4412, type: 3}
+  m_Script: {fileID: 11500000, guid: d627be612db651b4bb27070a8f3040e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8793023899972616217}
   bc: {fileID: 7679484945097419853}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 11400000, guid: 15e2e0242bf63674ca5a71295ba7a85e, type: 2}
+    <myItem>k__BackingField: {fileID: 0}
     name: Mixer
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
-    size: {x: 1, y: 2}
-    description: mixes things
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
+    size: {x: 1, y: 1}
+    description: 
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -144,23 +148,27 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
+  <baseSpeed>k__BackingField: 1
   outputProperties:
-    size: 8
-    name: Output
-    gridWidth: 4
-    scaleDownGridIfSmaller: 1
-    type: 0
-  inputProperties:
-    size: 1
-    name: Input
-    gridWidth: 4
-    scaleDownGridIfSmaller: 1
+    size: 0
+    name: 
+    gridWidth: 0
+    scaleDownGridIfSmaller: 0
     type: 0
   CraftingFX: []
   recipeSelector:
-    recipes: []
-    currentRecipe: {fileID: 11400000, guid: afae496122bde644fbe9c3f8ccd6bf84, type: 2}
+    recipes:
+    - {fileID: 0}
+    currentRecipe: {fileID: 0}
+  inputProperties:
+    size: 0
+    name: 
+    gridWidth: 0
+    scaleDownGridIfSmaller: 0
+    type: 0
+  baseUsage: 100
 --- !u!61 &7679484945097419853 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

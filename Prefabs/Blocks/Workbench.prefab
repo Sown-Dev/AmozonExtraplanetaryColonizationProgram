@@ -140,7 +140,7 @@ MonoBehaviour:
     destroyTime: 1
     ttFlags: 0
     size: {x: 1, y: 2}
-    description: 
+    description: Useful for basic carpentry. Crafts when actuated.
     bso: {fileID: 0}
   currentState:
     baseSprite:

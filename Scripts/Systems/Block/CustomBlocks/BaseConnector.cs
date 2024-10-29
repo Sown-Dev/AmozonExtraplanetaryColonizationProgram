@@ -231,9 +231,11 @@ namespace Systems.Block{
                 Gizmos.DrawSphere( (Vector2)origin, 0.25f);
             }
         }
-
-        public override List<Vector2> GetHighlights(){
-            return GetConnectorCoverage().Select(x => (Vector2)x).ToList();
+        public override List<TileIndicator> GetIndicators(){
+            var e = base.GetIndicators();
+            e.Add(new TileIndicator(GetConnectorCoverage().ToArray(), IndicatorType.PowerConnector));
+            e.Add( new TileIndicator(GetBlockCoverage(), IndicatorType.BlockPower));
+            return e;
         }
     }
 }

@@ -64,6 +64,8 @@ public partial class TerrainManager : MonoBehaviour{
     }
 
     public void SetWall(RuleTile tile, Vector3Int pos){
+        if(GetBlock((Vector2Int)pos) != null)
+            return;
         wallTilemap.SetTile(pos,tile);
     }
     

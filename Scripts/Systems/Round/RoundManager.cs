@@ -142,6 +142,10 @@ namespace Systems.Round{
 
             return false;
         }
+        
+        public void AddTime(float time){
+            roundTime += time;
+        }
 
 
         bool roundComplete;

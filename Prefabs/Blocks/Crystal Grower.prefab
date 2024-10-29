@@ -152,10 +152,11 @@ MonoBehaviour:
   bc: {fileID: 7454480620947731815}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 0}
+    <myItem>k__BackingField: {fileID: 11400000, guid: 07f6ffe6ad0a548458355c8af7792abb, type: 2}
     name: Crystal Grower
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
@@ -193,7 +194,7 @@ MonoBehaviour:
     gridWidth: 3
     scaleDownGridIfSmaller: 1
     type: 0
-  <needed>k__BackingField: 100
+  baseUsage: 40
 --- !u!212 &8640077656265709875 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8793023899972616217, guid: 2b61cfb4d5a444648a434f62d1d2cfbf, type: 3}

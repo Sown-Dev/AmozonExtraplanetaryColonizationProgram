@@ -145,7 +145,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 11400000, guid: c66ca198aa4de6e47be6a6550ccb4f88, type: 2}
     name: Deep Vein Miner
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
+    actuatable: 0
+    collidable: 1
+    destroyTime: 1
+    ttFlags: 0
     size: {x: 3, y: 3}
     description: Mines random material from below the planet's crust
     bso: {fileID: 0}
@@ -159,6 +164,7 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
   <baseSpeed>k__BackingField: 2
   outputProperties:
@@ -167,6 +173,8 @@ MonoBehaviour:
     gridWidth: 4
     scaleDownGridIfSmaller: 0
     type: 0
+  miningTime: 50
+  powerConsumption: 120
 --- !u!61 &1027843380165983958 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

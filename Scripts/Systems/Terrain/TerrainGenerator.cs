@@ -39,6 +39,7 @@ public partial class TerrainManager{
         //Start by placing important blocks first, so their positions can't be occupied
 
         PlaceBlock(SellBlock, new Vector2Int(0, 1));
+        PlaceBlock(LootCrate, new Vector2Int(Random.Range(-4, 4), -1));
 
 #if ALLITEMS1
         PlaceBlock(BigCrate, new Vector2Int(0, -4));
@@ -122,7 +123,7 @@ public partial class TerrainManager{
                         }
                     }
 
-                    if (((perlin2 * perlin2 < 0.32f && perlin2 > 0.03f) || (perlin1 < 0.25f && perlin2 < 0.42f)) &&
+                    if (((perlin2 * perlin2 < 0.35f && perlin2 > 0.03f) || (perlin1 < 0.25f && perlin2 < 0.42f)) &&
                         perlin3 > 0.25f){
                         SetWall(rockWall, (Vector3Int)position);
                     }
@@ -163,6 +164,11 @@ public partial class TerrainManager{
         for (int i = 0; i < 600; i++){
             Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
             if (!IsWall((Vector3Int)pos)){
+                if( Random.value < 0.06f){
+                    PlaceBlock(LootCrate, pos);
+                    continue;
+                }
+                
                 if (GetTerrain(pos).myProperties == Grass){
                     PlaceBlock(Tree, pos);
                 }
@@ -175,6 +181,8 @@ public partial class TerrainManager{
                 }
             }
         }
+        
+        
 
         for (int i = 0; i < 20; i++){
             Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));

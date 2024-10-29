@@ -5170,7 +5170,7 @@ MonoBehaviour:
     destroyTime: 1
     ttFlags: 4
     size: {x: 2, y: 2}
-    description: Smelts using corbydine
+    description: Smelts using fuel
     bso: {fileID: 0}
   currentState:
     baseSprite:

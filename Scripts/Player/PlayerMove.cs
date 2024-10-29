@@ -15,6 +15,7 @@ public partial class Player : Unit{
     [SerializeField] private Animator am;
     [SerializeField] private Transform highlights;
     [SerializeField] private GameObject Invalid;
+    [SerializeField] private TileIndicatorManager indicatorManager;
 
     private float moveV = 4600f;
     public float jumpVelocity = 10f; // The initial velocity applied when jumping   
@@ -111,14 +112,13 @@ public partial class Player : Unit{
 
                 
             
-            //TODO: OPTIMIZE THIS AND OVERALL REORGANIZE CURSOR LOGIC
-            foreach (Transform child in highlights.transform){
-                Destroy(child.gameObject);
+           
+            //indicators
+            if (block.blockPrefab.GetIndicators()?.Count > 0){
+                indicatorManager.DrawIndicators(block.blockPrefab.GetIndicators(), myCursor.currentPos);
             }
-            if (block.blockPrefab.GetHighlights()?.Count > 0){
-                Utils.Instance.GenerateHighlights(myCursor.currentPos, block.blockPrefab.GetHighlights(), highlights);
-            }
-
+            
+            //invalid
             foreach (var v2 in TerrainManager.Instance.GetBlockPositions(myCursor.currentPos, block.blockPrefab.properties.size.x, block.blockPrefab.properties.size.y)){
                 if (TerrainManager.Instance.GetBlock(v2) != null || TerrainManager.Instance.IsWall((Vector3Int)v2)){
                     GameObject go = Instantiate(Invalid, highlights);

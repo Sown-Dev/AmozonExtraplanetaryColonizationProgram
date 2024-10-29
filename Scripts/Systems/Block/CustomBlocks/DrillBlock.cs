@@ -65,9 +65,12 @@ namespace Systems.Block{
             return false;
         }
 
-        public override List<Vector2> GetHighlights(){
-            return DrillPositions.ConvertAll(pos => (Vector2)pos + (Vector2)origin);
+        public override List<TileIndicator> GetIndicators(){
+            var e = base.GetIndicators();
+            e.Add(new TileIndicator(DrillPositions.ToArray(), IndicatorType.Mining));
+            return e;
         }
+
     }
     
 }

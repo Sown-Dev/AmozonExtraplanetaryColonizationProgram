@@ -178,7 +178,7 @@ MonoBehaviour:
     gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
-  baseUsage: 400
+  baseUsage: 200
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

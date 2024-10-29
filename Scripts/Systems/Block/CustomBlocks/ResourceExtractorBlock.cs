@@ -50,9 +50,9 @@ namespace Systems.Block.CustomBlocks{
 
             return null;
         }
-        
-        public override List<Vector2> GetHighlights(){
-            return ExtractPositions.ConvertAll(pos => (Vector2)pos + (Vector2)origin);
+        public override List<TileIndicator> GetIndicators(){
+            
+            return new List<TileIndicator>(){ new TileIndicator(ExtractPositions.ToArray(), IndicatorType.Extracting)};
         }
 
         
