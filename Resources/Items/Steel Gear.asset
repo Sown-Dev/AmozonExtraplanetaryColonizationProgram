@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Steel Gear
   m_EditorClassIdentifier: 
   <description>k__BackingField: Useful for machinery
-  <icon>k__BackingField: {fileID: 21300000, guid: 04687d25c2036db409ef23f0b9a07b39, type: 3}
+  <icon>k__BackingField: {fileID: 21300000, guid: 5ac24a26364dfd645a2be2990fbcf38c, type: 3}
   stackSize: 32
   category: 1
   useCursor: 0

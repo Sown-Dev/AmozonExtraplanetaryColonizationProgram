@@ -27,6 +27,8 @@ namespace UI{
                 icon.sprite = block.sr.sprite;
                 icon.SetNativeSize();
                 layoutElement.ignoreLayout = false;
+                Canvas.ForceUpdateCanvases();
+
             }
             else{
                 cg.alpha = 0;

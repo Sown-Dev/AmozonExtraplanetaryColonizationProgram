@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Tutorial_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 58620fda1284ca84692a21dd50a8a090, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 18635087872
+    m_Localized: Welcome to your first day on the job! To get started, make sure
+      to stretch your legs and move around a bit. Light exercise will reduce the
+      effects of cryosleep hangover. (Press Space to continue)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 570840375296
+    m_Localized: Use WASD (default) to move around. You can jump over blocks using
+      Space, but not over walls.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 699018305536
+    m_Localized: 'You can interact with blocks in many ways. Right clicking will
+      interact with a block, which will usually open the block''s UI. You can also
+      hold X to break blocks and ores. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46420572561408
+    m_Localized: Pressing tab will open your inventory. You can move items by dragging
+      them. Pressing 1-8 will select slots in your hotbar to be used, but you can
+      also middle mouse click any slot to select it in your hand. Left clicking uses
+      your currently held item.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67889717370880
+    m_Localized: 'Here at Amozon, your primary goal is always the same: generate
+      profit. To do so, '
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -13,6 +13,7 @@ public interface IPowerBlock{
 
 public interface IPowerProducer: IPowerBlock{
     public int producing{get; set; }
+    public int maxProduction{ get; set; }
     public bool neededOn{ get; set; }
 }
 
@@ -20,6 +21,12 @@ public interface IPowerConsumer: IPowerBlock{
     public int needed{ get; set; }
     public int providedPower{ get; set; }//power that the block has. is set outside but only used internally
 }
+
+public interface IPowerBattery: IPowerBlock{
+    public int capacity{ get; set; }
+    public int storedPower{ get; set; }
+}
+
 public interface IPowerConnector{
     public int Priority{ get; }
     public Block myBlock{ get; }

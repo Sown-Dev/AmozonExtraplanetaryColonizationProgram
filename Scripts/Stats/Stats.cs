@@ -6,6 +6,7 @@ using System.Linq;
 public enum Statstype{
     InventorySlots=1,
     Movespeed=2,
+    MiningSpeed=3,
 }
 
 [Serializable]

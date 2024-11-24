@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867aba9949ccf1244bf2f66f76499b8c, type: 3}
+  m_Name: Worker
+  m_EditorClassIdentifier: 
+  description: It's my first day on the job!
+  startingItems:
+  - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
+    amount: 12
+  - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
+    amount: 4
+  startingUpgrades: []
+  portrait: {fileID: 21300000, guid: 91464c34a145f244ca691f42b99d7b17, type: 3}
+  shirtColor: {r: 0, g: 0, b: 0, a: 0}
+  pantsColor: {r: 0, g: 0, b: 0, a: 0}
+  skinColor: {r: 0, g: 0, b: 0, a: 0}

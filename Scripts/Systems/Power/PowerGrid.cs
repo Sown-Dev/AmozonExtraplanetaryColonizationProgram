@@ -9,46 +9,93 @@ public class PowerGrid{
     public int size{
         get{ return blocks.Count + connectors.Count; }
     }
-
-
-    private int id = 0;
-
+    
+    
+    //local vars
+    
+    //stored power and max capacity
+    public int capacity;
+    public float storedPower;
+    
+    //production and max production
+    public int producing;
+    public int productionCapacity;
+    
+    //consumption and max consumption (if we don't have enough power we have less consumption than max)
+    public int consuming;
+    public int powerNeeded;
+    
+    private int id = 0; // an unnecessary id. it is only used for debugging as it allows serialized representations to be unique
     public PowerGrid(){
         blocks = new List<IPowerBlock>();
         connectors = new List<IPowerConnector>();
         TerrainManager.Instance.powerGrids.Add(this);
         id = Random.Range(0, 6000);
+        capacity = 0;
+        storedPower = 0;
     }
-    
-
-    public int totalPower;
-    public int availablePower;
 
     public void GridTick(){
-        totalPower = 0;
-        int powerNeeded = 0;
+        producing = 0; //how much power we are producing
+        powerNeeded = 0; //how much power we need
+        consuming = 0; //keeps track of how much power we are consuming. can be seperate from needs if we are overconsuming
         
         foreach (IPowerConsumer block in blocks.OfType<IPowerConsumer>()){
             powerNeeded += block.needed;
         }
         
         foreach (IPowerProducer generator in blocks.OfType<IPowerProducer>().OrderBy(x => x.Priority)){
-            generator.neededOn = totalPower < powerNeeded;
+            generator.neededOn = producing < powerNeeded;
             //idea: could maybe put a function in between here that lets us get our power production based on whether we need it or not
-            totalPower += generator.producing;
-
+            producing += generator.producing;
         }
+        int remainingPower = producing; //we use this to keep track of how much power we have left to give to consumers, but still need to keep track of how much power we produce
 
-        availablePower = totalPower;
+
+        if (producing > powerNeeded){
+            //add difference to stored power
+            StorePower(producing - powerNeeded, Time.deltaTime);
+            remainingPower-= producing - powerNeeded;
+        }
+        if(producing < powerNeeded){
+            //use stored power
+            UsePower(powerNeeded - producing, Time.deltaTime);
+            remainingPower+= powerNeeded - producing;
+        }
+        
+
         foreach (IPowerConsumer block in blocks.OfType<IPowerConsumer>()){
-            if (availablePower >= block.needed){
+            if (remainingPower>= block.needed){
                 block.providedPower = block.needed;
-                availablePower -= block.needed;
+                remainingPower-= block.needed;
+                consuming += block.needed;
             }
             else{
-                block.providedPower = availablePower;
-                availablePower = 0;
+                block.providedPower = remainingPower;
+                consuming += remainingPower;
+                remainingPower = 0;
             }
+        }
+        
+        
+    }
+    
+    public void StorePower(int power, float deltaTime){
+        storedPower += power*deltaTime;
+        if (storedPower > capacity){
+            storedPower = capacity;
+        }
+    }
+    
+    public int UsePower(int power, float deltaTime){
+        if (storedPower >= power){
+            storedPower -= power*deltaTime;
+            return power;
+        }
+        else{
+            int usedPower = (int)storedPower;
+            storedPower = 0;
+            return usedPower;
         }
     }
 
@@ -60,6 +107,10 @@ public class PowerGrid{
         block.myGrid?.RemoveBlock(block); //remove from old grid if any
         blocks.Add(block);
         block.myGrid = this;
+        if(block is IPowerBattery battery){
+            capacity += battery.capacity;
+            storedPower += battery.storedPower;
+        }
     }
 
     public void AddConnector(IPowerConnector connector){
@@ -72,6 +123,11 @@ public class PowerGrid{
     public void RemoveBlock(IPowerBlock block){
         blocks.Remove(block);
         block.myGrid = null;
+        if(block is IPowerBattery battery){
+            capacity -= battery.capacity;
+            int powerTransfer = UsePower((int)  storedPower/capacity*battery.capacity, Time.deltaTime);
+            battery.storedPower = powerTransfer;
+        }
     }
 
     public void RemoveConnector(IPowerConnector connector){

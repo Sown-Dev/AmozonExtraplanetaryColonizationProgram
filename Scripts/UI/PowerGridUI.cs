@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +12,14 @@ namespace UI{
 
         public VerticalLayoutGroup consumerList;
         public VerticalLayoutGroup producerList;
+
+        public TMP_Text producing;
+        public TMP_Text consuming;
+        public TMP_Text stored;
+        
+        public SlicedFilledImage producingBar;
+        public SlicedFilledImage storedBar;
+        public SlicedFilledImage consumingBar;
 
         public void Init(PowerGrid g){
             myGrid = g;
@@ -26,6 +36,19 @@ namespace UI{
             }
         
         
+        }
+
+        private void Update(){
+            
+            producing.text = myGrid.producing + "W/" + myGrid.productionCapacity + "W";
+            consuming.text = myGrid.consuming + "W/" + myGrid.powerNeeded + "W";
+            stored.text = myGrid.storedPower + "W/" + myGrid.capacity + "W";
+
+            producingBar.fillAmount = myGrid.producing>0?(float)myGrid.producing / myGrid.productionCapacity:0;
+            storedBar.fillAmount = myGrid.storedPower / myGrid.capacity;
+            consumingBar.fillAmount =myGrid.consuming>0 ? (float)myGrid.consuming / myGrid.powerNeeded : 0;
+
+
         }
     }
 }

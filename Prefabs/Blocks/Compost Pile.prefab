@@ -136,7 +136,7 @@ MonoBehaviour:
     destroyTime: 1
     ttFlags: 0
     size: {x: 2, y: 2}
-    description: Slowly turns wood into biomass
+    description: Slowly turns organic matter into biomass
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -161,6 +161,7 @@ MonoBehaviour:
   recipeSelector:
     recipes:
     - {fileID: 11400000, guid: bf48785acf8dd9e4da71dec7f15d4ebb, type: 2}
+    - {fileID: 11400000, guid: 1df977b491c0a19458910a8b0b6ccfac, type: 2}
     currentRecipe: {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
   inputProperties:
     size: 2

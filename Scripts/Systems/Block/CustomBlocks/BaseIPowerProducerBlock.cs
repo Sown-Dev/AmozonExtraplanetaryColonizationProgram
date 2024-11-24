@@ -4,6 +4,7 @@ using Systems.Block.CustomBlocks;
 
 public class BaseIPowerProducerBlock: BaseIPowerBlock, IPowerProducer{
     public int producing{ get; set; }
+    public int maxProduction{ get; set; }
     public bool neededOn{ get; set; }
 
     public int baseRate = 50;

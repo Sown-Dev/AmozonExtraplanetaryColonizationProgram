@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crate
   m_EditorClassIdentifier: 
   <description>k__BackingField: 
-  <icon>k__BackingField: {fileID: 21300000, guid: 9b98c85daf607b943b5d1a7acfc1dcfb, type: 3}
+  <icon>k__BackingField: {fileID: 21300000, guid: b5ceab370a772a24c83fdebc77d21710, type: 3}
   stackSize: 16
   category: 2
   useCursor: 1

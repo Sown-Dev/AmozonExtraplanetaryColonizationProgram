@@ -1,4 +1,3 @@
-
 using System;
 using Systems.Block;
 using Systems.Items;
@@ -11,81 +10,85 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Terrain = Systems.Terrain.Terrain;
 
-public class Cursor : MonoBehaviour{
+public class Cursor : MonoBehaviour
+{
     public static Cursor Instance;
-    
-   [SerializeField] public SpriteRenderer buildingPreview;
 
-[SerializeField]public SpriteRenderer sr;
-[SerializeField] public SpriteRenderer directionArrow;
-    
-    
-    public UnityEvent<Vector2Int> OnClick;
+    [SerializeField] public SpriteRenderer buildingPreview;
+    [SerializeField] public SpriteRenderer sr;
+    [SerializeField] public SpriteRenderer directionArrow;
+
+    [FormerlySerializedAs("OnClick")] public UnityEvent<Vector2Int> OnLeftClick;
     public UnityEvent<Vector2Int> OnRightClick;
+    public UnityEvent<Vector2Int> OnCTRLClick;
 
     private Vector2Int lastPos;
     public Vector2Int currentPos;
 
     public Orientation cursorRotation;
-    
+
     public Block lookingBlock;
     public Ore lookingOre;
 
     public Terrain lookingTerrain;
 
-    //public Transform player;
-
-    private void Awake(){
+    private void Awake()
+    {
         Instance = this;
     }
 
     void Update()
     {
-        if(CursorManager.Instance.uiDepth > 0) return;
-        
-        currentPos=Vector2Int.RoundToInt( Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        // Update current position based on mouse position
+        currentPos = Vector2Int.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-       /* int range = 8;
-        //set pos in range of player pos +- range
-        Vector2Int playerPos = Vector2Int.RoundToInt(player.position); // player is a transform field
-        currentPos.x = Mathf.Clamp(currentPos.x, playerPos.x - range, playerPos.x + range);
-        currentPos.y = Mathf.Clamp(currentPos.y, playerPos.y - range, playerPos.y + range);*/
-        
-        
-        
-        if (currentPos!=lastPos){
-            Refresh();
-        }
-        
-        //TODO: fix placing while dragging (maybe make it only work if the original click was not on ui, swtich to onmousedown, and use my own bool)
-        if(EventSystem.current.IsPointerOverGameObject()|| EventSystem.current.IsInvoking()) return;
-        
-        if (Input.GetMouseButtonDown(0)){
-            OnClick.Invoke( Vector2Int.RoundToInt(currentPos));
+        // Refresh cursor state if position has changed
+        if (currentPos != lastPos)
+        {
             Refresh();
         }
 
-        if (Input.GetMouseButtonDown(1)){
-            OnRightClick.Invoke( Vector2Int.RoundToInt(currentPos));
+        // Check if the pointer is over a UI element
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        // Handle mouse clicks
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                OnCTRLClick.Invoke(currentPos);
+            }
+            else
+            {
+                OnLeftClick.Invoke(currentPos);
+            }
             Refresh();
         }
-        if(Input.GetKeyDown(KeyCode.R)){
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            OnRightClick.Invoke(currentPos);
+            Refresh();
+        }
+
+        // Rotate cursor with the R key
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             cursorRotation = cursorRotation.next();
             Debug.Log(cursorRotation.GetAngle());
         }
-       
 
-        //rotate in 2d
-        // Get the current rotation (as a quaternion) and the target rotation angle
+        // Smoothly rotate the direction arrow
         Quaternion currentRotation = directionArrow.transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 0, cursorRotation.GetAngle());
-
-// Slerp between the current rotation and the target rotation
         directionArrow.transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * 24f);
-
     }
 
-    void Refresh(){
+    void Refresh()
+    {
         transform.position = (Vector2)currentPos;
         lastPos = currentPos;
 
@@ -95,20 +98,20 @@ public class Cursor : MonoBehaviour{
 
         lookingOre = TerrainManager.Instance.GetOre(currentPos);
         if (lookingOre != null)
+        {
             OreInfoUI.Instance.Select(lookingOre);
-        else{
+        }
+        else
+        {
             OreInfoUI.Instance.Deselect();
         }
 
-
-
-
-
-
         lookingTerrain = TerrainManager.Instance.GetTerrain(currentPos);
     }
+
 #if UNITY_EDITOR
-    private void OnDrawGizmos(){
+    private void OnDrawGizmos()
+    {
         Handles.Label(transform.position, cursorRotation.ToString());
     }
 #endif

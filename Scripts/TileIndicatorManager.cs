@@ -7,7 +7,7 @@ using UnityEngine;
 public class TileIndicatorManager : MonoBehaviour{
 
     public Transform indicatorList;
-
+    public float indicatorAlpha = 0.5f;
 
     public GameObject[] prefabs; // ordered by IndicatorType
     
@@ -41,19 +41,22 @@ public class TileIndicatorManager : MonoBehaviour{
                 case IndicatorType.Extracting:
                     //check if resourceblock
                     bool isResource = TerrainManager.Instance.GetBlock(myPos) is ResourceBlock;
-                    sr.color = isResource ? Color.green : Color.red;
+                    sr.color = isResource ?  new Color(0.2f, 0.8f,0.4f): new Color(0.4f, 0.2f,0.2f);
                     break;
                 case IndicatorType.BlockPower:
-                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IPowerBlock ? Color.green : Color.yellow;
+                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IPowerBlock ? new Color(0.5f, 0.9f,0.1f): new Color(
+                        0.9f, 0.7f, 0.3f);
                     break;
                 case IndicatorType.PowerConnector:
-                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IPowerConnector ? Color.green : Color.yellow;
+                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IPowerConnector ? Color.green : new Color(
+                        0.9f, 0.7f, 0.3f);
                     break;
                 default:
 
                     break;
 
             }
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, indicatorAlpha);
         }
     }
 }

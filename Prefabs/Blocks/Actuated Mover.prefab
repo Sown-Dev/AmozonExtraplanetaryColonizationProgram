@@ -157,9 +157,9 @@ MonoBehaviour:
     destroyTime: 1
     ttFlags: 8
     size: {x: 1, y: 1}
-    description: 'When Actuated, this contraption will move its item to the forward
+    description: When Actuated, this contraption will move its item to the forward
       container, and extract from the previous. It also Actuates those blocks, allowing
-      them to be daisy chained. See [Wind Actuator]'
+      them to be chained.
     bso: {fileID: 0}
   currentState:
     baseSprite:

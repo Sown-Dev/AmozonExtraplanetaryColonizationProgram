@@ -149,6 +149,9 @@ public partial class Player : Unit{
             myCursor.directionArrow.gameObject.SetActive(false);
         }
 
+        
+        
+        //Destroying Blocks
 
         if (myCursor.currentPos != lastPos){
             lastPos = myCursor.currentPos;
@@ -156,7 +159,9 @@ public partial class Player : Unit{
         }
 
         if (Input.GetKey(KeyCode.X) && Vector2.Distance(transform.position, myCursor.currentPos) < 8){
-            if (TerrainManager.Instance.GetBlock(myCursor.currentPos) != null){
+            if ( TerrainManager.Instance.GetBlock(myCursor.currentPos)  != null){
+                destroyDuration = TerrainManager.Instance.GetBlock(myCursor.currentPos).properties.destroyTime *
+                               baseDestroyDuration * finalStats[Statstype.MiningSpeed];
                 if (!TerrainManager.Instance.GetBlock(myCursor.currentPos)?.properties.indestructible ?? false){
                     move = Vector2.zero;
                     destroyTimer += Time.deltaTime;
@@ -167,6 +172,7 @@ public partial class Player : Unit{
                 }
             }
             else if (TerrainManager.Instance.GetOre(myCursor.currentPos) != null){
+                destroyDuration = baseDestroyDuration * finalStats[Statstype.MiningSpeed];
                 move = Vector2.zero;
                 destroyTimer += Time.deltaTime;
                 if (destroyTimer > destroyDuration){
@@ -188,6 +194,7 @@ public partial class Player : Unit{
     }
 
     [HideInInspector] public float destroyTimer = 0;
-    public float destroyDuration = 0.4f;
+    [HideInInspector] public float destroyDuration;
+    float baseDestroyDuration = 0.5f;
     Vector2Int lastPos;
 }

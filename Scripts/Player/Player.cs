@@ -23,8 +23,9 @@ public partial class Player : Unit{
     protected override void Awake(){
         base.Awake();
         Instance = this;
-        myCursor.OnClick.AddListener(ClickPos);
+        myCursor.OnLeftClick.AddListener(ClickPos);
         myCursor.OnRightClick.AddListener(RightClickPos);
+        myCursor.OnCTRLClick.AddListener(CTRLClickPos);
         SelectSlot(Inventory.GetSlot(0)); 
         Inventory.AddOnInsert(OnInsert);
     }
@@ -39,13 +40,7 @@ public partial class Player : Unit{
     }
 
     private void Start(){
-        Inventory.Insert(new ItemStack(Utils.Instance.drillBlock, 1));
-        Inventory.Insert(new ItemStack(Utils.Instance.inserterBlock, 3));
-        Inventory.Insert(new ItemStack(Utils.Instance.crateBlock, 1));
-
-        Inventory.Insert(new ItemStack(Utils.Instance.conveyor, 12));
-
-
+        
 #if ALLITEMS1
         Inventory.Insert(new ItemStack(Utils.Instance.furnaceBlock, 12));
         Inventory.Insert(new ItemStack(Utils.Instance.drillBlock, 12));
@@ -81,10 +76,22 @@ public partial class Player : Unit{
         SelectedSlot.ItemStack?.item.Use(pos, this, SelectedSlot);
     }
 
+   
     private void RightClickPos(Vector2Int pos){
         if (Vector2.Distance(pos, transform.position) > 12f)
             return;
         TerrainManager.Instance.GetBlock(pos)?.Use(this);
+    }
+    private void CTRLClickPos(Vector2Int pos){
+        Debug.Log("ctrl click");
+        if (Vector2.Distance(pos, transform.position) > 12f)
+            return;
+        if(        TerrainManager.Instance.GetBlock(pos) is IContainerBlock containerBlock){
+            //extract to my inventory
+            bool b = true;
+            while(b)
+             b=CU.Transfer(containerBlock, Inventory);
+        }
     }
 
     public void Die(){

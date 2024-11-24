@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867aba9949ccf1244bf2f66f76499b8c, type: 3}
+  m_Name: Analyst
+  m_EditorClassIdentifier: 
+  description: Always double check!
+  startingItems:
+  - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
+    amount: 3
+  startingUpgrades: []
+  portrait: {fileID: 0}
+  shirtColor: {r: 0, g: 0, b: 0, a: 0}
+  pantsColor: {r: 0, g: 0, b: 0, a: 0}
+  skinColor: {r: 0, g: 0, b: 0, a: 0}
