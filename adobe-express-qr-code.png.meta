@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      adobe-express-qr-code_0: 7670298371381907352
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

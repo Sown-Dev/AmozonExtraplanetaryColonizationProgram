@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TorqueProvider_0: -3309085021557440751
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

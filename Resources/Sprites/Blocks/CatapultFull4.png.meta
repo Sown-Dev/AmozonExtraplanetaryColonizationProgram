@@ -180,7 +180,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CatapultFull4_0: 4724351087182807235
+      CatapultFull4_1: 3977192413804302023
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

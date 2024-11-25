@@ -300,7 +300,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GameOver_0: -6899527831451061053
+      GameOver_1: 4804125648906539500
+      GameOver_2: -263511437403757397
+      GameOver_3: -7739051205162100772
+      GameOver_4: -7782269141841453749
+      GameOver_5: 2417089973929048815
+      GameOver_6: -8195210154822383127
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

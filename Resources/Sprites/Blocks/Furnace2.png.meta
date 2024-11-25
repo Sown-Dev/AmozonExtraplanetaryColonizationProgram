@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Furnace2_0: 6841671815650732596
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

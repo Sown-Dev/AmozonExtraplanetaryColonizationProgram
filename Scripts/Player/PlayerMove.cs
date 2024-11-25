@@ -18,6 +18,7 @@ public partial class Player : Unit{
     [SerializeField] private TileIndicatorManager indicatorManager;
 
     private float moveV = 4600f;
+    private float maxSpeed = 10f;
     public float jumpVelocity = 10f; // The initial velocity applied when jumping   
     public float gravity = -32; // Gravity applied to the player
     private float yVelocity = 0f; // Current vertical velocity of the player
@@ -195,6 +196,6 @@ public partial class Player : Unit{
 
     [HideInInspector] public float destroyTimer = 0;
     [HideInInspector] public float destroyDuration;
-    float baseDestroyDuration = 0.5f;
+    float baseDestroyDuration = 1f;
     Vector2Int lastPos;
 }

@@ -180,7 +180,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Corbydine Ore_0: 8376991738865812281
+      Corbydine Ore_1: 4656541503276209543
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

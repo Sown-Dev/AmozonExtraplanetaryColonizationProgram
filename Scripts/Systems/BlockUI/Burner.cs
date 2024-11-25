@@ -37,7 +37,7 @@ public class Burner : IBlockUI, IContainer{
     
     public void Init(){
         fuelContainer = new Container(properties);
-        fuelContainer.filterList = ItemManager.Instance.burnables.ToList();
+        try{fuelContainer.filterList = ItemManager.Instance.burnables.ToList();}catch(Exception e){}
         fuelContainer.blackList = false;
         burnTimeTotal = 20;
         fuelTime = 0;
