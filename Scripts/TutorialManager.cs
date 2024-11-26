@@ -41,7 +41,7 @@ public class TutorialManager : MonoBehaviour{
 
 
     private void Update(){
-        if (Input.anyKeyDown){
+        if (Input.anyKeyDown && !tutorials[0].completed){
             StartTutorial("controls");
         }                                                
         
@@ -49,7 +49,6 @@ public class TutorialManager : MonoBehaviour{
             NextStep();
         }
         
-        Debug.Log(currentTutorial == null ? "No tutorial running" : $"Current tutorial: {currentTutorial.title}");
         
     }
     
@@ -57,7 +56,7 @@ public class TutorialManager : MonoBehaviour{
         Debug.Log($"Starting tutorial {title}");
         Tutorial t = tutorials.Find(tut => tut.title == title);
         if (t == null || t == currentTutorial || t.completed){
-            Debug.LogError($"Tutorial of name '{title}' not found");
+            Debug.LogWarning($"Tutorial of name '{title}' not found");
             return;
         }
         if(currentTutorial != null){

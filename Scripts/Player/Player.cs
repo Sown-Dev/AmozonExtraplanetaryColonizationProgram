@@ -1,4 +1,5 @@
 ﻿using System;
+using NewRunMenu;
 using Systems;
 using Systems.Items;
 using Systems.Round;
@@ -16,11 +17,13 @@ public partial class Player : Unit{
 
     [SerializeField] private GameObject OnDeath;
 
+    public Character myCharacter;
 
    
     public Slot SelectedSlot;
 
     protected override void Awake(){
+        //myCharacter = GameManager.Instance.selectedChar;
         base.Awake();
         Instance = this;
         myCursor.OnLeftClick.AddListener(ClickPos);
@@ -98,5 +101,12 @@ public partial class Player : Unit{
         Instantiate(OnDeath, transform.position,quaternion.identity);
             myCam.transform.SetParent(transform.parent.parent);
         Destroy(gameObject);
+    }
+
+    public override Stats CalculateStats(){
+        finalStats= base.CalculateStats();
+        finalStats.Combine(myCharacter.stats);
+
+        return finalStats;
     }
 }

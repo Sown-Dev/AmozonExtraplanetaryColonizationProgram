@@ -7,7 +7,6 @@ using UnityEngine.Scripting;
 
 public class CursorManager : MonoBehaviour{
     public static CursorManager Instance;
-    public GameObject crosshair; //show if playing
 
     private bool crosshairEnabled;
     public int uiDepth=0;

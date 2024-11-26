@@ -20,5 +20,7 @@ namespace NewRunMenu{
         public Color pantsColor;
         public Color skinColor;
         
+        public Stats stats;
+        
     }
 }
