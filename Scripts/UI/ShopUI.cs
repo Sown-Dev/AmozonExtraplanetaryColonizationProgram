@@ -26,6 +26,7 @@ namespace UI{
 
         void Start(){
             Hide();
+            CGRefresh();
         }
 
         public override void Refresh(){

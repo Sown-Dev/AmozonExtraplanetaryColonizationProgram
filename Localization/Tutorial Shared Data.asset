@@ -35,6 +35,18 @@ MonoBehaviour:
     m_Key: objectives1
     m_Metadata:
       m_Items: []
+  - m_Id: 1424334836785152
+    m_Key: objectives2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1424359465738240
+    m_Key: objectives3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1834331810881536
+    m_Key: objective4
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

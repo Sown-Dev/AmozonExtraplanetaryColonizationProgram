@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 72.005, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5098247342219193726
@@ -497,8 +497,8 @@ MonoBehaviour:
   manager: {fileID: 0}
   consumerUIPrefab: {fileID: 7909335590301442086, guid: a37a9d8f04cf37b4b8996120287108fd, type: 3}
   producerUIPrefab: {fileID: 7909335590301442086, guid: c4b2ce5d44ef20047b1ac0952b8d7ff0, type: 3}
-  consumerList: {fileID: 1272111121671605590}
-  producerList: {fileID: 5805562828991092883}
+  consumerList: {fileID: 5805562828991092883}
+  producerList: {fileID: 1272111121671605590}
   producing: {fileID: 3236975602920959388}
   consuming: {fileID: 4915435170974530663}
   stored: {fileID: 6223753177792792450}
@@ -792,7 +792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7382674118970706909, guid: 2213a2acb4a39ca4c8f47573ec4fe6c6, type: 3}
       propertyPath: m_text
-      value: 'Stoired:'
+      value: 'Stored:'
       objectReference: {fileID: 0}
     - target: {fileID: 8444630273913756037, guid: 2213a2acb4a39ca4c8f47573ec4fe6c6, type: 3}
       propertyPath: m_Name

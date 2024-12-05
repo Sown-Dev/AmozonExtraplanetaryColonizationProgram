@@ -43,9 +43,10 @@ namespace UI{
             producing.text = myGrid.producing + "W/" + myGrid.productionCapacity + "W";
             consuming.text = myGrid.consuming + "W/" + myGrid.powerNeeded + "W";
             stored.text = myGrid.storedPower + "W/" + myGrid.capacity + "W";
-
+            
+            //make bars empty if the value doesn't apply.
             producingBar.fillAmount = myGrid.producing>0?(float)myGrid.producing / myGrid.productionCapacity:0;
-            storedBar.fillAmount = myGrid.storedPower / myGrid.capacity;
+            storedBar.fillAmount = (myGrid.storedPower>0 && myGrid.capacity>0) ?myGrid.storedPower / myGrid.capacity : 0;
             consumingBar.fillAmount =myGrid.consuming>0 ? (float)myGrid.consuming / myGrid.powerNeeded : 0;
 
 

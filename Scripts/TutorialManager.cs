@@ -23,9 +23,9 @@ public class TutorialManager : MonoBehaviour{
             child.gameObject.SetActive(false);
         }
         foreach (Tutorial tut in tutorials){
-                foreach (GameObject step in tut.steps){
+                foreach (TutorialElement step in tut.steps){
                     step.transform.parent = tutorialParent;
-                    step.SetActive(false);
+                    step.gameObject.SetActive(false);
                 }
             
         }
@@ -73,12 +73,12 @@ public class TutorialManager : MonoBehaviour{
 
         foreach (Tutorial tut in tutorials){
             if (tut != t){
-                foreach (GameObject step in tut.steps){
-                    step.SetActive(false);
+                foreach (TutorialElement step in tut.steps){
+                    step.gameObject.SetActive(false);
                 }
             }
         }
-        currentTutorial.steps[t.currentStep].SetActive(true);
+        currentTutorial.steps[t.currentStep].gameObject.SetActive(true);
         
     }
     public void NextStep(){
@@ -88,9 +88,9 @@ public class TutorialManager : MonoBehaviour{
             EndTutorial();
             return;
         }
-        currentTutorial.steps[currentTutorial.currentStep].SetActive(false);
+        currentTutorial.steps[currentTutorial.currentStep].gameObject.SetActive(false);
         currentTutorial.currentStep++;
-        currentTutorial.steps[currentTutorial.currentStep].SetActive(true);
+        currentTutorial.steps[currentTutorial.currentStep].gameObject.SetActive(true);
     }
     
     public void EndTutorial(){
@@ -98,7 +98,7 @@ public class TutorialManager : MonoBehaviour{
         CursorManager.Instance.CloseUI();
         blackBG.SetActive(false);
         
-        currentTutorial.steps[currentTutorial.currentStep].SetActive(false);
+        currentTutorial.steps[currentTutorial.currentStep].gameObject.SetActive(false);
         currentTutorial.completed = true;
         currentTutorial = null;
     }
@@ -106,7 +106,7 @@ public class TutorialManager : MonoBehaviour{
     [Serializable]
     public class Tutorial{
         public string title;
-        public GameObject[] steps;
+        public TutorialElement[] steps;
         [HideInInspector]public int currentStep;
         [HideInInspector]public bool completed;
 

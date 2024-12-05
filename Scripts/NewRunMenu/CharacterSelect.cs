@@ -17,6 +17,17 @@ namespace NewRunMenu{
         public GameObject upgradePrefab; */
         public Image portrait;
 
+        
+        
+        public GameObject charOptionPrefab;
+
+
+        void Awake(){
+            foreach (Character c in GameManager.Instance.allCharacters){
+                GameObject go = Instantiate(charOptionPrefab, transform);
+                go.GetComponent<CharacterOption>().Init(c, this);
+            }
+        }
 
 
         public void SelectChar(Character c){

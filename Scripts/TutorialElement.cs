@@ -11,7 +11,6 @@ public class TutorialElement : MonoBehaviour{
 
     public Transform highLight;
     
-    
 
     public void Init(string key, Transform highlight){
         GameObject go = Instantiate(text, transform);

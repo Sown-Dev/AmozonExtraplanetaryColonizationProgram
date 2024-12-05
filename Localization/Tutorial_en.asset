@@ -44,7 +44,24 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 67889717370880
     m_Localized: 'Here at Amozon, your primary goal is always the same: generate
-      profit. To do so, '
+      profit, and complete contracts. This number is your current funds. This money
+      is yours and you may spend it however you like in the shop.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1424334836785152
+    m_Localized: This part here gives information on your current contract. Your
+      current contract tells you what items are currently available to sell.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1424359465738240
+    m_Localized: 'Additionally, contracts come with a quota and a time limit. You
+      must sell enough of the item, or generate profit through other means within
+      the time limit, or risk contract termniation. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1834331810881536
+    m_Localized: Completing a contract will give you a bonus and lets you progress
+      further.
     m_Metadata:
       m_Items: []
   references:

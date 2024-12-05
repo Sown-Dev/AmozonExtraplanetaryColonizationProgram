@@ -27,6 +27,8 @@ public partial class Player : Unit{
     private bool m_Grounded = true;
 
     private void Update(){
+        if(Time.timeScale<=0) return;
+        
         Block standingBlock = TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(transform.position));
         
         handVisualizer.Refresh();

@@ -38,7 +38,8 @@ namespace UI{
                 }
             }
             else{
-                BlockImg.sprite = Utils.Instance.blankIcon;
+                if(Utils.Instance)
+                    BlockImg.sprite = Utils.Instance.blankIcon;
                 ItemStackUI ui = Instantiate(ItemIconPrefab, ItemIconTransform).GetComponent<ItemStackUI>();
                 ui.Init(myOffer.item);
             }

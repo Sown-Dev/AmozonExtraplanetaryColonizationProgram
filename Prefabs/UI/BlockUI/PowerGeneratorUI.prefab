@@ -122,6 +122,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4420028355112961883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 365829807852433362, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
+  m_PrefabInstance: {fileID: 4054550399580022921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8104889433414936184 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5205864184136404721, guid: 727b4fa11777e064183140fb14d403cb, type: 3}
@@ -140,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plug: {fileID: 522236179464556434}
+  plugButton: {fileID: 4420028355112961883}
   plugOn: {fileID: 21300000, guid: f98b07ae46b43304598cd7f4c41bd956, type: 3}
   plugOff: {fileID: 21300000, guid: 80cf134f36634c84c8772d19535c9493, type: 3}
   powerText: {fileID: 3638960535296053704}
