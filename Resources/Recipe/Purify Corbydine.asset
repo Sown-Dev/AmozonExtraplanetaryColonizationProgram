@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
+  m_Name: Purify Corbydine
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 9bdf5a34518a1544db8afe168870d174, type: 3}
+  ingredients:
+  - item: {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
+    amount: 3
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
+    name: 
+    icon: {fileID: 0}
+  results:
+  - item: {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
+    amount: 1
+  craftTime: 400

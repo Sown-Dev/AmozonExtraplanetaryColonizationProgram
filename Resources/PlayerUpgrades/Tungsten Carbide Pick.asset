@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f23353328619948b644253b1f1796d, type: 3}
+  m_Name: Tungsten Carbide Pick
+  m_EditorClassIdentifier: 
+  su:
+    <name>k__BackingField: Tungsten Carbide Pick
+    stats:
+      stats:
+      - type: 4
+        amount: 1
+        operation: 2
+    <description>k__BackingField: Gain +1 extra resource when mining.
+    <icon>k__BackingField: {fileID: 21300000, guid: c2b8c8f23c4919f4d96b24fa0ade432d, type: 3}
