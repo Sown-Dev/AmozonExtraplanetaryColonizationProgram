@@ -17,7 +17,7 @@ MonoBehaviour:
     stats:
       stats:
       - type: 1
-        amount: 8
+        amount: 4
         operation: 2
-    <description>k__BackingField: Increases your inventory by 8 slots
+    <description>k__BackingField: Increases your inventory size by +4 slots
     <icon>k__BackingField: {fileID: 21300000, guid: 99c9d6e45329c7645a7d0d10af9c2ae3, type: 3}

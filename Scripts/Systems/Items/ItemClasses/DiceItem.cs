@@ -6,8 +6,9 @@ namespace Systems.Items.ItemClasses{
 
     public class DiceItem : ThrowableItem{
         public override void Use(Vector2Int pos, Unit user, Slot slot){
-            base.Use(pos, user, slot);
             RoundManager.Instance.RegenerateRoundShop();
+
+            base.Use(pos, user, slot);
 
         }
     }

@@ -36,7 +36,6 @@ namespace Systems.Round{
         int lives = 0;
 
         public WorldStats roundStats;
-        public WorldStats myStats;
 
         public LoseGameUI loseGameUI;
 
@@ -47,6 +46,7 @@ namespace Systems.Round{
         void Awake(){
             roundStats = new WorldStats();
             shopTiers = new List<ShopTier>();
+            roundStats= new WorldStats();
         }
 
         private void Start(){
@@ -93,21 +93,7 @@ namespace Systems.Round{
         }
 
 
-        public void SaveStats(){
-            string json = JsonUtility.ToJson(myStats);
-            PlayerPrefs.SetString("PlayerStats", json);
-            PlayerPrefs.Save();
-        }
-
-        public void LoadStats(){
-            if (PlayerPrefs.HasKey("PlayerStats")){
-                string json = PlayerPrefs.GetString("PlayerStats");
-                myStats = JsonUtility.FromJson<WorldStats>(json);
-            }
-            else{
-                myStats = new WorldStats(); // Default if no data is saved
-            }
-        }
+    
 
         //only call after checking if the item is in the sell list
         public void Sell(ItemStack stack){
@@ -341,7 +327,7 @@ namespace Systems.Round{
                     break;
                 case Sponsor.Toyoma:
                     sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier-1, 1));
-                    TimeGiven -= 15;
+                    TimeGiven -= 60;
                     reward = 0;
 
                     break;

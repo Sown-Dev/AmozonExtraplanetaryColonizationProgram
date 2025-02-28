@@ -14,9 +14,10 @@ namespace Systems.Terrain{
         public Item oreItem;
 
         public RuleTile tile;
-
+        
 
         public int amount;
+        public Vector2Int position;
 
         public virtual ItemStack ExtractOre(int oreAmt){
             int stackAmount = 0;
@@ -33,7 +34,8 @@ namespace Systems.Terrain{
             if (amount <= 0){
                 amount = 0;
             }
-
+            //spawn item drop on position (maybe for another time. conflicts with how miners work)
+            //Utils.Instance.CreateItemDrop(new ItemStack(oreItem, stackAmount), (Vector2) position);
             return new ItemStack(oreItem, stackAmount);
         }
         

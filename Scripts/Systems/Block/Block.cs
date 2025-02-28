@@ -86,6 +86,7 @@ namespace Systems.Block{
         }
 
         public virtual void Use(Unit user){
+            TileIndicatorManager.Instance.DrawIndicators(GetIndicators(), origin, rotation);
             Debug.Log("Used " + this.GetType().Name);
         }
 
@@ -153,6 +154,11 @@ namespace Systems.Block{
         public virtual List<TileIndicator> GetIndicators(){
             return new List<TileIndicator>();
         }
+
+        //prob a more elegant way to do this, but this works
+        public virtual void OnUIClose(){
+            
+        }
         
         
         
@@ -167,6 +173,7 @@ namespace Systems.Block{
         #endif
     }
 
+    [Serializable]
     public enum Orientation{
         Up =0,
         Down =1,
@@ -314,6 +321,14 @@ namespace Systems.Block{
             float radians = angle * Mathf.Deg2Rad; // Convert the angle to radians
         
             return points.Select(point => RotatePointAroundOrigin(point, radians, origin));
+        }
+        
+        public static Vector2Int[] RotateArray(this Vector2Int[] points, Orientation orientation, Vector2Int origin)
+        {
+            float angle = orientation.GetAngle(); // Get the angle in degrees based on the orientation
+            float radians = angle * Mathf.Deg2Rad; // Convert the angle to radians
+        
+            return points.Select(point => RotatePointAroundOrigin(point, radians, origin)).ToArray();
         }
 
         /// <summary>

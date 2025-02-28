@@ -9,9 +9,11 @@ namespace UI{
     
         public GameObject consumerUIPrefab;
         public GameObject producerUIPrefab;
+        public GameObject batteryUIPrefab;
 
         public VerticalLayoutGroup consumerList;
         public VerticalLayoutGroup producerList;
+        public VerticalLayoutGroup batteryList;
 
         public TMP_Text producing;
         public TMP_Text consuming;
@@ -32,6 +34,12 @@ namespace UI{
                 else if (block is IPowerProducer producer){
                     GameObject producerUI = Instantiate(producerUIPrefab, producerList.transform);
                     producerUI.GetComponent<GridProducerUI>().Init(producer);
+                }else if(block is IPowerBattery battery){
+                    GameObject batteryUI = Instantiate(batteryUIPrefab, batteryList.transform);
+                    //producerUI.GetComponent<GridProducerUI>().Init(battery);
+                }
+                else{
+                    Debug.LogError("Block is not a consumer or producer");
                 }
             }
         

@@ -4,6 +4,7 @@ using Systems.Items;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI{
@@ -11,8 +12,8 @@ namespace UI{
         public static TooltipManager Instance;
 
 
-        [Header("Tooltip Fields")] [SerializeField]
-        private CanvasGroup cg;
+        [FormerlySerializedAs("cg")] [Header("Tooltip Fields")] [SerializeField]
+        private CanvasGroup tooltipCG;
 
         [SerializeField] private TMP_Text title;
         [SerializeField] private TMP_Text description;
@@ -39,6 +40,14 @@ namespace UI{
         [SerializeField] private GameObject logistics;
 
         private GameObject tooltipCaller; //the object that called the tooltip. we keep track of it to hide the tooltip when it is destroyed or hidden
+        
+        // Camera Tooltip (shows a certain place in the world)
+        [Header("Camera Tooltip")] 
+        [SerializeField]private Camera ttCam;
+        [SerializeField] private CanvasGroup camCG;
+        [SerializeField] private RectTransform camRT;
+        
+
 
         private bool isOpen;
         private int width = 228;
@@ -46,15 +55,17 @@ namespace UI{
 
 
         private void Awake(){
-            cg.alpha = 0;
+            tooltipCG.alpha = 0;
             Instance = this;
+            
+            HideCameraTooltip();
         }
 
         private void Update(){
             // cg.alpha = isOpen ? 1 : 0;
-            cg.alpha = Mathf.Lerp(cg.alpha, isOpen ? 1 : 0, Time.unscaledDeltaTime * 24);
+            tooltipCG.alpha = Mathf.Lerp(tooltipCG.alpha, isOpen ? 1 : 0, Time.unscaledDeltaTime * 24);
 
-            cg.alpha = cg.alpha < 0.1f && !isOpen ? 0 : cg.alpha;
+            tooltipCG.alpha = tooltipCG.alpha < 0.1f && !isOpen ? 0 : tooltipCG.alpha;
 
             if (isOpen){
                 rt.anchoredPosition = Vector2.Lerp(rt.anchoredPosition, toPos, Time.unscaledDeltaTime * 24);
@@ -78,7 +89,7 @@ namespace UI{
             if (useOffset)
                 canvasPosition += offset;
 
-            //Debug.Log($"our original pos is {pos}, end pos is{canvasPosition.x +width} and screen edge thresh is {screenDimensions.x}");
+            Debug.Log($"our original pos is {pos}, end pos is{canvasPosition.x +width} and screen edge thresh is {screenDimensions.x}");
 
             if (canvasPosition.x + width > screenDimensions.x / 2){
                 //Debug.Log("out of bounds");
@@ -188,6 +199,34 @@ namespace UI{
         public void OnTTExit(){
             TTmouseOver = false;
             Hide();
+        }
+        
+        public void ShowCameraTooltip(Vector2 screenPosition, Vector2 camPosition){
+            Debug.Log($"showing camera tooltip at {screenPosition} and cam pos {camPosition}");
+            int w = 100;
+            Vector2 canvasPosition;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)transform.parent, screenPosition, null,
+                out canvasPosition);
+
+            
+            if (canvasPosition.x + w > screenDimensions.x / 2){
+                //Debug.Log("out of bounds");
+                canvasPosition.x = screenDimensions.x / 2 - (w);
+            }
+
+            //do the same for y
+            if (canvasPosition.y - rt.sizeDelta.y -32 < -screenDimensions.y / 2){
+                canvasPosition.y = -screenDimensions.y / 2 + (rt.sizeDelta.y + 64);
+                canvasPosition.x += 32;
+            }
+            
+            
+            camCG.alpha = 1;
+            camRT.anchoredPosition = canvasPosition;
+            ttCam.transform.position = new Vector3( camPosition.x, camPosition.y, -10);
+        }
+        public void HideCameraTooltip(){
+            camCG.alpha = 0;
         }
         
     }

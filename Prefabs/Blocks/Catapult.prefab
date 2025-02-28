@@ -144,14 +144,15 @@ MonoBehaviour:
     bso: {fileID: 0}
   currentState:
     baseSprite:
-      sprites: []
+      sprites:
+      - {fileID: 21300000, guid: 7a00e1a8ffc8bd24f97a13c47c498864, type: 3}
     rotateable: 1
     orientation: 0
     rotations:
     - sprites:
-      - {fileID: 21300000, guid: ba28b609675242048b0e369a06abdf95, type: 3}
-    - sprites:
       - {fileID: 21300000, guid: 9682f3b4dfad63943b7be4e66adfc377, type: 3}
+    - sprites:
+      - {fileID: 21300000, guid: ba28b609675242048b0e369a06abdf95, type: 3}
     - sprites:
       - {fileID: 21300000, guid: 7a00e1a8ffc8bd24f97a13c47c498864, type: 3}
     - sprites:

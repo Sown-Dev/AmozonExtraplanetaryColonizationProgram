@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3071626970990201939, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: m_Name
-      value: LargeCrate
+      value: Large Crate
       objectReference: {fileID: 0}
     - target: {fileID: 3560868191791535471, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: m_Sprite
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.name
-      value: LargeCrate
+      value: Large Crate
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.size.x
@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: outputProperties.size
-      value: 72
+      value: 81
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.description
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: outputProperties.gridWidth
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.<myItem>k__BackingField

@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 public partial class Player : Unit{
     [SerializeField] protected Collider2D playerCollider; // Reference to the player's collider
     [SerializeField] private SpriteRenderer shadow;
+    [SerializeField] private Transform spriteHolder;
     [SerializeField] private Animator am;
     [SerializeField] private Transform highlights;
     [SerializeField] private GameObject Invalid;
@@ -37,16 +38,16 @@ public partial class Player : Unit{
         sr.sortingOrder = 0;
         shadow.sortingOrder = 0;
         shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b,
-            Mathf.Max(0.4f * (6 - sr.transform.localPosition.y) / 8, 0.05f));
+            Mathf.Max(0.4f * (6 - spriteHolder.transform.localPosition.y) / 8, 0.05f));
         // Apply gravity if player is not grounded
         if (!m_Grounded){
             yVelocity += gravity * Time.deltaTime; // Apply gravity to vertical velocity
-            sr.transform.localPosition +=
+            spriteHolder.transform.localPosition +=
                 new Vector3(0, yVelocity * Time.deltaTime, 0); // Update position based on velocity
 
             // Check if player has landed
-            if (sr.transform.localPosition.y <= groundLevel){
-                sr.transform.localPosition = new Vector3(0, groundLevel, 0); // Reset to ground level
+            if (spriteHolder.transform.localPosition.y <= groundLevel){
+                spriteHolder.transform.localPosition = new Vector3(0, groundLevel, 0); // Reset to ground level
                 yVelocity = 0; // Reset vertical velocity
                 m_Grounded = true; // Player is now grounded
             }
@@ -80,7 +81,7 @@ public partial class Player : Unit{
         playerCollider.enabled = sr.transform.localPosition.y < disableColliderHeight;
 
         if (sr.sortingOrder == 0)
-            sr.sortingOrder = sr.transform.localPosition.y < disableColliderHeight ? 0 : 2;
+            sr.sortingOrder = spriteHolder.transform.localPosition.y < disableColliderHeight ? 0 : 2;
 
         rb.drag = m_Grounded ? 10 : 9;
 
@@ -112,17 +113,16 @@ public partial class Player : Unit{
             buildingPreview.color = new Color(1, 1, 1, 0.5f);
             myCursor.sr.size = Vector2.Lerp( myCursor.sr.size, new Vector2(sx,sy),Time.deltaTime * 12);
             
-
                 
+            Orientation rot = block.blockPrefab.properties.rotatable ? myCursor.cursorRotation : Orientation.Up;
             
-           
             //indicators
             if (block.blockPrefab.GetIndicators()?.Count > 0){
-                indicatorManager.DrawIndicators(block.blockPrefab.GetIndicators(), myCursor.currentPos);
+                indicatorManager.DrawIndicators(block.blockPrefab.GetIndicators(), myCursor.currentPos, rot);
             }
             
             //invalid
-            foreach (var v2 in TerrainManager.Instance.GetBlockPositions(myCursor.currentPos, block.blockPrefab.properties.size.x, block.blockPrefab.properties.size.y)){
+            foreach (var v2 in TerrainManager.Instance.GetBlockPositions(myCursor.currentPos, block.blockPrefab.properties.size.x, block.blockPrefab.properties.size.y,rot)){
                 if (TerrainManager.Instance.GetBlock(v2) != null || TerrainManager.Instance.IsWall((Vector3Int)v2)){
                     GameObject go = Instantiate(Invalid, highlights);
                     go.transform.position = (Vector3Int)v2;
@@ -180,8 +180,11 @@ public partial class Player : Unit{
                 destroyTimer += Time.deltaTime;
                 if (destroyTimer > destroyDuration){
                     destroyTimer = 0;
-                    var extractOre = TerrainManager.Instance.ExtractOre(myCursor.currentPos, 1);
-                    Inventory.Insert(ref extractOre);
+                    var extractOre = TerrainManager.Instance.ExtractOre(myCursor.currentPos, (int) finalStats[Statstype.MiningAmount]);
+                    Insert(ref extractOre);
+                    /*if (extractOre != null || extractOre.amount >= 0){
+                        Utils.Instance.CreateItemDrop(extractOre, (Vector2)myCursor.currentPos);
+                    }*/
                 }
             }
             else{
@@ -190,8 +193,7 @@ public partial class Player : Unit{
         }
         else{
             destroyTimer = 0;
-        }
-
+        } 
 
         rb.AddForce(move * (moveV * finalStats[Statstype.Movespeed]) * Time.deltaTime * (m_Grounded ? 1f : 1.2f));
     }

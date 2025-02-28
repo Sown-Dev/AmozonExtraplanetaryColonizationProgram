@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867aba9949ccf1244bf2f66f76499b8c, type: 3}
   m_Name: Analyst
   m_EditorClassIdentifier: 
-  description: Always double check!
+  description: Arthur shows high competence and is very methodical about his work
+  legalName: Arthur LaQuavius
   startingItems:
   - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
-    amount: 3
+    amount: 5
   - item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
     amount: 3
   startingUpgrades: []
-  portrait: {fileID: 0}
-  shirtColor: {r: 0, g: 0, b: 0, a: 0}
-  pantsColor: {r: 0, g: 0, b: 0, a: 0}
-  skinColor: {r: 0, g: 0, b: 0, a: 0}
+  portrait: {fileID: 21300000, guid: b5c1a5e83f2f3c9408455f07b8eb391e, type: 3}
+  icon: {fileID: 21300000, guid: fd8af2276cf52984ba31adb940325f21, type: 3}
+  shirtColor: {r: 0.6548453, g: 0.6698113, b: 0.6540139, a: 1}
+  pantsColor: {r: 0.14484692, g: 0.27735782, b: 0.3301887, a: 0}
+  skinColor: {r: 0.8207547, g: 0.79179215, b: 0.623309, a: 0}
+  hatColor: {r: 0, g: 0, b: 0, a: 0}
+  stats:
+    stats: []

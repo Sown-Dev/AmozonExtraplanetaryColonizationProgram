@@ -52,7 +52,7 @@ namespace Systems.Block.CustomBlocks{
         }
         public override List<TileIndicator> GetIndicators(){
             
-            return new List<TileIndicator>(){ new TileIndicator(ExtractPositions.ToArray(), IndicatorType.Extracting)};
+            return new List<TileIndicator>(){ new TileIndicator(ExtractPositions.ToArray(), IndicatorType.Harvesting)};
         }
 
         

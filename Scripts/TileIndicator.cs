@@ -17,7 +17,9 @@ public struct TileIndicator{
 
 public enum IndicatorType{
     Mining,
-    Extracting,
+    Harvesting, //referring to extracting resources from a resource block
     BlockPower,
     PowerConnector,
+    InsertingTo,
+    ExtractingFrom,
 }

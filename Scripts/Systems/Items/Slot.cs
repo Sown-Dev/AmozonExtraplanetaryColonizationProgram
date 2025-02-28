@@ -43,22 +43,60 @@ namespace Systems.Items{
         }
 
 
-        public bool Insert(ref ItemStack other){
+        public bool Insert(ref ItemStack other, bool simulate = false){
             if (other == null || !CanAccept(other)) return false;
 
-            if (ItemStack == null){
-                // Directly set the ItemStack if the slot is empty
-                ItemStack = other.Clone();
-                ItemStack.amount = 0; // Start with zero and combine amounts
+            if (simulate){
+                // Simulate the insertion without modifying anything
+                if (ItemStack == null){
+                    // If the slot is empty, the insertion is possible
+                    return true;
+                }
+                else{
+                    // If the slot is not empty, check if the items can be combined
+                    int size = Mathf.Min(Stacksize, ItemStack.item.stackSize);
+                    int myAmount = ItemStack.amount;
+                    int potentialAmount = myAmount + other.amount;
+                    return potentialAmount <= size;
+                }
             }
+            else{
+                // Perform the actual insertion
+                if (ItemStack == null){
+                    // Directly set the ItemStack if the slot is empty
+                    ItemStack = other.Clone();
+                    ItemStack.amount = 0; // Start with zero and combine amounts
+                }
 
+                Combine(ref other, simulate: false); // Ensure Combine does not simulate
+                OnChange?.Invoke();
 
-            Combine(ref other);
-            OnChange?.Invoke();
+                // Check if the itemstack is fully inserted and set to null
+                if (other != null && other.amount <= 0){
+                    other = null;
+                }
 
-            return other == null;
+                return other == null;
+            }
         }
 
+        public void Combine(ref ItemStack other, bool simulate = false){
+            if (other == null) return;
+
+            int size = Mathf.Min(Stacksize, ItemStack?.item.stackSize ?? 512);
+            int myAmount = ItemStack?.amount ?? 0;
+
+            if (!simulate){
+                ItemStack.amount = Mathf.Min(size, other.amount + myAmount);
+                other.amount -= ItemStack.amount - myAmount;
+
+                if (other.amount <= 0){
+                    other = null;
+                }
+
+                OnChange?.Invoke();
+            }
+        }
 
         // This method now leverages the core Insert logic for ItemStack to maintain consistency
         public bool Insert(Slot other){
@@ -112,18 +150,6 @@ namespace Systems.Items{
         public void CombineSlots(Slot other){
             Combine(ref other.ItemStack);
             other.OnChange?.Invoke();
-        }
-
-        public void Combine(ref ItemStack other){
-            int size = Mathf.Min(Stacksize, ItemStack?.item.stackSize ?? 512);
-
-            int myAmount = ItemStack?.amount ?? 0;
-            ItemStack.amount = Mathf.Min(size, other.amount + myAmount);
-            other.amount -= ItemStack.amount - myAmount;
-
-            if (other.amount <= 0) other = null;
-
-            OnChange?.Invoke();
         }
 
 

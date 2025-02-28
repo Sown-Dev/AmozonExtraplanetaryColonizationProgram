@@ -17,6 +17,10 @@ namespace Systems.Items{
         
         [Obsolete]
         public bool AttemptStack(ItemStack other, int SlotSize=256){
+            if(other.amount == 0){
+                return false;
+            }
+            
             int stackSize = Mathf.Min(item.stackSize,SlotSize );
             
             if (item == other.item){

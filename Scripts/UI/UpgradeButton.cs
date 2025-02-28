@@ -6,22 +6,23 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI{
-    public class UpgradeButton: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
+    public class UpgradeButton: MonoBehaviour{
         public UpgradeOffer myOffer;
         public TMP_Text priceText;
-        public Image UpgradeImage;
+
+        public UpgradeUI UpgradeUI;
         public Button buyButton;
         public GameObject SoldOut;
         
-        public void Init(UpgradeOffer upgrade){
-            myOffer = upgrade;
+        public void Init(UpgradeOffer offer){
+            myOffer = offer;
             Refresh();
             //ui.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+            UpgradeUI.Init(offer.upgrade);
         }
         
         void Refresh(){
             priceText.text = "$" + myOffer.price;
-            UpgradeImage.sprite = myOffer.upgrade.u.icon;
             buyButton.interactable = !myOffer.bought;
             SoldOut.SetActive(myOffer.bought);
         }
@@ -39,13 +40,6 @@ namespace UI{
             
         }
 
-        public void OnPointerEnter(PointerEventData eventData){
-            
-            TooltipManager.Instance.Show(myOffer.upgrade.u, transform.position + new Vector3(0,-32), this.gameObject);
-        }
-
-        public void OnPointerExit(PointerEventData eventData){
-           TooltipManager.Instance.Hide();
-        }
+      
     }
 }

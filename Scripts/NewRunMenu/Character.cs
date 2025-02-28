@@ -7,6 +7,7 @@ namespace NewRunMenu{
     public class Character : ScriptableObject{
 
         public string description;
+        public string legalName;
         //public int startingMoney; //think i'll remove this
         
         public List<ItemStack> startingItems;
@@ -14,11 +15,13 @@ namespace NewRunMenu{
         //stats, but later
 
         public Sprite portrait;
+        public Sprite icon;
         
         //later on, colors for shirt, pants and skin for unique character sprites. Probably just use a replacecolor shader
         public Color shirtColor;
         public Color pantsColor;
         public Color skinColor;
+        public Color hatColor;
         
         public Stats stats;
         

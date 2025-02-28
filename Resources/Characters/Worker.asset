@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867aba9949ccf1244bf2f66f76499b8c, type: 3}
   m_Name: Worker
   m_EditorClassIdentifier: 
-  description: It's my first day on the job!
+  description: Alan shows potential for leadership, but his lack of motivation hinders
+    his productivity
+  legalName: Alan Smith
   startingItems:
   - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
-    amount: 12
+    amount: 8
   - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
-    amount: 4
+    amount: 3
   startingUpgrades: []
-  portrait: {fileID: 21300000, guid: 91464c34a145f244ca691f42b99d7b17, type: 3}
-  shirtColor: {r: 0.63456744, g: 0.8032817, b: 0.8679245, a: 1}
-  pantsColor: {r: 0, g: 0, b: 0, a: 0}
-  skinColor: {r: 0, g: 0, b: 0, a: 0}
+  portrait: {fileID: 21300000, guid: 0821c4ca694491344bd51240ec5ffbaa, type: 3}
+  icon: {fileID: 21300000, guid: 5c823ef67eacc6f479cedb70b0f05c1b, type: 3}
+  shirtColor: {r: 0.4206123, g: 0.6415094, b: 0.58220905, a: 1}
+  pantsColor: {r: 0.064836234, g: 0.1239811, b: 0.2924528, a: 0}
+  skinColor: {r: 0.6886792, g: 0.5637678, b: 0.38007298, a: 1}
+  hatColor: {r: 0, g: 0, b: 0, a: 0}
   stats:
     stats: []

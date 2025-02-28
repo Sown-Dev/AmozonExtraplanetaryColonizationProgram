@@ -10,7 +10,7 @@ namespace Systems{
         private List<UpgradeSO>
             BaseUpgrades; // we use scriptable object so we can assign them in the inspector, and then have them be added to the player on awake;
 
-        public List<Upgrade> upgrades{ get; protected set; } = new List<Upgrade>();
+        public List<Upgrade> upgrades= new List<Upgrade>();
 
         public SpriteRenderer sr;
         public Rigidbody2D rb;
@@ -35,7 +35,8 @@ namespace Systems{
         public virtual void AddUpgrade(Upgrade upgrade, bool recalculate = true){
             upgrade.Init(this);
             upgrades.Add(upgrade);
-            CalculateStats();
+            if(recalculate)
+                CalculateStats();
         }
 
         // ---------------------------------------------------------- STATS --------------------------------------------

@@ -9,10 +9,6 @@ public class PowerProducerUI : ElectricityUI
 {
     public IPowerProducer producer;
 
-    public Image plug;
-    public Button plugButton;
-    public Sprite plugOn;
-    public Sprite plugOff;
     public TMP_Text powerText;
 
    

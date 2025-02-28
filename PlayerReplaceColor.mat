@@ -30,15 +30,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorCount: 1
-    - _Threshold: 0.1
+    - _Threshold: 0.12
     m_Colors:
     - _Color1: {r: 0.3019608, g: 0.5019608, b: 0.34117648, a: 1}
     - _Color2: {r: 0.28627452, g: 0.29803923, b: 0.46274513, a: 1}
     - _Color3: {r: 0.7803922, g: 0.69803923, b: 0.53333336, a: 1}
     - _ColorsToReplace: {r: 0.4716981, g: 0.12237452, b: 0.12237452, a: 1}
-    - _ReplaceColor1: {r: 0.81501424, g: 0.9339623, b: 0.9116551, a: 1}
-    - _ReplaceColor2: {r: 0.15574935, g: 0.16101162, b: 0.18867922, a: 1}
-    - _ReplaceColor3: {r: 0.8867924, g: 0.84622854, b: 0.70692414, a: 1}
+    - _ReplaceColor1: {r: 1, g: 0, b: 0, a: 1}
+    - _ReplaceColor2: {r: 0, g: 0.125, b: 1, a: 1}
+    - _ReplaceColor3: {r: 1, g: 1, b: 1, a: 1}
     - _ReplacementColors: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

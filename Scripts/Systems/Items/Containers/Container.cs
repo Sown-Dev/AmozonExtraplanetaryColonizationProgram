@@ -70,6 +70,7 @@ namespace Systems.Items{
 
                 if (!simulate){
                     // If we're not simulating and the slot is empty, directly insert the item stack
+                    
                     if (containerList[i].Insert(ref s))
 
                         //OnInsert?.Invoke(containerList[i].ItemStack);
@@ -78,6 +79,12 @@ namespace Systems.Items{
                 }
                 else{
                     //SIMULATE TRUE
+
+                    if (containerList[i].Insert(ref s, simulate)){
+                        return true;
+                    }
+                    
+                    /* OLD SIMULATE CODE
                     // Calculate space available in the current stack
                     int spaceAvailable = currentStack.item.stackSize - currentStack.amount;
                     if (spaceAvailable > 0){
@@ -86,7 +93,7 @@ namespace Systems.Items{
 
                     if (simAmount <= 0){
                         return true;
-                    }
+                    }*/
                 }
             }
 
@@ -126,7 +133,9 @@ namespace Systems.Items{
             for (int i = 0; i < containerList.Length; i++){
                 if (containerList[i].Insert(s)){
                     if (s.ItemStack == null || s.ItemStack.amount == 0){
+                        OnInsert?.Invoke(s.ItemStack);
                         return true;
+                        
                     }
                 }
             }

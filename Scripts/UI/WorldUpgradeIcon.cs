@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpgradeIcon: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
+public class WorldUpgradeIcon: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
 
     public Image icon;
     public WorldUpgrade myUpgrade;

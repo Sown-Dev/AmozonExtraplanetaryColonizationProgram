@@ -48,6 +48,13 @@ bool hasGenerated = false;
         public override ItemStack Extract(){
             return null;
         }
+
+        public override void OnUIClose(){
+            base.OnUIClose();
+            /*if (output.isEmpty()){  //Would rather keep them existing, as it opens emergent gameplay to use them as storeage
+                BlockDestroy(false);
+            }*/
+        }
     }
     [Serializable]
     public struct Drop{

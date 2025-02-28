@@ -24,7 +24,7 @@ public class TutorialManager : MonoBehaviour{
         }
         foreach (Tutorial tut in tutorials){
                 foreach (TutorialElement step in tut.steps){
-                    step.transform.parent = tutorialParent;
+                    step.transform.SetParent(tutorialParent);   
                     step.gameObject.SetActive(false);
                 }
             

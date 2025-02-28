@@ -9,8 +9,8 @@ public class CharacterOption : MonoBehaviour{
    public Button button;
    
    public void Init(Character c, CharacterSelect cs){
-       icon.sprite = c.portrait;
-       icon.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-       button.onClick.AddListener(() => cs.SelectChar(c));
+       icon.sprite = c.icon;
+       button.onClick.AddListener(() => cs.SelectChar(c)); //cant believe i dont use this pattern more often
+       
    }
 }

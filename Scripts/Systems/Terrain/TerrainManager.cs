@@ -90,7 +90,6 @@ public partial class TerrainManager : MonoBehaviour{
         if((rot == Orientation.Left || rot == Orientation.Right) && blockPrefab.properties.rotatable){
             //swap dimensions
             (sizex, sizey) = (sizey, sizex);
-           (sizex, sizey) = (sizey, sizex);
         }
 
         if (sizex < 1 || sizex > 32 || sizey < 1 || sizey > 32)
@@ -198,6 +197,7 @@ public partial class TerrainManager : MonoBehaviour{
         oreTilemap.SetTile((Vector3Int)pos, ore.tile);
 
         Ore o = ore.Clone();
+        o.position = pos;
         oreLayer.Set(pos, o);
 
         if (amount > 0){

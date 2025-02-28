@@ -1,9 +1,10 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI{
-    public class GridProducerUI : MonoBehaviour{
+    public class GridProducerUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler{
         
         private IPowerProducer myProducer;
             
@@ -24,5 +25,14 @@ namespace UI{
             powerText.text = myProducer.producing + "W ";
 
         }
+        
+        public void OnPointerEnter(PointerEventData eventData){
+            TooltipManager.Instance.ShowCameraTooltip(eventData.position, myProducer.myBlock.origin);
+
+        }
+        public void OnPointerExit(PointerEventData eventData){
+            TooltipManager.Instance.HideCameraTooltip();
+        }
+
     }
 }

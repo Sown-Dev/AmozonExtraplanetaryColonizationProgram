@@ -50,6 +50,7 @@ namespace UI.BlockUI{
             
             if (currentBlockUI != null){
                 lastPos = currentBlockUI.transform.localPosition;
+                currentBlockUI.block.OnUIClose();
                 Destroy(currentBlockUI.gameObject); 
                 currentBlockUI = null;
             }
