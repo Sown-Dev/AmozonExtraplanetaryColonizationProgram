@@ -63,15 +63,19 @@ namespace Systems.Items{
                     return false;
                 }
             }
+            
+            /*if(GetInsertionSlot(s).Insert(ref s) && !simulate){
+                
+                return true;
+            }*/
 
-            int simAmount = s.amount;
             for (int i = 0; i < containerList.Length; i++){
                 var currentStack = containerList[i].ItemStack;
 
                 if (!simulate){
                     // If we're not simulating and the slot is empty, directly insert the item stack
                     
-                    if (containerList[i].Insert(ref s))
+                    if (containerList[i].Insert(ref s, simulate))
 
                         //OnInsert?.Invoke(containerList[i].ItemStack);
                         return true;
@@ -185,6 +189,9 @@ namespace Systems.Items{
                             //|| (containerList[i].ItemStack.item == insertItem.item && containerList[i].ItemStack.amount < insertItem.amount)){
                             return containerList[i];
                         }
+                        if(containerList[i].ItemStack.item == insertItem.item && containerList[i].Combine( ref insertItem, true)){   
+                            return containerList[i];
+                        }
                     }
 
                     break;
@@ -192,6 +199,9 @@ namespace Systems.Items{
                     for (int i = containerList.Length - 1; i >= 0; i--){
                         if (containerList[i].ItemStack == null){
                             // || (containerList[i].ItemStack.item == insertItem.item && containerList[i].ItemStack.amount < insertItem.amount)){
+                            return containerList[i];
+                        }
+                        if(containerList[i].ItemStack.item == insertItem.item && containerList[i].Combine( ref insertItem, true)){   
                             return containerList[i];
                         }
                     }

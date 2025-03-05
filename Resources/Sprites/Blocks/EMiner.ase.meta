@@ -194,7 +194,7 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 29
-        y: 39
+        y: 27
         width: 8
         height: 15
       spriteId: fe1021b2f3fd61d4598317e50f1e603f
@@ -228,7 +228,7 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 24
-        y: 54
+        y: 39
         width: 18
         height: 20
       spriteId: 17a7388dfa6f27548901c0c7b20fca90

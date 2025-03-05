@@ -497,10 +497,10 @@ MonoBehaviour:
   manager: {fileID: 0}
   consumerUIPrefab: {fileID: 7909335590301442086, guid: a37a9d8f04cf37b4b8996120287108fd, type: 3}
   producerUIPrefab: {fileID: 7909335590301442086, guid: c4b2ce5d44ef20047b1ac0952b8d7ff0, type: 3}
-  batteryUIPrefab: {fileID: 0}
+  batteryUIPrefab: {fileID: 7909335590301442086, guid: 04ef414ed99fbf749b3d852ae4f2c612, type: 3}
   consumerList: {fileID: 5805562828991092883}
   producerList: {fileID: 1272111121671605590}
-  batteryList: {fileID: 0}
+  batteryList: {fileID: 8739853443987545652}
   producing: {fileID: 3236975602920959388}
   consuming: {fileID: 4915435170974530663}
   stored: {fileID: 6223753177792792450}
@@ -545,7 +545,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 180}
+  m_SizeDelta: {x: 0, y: 184}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &4495650596253785208
 MonoBehaviour:
@@ -1196,6 +1196,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3860546257861307832, guid: 487790d64c71c3e418fb6ba0de4144d6, type: 3}
   m_PrefabInstance: {fileID: 3938980711529052230}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8739853443987545652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5755635992041612914, guid: 487790d64c71c3e418fb6ba0de4144d6, type: 3}
+  m_PrefabInstance: {fileID: 3938980711529052230}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6493453015075482904
 PrefabInstance:
   m_ObjectHideFlags: 0

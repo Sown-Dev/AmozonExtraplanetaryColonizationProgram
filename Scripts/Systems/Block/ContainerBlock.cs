@@ -19,6 +19,10 @@ public class ContainerBlock: TickingBlock, IContainerBlock{
         return output.Extract();
 
     }
+    
+    public Slot GetInsertionSlot( ItemStack s = null){
+        return output.GetInsertionSlot(s);
+    }
 
     public override bool BlockDestroy(bool dropItems = true){
         lootTable.AddRange(output.GetItems());

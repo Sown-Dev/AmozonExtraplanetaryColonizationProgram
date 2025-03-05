@@ -21,7 +21,8 @@ MonoBehaviour:
     amount: 5
   - item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
     amount: 3
-  startingUpgrades: []
+  startingUpgrades:
+  - {fileID: 11400000, guid: e25e37babf96b74418b0c5ab81acb2da, type: 2}
   portrait: {fileID: 21300000, guid: b5c1a5e83f2f3c9408455f07b8eb391e, type: 3}
   icon: {fileID: 21300000, guid: fd8af2276cf52984ba31adb940325f21, type: 3}
   shirtColor: {r: 0.6548453, g: 0.6698113, b: 0.6540139, a: 1}

@@ -2,6 +2,7 @@
 using Systems.Items;
 using TMPro;
 using UI.BlockUI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 using UnityEngine.EventSystems;
@@ -24,8 +25,7 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
     [SerializeField] private Sprite normal;
     [SerializeField] private Sprite selected;
     [SerializeField] private Sprite filtered;
-    
-   
+
 
     void Start(){
         Refresh();
@@ -42,9 +42,9 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
         draggable.myImg.sprite = Slot.ItemStack?.item != null && Slot.ItemStack?.item.icon
             ? Slot.ItemStack?.item.icon
             : Utils.Instance.blankIcon;
-        amount.text = Slot.ItemStack?.amount > 1 ? Slot.ItemStack?.amount.ToString() : "";
+        amount.text = Slot.ItemStack?.amount != 1 ? Slot.ItemStack?.amount.ToString() : "";
 
-        switch(Slot?.ItemStack?.item.category){
+        switch (Slot?.ItemStack?.item.category){
             case ItemCategory.Building:
                 tint.color = new Color(0.9f, 0.6f, 0.1f, 0.2f);
                 break;
@@ -54,17 +54,16 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
             default:
                 tint.color = Color.clear;
                 break;
-
         }
     }
 
     private void Update(){
-       // if (Slot.dirty){
-            Refresh();
-            slotImg.sprite = Slot.filter ? filtered : normal;
-            foreground.sprite = Slot.Selected ? selected : Utils.Instance.blankIcon;
-            background.sprite = Slot.filter ? Slot.filter.icon : Utils.Instance.blankIcon;
-            Slot.dirty = false;
+        // if (Slot.dirty){
+        Refresh();
+        slotImg.sprite = Slot.filter ? filtered : normal;
+        foreground.sprite = Slot.Selected ? selected : Utils.Instance.blankIcon;
+        background.sprite = Slot.filter ? Slot.filter.icon : Utils.Instance.blankIcon;
+        Slot.dirty = false;
         //}
     }
 
@@ -75,11 +74,26 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
             Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
 
 
-            if (d.mySlot.Slot.ItemStack?.item == Slot.ItemStack?.item){
-                Slot.Insert(d.mySlot.Slot);
+            //split into my slot if empty
+            if (Input.GetKey(KeyCode.LeftControl)){
+                if (d.mySlot.Slot.ItemStack?.item == Slot.ItemStack?.item || Slot.ItemStack == null){
+                    int half = d.mySlot.Slot.ItemStack.amount / 2;
+                    if (half > 0){
+                        ItemStack split = d.mySlot.Slot.ItemStack.Clone();
+
+                        split.amount = half;
+                        d.mySlot.Slot.Decrement(half);
+                        Slot.Insert(ref split);
+                    }
+                }
             }
             else{
-                Slot.Swap(d.mySlot.Slot);
+                if (d.mySlot.Slot.ItemStack?.item == Slot.ItemStack?.item){
+                    Slot.Insert(d.mySlot.Slot);
+                }
+                else{
+                    Slot.Swap(d.mySlot.Slot);
+                }
             }
         }
     }
@@ -97,7 +111,7 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
                         CU.Transfer(Slot, container);
                     }
                     else{
-                        CU.Transfer(Slot,Player.Instance.Inventory );
+                        CU.Transfer(Slot, Player.Instance.Inventory);
                     }
                 }
             }

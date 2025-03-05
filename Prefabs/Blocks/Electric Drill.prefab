@@ -176,12 +176,12 @@ MonoBehaviour:
   tile: {fileID: 0}
   origin: {x: 0, y: 0}
   outputProperties:
-    size: 4
+    size: 6
     name: 
     gridWidth: 2
     scaleDownGridIfSmaller: 1
     type: 0
-  DrillTime: 30
+  DrillTime: 25
   DrillAmount: 1
   DrillPositions:
   - {x: 0, y: 0}

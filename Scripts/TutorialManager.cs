@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TutorialManager : MonoBehaviour{
+    public static TutorialManager Instance;
+    
     public GameObject blackBG;
     public Transform tutorialParent;
 
@@ -11,7 +14,7 @@ public class TutorialManager : MonoBehaviour{
    private Tutorial currentTutorial;
     
 
-    
+    List<string> completedTutorials = new List<string>();
 
     private void Awake(){
  
@@ -23,17 +26,21 @@ public class TutorialManager : MonoBehaviour{
             child.gameObject.SetActive(false);
         }
         foreach (Tutorial tut in tutorials){
-                foreach (TutorialElement step in tut.steps){
-                    step.transform.SetParent(tutorialParent);   
-                    step.gameObject.SetActive(false);
+                
+                for( int i = 0; i < tut.steps.Length; i++){
+                    tut.steps[i].Init( tut.title + i, tut.steps[i].highlight);
+                    tut.steps[i].transform.SetParent(tutorialParent);   
+                    tut.steps[i].gameObject.SetActive(false);
                 }
+
             
         }
+        
+        Instance = this;
+        currentTutorial = null;
+
     }
 
-    private void Start(){
-        currentTutorial = null;
-    }
 
     private void Reset(){
         currentTutorial = null; //whatever genuine retard at unity made me have to do this needs to be shot in the head until they can come up with a better idea.
@@ -41,28 +48,52 @@ public class TutorialManager : MonoBehaviour{
 
 
     private void Update(){
-        if (Input.anyKeyDown && !tutorials[0].completed){
-            StartTutorial("controls");
-        }                                                
-        
+      
         if (Input.GetKeyDown(KeyCode.Space) && currentTutorial != null){
             NextStep();
         }
         
         
     }
-    
-    public void StartTutorial(string title){
+    public void StartTutorial(string title, float delay = 0f){
+        if(currentTutorial != null){
+            Debug.Log($"Cannot start tutorial. one is already in progress");
+            return;
+        }
+
+        if (title.Length < 2){
+            return;
+        }
+        StartCoroutine(StartTutorialCoroutine(title, delay));
+    }
+
+    private System.Collections.IEnumerator StartTutorialCoroutine(string title, float delay){
+        yield return new WaitForSecondsRealtime(delay);
+
+        
+        if (completedTutorials.Contains(title)){
+            Debug.Log("tutorial already completed");
+            yield break;
+        }
+        
         Debug.Log($"Starting tutorial {title}");
+        
         Tutorial t = tutorials.Find(tut => tut.title == title);
         if (t == null || t == currentTutorial || t.completed){
             Debug.LogWarning($"Tutorial of name '{title}' not found");
-            return;
+            yield break;
         }
-        if(currentTutorial != null){
-            Debug.Log($"Ending current tutorial {currentTutorial.title}");
-            EndTutorial();
+
+        if (t.prerequisite.Length > 1){  //check to see if we actualy have a prerequisite, not just empty string
+            if (completedTutorials.Contains(t.prerequisite)){
+                Debug.Log($"Prerequisite {t.prerequisite} already completed");
+            }
+            else{
+                Debug.Log($"Prerequisite {t.prerequisite} not completed, skipping tutorial");
+                yield break;
+            }
         }
+
         CursorManager.Instance.OpenUI();
         blackBG.SetActive(true);
         Debug.Log($"Starting tutorial {t.title}");
@@ -73,9 +104,11 @@ public class TutorialManager : MonoBehaviour{
 
         foreach (Tutorial tut in tutorials){
             if (tut != t){
-                foreach (TutorialElement step in tut.steps){
-                    step.gameObject.SetActive(false);
+                for( int i = 0; i < tut.steps.Length; i++){
+                    
+                    tut.steps[i].gameObject.SetActive(false);
                 }
+                
             }
         }
         currentTutorial.steps[t.currentStep].gameObject.SetActive(true);
@@ -97,10 +130,13 @@ public class TutorialManager : MonoBehaviour{
         
         CursorManager.Instance.CloseUI();
         blackBG.SetActive(false);
-        
+        String nextTutorial = currentTutorial.nextTutorial;
+        completedTutorials.Add(currentTutorial.title);
         currentTutorial.steps[currentTutorial.currentStep].gameObject.SetActive(false);
         currentTutorial.completed = true;
         currentTutorial = null;
+        
+        StartTutorial(nextTutorial);
     }
     
     [Serializable]
@@ -109,6 +145,10 @@ public class TutorialManager : MonoBehaviour{
         public TutorialElement[] steps;
         [HideInInspector]public int currentStep;
         [HideInInspector]public bool completed;
+        
+        
+        public string prerequisite;
+        [FormerlySerializedAs("NextTutorial")] public string nextTutorial;
 
         public Tutorial(){
             

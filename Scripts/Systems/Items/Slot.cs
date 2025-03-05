@@ -80,24 +80,56 @@ namespace Systems.Items{
             }
         }
 
-        public void Combine(ref ItemStack other, bool simulate = false){
-            if (other == null) return;
+        public bool Combine(ref ItemStack other, bool simulate = false)
+        {
+            if (other == null || other.item != ItemStack.item) return false;
 
-            int size = Mathf.Min(Stacksize, ItemStack?.item.stackSize ?? 512);
+            // Determine the maximum stack size for the item
+            int maxStackSize = Mathf.Min(Stacksize, ItemStack?.item.stackSize ?? 512);
+
+            // Current amount in the slot
             int myAmount = ItemStack?.amount ?? 0;
 
-            if (!simulate){
-                ItemStack.amount = Mathf.Min(size, other.amount + myAmount);
-                other.amount -= ItemStack.amount - myAmount;
+            // Amount available to transfer
+            int spaceAvailable = maxStackSize - myAmount;
 
-                if (other.amount <= 0){
+            // Amount that can be transferred
+            int transferAmount = Mathf.Min(spaceAvailable, other.amount);
+
+            // Check if the entire stack can be transferred
+            bool fullyTransferred = transferAmount == other.amount;
+
+            if (!simulate && transferAmount > 0)
+            {
+                // Perform the actual transfer
+                if (ItemStack == null)
+                {
+                    // If the slot is empty, clone the other stack and set the amount
+                    ItemStack = other.Clone();
+                    ItemStack.amount = transferAmount;
+                }
+                else
+                {
+                    // Otherwise, add the transfer amount to the existing stack
+                    ItemStack.amount += transferAmount;
+                }
+
+                // Reduce the other stack's amount
+                other.amount -= transferAmount;
+
+                // Set other to null if fully transferred
+                if (other.amount <= 0)
+                {
                     other = null;
                 }
 
+                // Notify listeners of the change
                 OnChange?.Invoke();
             }
-        }
 
+            // Return true only if the other stack is fully transferred
+            return fullyTransferred;
+        }
         // This method now leverages the core Insert logic for ItemStack to maintain consistency
         public bool Insert(Slot other){
             if (!CanAccept(other.ItemStack)) return false;
@@ -192,10 +224,10 @@ namespace Systems.Items{
             return false;
         }
 
-        public bool Decrement(){
+        public bool Decrement(int amount =1){
             if (ItemStack == null) return false;
             OnChange?.Invoke();
-            ItemStack.amount--;
+            ItemStack.amount-=amount;
             if (ItemStack.amount <= 0){
                 ItemStack = null;
                 return true;

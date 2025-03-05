@@ -116,6 +116,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7845240300976606728}
+    - targetCorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4726700778545021060}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       insertIndex: 1
@@ -151,15 +154,14 @@ MonoBehaviour:
     name: Actuated Mover
     indestructible: 0
     rotatable: 1
-    invertRotation: 1
+    invertRotation: 0
     actuatable: 1
     collidable: 1
     destroyTime: 1
     ttFlags: 8
     size: {x: 1, y: 1}
-    description: When Actuated, this contraption will move its item to the forward
-      container, and extract from the previous. It also Actuates those blocks, allowing
-      them to be chained.
+    description: When Actuated, transfers its item forward, pulls an item from behind,
+      and Actuates both containers, enabling chain reactions
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -169,13 +171,13 @@ MonoBehaviour:
     orientation: 0
     rotations:
     - sprites:
-      - {fileID: 21300000, guid: 73963502e169c4c4384beb7e05f50d09, type: 3}
-    - sprites:
       - {fileID: 21300000, guid: 3f8e0315dd5a7604e928115b2487ba80, type: 3}
     - sprites:
-      - {fileID: 21300000, guid: 848859a724356364299f84c8270bd057, type: 3}
+      - {fileID: 21300000, guid: 73963502e169c4c4384beb7e05f50d09, type: 3}
     - sprites:
       - {fileID: 21300000, guid: 12550346e5a5b804394b53dc9c7d6d41, type: 3}
+    - sprites:
+      - {fileID: 21300000, guid: 848859a724356364299f84c8270bd057, type: 3}
     currentSprite:
       sprites: []
   lootTable: []
@@ -188,7 +190,9 @@ MonoBehaviour:
     gridWidth: 1
     scaleDownGridIfSmaller: 0
     type: 0
-  SlotVisualizer: {fileID: 4731648285037132209}
+  InputSlotVis: {fileID: 4731648285037132209}
+  OutputSlotVis: {fileID: 8111013967133859898}
+  ToOutput: {x: 0, y: 0}
   StackSize: 8
 --- !u!212 &3801151613052395935 stripped
 SpriteRenderer:
@@ -273,3 +277,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3714199307962139276, guid: 4e4f95e376e55b9488f84539fc7e9830, type: 3}
   m_PrefabInstance: {fileID: 6869283468566580356}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8220161990378177032
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4882662933755731308}
+    m_Modifications:
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466339862039971668, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+      propertyPath: m_Name
+      value: ItemStackVisual
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+--- !u!4 &4726700778545021060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3714199307962139276, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+  m_PrefabInstance: {fileID: 8220161990378177032}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8111013967133859898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 181267675502486066, guid: f0e307b974992d048845e38aefa1c1be, type: 3}
+  m_PrefabInstance: {fileID: 8220161990378177032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124430ae2c4b15b49899092fa0e761a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

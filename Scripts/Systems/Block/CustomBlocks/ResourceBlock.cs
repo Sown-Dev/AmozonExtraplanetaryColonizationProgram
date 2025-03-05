@@ -21,6 +21,7 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public ItemStack Extract(int amt){
+            amt *= baseYield;
             if (amount - amt <= 0){
                 amt = amount;
                 amount = 0;
@@ -30,7 +31,7 @@ namespace Systems.Block.CustomBlocks{
             amount -= amt;
             //create block debris
             TerrainManager.Instance.CreateBlockDebris(origin, color);
-            return new ItemStack(item, amt * baseYield);    
+            return new ItemStack(item, amt);    
         }
 
         public override bool BlockDestroy(bool dropLoot){

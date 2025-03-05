@@ -163,7 +163,9 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
+  lootTable:
+  - item: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
+    amount: 2
   rotation: 0
   tile: {fileID: 0}
   origin: {x: 0, y: 0}

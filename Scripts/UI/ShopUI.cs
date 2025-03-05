@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Systems.Items;
 using Systems.Round;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -14,14 +15,14 @@ namespace UI{
         public GameObject shopItemPrefab;
         public GameObject shopTierPrefab;
         
-        public ShopButton shopButton;
+        [FormerlySerializedAs("shopButton")] public ShopOfferUI shopOfferUI;
         public ShopOffer dynamiteOffer;
 
         public override void Awake(){
             base.Awake();
             Instance = this;
             DragAllow = false;
-            shopButton.Init(dynamiteOffer);
+            shopOfferUI.Init(dynamiteOffer);
         }
 
         void Start(){

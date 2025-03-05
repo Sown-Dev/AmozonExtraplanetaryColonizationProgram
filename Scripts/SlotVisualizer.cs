@@ -8,7 +8,7 @@ public class SlotVisualizer : MonoBehaviour
 {
     public Slot mySlot;
 
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] public SpriteRenderer spriteRenderer;
 
     private void Update()
     {

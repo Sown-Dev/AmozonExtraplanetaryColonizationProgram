@@ -160,7 +160,7 @@ MonoBehaviour:
     gridWidth: 2
     scaleDownGridIfSmaller: 0
     type: 0
-  DrillTime: 80
+  DrillTime: 100
   DrillAmount: 0
   DrillPositions: []
   DrillFX: []

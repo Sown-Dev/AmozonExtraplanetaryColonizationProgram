@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
   m_Name: BioFuel Cell
   m_EditorClassIdentifier: 
-  <description>k__BackingField: Pure liquid corbydine fuel kept insulated in an iron
-    capsule. One of the most efficient fuel sources in the galaxy.
-  <icon>k__BackingField: {fileID: 21300000, guid: 4ad7149444e39204ea1cc112516dcbc2, type: 3}
+  <description>k__BackingField: Pure liquid biofuel. Just a little shake in open
+    air could set it on fire.
+  <icon>k__BackingField: {fileID: 21300000, guid: 2e8d93a576b5c2e44ab9f74b200210e3, type: 3}
   stackSize: 32
   category: 1
   useCursor: 0
   value: 45
-  tier: 3
+  tier: -1
   fuelValue: 1200

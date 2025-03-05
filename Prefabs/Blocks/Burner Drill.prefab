@@ -223,7 +223,7 @@ MonoBehaviour:
     gridWidth: 3
     scaleDownGridIfSmaller: 0
     type: 0
-  DrillTime: 40
+  DrillTime: 30
   DrillAmount: 1
   DrillPositions:
   - {x: 0, y: 0}

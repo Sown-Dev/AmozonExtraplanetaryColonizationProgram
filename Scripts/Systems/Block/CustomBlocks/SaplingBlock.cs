@@ -27,7 +27,8 @@ public class SaplingBlock: TickingBlock{
     }
 
     public override bool BlockDestroy(bool dropLoot = true){
-        return base.BlockDestroy(false); //never drop yourself
+        lootTable.RemoveAt(0); //prob better to do linq query for myItem to be safe, but atleast this is faster
+        return base.BlockDestroy(true);
     }
 
     public override StringBuilder GetDescription(){

@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 595279ff1864e6343b4536309dbb5c3e, type: 3}
+    - target: {fileID: -4898460592423323599, guid: 080d651db89461d45b650f70ec5f4780, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4898460592423323599, guid: 080d651db89461d45b650f70ec5f4780, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3017160607117403154, guid: 080d651db89461d45b650f70ec5f4780, type: 3}
       propertyPath: m_Name
       value: BlockPower

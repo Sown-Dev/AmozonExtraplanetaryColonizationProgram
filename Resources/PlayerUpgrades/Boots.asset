@@ -17,7 +17,7 @@ MonoBehaviour:
     stats:
       stats:
       - type: 2
-        amount: 1.05
-        operation: 1
+        amount: 0.05
+        operation: 2
     <description>k__BackingField: Gives +5% movement speed
     <icon>k__BackingField: {fileID: 21300000, guid: 7970b099e7d048440a1decf0eb7a4548, type: 3}

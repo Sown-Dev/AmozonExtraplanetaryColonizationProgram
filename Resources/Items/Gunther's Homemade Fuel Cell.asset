@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f35f2fd83260f94a878c378b0ca9a5e, type: 3}
+  m_Name: Gunther's Homemade Fuel Cell
+  m_EditorClassIdentifier: 
+  <description>k__BackingField: Highly flammable, highly reactive, highly toxic,
+    and highly explosive. No one is entirely sure what's in these, but they work
+    great as fuel.
+  <icon>k__BackingField: {fileID: 21300000, guid: ae47e758a4e6ceb439582f2c5d8537a7, type: 3}
+  stackSize: 16
+  category: 1
+  useCursor: 0
+  value: 100
+  tier: -1
+  fuelValue: 2000

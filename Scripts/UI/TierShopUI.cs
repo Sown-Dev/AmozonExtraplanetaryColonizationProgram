@@ -44,8 +44,8 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.logistics){
-                ShopButton button = Instantiate(shopItemPrefab, LogisticsList).GetComponent<ShopButton>();
-                button.Init(offer);
+                ShopOfferUI offerUI = Instantiate(shopItemPrefab, LogisticsList).GetComponent<ShopOfferUI>();
+                offerUI.Init(offer);
             }
         }
         
@@ -56,8 +56,8 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.production){
-                ShopButton button = Instantiate(shopItemPrefab, ProductionList).GetComponent<ShopButton>();
-                button.Init(offer);
+                ShopOfferUI offerUI = Instantiate(shopItemPrefab, ProductionList).GetComponent<ShopOfferUI>();
+                offerUI.Init(offer);
             }
         }
         
@@ -66,8 +66,8 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.electrical){
-                ShopButton button = Instantiate(shopItemPrefab, ElectricalList).GetComponent<ShopButton>();
-                button.Init(offer);
+                ShopOfferUI offerUI = Instantiate(shopItemPrefab, ElectricalList).GetComponent<ShopOfferUI>();
+                offerUI.Init(offer);
             }
         }
 
@@ -76,8 +76,8 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.refinement){
-                ShopButton button = Instantiate(shopItemPrefab, RefineList).GetComponent<ShopButton>();
-                button.Init(offer);
+                ShopOfferUI offerUI = Instantiate(shopItemPrefab, RefineList).GetComponent<ShopOfferUI>();
+                offerUI.Init(offer);
             }
         }
 
@@ -86,8 +86,8 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.misc){
-                ShopButton button = Instantiate(shopItemPrefab, MiscList).GetComponent<ShopButton>();
-                button.Init(offer);
+                ShopOfferUI offerUI = Instantiate(shopItemPrefab, MiscList).GetComponent<ShopOfferUI>();
+                offerUI.Init(offer);
             }
         }
 

@@ -134,7 +134,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
-      insertIndex: 3
+      insertIndex: -1
       addedObject: {fileID: -8526707392088505906}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
 --- !u!61 &2449576365950138683 stripped
@@ -166,10 +166,12 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 0}
     name: Tree
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
     description: just a tree
     bso: {fileID: 0}
@@ -188,7 +190,7 @@ MonoBehaviour:
   origin: {x: 0, y: 0}
   item: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
   baseYield: 2
-  baseAmount: 24
+  baseAmount: 60
   range: 12
   color: {r: 0.5660378, g: 0.27225316, b: 0.15218939, a: 1}
   hardness: 0

@@ -14,17 +14,17 @@ bool hasGenerated = false;
         public void GenerateLoot(){
             if(hasGenerated) return;
             hasGenerated = true;
-            int lootAmount  = 2+Random.Range(0,3) + RoundManager.Instance.roundNum;
+            int lootAmount = 1 + Random.Range(0, 3); //+ RoundManager.Instance.roundNum;
             
             Utils.Shuffle(drops);
-            drops.OrderBy( x => x.tier);
+            //drops.OrderBy( x => x.tier); used to order by tier, but whatever we can just skip over non matching tiers. no other code changes required
             
             //add loot going from curent tier to 0
             while (lootAmount > 0){
 
 
                 for (int i = drops.Length - 1; i >= 0 && lootAmount > 0; i--){
-                    if (drops[i].tier > RoundManager.Instance.roundNum) continue;
+                    //if (drops[i].tier > RoundManager.Instance.roundNum) continue;
 
                     //if(Random.value<0.3f) continue; //random chance to skip
                     if (drops[i].chance > Random.value){
@@ -44,10 +44,10 @@ bool hasGenerated = false;
         }
         
         
-        //Can't extract
+        /*//Can't extract
         public override ItemStack Extract(){
             return null;
-        }
+        }*/
 
         public override void OnUIClose(){
             base.OnUIClose();

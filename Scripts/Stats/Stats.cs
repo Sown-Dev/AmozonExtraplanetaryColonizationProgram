@@ -8,6 +8,8 @@ public enum Statstype{
     Movespeed=2,
     MiningSpeed=3,
     MiningAmount=4,
+    Range=5,
+    ExtraTime=6,
 }
 
 [Serializable]

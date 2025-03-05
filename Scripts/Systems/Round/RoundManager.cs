@@ -18,44 +18,48 @@ namespace Systems.Round{
 
         //Prefabs
         [SerializeField] private GameObject RoundCompleteUIPrefab;
+        [SerializeField] private GameObject ContractSelectUIPrefab;
 
         //Round info
         public List<ShopOffer> allOffers;
-
         public List<ShopTier> shopTiers;
-
         public UpgradeSO[] upgrades;
-
         public Contract currentContract;
 
         public int money;
         public int roundNum{ private set; get; }
-
         public float roundTime;
 
+        public float cooldownTimer = 0f;
+        private bool isInCooldown = false;
+
+
+        public float addTime;
+
         int lives = 0;
+        bool lostGame;
+
 
         public WorldStats roundStats;
 
         public LoseGameUI loseGameUI;
 
 
-        bool lostGame;
-
-
         void Awake(){
             roundStats = new WorldStats();
             shopTiers = new List<ShopTier>();
-            roundStats= new WorldStats();
+            roundStats = new WorldStats();
         }
 
         private void Start(){
             Instance = this;
             roundNum = -1;
-            StartRound(new Contract{
+            /*StartRound(new Contract{
                 quota = 0, requiredQuota = 300, sellList = ItemManager.Instance.GetRandomItemsByTier(0, 3).ToList(), reward = 50,
                 signBonus = 0, TimeGiven = 450, sponsor = Sponsor.Amozon
-            });
+            });*/
+
+            StartCooldown(30f);
 
 
             money = 100;
@@ -64,36 +68,51 @@ namespace Systems.Round{
             CursorManager.Instance.uiDepth = 0;
         }
 
+
+        // Modified FixedUpdate to handle cooldown
         private void FixedUpdate(){
-            if (roundTime >= 0){
-                roundTime -= Time.deltaTime;
+            if (currentContract != null){
+                // Handle contract timer
+                if (roundTime > 0){
+                    roundTime -= Time.deltaTime;
+                }
+                else if (!lostGame){
+                    LoseRound();
+                }
+            }
+            else if (isInCooldown){
+                //indefinite cooldown
+                if (cooldownTimer == -1){ }
+                else{
+                    // Handle cooldown timer
+                    cooldownTimer -= Time.deltaTime;
+                    if (cooldownTimer <= 0){
+                        isInCooldown = false;
+                        ChooseContract();
+                        //open contract ui
+                    }
+                }
             }
 
-            if (roundTime <= 0 && !lostGame){
-                //lose game
-                LoseRound();
-            }
-#if ALLITEMS1
-            if (Input.GetKey(KeyCode.F1)){
-                roundTime -= 1;
-            }
+            if (GameManager.DevMode){
+                if (Input.GetKey(KeyCode.F1)){
+                    roundTime -= 1;
+                }
 
-            if (Input.GetKey(KeyCode.F2)){
-                AddMoney(95);
-            }
+                if (Input.GetKey(KeyCode.F2)){
+                    AddMoney(95);
+                }
 
-            if (Input.GetKeyDown(KeyCode.F4)){
-                RegenerateShop();
-            }
+                if (Input.GetKeyDown(KeyCode.F4)){
+                    RegenerateShop();
+                }
 
-            if (Input.GetKeyDown(KeyCode.F5)){
-                RegenerateRoundShop();
+                if (Input.GetKeyDown(KeyCode.F5)){
+                    RegenerateRoundShop();
+                }
             }
-#endif
         }
 
-
-    
 
         //only call after checking if the item is in the sell list
         public void Sell(ItemStack stack){
@@ -107,6 +126,11 @@ namespace Systems.Round{
 
         public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
+
+            if (money >= 1000){
+                GameManager.Instance.UnlockAchievement("1000_DOLLARS");
+            }
+
             if (countTowardsQuota){
                 currentContract.quota += amount;
                 if (currentContract.quota >= currentContract.requiredQuota){
@@ -128,7 +152,7 @@ namespace Systems.Round{
 
             return false;
         }
-        
+
         public void AddTime(float time){
             roundTime += time;
         }
@@ -136,33 +160,63 @@ namespace Systems.Round{
 
         bool roundComplete;
 
-        //Triggers when we have reached the quota
+        // Modified QuotaReach to trigger cooldown
         public void QuotaReach(){
             CursorManager.Instance.OpenUI();
 
+            if (roundNum == 0){
+                GameManager.Instance.UnlockAchievement("FIRST_ROUND");
+            }
 
             RoundCompleteUI rc = Instantiate(RoundCompleteUIPrefab, importantUIs)
                 .GetComponent<RoundCompleteUI>();
 
             rc.Init(currentContract.quota, roundTime);
             roundComplete = true;
+
+           
         }
 
+        // Modified StartRound to handle null contracts
         public void StartRound(Contract newContract){
+            if (newContract == null){
+                Debug.LogWarning("Tried to start round with null contract!");
+                return;
+            }
+            
+            
+
             roundComplete = false;
-
             roundNum++;
-
             currentContract = newContract;
-
-
             roundTime = currentContract.TimeGiven;
 
+            if (addTime > 0){
+                roundTime += addTime;
+                addTime = 0;
+            }
 
             shopTiers.Add(GenerateShop(roundNum));
 
 
             infoUI.Refresh();
+            
+            TutorialManager.Instance.StartTutorial("firstcontract", 0.1f);
+        }
+
+        public void StartCooldown(float duration){
+            currentContract = null;
+            cooldownTimer = duration;
+            isInCooldown = true;
+            infoUI.Refresh();
+        }
+
+        public void ChooseContract(){
+            int contractNum = roundNum > -1 ? 3 : 2;
+            ContractSelectUI ui = Instantiate(ContractSelectUIPrefab, importantUIs).GetComponent<ContractSelectUI>();
+            ui.Init(GenerateNewContracts(contractNum));
+            TutorialManager.Instance.StartTutorial("contracts",0.2f);
+
         }
 
         public void RegenerateRoundShop(){
@@ -184,7 +238,7 @@ namespace Systems.Round{
             List<ShopOffer> tierOffers = allOffers.Where(t => t.tier == tier).ToList();
 
 // These will be pulled from world stats when added
-            int logistics = 1;
+            int logistics = tier > 0 ? 1 : 0;
             int electrical = tier >= 2 ? 1 : 0;
             int refine = tier == 0 ? 0 : 1;
             int production = 1;
@@ -262,8 +316,16 @@ namespace Systems.Round{
         //generates new contracts for next round
         public Contract[] GenerateNewContracts(int numContracts){
             Contract[] contracts = new Contract[numContracts];
+            List<Sponsor> allSponsors = Enum.GetValues(typeof(Sponsor)).Cast<Sponsor>().ToList();
+            if (roundNum == -1){
+                allSponsors = new List<Sponsor>{Sponsor.Amozon, Sponsor.Pivot, Sponsor.Anogen};
+            }
             for (int i = 0; i < numContracts; i++){
-                contracts[i] = new Contract(roundNum + 1, Random.Range(2, 4));
+                
+                Sponsor s = allSponsors[Random.Range(0, allSponsors.Count)];
+               
+                contracts[i] = new Contract(roundNum + 1, Random.Range(2, 4), s);
+                allSponsors.Remove(s);
             }
 
             return contracts;
@@ -273,91 +335,5 @@ namespace Systems.Round{
             //sort by tier.
             //allOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
         }
-    }
-
-    public class Contract{
-        public int quota;
-        public int requiredQuota;
-        public List<Item> sellList;
-        public int reward;
-        public int signBonus;
-
-        public int TimeGiven;
-        public Sponsor sponsor;
-
-        public Contract(){ }
-
-        public Contract(int tier, int itemsAmt){
-            requiredQuota = (int)((400f * ((tier + 1f) * (tier / 2f)) + 300) / 50) * 50;
-            
-            sponsor = (Sponsor)Random.Range(0, Sponsor.GetValues(typeof(Sponsor)).Length);
-            
-            quota = 0;
-
-            
-
-            // Generate random items to be part of the contract
-            sellList = ItemManager.Instance.GetRandomItemsByTier(tier, itemsAmt).ToList();
-
-            // Randomly generate reward and sign bonus for the contract
-            reward = (Random.Range(80, 160) + (3-sellList.Count)*40) * tier;
-            signBonus = 0;
-
-            TimeGiven = 420 + (tier * (90+Random.Range(-60, 45)));
-
-            switch ( sponsor){
-                case Sponsor.CorbCO:
-                    requiredQuota = (int)(requiredQuota * 1.1f);
-                    reward += 100;
-                    TimeGiven += 10;
-                    break;
-                case Sponsor.Anogen:
-                    reward /= 2;
-                    requiredQuota += 100;
-                    TimeGiven += 80;
-                    signBonus += 40;
-                    break;
-                case Sponsor.Silus:
-                    TimeGiven -= 25;
-                    reward *= 2;
-                    requiredQuota -= 100;
-                    sellList.RemoveAt(0);
-                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier+1, 1));
-                    
-                    break;
-                case Sponsor.Toyoma:
-                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier-1, 1));
-                    TimeGiven -= 60;
-                    reward = 0;
-
-                    break;
-                case Sponsor.Amozon:
-                    reward += 25; //Partner bonus
-                    break;
-                case Sponsor.Pivot:
-                    sellList.RemoveRange(1, sellList.Count - 1);
-                    TimeGiven -= 45;
-                    reward += 500 * tier;
-                    requiredQuota/=2;
-                    requiredQuota += 200;
-                    
-                    break;
-            }
-            
-            TimeGiven =  Mathf.RoundToInt(TimeGiven / 15f) * 15;
-            requiredQuota = requiredQuota / 50 * 50;
-            reward = reward / 10 * 10;
-           // Debug.Log($"New contract generated for tier {tier} with {itemsAmt} items. Required quota: {requiredQuota}, Reward: {reward}, SignBonus: {signBonus}");
-        }
-
-        
-    }
-    public enum Sponsor{
-        CorbCO,
-        Anogen,
-        Silus,
-        Toyoma,
-        Amozon,
-        Pivot,
     }
 }

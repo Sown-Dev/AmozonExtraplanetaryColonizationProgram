@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      standing-confident-man-DW1RR1_0: 3280344904753705480
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

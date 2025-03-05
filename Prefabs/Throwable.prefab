@@ -148,7 +148,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-2191679372146513533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,9 +162,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -4788089487448818009}
-  sr: {fileID: 5800216070653744165}
+  sr: {fileID: 8368856016182629934}
   onCollide: {fileID: 0}
   DestroyOnCollide: 1
+  destroyDelay: 0
 --- !u!58 &-8526604435466743775
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using Systems.Block;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI{
@@ -18,9 +19,9 @@ namespace UI{
 
         public void Update(){
             
-            if (block != null){
+            if (block != null && !EventSystem.current.IsPointerOverGameObject()){
                 cg.alpha = 1;
-                cg.blocksRaycasts = true;
+                //cg.blocksRaycasts = true;
                 cg.interactable = true;
                 nameText.text = block.properties.name;
                 descText.text = block.GetDescription().ToString();

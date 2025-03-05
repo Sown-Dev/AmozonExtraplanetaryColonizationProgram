@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf42078941081f4386419ceaf64ceea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  highLight: {fileID: 0}
+  text: {fileID: 5175638908970341099}
+  highlight: {fileID: 0}
 --- !u!225 &8840323040450082237
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 1066647479656683141}
   - component: {fileID: 7965117172857573094}
   - component: {fileID: 5175638908970341099}
-  - component: {fileID: 6794135068949763528}
   - component: {fileID: 8597304319832285170}
   m_Layer: 0
   m_Name: Text
@@ -182,8 +181,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 0}
-  m_SizeDelta: {x: 192, y: 0}
+  m_AnchoredPosition: {x: 104, y: 0}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7965117172857573094
 CanvasRenderer:
@@ -213,7 +212,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Test test '
+  m_text: Welcome to your first day on the job! To get started, make sure to stretch
+    your legs and move around a bit. Light exercise will reduce the effects of cryosleep
+    hangover. (Press Space to continue)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ac9fb987b73617419bfb0c5ca9c6e2c, type: 2}
   m_sharedMaterial: {fileID: -1804899757545243514, guid: 1ac9fb987b73617419bfb0c5ca9c6e2c, type: 2}
@@ -250,9 +251,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0.25
+  m_characterSpacing: -12.5
+  m_wordSpacing: -12.5
+  m_lineSpacing: 37.5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -284,46 +285,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6794135068949763528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4250611793951759202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: 
-    m_TableEntryReference:
-      m_KeyId: 0
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5175638908970341099}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &8597304319832285170
 MonoBehaviour:
   m_ObjectHideFlags: 0

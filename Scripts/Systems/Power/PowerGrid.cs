@@ -59,8 +59,7 @@ public class PowerGrid{
         }
         if(producing < powerNeeded){
             //use stored power
-            UsePower(powerNeeded - producing, Time.deltaTime);
-            remainingPower+= powerNeeded - producing;
+            remainingPower+=UsePower(powerNeeded - producing, Time.deltaTime);
         }
         
 
@@ -81,6 +80,7 @@ public class PowerGrid{
     }
     
     public void StorePower(int power, float deltaTime){
+        Debug.Log($"Storing {power} power");
         storedPower += power*deltaTime;
         if (storedPower > capacity){
             storedPower = capacity;
@@ -88,14 +88,15 @@ public class PowerGrid{
     }
     
     public int UsePower(int power, float deltaTime){
-        if (storedPower >= power){
-            storedPower -= power*deltaTime;
+        float storedNeeded = power*deltaTime;
+        if (storedPower >= storedNeeded){
+            storedPower -= storedNeeded;
+            Debug.Log($"Using {power} power, but only {storedPower} is available. Used {power} power");
             return power;
         }
         else{
-            int usedPower = (int)storedPower;
-            storedPower = 0;
-            return usedPower;
+            Debug.Log($"Using {power} power, but only {storedPower} is available. Used 0 power");
+            return 0;
         }
     }
 

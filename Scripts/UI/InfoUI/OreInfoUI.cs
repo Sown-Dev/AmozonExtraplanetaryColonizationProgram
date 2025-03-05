@@ -3,6 +3,7 @@ using Systems.Items;
 using Systems.Terrain;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI{
@@ -27,20 +28,20 @@ namespace UI{
 
         public void Update(){
             
-            if (!Selected || myOre == null){
-                cg.alpha = 0;
-                cg.blocksRaycasts = false;
-                cg.interactable = false;
-                layoutElement.ignoreLayout = true;
-            }
-            else{
+            if (Selected && myOre != null && !EventSystem.current.IsPointerOverGameObject()){
                 cg.alpha = 1;
                 cg.blocksRaycasts = true;
                 cg.interactable = true;
                 nameText.text = myOre.myProperties?.name;
-                amountText.text = "Remaining: "+myOre.amount;
+                amountText.text = "Remaining: " + myOre.amount;
                 icon.sprite = myOre.tile.m_DefaultSprite;
                 layoutElement.ignoreLayout = false;
+            }
+            else{
+                cg.alpha = 0;
+                cg.blocksRaycasts = false;
+                cg.interactable = false;
+                layoutElement.ignoreLayout = true;
             }
         }
         bool Selected = false;

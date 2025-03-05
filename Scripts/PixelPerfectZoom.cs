@@ -30,8 +30,15 @@ public class PixelPerfectCameraZoom : MonoBehaviour{
     public int minZoom = 1;
 
 
+    private void FixedUpdate(){
+       transform.localPosition= Vector3Int.RoundToInt( transform.localPosition/16)*16;
+
+    }
+
     void Update(){
         if(Time.timeScale <= 0) return;
+        
+        
         
         if (Input.mouseScrollDelta.y != 0){
             // Determine the direction to zoom based on mouse scroll direction

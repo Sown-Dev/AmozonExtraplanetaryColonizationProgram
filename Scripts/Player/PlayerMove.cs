@@ -10,6 +10,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public partial class Player : Unit{
+    
+    [Header("PlayerMove Fields")]
     [SerializeField] protected Collider2D playerCollider; // Reference to the player's collider
     [SerializeField] private SpriteRenderer shadow;
     [SerializeField] private Transform spriteHolder;
@@ -17,15 +19,17 @@ public partial class Player : Unit{
     [SerializeField] private Transform highlights;
     [SerializeField] private GameObject Invalid;
     [SerializeField] private TileIndicatorManager indicatorManager;
+    [SerializeField] private GameObject DropPod; //only spawned at beginning, destroyed on landing
+    [SerializeField] private GameObject DropPodDestroy;
 
     private float moveV = 4600f;
     private float maxSpeed = 10f;
     public float jumpVelocity = 10f; // The initial velocity applied when jumping   
-    public float gravity = -32; // Gravity applied to the player
+    public float gravity = -36; // Gravity applied to the player
     private float yVelocity = 0f; // Current vertical velocity of the player
     private float groundLevel = 0f; // The Y position that represents the ground level
     private float disableColliderHeight = 1f; // Height at which the collider is disabled
-    private bool m_Grounded = true;
+    private bool m_Grounded = false;
 
     private void Update(){
         if(Time.timeScale<=0) return;
@@ -47,9 +51,8 @@ public partial class Player : Unit{
 
             // Check if player has landed
             if (spriteHolder.transform.localPosition.y <= groundLevel){
-                spriteHolder.transform.localPosition = new Vector3(0, groundLevel, 0); // Reset to ground level
-                yVelocity = 0; // Reset vertical velocity
-                m_Grounded = true; // Player is now grounded
+                Land();
+               
             }
         }
         else{
@@ -77,16 +80,24 @@ public partial class Player : Unit{
         am.SetFloat("yVel", yVelocity);
 
 
+        
+        //round position
+        
         // Disable or enable the collider based on height
-        playerCollider.enabled = sr.transform.localPosition.y < disableColliderHeight;
+        playerCollider.enabled = spriteHolder.transform.localPosition.y < disableColliderHeight;
 
-        if (sr.sortingOrder == 0)
+        if (sr.sortingOrder == 0){
             sr.sortingOrder = spriteHolder.transform.localPosition.y < disableColliderHeight ? 0 : 2;
+        }
+        handVisualizer.spriteRenderer.sortingOrder = sr.sortingOrder;
 
         rb.drag = m_Grounded ? 10 : 9;
 
-        Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
+        Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        
+        if(move != Vector2.zero){
+            TutorialManager.Instance.StartTutorial("interaction",1);
+        }
 
         if (move.x > 0){
             sr.transform.localScale = new Vector3(1, 1, 1);
@@ -196,6 +207,27 @@ public partial class Player : Unit{
         } 
 
         rb.AddForce(move * (moveV * finalStats[Statstype.Movespeed]) * Time.deltaTime * (m_Grounded ? 1f : 1.2f));
+    }
+bool firstLand = true;
+    public void Land(){
+        spriteHolder.transform.localPosition = new Vector3(0, groundLevel, 0); // Reset to ground level
+        Debug.Log("Landed" + yVelocity);
+        if (yVelocity < -30){
+            TerrainManager.Instance.CreateBlockDebris((Vector2)transform.position, Color.gray);
+        }
+
+        yVelocity = 0; // Reset vertical velocity
+        m_Grounded = true; // Player is now grounded
+        
+        if (firstLand){
+            firstLand = false;
+            myCursor.gameObject.SetActive(true);
+            TutorialManager.Instance.StartTutorial("controls",1);
+            Instantiate(DropPodDestroy, DropPod.transform.position, quaternion.identity);
+            Destroy(DropPod);
+        }
+        
+
     }
 
     [HideInInspector] public float destroyTimer = 0;

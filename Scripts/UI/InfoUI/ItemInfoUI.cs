@@ -2,6 +2,7 @@
 using Systems.Items;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI{
@@ -29,24 +30,24 @@ namespace UI{
 
         public void Update(){
             
-            if (!Selected){
-                cg.alpha = 0;
-                cg.blocksRaycasts = false;
-                cg.interactable = false;
-                layoutElement.ignoreLayout = true;
-            }
-            else{
+            if (Selected && !EventSystem.current.IsPointerOverGameObject()){
                 cg.alpha = 1;
                 cg.blocksRaycasts = true;
                 cg.interactable = true;
                 nameText.text = item.item?.name;
-                descText.text =item.item?.ToString();
+                descText.text = item.item?.ToString();
                 icon.sprite = item.item?.icon;
-                sellPriceText.text = "$"+item.item?.value;
+                sellPriceText.text = "$" + item.item?.value;
                 
                 //tierText.text = item.item?.tier.ToString();
                 
                 layoutElement.ignoreLayout = false;
+            }
+            else{
+                cg.alpha = 0;
+                cg.blocksRaycasts = false;
+                cg.interactable = false;
+                layoutElement.ignoreLayout = true;
             }
         }
         bool Selected = false;

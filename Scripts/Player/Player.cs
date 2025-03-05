@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using NewRunMenu;
 using Systems;
+using Systems.Block;
 using Systems.Items;
 using Systems.Round;
 using TMPro;
+using UI;
+using UI.BlockUI;
 using Unity.Mathematics;
 using UnityEngine;
 
-public partial class Player : Unit{
+public partial class Player : Unit, IContainer{
     public static Player Instance;
 
     [SerializeField] public Cursor myCursor;
@@ -30,15 +34,15 @@ public partial class Player : Unit{
         myCharacter = GameManager.Instance?.selectedChar ?? myCharacter;
         //add upgrades
         foreach (UpgradeSO u in myCharacter.startingUpgrades){
-            AddUpgrade( (Upgrade)u.u,false);
+            AddUpgrade((Upgrade)u.u, false);
         }
-        
+
         base.Awake();
         Instance = this;
         myCursor.OnLeftClick.AddListener(ClickPos);
         myCursor.OnRightClick.AddListener(RightClickPos);
         myCursor.OnCTRLClick.AddListener(CTRLClickPos);
-        SelectSlot(Inventory.GetSlot(0));
+        SelectSlot(Inventory.GetSlot(7));
         //Inventory.AddOnInsert(OnInsert); //shit doesnt work bruh
 
 
@@ -46,8 +50,6 @@ public partial class Player : Unit{
         myMat.SetColor("_ReplaceColor1", myCharacter.shirtColor);
         myMat.SetColor("_ReplaceColor2", myCharacter.pantsColor);
         myMat.SetColor("_ReplaceColor3", myCharacter.skinColor);
-        
-        
     }
 
     public bool Insert(ref ItemStack s, bool popup = true){
@@ -59,6 +61,10 @@ public partial class Player : Unit{
         }
 
         return Inventory.Insert(s);
+    }
+
+    public ItemStack Extract(){
+        return Inventory.Extract();
     }
 
 
@@ -85,8 +91,14 @@ public partial class Player : Unit{
         foreach (ItemStack i in myCharacter.startingItems){
             Inventory.Insert(i.Clone(), false);
         }
+
+        spriteHolder.transform.localPosition = new Vector3(0, 170, 0);
+        yVelocity = -10;
+
+        myCursor.gameObject.SetActive(false); //disable at first, enable when we land
     }
 
+   
     public void SelectSlot(Slot slot){
         if (SelectedSlot != null)
             SelectedSlot.Selected = false;
@@ -104,9 +116,25 @@ public partial class Player : Unit{
 
 
     private void RightClickPos(Vector2Int pos){
-        if (Vector2.Distance(pos, transform.position) > 12f)
-            return;
-        TerrainManager.Instance.GetBlock(pos)?.Use(this);
+        Block b = TerrainManager.Instance.GetBlock(pos);
+
+        if (b){
+            if (Vector2.Distance(b.transform.position, transform.position) > 10f){
+                if (BlockUIManager.Instance.currentBlockUI?.block == b){
+                    //b.Use(this); could do this also, same thing basically as using should just close it       
+                    BlockUIManager.Instance.CloseBlockUI();
+                }
+                else{
+                    Popup("Out of reach", new Color(0.9f, 0.4f, 0.4f));
+                    return;
+                }
+            }
+            else{
+                b.Use(this);
+
+            }
+
+        }
     }
 
     private void CTRLClickPos(Vector2Int pos){
@@ -117,7 +145,7 @@ public partial class Player : Unit{
             //extract to my inventory
             bool b = true;
             while (b)
-                b = CU.Transfer(containerBlock, Inventory);
+                b = CU.Transfer(containerBlock, this);
         }
     }
 
@@ -125,8 +153,9 @@ public partial class Player : Unit{
         Instantiate(OnDeath, transform.position, quaternion.identity);
         myCam.transform.SetParent(transform.parent.parent);
         Destroy(gameObject);
-    }
 
+    }
+  
     public override Stats CalculateStats(){
         finalStats = base.CalculateStats();
         finalStats.Combine(myCharacter.stats);
@@ -135,6 +164,10 @@ public partial class Player : Unit{
     }
 
     public void Popup(string s){
-        popupList.AddPopup(s);
+        popupList.AddPopup(s, Color.white);
+    }
+
+    public void Popup(string s, Color c){
+        popupList.AddPopup(s, c);
     }
 }

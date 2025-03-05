@@ -133,6 +133,24 @@ namespace Systems.Block.CustomBlocks{
             ConveyorContainer.Remove(cs);
         }
 
+        public override bool BlockDestroy(bool dropLoot = true){
+          //add all items to loot table
+          foreach (ConveyorSlot cs in ConveyorContainer){
+              lootTable.Add(cs.mySlot.ItemStack);
+          }
+
+          return base.BlockDestroy(dropLoot);
+        }
+
+        public override List<TileIndicator> GetIndicators(){
+            var e = base.GetIndicators();
+            //add input and output indicators
+            e.Add( new TileIndicator(new Vector2Int[]{Orientation.Up.GetVectorInt()}, IndicatorType.InsertingTo));
+            
+            
+            return e;
+        }
+
 
         public class ConveyorSlot{
             public Slot mySlot;

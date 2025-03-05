@@ -382,6 +382,13 @@ public partial class TerrainManager : MonoBehaviour{
         if (tickTimer >= tickTime){
             tickTimer -= tickTime;
             totalTicksElapsed++;
+            bool resetActuate = totalTicksElapsed % 2 == 0;
+            if (resetActuate){
+                foreach (TickingBlock tickingBlock in tickingBlocks.ToList()){
+                    tickingBlock.ResetActuated(); //can prob add an empty interface to only check things that need to be reset
+                }
+            }
+
             foreach (TickingBlock tickingBlock in tickingBlocks.ToList()){  //tolist could be very bad. idk the performance impact, but need some way otherwise to destroy blocks at end frame
 
                 tickingBlock.Tick();

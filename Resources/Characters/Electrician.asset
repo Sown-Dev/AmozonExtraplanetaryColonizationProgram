@@ -12,21 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867aba9949ccf1244bf2f66f76499b8c, type: 3}
   m_Name: Electrician
   m_EditorClassIdentifier: 
-  description: n/a (Georg refused Partner Assessment)
-  legalName: Georg Formane
+  description: n/a (Frank refused Partner Assessment)
+  legalName: Frank Formane
   startingItems:
   - item: {fileID: 11400000, guid: d30994e50df07ca42870d6d29369701a, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 08dc00519e6c18e4280f1a0008359605, type: 2}
+  - item: {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
     amount: 10
-  - item: {fileID: 11400000, guid: c34fb669fdcdf2d47b2db6754f16846c, type: 2}
-    amount: 2
   startingUpgrades: []
   portrait: {fileID: 21300000, guid: df12b476cf172164aa6630b8021fee7f, type: 3}
   icon: {fileID: 21300000, guid: 0ccf18d22a4915b42bebb2a114e596bb, type: 3}
-  shirtColor: {r: 0, g: 0.30631447, b: 0.9150943, a: 1}
+  shirtColor: {r: 0.125534, g: 0.37090147, b: 0.8584906, a: 1}
   pantsColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   skinColor: {r: 0.8396226, g: 0.6797308, b: 0.5584282, a: 0}
   hatColor: {r: 0, g: 0, b: 0, a: 0}

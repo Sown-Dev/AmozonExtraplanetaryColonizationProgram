@@ -130,12 +130,14 @@ MonoBehaviour:
     <myItem>k__BackingField: {fileID: 0}
     name: ResourceExtractor
     indestructible: 0
-    rotateable: 0
+    rotatable: 0
+    invertRotation: 0
     actuatable: 0
     collidable: 1
     destroyTime: 1
+    ttFlags: 0
     size: {x: 1, y: 1}
-    description: 
+    description: Extract resources from surrounding blocks using magic
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -157,7 +159,6 @@ MonoBehaviour:
     type: 0
   DrillTime: 80
   DrillAmount: 2
-  hardness: 0
   ExtractPositions:
   - {x: 0, y: 1}
   - {x: 1, y: 0}

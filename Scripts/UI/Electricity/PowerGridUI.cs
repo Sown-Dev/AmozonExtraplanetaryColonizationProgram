@@ -36,7 +36,7 @@ namespace UI{
                     producerUI.GetComponent<GridProducerUI>().Init(producer);
                 }else if(block is IPowerBattery battery){
                     GameObject batteryUI = Instantiate(batteryUIPrefab, batteryList.transform);
-                    //producerUI.GetComponent<GridProducerUI>().Init(battery);
+                    batteryUI.GetComponent<GridBatteryUI>().Init(battery);
                 }
                 else{
                     Debug.LogError("Block is not a consumer or producer");

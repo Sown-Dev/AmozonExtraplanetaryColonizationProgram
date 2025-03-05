@@ -23,6 +23,10 @@ public class RoundCompleteUI : MonoBehaviour{
     private float toRemaining;
     private float timeBonus;
     private int realTimeBonus;
+    
+    public CanvasGroup addtimeCG;
+    public TMP_Text addtimeText;
+    private float addTime;
 
     public CanvasGroup rewardCG;
     public TMP_Text rewardText;
@@ -35,7 +39,6 @@ public class RoundCompleteUI : MonoBehaviour{
 
     
     
-    public GameObject ContractSelectUIPrefab;
     
     private void Awake(){
         continueButton.onClick.AddListener(Continue);
@@ -47,9 +50,12 @@ public class RoundCompleteUI : MonoBehaviour{
         timeCG.alpha = 0;
         rewardCG.alpha = 0;
         totalCG.alpha = 0;
-        
+        addtimeCG.alpha = 0;
+
         continueButton.interactable = false;
-        
+        addTime = time/ 2;
+        RoundManager.Instance.addTime = addTime;
+
         StartCoroutine(StartSequence(earn, time));
     }
 
@@ -66,7 +72,14 @@ public class RoundCompleteUI : MonoBehaviour{
         yield return new WaitForSecondsRealtime(1f);
         lerpTime = true;
         yield return new WaitForSecondsRealtime(1.5f);
+        addtimeText.text = $"Extra time for next contract:      <color=#118811ff>+{(int)(addTime/ 60)}:{(addTime % 60):00}</color>";
+        addtimeCG.alpha = 1;
+        yield return new WaitForSecondsRealtime(1f);
+        
+        
         totalBonus = realTimeBonus + RoundManager.Instance.currentContract.reward;
+        
+        
 
         rewardText.text = $"Contract Reward: <color=#118811ff>${RoundManager.Instance.currentContract.reward}</color>";
         rewardCG.alpha = 1;
@@ -91,7 +104,7 @@ public class RoundCompleteUI : MonoBehaviour{
 
         
         timeText.text =
-            $"Time Remaining: <color=#226633ff>{(int)(timeRemaining / 60)}:{(timeRemaining % 60).ToString("00")}</color>\nTime Bonus:    <color=#118811ff>+${(int)timeBonus}</color>";
+            $"Time Remaining: <color=#226633ff>{(int)(timeRemaining / 60)}:{(timeRemaining % 60):00}</color>\nTime Bonus:    <color=#118811ff>+${(int)timeBonus}</color>";
 
         if (lerpEarn){
             
@@ -126,6 +139,8 @@ public class RoundCompleteUI : MonoBehaviour{
         timeRemaining = _timeRemaining;
         toRemaining = 0;
         realTimeBonus = (int)(timeRemaining)  * (RoundManager.Instance.roundNum+1);
+
+        
         timeBonus = 0;
         
         timeCG.alpha = 1;
@@ -134,8 +149,7 @@ public class RoundCompleteUI : MonoBehaviour{
     public void Continue(){
         RoundManager.Instance.AddMoney( totalBonus, false);
 
-        ContractSelectUI ui = Instantiate(ContractSelectUIPrefab, transform.parent).GetComponent<ContractSelectUI>();
-        ui.Init(RoundManager.Instance.GenerateNewContracts( 3));
+       RoundManager.Instance.StartCooldown(30);
        
                 
         CursorManager.Instance.CloseUI();

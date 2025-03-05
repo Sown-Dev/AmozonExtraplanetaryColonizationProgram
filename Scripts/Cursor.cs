@@ -39,6 +39,8 @@ public class Cursor : MonoBehaviour
 
     void Update()
     {
+        if(Time.timeScale<=0) return;
+        
         // Update current position based on mouse position
         currentPos = Vector2Int.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 

@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Corbydine Infuser2_0: -1098509705616133447
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

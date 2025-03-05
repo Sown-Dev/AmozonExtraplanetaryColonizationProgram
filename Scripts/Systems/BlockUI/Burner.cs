@@ -57,8 +57,10 @@ public class Burner : IBlockUI, IContainer{
             if (!fuelContainer.isEmpty()){
                 Slot s= fuelContainer.GetExtractionSlot();
                 if (s !=null  && s.ItemStack?.item.fuelValue > 0){
+                    //need temp values bc decrement sets to null
+                    int fuelValue = s.ItemStack.item.fuelValue;
                     if (s.Decrement()){
-                        fuelTime = s.ItemStack.item.fuelValue;
+                        fuelTime = fuelValue;
                         burnTimeTotal = fuelTime;
                         return true;
                     }

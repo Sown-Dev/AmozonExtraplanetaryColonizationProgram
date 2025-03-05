@@ -1,4 +1,6 @@
-﻿using Systems.BlockUI;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Systems.BlockUI;
 using Systems.Items;
 using UnityEngine;
 
@@ -13,11 +15,14 @@ namespace Systems.Block
         public IContainerBlock toInsert;
         public Transform arm;
         
+        public bool hiddenDirSelect = false;
+        
         [SerializeField] private SlotVisualizer slotVisualizer;
 
         protected override void Awake()
         {
             DirSelect = new DirectionSelect();
+            DirSelect.Hidden = hiddenDirSelect;
             base.Awake();
 
             outputProperties.size = 1;
@@ -116,6 +121,16 @@ namespace Systems.Block
         public override ItemStack Extract(){
             //can't extract
             return null;
+        }
+        
+        public override List<TileIndicator> GetIndicators(){
+            var e = base.GetIndicators();
+            //add input and output indicators
+            e.Add( new TileIndicator(new Vector2Int[]{Orientation.Down.GetVectorInt()}, IndicatorType.InsertingTo));
+            e.Add( new TileIndicator(new Vector2Int[]{Orientation.Up.GetVectorInt()}, IndicatorType.ExtractingFrom));
+            
+            
+            return e;
         }
     }
 }

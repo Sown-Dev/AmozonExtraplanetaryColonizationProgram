@@ -16,12 +16,14 @@ MonoBehaviour:
     proper safety and operating procedures is concerning
   legalName: Gunther Shmauchenschmidt
   startingItems:
-  - item: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
+  - item: {fileID: 11400000, guid: f6c49820d6b19c245ab0d6b1f9cd1880, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
+  - item: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
     amount: 2
+  - item: {fileID: 11400000, guid: 62b580cf9896fa149a6caf23ce7b604a, type: 2}
+    amount: 4
   startingUpgrades:
   - {fileID: 11400000, guid: 685810cb4d4a46e43b18299412e1409e, type: 2}
   portrait: {fileID: 21300000, guid: ec8e5616f7c5ba34b8ad9a0d9b9f114e, type: 3}

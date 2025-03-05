@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Scripting;
 
 public class CursorManager : MonoBehaviour{
@@ -37,7 +38,16 @@ public class CursorManager : MonoBehaviour{
     private void Update(){
         Time.timeScale = uiDepth>0 ? 0 : 1;
         
+        //constantly print what the mouse is over
         
+        /*if (EventSystem.current)
+        {
+            PointerEventData pointer = new PointerEventData(EventSystem.current) { position = Input.mousePosition };
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointer, results);
+
+            Debug.Log("Hovering over: " + string.Join(", ", results.ConvertAll(r => r.gameObject.name)));
+        }*/ 
 
        
     }

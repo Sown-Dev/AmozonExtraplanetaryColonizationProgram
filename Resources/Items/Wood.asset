@@ -18,6 +18,6 @@ MonoBehaviour:
   stackSize: 32
   category: 1
   useCursor: 0
-  value: 2
+  value: 4
   tier: 0
-  fuelValue: 80
+  fuelValue: 100

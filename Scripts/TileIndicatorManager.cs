@@ -22,7 +22,8 @@ public class TileIndicatorManager : MonoBehaviour{
     public void DrawIndicators(IEnumerable<TileIndicator> indicators, Vector2Int origin = default, Orientation rot = Orientation.Up){
         Clear();
         foreach (TileIndicator indicator in indicators){
-            DrawIndicator(indicator.pos.RotateArray(rot,origin),indicator.type, origin);
+            
+            DrawIndicator(indicator.pos.RotateArray(rot, Vector2Int.zero),indicator.type, origin);
         }
     }
 
@@ -48,28 +49,26 @@ public class TileIndicatorManager : MonoBehaviour{
             switch (type){
                 case IndicatorType.Mining:
                     //check if ore
-                    sr.color = TerrainManager.Instance.GetOre(myPos) != null ? Color.green : Color.red;
+                    sr.color = TerrainManager.Instance.GetOre(myPos) != null ? Color.green : new Color(0.6f, 0.2f,0.2f);;
                     break;
                 case IndicatorType.Harvesting:
                     //check if resourceblock
                     bool isResource = TerrainManager.Instance.GetBlock(myPos) is ResourceBlock;
-                    sr.color = isResource ?  new Color(0.2f, 0.8f,0.4f): new Color(0.4f, 0.2f,0.2f);
+                    sr.color = isResource ?  new Color(0.2f, 0.8f,0.4f): new Color(0.6f, 0.2f,0.2f);
                     break;
                 case IndicatorType.BlockPower:
-                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IPowerBlock ? new Color(0.5f, 0.9f,0.1f): new Color(
-                        0.9f, 0.7f, 0.3f);
+                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IPowerBlock ? new Color(0.5f, 0.9f,0.1f):new Color(
+                        0.8f, 0.5f, 0.3f);
                     break;
                 case IndicatorType.PowerConnector:
                     sr.color = TerrainManager.Instance.GetBlock(myPos) is IPowerConnector ? Color.green : new Color(
-                        0.9f, 0.7f, 0.3f);
+                        0.8f, 0.5f, 0.3f);
                     break;
                 case IndicatorType.InsertingTo:
-                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IContainerBlock ? Color.green : new Color(
-                        0.9f, 0.7f, 0.3f);
+                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IContainerBlock ? Color.green :  new Color(0.6f, 0.2f,0.2f);
                     break;
                 case IndicatorType.ExtractingFrom:
-                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IContainerBlock ? Color.green : new Color(
-                        0.9f, 0.7f, 0.3f);
+                    sr.color = TerrainManager.Instance.GetBlock(myPos) is IContainerBlock ? Color.green :  new Color(0.6f, 0.2f,0.2f);
                     break;
                 default:
 

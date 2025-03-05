@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Tutorial_en
+  m_Name: tutorial_en
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: en
@@ -30,16 +30,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 699018305536
-    m_Localized: 'You can interact with blocks in many ways. Right clicking will
-      interact with a block, which will usually open the block''s UI. You can also
-      hold X to break blocks and ores. '
+    m_Localized: 'Congratulations! It seems your legs are still fully intact after
+      impact. '
     m_Metadata:
       m_Items: []
   - m_Id: 46420572561408
-    m_Localized: Pressing tab will open your inventory. You can move items by dragging
-      them. Pressing 1-8 will select slots in your hotbar to be used, but you can
-      also middle mouse click any slot to select it in your hand. Left clicking uses
-      your currently held item.
+    m_Localized: 'You can interact with blocks in many ways. Right clicking will
+      interact with a block, which will usually open the block''s UI. Control-clicking
+      will take from a block''s inventory. You can also hold X to break blocks and
+      ores. '
     m_Metadata:
       m_Items: []
   - m_Id: 67889717370880
@@ -60,8 +59,65 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1834331810881536
-    m_Localized: Completing a contract will give you a bonus and lets you progress
-      further.
+    m_Localized: Completing a contract will give you a bonus and unlock more offers
+      in your Partner shop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36621287002267648
+    m_Localized: Now that you've gotten to grips with the basics, it's time to select
+      a contract. Completing contracts is your main objective on this planet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36621635213385728
+    m_Localized: A contract is a request made by a company to buy certain materials.
+      Each contract usually has 1-4 items that can be sold, as well as a quota, which
+      you must meet by earning money through selling the requested items.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36622058137640960
+    m_Localized: All contracts must be fulfilled before their time deadline. Failure
+      to do so will result in immediate termination. However, some companies will
+      offer a reward for completing a contract.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36622260428922880
+    m_Localized: Completing contracts early is a high priority, as doing so will
+      reward you with an additional bonus for remaining time, and will also carry
+      over half of the remaining time to the next contract.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36682164917297152
+    m_Localized: Pressing tab will open your inventory. You can move items by dragging
+      them, or hold control to split. Pressing 1-8 will select slots in your hotbar
+      to be used, but you can also middle mouse click any slot to select it in your
+      hand. Left clicking uses your currently held item.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36683304530665472
+    m_Localized: 'Good choice! Now that you have a contract, you must start producing
+      the required items and move them into the Sell Block. The first contract only
+      requires raw resources. These can be acquired either from ores, such as copper
+      or resource blocks such as trees. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36683468506980352
+    m_Localized: This is the shop. Here you can buy new blocks and machines to expand
+      your factory. Each item only comes in a limited stock however.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36683603987193856
+    m_Localized: Right now, you only have 1 shop tier unlocked. As you complete contracts,
+      you will unlock more shop tiers that contain better but more expensive items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36689022096826368
+    m_Localized: Ores come from the ground and must be mined using miners. Resource
+      blocks require resource extracters to acquire their resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36689318629924864
+    m_Localized: You also have gained access to the store. Click this button to open
+      it.
     m_Metadata:
       m_Items: []
   references:

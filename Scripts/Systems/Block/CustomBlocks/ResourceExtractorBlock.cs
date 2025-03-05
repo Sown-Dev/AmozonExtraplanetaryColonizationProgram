@@ -9,7 +9,7 @@ namespace Systems.Block.CustomBlocks{
 
 
 
-        public ProgressBar progressBar = new ProgressBar();
+        public ProgressBar progressBar = new ProgressBar(-10);
         
         public List<Vector2Int> ExtractPositions;
 
@@ -32,7 +32,7 @@ namespace Systems.Block.CustomBlocks{
         public void Extract(){
             ItemStack s = currentResource.Extract(DrillAmount);
             if (s != null)
-                output.Insert(ref s);
+                Insert(ref s);
             
         }
 

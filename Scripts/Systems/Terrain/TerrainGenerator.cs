@@ -15,14 +15,13 @@ public partial class TerrainManager{
     [SerializeField] private TerrainProperties Stone;
 
 
-    [Header("Blocks")] 
-    [SerializeField] private Block Tree;
+    [Header("Blocks")] [SerializeField] private Block Tree;
     [SerializeField] private Block Sapling;
     [SerializeField] private Block Crystal;
     [SerializeField] private Block Mushroom;
     [SerializeField] private Block LootCrate;
     [SerializeField] private Block CoalNode;
-    
+
 
     [SerializeField] private Block SellBlock;
     [SerializeField] private Block BigCrate;
@@ -41,17 +40,17 @@ public partial class TerrainManager{
         PlaceBlock(SellBlock, new Vector2Int(0, 1));
         PlaceBlock(LootCrate, new Vector2Int(Random.Range(-4, 4), -1));
 
-#if ALLITEMS1
-        PlaceBlock(BigCrate, new Vector2Int(0, -4));
-        ContainerBlock c = GetBlock(new Vector2Int(0, -4)) as ContainerBlock;
+        if (GameManager.DevMode){
+            PlaceBlock(BigCrate, new Vector2Int(0, -4));
+            ContainerBlock c = GetBlock(new Vector2Int(0, -4)) as ContainerBlock;
 
-        foreach (List<Item> list in ItemManager.Instance.itemDict.Values){
-            foreach (Item item in list){
-                ItemStack i = new ItemStack(item, item.stackSize);
-                c.output.Insert(ref i);
+            foreach (List<Item> list in ItemManager.Instance.itemDict.Values){
+                foreach (Item item in list){
+                    ItemStack i = new ItemStack(item, item.stackSize);
+                    c.output.Insert(ref i);
+                }
             }
         }
-#endif
 
 
         float centerNoise = 0;
@@ -117,7 +116,8 @@ public partial class TerrainManager{
                             }
                             else if (Random.value > 0.4f){
                                 PlaceBlock(Mushroom, position);
-                            }else{
+                            }
+                            else{
                                 PlaceBlock(Sapling, position);
                             }
                         }
@@ -161,34 +161,36 @@ public partial class TerrainManager{
 
         //now place worldgen:
 
-        for (int i = 0; i < 600; i++){
+        for (int i = 0; i < 400; i++){
             Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
             if (!IsWall((Vector3Int)pos)){
-                if( Random.value < 0.06f){
+                if (Random.value < 0.06f){
                     PlaceBlock(LootCrate, pos);
                     continue;
                 }
-                
+
                 if (GetTerrain(pos).myProperties == Grass){
                     PlaceBlock(Tree, pos);
                 }
                 else{
-                    if (Random.value > 0.6f){
+                    if (Random.value > 0.4f){
                         PlaceBlock(CoalNode, pos);
                     }
 
                     PlaceBlock(Crystal, pos);
                 }
             }
+            else{
+                i--;
+            }
         }
-        
-        
+
 
         for (int i = 0; i < 20; i++){
             Vector2Int pos = new Vector2Int(Random.Range(-200, 200), Random.Range(-200, 200));
             SetWall(null, (Vector3Int)pos);
             for (int j = 0; j < 7; j++){
-                SetWall(null, (Vector3Int)pos + Vector3Int.RoundToInt(Random.insideUnitCircle * Random.Range(0.5f,2f)));
+                SetWall(null, (Vector3Int)pos + Vector3Int.RoundToInt(Random.insideUnitCircle * Random.Range(0.5f, 2f)));
             }
 
 

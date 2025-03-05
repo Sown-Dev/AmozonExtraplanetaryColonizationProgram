@@ -36,7 +36,7 @@ public class PopupListUI : MonoBehaviour
         }
     }
 
-    public void AddPopup(string message)
+    public void AddPopup(string message, Color c)
     {
         // If the list is at max capacity, remove the oldest popup
         if (popups.Count >= maxPopupCount)
@@ -49,6 +49,7 @@ public class PopupListUI : MonoBehaviour
         
         TMP_Text textComponent = popupGO.GetComponent<TMP_Text>();
         textComponent.text = message;
+        textComponent.color = c;
 
         // Initialize the popup item
         PopupItem newPopup = new PopupItem

@@ -177,7 +177,7 @@ MonoBehaviour:
   - item:
       item: {fileID: 11400000, guid: 66bc1101b67357444b94e68a451f0c08, type: 2}
       amount: 1
-    chance: 0.15
+    chance: 0.12
     tier: 0
   - item:
       item: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
@@ -267,7 +267,7 @@ MonoBehaviour:
   - item:
       item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
       amount: 1
-    chance: 0.08
+    chance: 0.05
     tier: 0
   - item:
       item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
@@ -301,9 +301,14 @@ MonoBehaviour:
     tier: 3
   - item:
       item: {fileID: 11400000, guid: 23117d005a935e74fbc8ecde9ddfaab7, type: 2}
-      amount: 2
-    chance: 0.04
+      amount: 1
+    chance: 0.02
     tier: 3
+  - item:
+      item: {fileID: 11400000, guid: fc83bfc7c42c8aa4998f94e7fa77aead, type: 2}
+      amount: 64
+    chance: 0.005
+    tier: 0
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

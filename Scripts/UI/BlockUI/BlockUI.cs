@@ -65,6 +65,7 @@ namespace UI.BlockUI{
                 .Where(field => typeof(IBlockUI).IsAssignableFrom(field.FieldType))
                 .Select(field => field.GetValue(block) as IBlockUI)
                 .Where(component => component != null)
+                .Where(component => component.Hidden == false)
                 .OrderByDescending(component => -component.Priority)
                 .ToList();
 

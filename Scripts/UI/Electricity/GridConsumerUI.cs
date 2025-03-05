@@ -24,7 +24,7 @@ namespace UI{
         }
 
         public void OnPointerEnter(PointerEventData eventData){
-            TooltipManager.Instance.ShowCameraTooltip(eventData.position, myConsumer.myBlock.origin);
+            TooltipManager.Instance.ShowCameraTooltip(transform.position, myConsumer.myBlock.transform.position);
 
         }
         public void OnPointerExit(PointerEventData eventData){

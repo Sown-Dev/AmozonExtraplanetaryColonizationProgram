@@ -12,39 +12,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
   m_Name: Tutorial Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Tutorial
+  m_TableCollectionName: tutorial
   m_TableCollectionNameGuidString: 58620fda1284ca84692a21dd50a8a090
   m_Entries:
   - m_Id: 18635087872
-    m_Key: controls1
+    m_Key: controls0
     m_Metadata:
       m_Items: []
   - m_Id: 570840375296
-    m_Key: controls2
+    m_Key: controls1
     m_Metadata:
       m_Items: []
   - m_Id: 699018305536
-    m_Key: controls3
+    m_Key: interaction0
     m_Metadata:
       m_Items: []
   - m_Id: 46420572561408
-    m_Key: controls4
+    m_Key: interaction1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36682164917297152
+    m_Key: interaction2
     m_Metadata:
       m_Items: []
   - m_Id: 67889717370880
-    m_Key: objectives1
+    m_Key: objectives0
     m_Metadata:
       m_Items: []
   - m_Id: 1424334836785152
-    m_Key: objectives2
+    m_Key: objectives1
     m_Metadata:
       m_Items: []
   - m_Id: 1424359465738240
-    m_Key: objectives3
+    m_Key: objectives2
     m_Metadata:
       m_Items: []
   - m_Id: 1834331810881536
-    m_Key: objective4
+    m_Key: objectives3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36621287002267648
+    m_Key: contracts0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36621635213385728
+    m_Key: contracts1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36622058137640960
+    m_Key: contracts2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36622260428922880
+    m_Key: contracts3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36683304530665472
+    m_Key: firstcontract0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36683468506980352
+    m_Key: shop0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36683603987193856
+    m_Key: shop1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36689022096826368
+    m_Key: firstcontract1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36689318629924864
+    m_Key: firstcontract2
     m_Metadata:
       m_Items: []
   m_Metadata:

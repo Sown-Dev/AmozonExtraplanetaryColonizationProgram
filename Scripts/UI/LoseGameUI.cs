@@ -42,8 +42,11 @@ public class LoseGameUI : MonoBehaviour
     }
     private IEnumerator DelayedDeath()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         Player.Instance.Die();
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.CharacterSelectScreen();
+
 
     }
 

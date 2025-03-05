@@ -4,14 +4,16 @@ using UnityEngine;
 namespace Systems.Block{
     public class TickingBlock : Block{
         public virtual void Tick(){
-            if (TerrainManager.totalTicksElapsed % 2 == 0){
-                actuatedThisTick = false;
-                if (properties.actuatable)
-                    mat.SetColor("_AddColor", new Color(0, 0, 0, 0));
+            
+        }
+        
+        public void ResetActuated(){
+            actuatedThisTick = false;
+            if (properties.actuatable)
+                mat.SetColor("_AddColor", new Color(0, 0, 0, 0));
 
-                currentState.SetNextSprite();
-                UpdateSprite();
-            }
+            currentState.SetNextSprite();
+            UpdateSprite();
         }
 
         protected bool actuatedThisTick = false;

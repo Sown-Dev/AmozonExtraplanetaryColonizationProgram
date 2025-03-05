@@ -9,19 +9,21 @@ public class Throwable:MonoBehaviour{
     public GameObject onCollide;
     
     public bool DestroyOnCollide = true;
+    public float destroyDelay = 0;
     
     public void Throw(Vector3 pos, float vel,float _yVel){
          rb.velocity =( pos-transform.position ).normalized * vel;
         yVel = _yVel;
-        y = 1;
+        y = 0.25f;
     }
     
     private void FixedUpdate(){
-        sr.transform.localPosition = new Vector3(0, y, 0);
-        yVel+= -10*Time.deltaTime; //grav
+        sr.transform.localPosition = new Vector3(0, y*0.8f, 0);
+        yVel+= -11*Time.deltaTime; //grav
         if (y > 0){
             y += yVel * Time.deltaTime;
         }
+        
         else{
             Collide();
             if(!DestroyOnCollide)
@@ -34,10 +36,23 @@ public class Throwable:MonoBehaviour{
     }
     
     public virtual void Collide(){
+        
+        
+        //bouncing
+        if (y < 0){
+            yVel = -yVel * 0.4f;
+            y = 0.01f;
+            rb.velocity *= 0.8f;
+
+        }
+        else{
+
+        }
+
         if(onCollide)
-            Instantiate(onCollide, transform.position, Quaternion.identity);
+            Instantiate(onCollide, (transform.position+sr.transform.position)/2, Quaternion.identity);
         if(DestroyOnCollide)
-            Destroy(gameObject);
+            Destroy(gameObject, destroyDelay);
     }
 
 }
