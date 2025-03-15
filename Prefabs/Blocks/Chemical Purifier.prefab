@@ -166,7 +166,7 @@ MonoBehaviour:
   recipeSelector:
     recipes:
     - {fileID: 11400000, guid: 0c077e895d535f94a89506ef771a99ec, type: 2}
-    - {fileID: 11400000, guid: 0c077e895d535f94a89506ef771a99ec, type: 2}
+    - {fileID: 11400000, guid: 273f0f48edb2e2d4cbd914557e82a92e, type: 2}
     currentRecipe: {fileID: 0}
   inputProperties:
     size: 0

@@ -51,7 +51,6 @@ namespace Systems.Block.CustomBlocks{
                 return false;
             }
 
-            needed = baseUsage;
             if (providedPower < needed){
                 return false;
             }

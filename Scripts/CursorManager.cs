@@ -40,14 +40,14 @@ public class CursorManager : MonoBehaviour{
         
         //constantly print what the mouse is over
         
-        /*if (EventSystem.current)
+        if (EventSystem.current)
         {
             PointerEventData pointer = new PointerEventData(EventSystem.current) { position = Input.mousePosition };
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointer, results);
 
             Debug.Log("Hovering over: " + string.Join(", ", results.ConvertAll(r => r.gameObject.name)));
-        }*/ 
+        }
 
        
     }

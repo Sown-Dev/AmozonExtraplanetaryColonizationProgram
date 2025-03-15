@@ -182,28 +182,28 @@ MonoBehaviour:
   - item:
       item: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
       amount: 1
-    chance: 0.15
-    tier: 0
+    chance: 0.1
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
       amount: 2
     chance: 0.01
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: c66de7e1e83f50e42a3d7fe6672055a7, type: 2}
       amount: 1
-    chance: 0.05
-    tier: 0
+    chance: 0.15
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
       amount: 8
     chance: 0.1
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
       amount: 2
     chance: 0.1
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
       amount: 10
@@ -233,12 +233,12 @@ MonoBehaviour:
       item: {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
       amount: 2
     chance: 0.08
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: 96c7c17460afe15428ffb3d0c72e64f0, type: 2}
       amount: 3
     chance: 0.1
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: 5ccfdc5997f0a674daba36a7e2378d92, type: 2}
       amount: 2
@@ -251,19 +251,19 @@ MonoBehaviour:
     tier: 0
   - item:
       item: {fileID: 11400000, guid: 081f0a82a1910e44693054f6e1ed1284, type: 2}
-      amount: 4
-    chance: 0.07
+      amount: 8
+    chance: 0.02
     tier: 1
   - item:
       item: {fileID: 11400000, guid: 732b2f58216f5854281079899f7baa01, type: 2}
-      amount: 4
-    chance: 0.05
+      amount: 16
+    chance: 0.01
     tier: 0
   - item:
       item: {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
       amount: 2
     chance: 0.08
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
       amount: 1
@@ -271,9 +271,9 @@ MonoBehaviour:
     tier: 0
   - item:
       item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
-      amount: 3
+      amount: 2
     chance: 0.06
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: 64fb303351946f04282aaad0b294ca91, type: 2}
       amount: 5
@@ -282,7 +282,7 @@ MonoBehaviour:
   - item:
       item: {fileID: 11400000, guid: 19eb75259e21bda4abed50dff9e57f71, type: 2}
       amount: 1
-    chance: 0.04
+    chance: 0.05
     tier: 0
   - item:
       item: {fileID: 11400000, guid: e46ad3c465c6dde4491f49ead6b4db40, type: 2}
@@ -293,7 +293,7 @@ MonoBehaviour:
       item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
       amount: 2
     chance: 0.02
-    tier: 0
+    tier: -1
   - item:
       item: {fileID: 11400000, guid: c66ca198aa4de6e47be6a6550ccb4f88, type: 2}
       amount: 2
@@ -306,9 +306,29 @@ MonoBehaviour:
     tier: 3
   - item:
       item: {fileID: 11400000, guid: fc83bfc7c42c8aa4998f94e7fa77aead, type: 2}
-      amount: 64
-    chance: 0.005
-    tier: 0
+      amount: 32
+    chance: 0.001
+    tier: -1
+  - item:
+      item: {fileID: 11400000, guid: 2a2072a15f8f35545a162b737649293f, type: 2}
+      amount: 50
+    chance: 0.03
+    tier: -1
+  - item:
+      item: {fileID: 11400000, guid: 2a2072a15f8f35545a162b737649293f, type: 2}
+      amount: 200
+    chance: 0.02
+    tier: 1
+  - item:
+      item: {fileID: 11400000, guid: 97739a25de689c44081e7aea18fe4e64, type: 2}
+      amount: 1
+    chance: 0.03
+    tier: -1
+  - item:
+      item: {fileID: 11400000, guid: f278dc199ad454848a20173bd016c755, type: 2}
+      amount: 1
+    chance: 0.02
+    tier: 2
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

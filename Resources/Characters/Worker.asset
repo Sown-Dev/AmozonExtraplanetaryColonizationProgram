@@ -16,6 +16,8 @@ MonoBehaviour:
     his productivity
   legalName: Alan Smith
   startingItems:
+  - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
+    amount: 1
   - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}

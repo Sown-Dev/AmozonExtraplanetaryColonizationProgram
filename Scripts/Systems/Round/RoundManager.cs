@@ -21,7 +21,8 @@ namespace Systems.Round{
         [SerializeField] private GameObject ContractSelectUIPrefab;
 
         //Round info
-        public List<ShopOffer> allOffers;
+        [FormerlySerializedAs("allOffers")] public List<ShopOffer> blockOffers;
+        public List<ShopOffer> itemOffers;
         public List<ShopTier> shopTiers;
         public UpgradeSO[] upgrades;
         public Contract currentContract;
@@ -30,8 +31,15 @@ namespace Systems.Round{
         public int roundNum{ private set; get; }
         public float roundTime;
 
-        public float cooldownTimer = 0f;
+        public float prevCDTime = 0f;
         private bool isInCooldown = false;
+        
+        //loans
+        public int debt;
+        public int loansTaken;
+        public int loanLimit = 3;
+        public int loanAmount = 100;
+        public bool loansUnlocked = true;
 
 
         public float addTime;
@@ -46,9 +54,10 @@ namespace Systems.Round{
 
 
         void Awake(){
-            roundStats = new WorldStats();
             shopTiers = new List<ShopTier>();
+
             roundStats = new WorldStats();
+            blockOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
         }
 
         private void Start(){
@@ -59,7 +68,7 @@ namespace Systems.Round{
                 signBonus = 0, TimeGiven = 450, sponsor = Sponsor.Amozon
             });*/
 
-            StartCooldown(30f);
+            StartCooldown(-1);
 
 
             money = 100;
@@ -82,11 +91,16 @@ namespace Systems.Round{
             }
             else if (isInCooldown){
                 //indefinite cooldown
-                if (cooldownTimer == -1){ }
+                if (roundTime == -1){ }
                 else{
                     // Handle cooldown timer
-                    cooldownTimer -= Time.deltaTime;
-                    if (cooldownTimer <= 0){
+                    prevCDTime = roundTime;
+                    roundTime -= Time.deltaTime;
+                    if (prevCDTime > 3.5f && roundTime <= 3.5f){
+                        Player.Instance.Popup("Contract Incoming!", Color.yellow);
+                    }
+
+                    if (roundTime <= 0){
                         isInCooldown = false;
                         ChooseContract();
                         //open contract ui
@@ -94,7 +108,7 @@ namespace Systems.Round{
                 }
             }
 
-            if (GameManager.DevMode){
+            if (GameManager.Instance.settings.DevMode){
                 if (Input.GetKey(KeyCode.F1)){
                     roundTime -= 1;
                 }
@@ -126,6 +140,10 @@ namespace Systems.Round{
 
         public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
+
+            if (amount > 0){
+                Player.Instance.Popup("+" + amount + "$", new Color(0.1f, 1f, 0.5f));
+            }
 
             if (money >= 1000){
                 GameManager.Instance.UnlockAchievement("1000_DOLLARS");
@@ -173,18 +191,25 @@ namespace Systems.Round{
 
             rc.Init(currentContract.quota, roundTime);
             roundComplete = true;
+        }
 
-           
+        public void CompleteRound(){
+            StartCooldown(50);
+            GenerateNewShopTier(roundNum+1);
+            
         }
 
         // Modified StartRound to handle null contracts
+        private bool firstRound = true;
+
         public void StartRound(Contract newContract){
             if (newContract == null){
                 Debug.LogWarning("Tried to start round with null contract!");
                 return;
             }
-            
-            
+
+            GC.Collect();
+
 
             roundComplete = false;
             roundNum++;
@@ -196,17 +221,29 @@ namespace Systems.Round{
                 addTime = 0;
             }
 
-            shopTiers.Add(GenerateShop(roundNum));
+            if (firstRound){
+                firstRound = false;
+                GenerateNewShopTier(roundNum);
+            }
+            
+            loansTaken = 0;
+            loanAmount = 100 * (roundNum + 1);
+            
 
 
             infoUI.Refresh();
-            
+
             TutorialManager.Instance.StartTutorial("firstcontract", 0.1f);
+        }
+
+        public void GenerateNewShopTier(int tierNum){
+            shopTiers.Add(GenerateShop(tierNum));
+            Player.Instance?.Popup("New items available in shop!", Color.yellow);
         }
 
         public void StartCooldown(float duration){
             currentContract = null;
-            cooldownTimer = duration;
+            roundTime = duration;
             isInCooldown = true;
             infoUI.Refresh();
         }
@@ -215,8 +252,7 @@ namespace Systems.Round{
             int contractNum = roundNum > -1 ? 3 : 2;
             ContractSelectUI ui = Instantiate(ContractSelectUIPrefab, importantUIs).GetComponent<ContractSelectUI>();
             ui.Init(GenerateNewContracts(contractNum));
-            TutorialManager.Instance.StartTutorial("contracts",0.2f);
-
+            TutorialManager.Instance.StartTutorial("contracts");
         }
 
         public void RegenerateRoundShop(){
@@ -234,67 +270,110 @@ namespace Systems.Round{
 
         public ShopTier GenerateShop(int tier){
             // Shuffle the list
-            Utils.Shuffle(allOffers);
-            List<ShopOffer> tierOffers = allOffers.Where(t => t.tier == tier).ToList();
+            Utils.Shuffle(blockOffers);
+            Utils.Shuffle(itemOffers);
+            List<ShopOffer> tierOffers = blockOffers.Where(t => t.tier == tier).ToList();
 
-// These will be pulled from world stats when added
+            // These will be pulled from world stats when added
             int logistics = tier > 0 ? 1 : 0;
             int electrical = tier >= 2 ? 1 : 0;
             int refine = tier == 0 ? 0 : 1;
             int production = 1;
-            int misc = 2;
+            int misc = tier==0 ?3:2;
+            int explosives = 1;
 
-// Method to calculate price adjustments
+            // Method to calculate price adjustments
             int AdjustPrice(int roundNum) => Random.Range(-6, 12) - roundNum;
 
-// Select offers for logistics
+            // Select offers for logistics
             ShopOffer[] logisticsOffers = tierOffers
+                .Where(t => !t.overrideCategory)
                 .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Logistics) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier * 2))
                 .Take(logistics)
+                .Union(
+                    tierOffers
+                        .Where(t => t.overrideCategory && t.blockCategory.HasFlag(BlockCategory.Logistics))
+                        .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier * 2))
+                        .Take(logistics)
+                )
                 .ToArray();
+
             tierOffers.RemoveAll(x => logisticsOffers.Any(y => y.item == x.item));
 
-// Select offers for electrical
-
+            // Select offers for electrical
             ShopOffer[] electricalOffers = tierOffers
+                .Where(t => !t.overrideCategory)
                 .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Electrical) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(electrical)
+                .Union(
+                    tierOffers
+                        .Where(t => t.overrideCategory && t.blockCategory.HasFlag(BlockCategory.Electrical))
+                        .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
+                        .Take(electrical)
+                )
                 .ToArray();
             tierOffers.RemoveAll(x => electricalOffers.Any(y => y.item == x.item));
 
-// Select offers for refining
+            // Select offers for refining
             ShopOffer[] refineOffers = tierOffers
+                .Where(t => !t.overrideCategory)
                 .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Refining) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(refine)
+                .Union(
+                    tierOffers
+                        .Where(t => t.overrideCategory && t.blockCategory.HasFlag(BlockCategory.Refining))
+                        .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
+                        .Take(refine)
+                )
                 .ToArray();
             tierOffers.RemoveAll(x => refineOffers.Any(y => y.item == x.item));
 
-// Select offers for production
+            // Select offers for production
             ShopOffer[] productionOffers = tierOffers
+                .Where(t => !t.overrideCategory)
                 .Where(t => (t.item as BlockItem)?.blockCategory.HasFlag(BlockCategory.Production) ?? false)
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(production)
+                .Union(
+                    tierOffers
+                        .Where(t => t.overrideCategory && t.blockCategory.HasFlag(BlockCategory.Production))
+                        .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
+                        .Take(production)
+                )
                 .ToArray();
             tierOffers.RemoveAll(x => productionOffers.Any(y => y.item == x.item));
 
-// Select misc offers
+            // Select misc offers
             ShopOffer[] miscOffers = tierOffers
                 .Select(t => new ShopOffer(t, AdjustPrice(roundNum), tier))
                 .Take(misc)
                 .ToArray();
             tierOffers.RemoveAll(x => miscOffers.Any(y => y.item == x.item));
-
+            
+            ShopOffer[] explosivesOffers = itemOffers
+                .Where(t => (t.item?.category == ItemCategory.Explosive) && t.tier <= tier)
+                .Select(t => new ShopOffer(t, (int)(t.price*(0.15f*tier)),t.stock*tier))
+                .Take(explosives)
+                .ToArray();
 
             UpgradeOffer u = new UpgradeOffer(upgrades[Random.Range(0, upgrades.Length)],
                 ((tier + 1) * 100 + Random.Range(-20, 20)));
 
-
-            ShopTier t = new ShopTier(logisticsOffers, electricalOffers, refineOffers, productionOffers, miscOffers, u,
-                tier);
+            ShopTier t = new ShopTier(logisticsOffers, electricalOffers, refineOffers, productionOffers, miscOffers, explosivesOffers,u, tier);
+            ShopUI.Instance.Refresh(); //prob should be elsewhere but this works
             return t;
+        }
+
+        private float interestRate = 1.5f;
+        public void TakeLoan(){
+            if (loansTaken < loanLimit && loansUnlocked){
+                AddMoney( loanAmount);
+                debt += (int) (loanAmount * interestRate);
+                loansTaken += 1;
+            }
         }
 
         public void LoseRound(){
@@ -318,12 +397,12 @@ namespace Systems.Round{
             Contract[] contracts = new Contract[numContracts];
             List<Sponsor> allSponsors = Enum.GetValues(typeof(Sponsor)).Cast<Sponsor>().ToList();
             if (roundNum == -1){
-                allSponsors = new List<Sponsor>{Sponsor.Amozon, Sponsor.Pivot, Sponsor.Anogen};
+                allSponsors = new List<Sponsor>{ Sponsor.Amozon, Sponsor.Pivot, Sponsor.Anogen };
             }
+
             for (int i = 0; i < numContracts; i++){
-                
                 Sponsor s = allSponsors[Random.Range(0, allSponsors.Count)];
-               
+
                 contracts[i] = new Contract(roundNum + 1, Random.Range(2, 4), s);
                 allSponsors.Remove(s);
             }
@@ -333,7 +412,6 @@ namespace Systems.Round{
 
         private void OnValidate(){
             //sort by tier.
-            //allOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
         }
     }
 }

@@ -275,6 +275,7 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 0
     destroyTime: 1
     ttFlags: 0
     size: {x: 1, y: 1}

@@ -23,6 +23,7 @@ public partial class Player : Unit, IContainer{
 
     [SerializeField] private GameObject OnDeath;
     [SerializeField] private PopupListUI popupList;
+    [SerializeField] private Item money; //reference to check against
 
     public Character myCharacter;
 
@@ -50,17 +51,49 @@ public partial class Player : Unit, IContainer{
         myMat.SetColor("_ReplaceColor1", myCharacter.shirtColor);
         myMat.SetColor("_ReplaceColor2", myCharacter.pantsColor);
         myMat.SetColor("_ReplaceColor3", myCharacter.skinColor);
+
+        //used to be in start, but this is prob fine. reason is to maybe stop the particle system from blasting a bunch due to position change.
+        spriteHolder.transform.localPosition = new Vector3(0, 220, 0);
+
     }
 
-    public bool Insert(ref ItemStack s, bool popup = true){
-        if (Inventory.Insert(ref s, true)){
-            //RoundManager.Instance.myStats.itemsPickedUp += s.amount;
-            if (popup){
-                Popup($"+{s.amount} {s.item.name}");
-            }
+    private bool popup = true;
+    public bool Insert(ref ItemStack s, bool simulate=false){
+        if (s?.item == money){
+            RoundManager.Instance.AddMoney(s.amount, false);
+            s = null;
+            return true;
         }
 
+        if (s == null){
+            return false;
+        }
+
+        if (!simulate && Inventory.Insert(ref s, true)){
+            Popup($"+{s.amount} {s.item.name}");
+
+        }
+
+        bool ret = Inventory.Insert(ref s, simulate);
+        
+        popup = true; //
         return Inventory.Insert(s);
+    }
+    
+    public void OnInventoryChange(){
+        //check if we have any money
+        if(Inventory.Contains( money)){
+            //iterate to find it
+            for (int i = 0; i < Inventory.Size; i++){
+                if (Inventory.GetSlot(i).ItemStack?.item == money){
+                    //remove it
+                    RoundManager.Instance.AddMoney(Inventory.GetSlot(i).ItemStack.amount, false);
+
+                    Inventory.GetSlot(i).ItemStack = null;
+                    break;
+                }
+            }
+        }
     }
 
     public ItemStack Extract(){
@@ -92,7 +125,6 @@ public partial class Player : Unit, IContainer{
             Inventory.Insert(i.Clone(), false);
         }
 
-        spriteHolder.transform.localPosition = new Vector3(0, 170, 0);
         yVelocity = -10;
 
         myCursor.gameObject.SetActive(false); //disable at first, enable when we land
@@ -119,7 +151,10 @@ public partial class Player : Unit, IContainer{
         Block b = TerrainManager.Instance.GetBlock(pos);
 
         if (b){
-            if (Vector2.Distance(b.transform.position, transform.position) > 10f){
+            //raycast to target, using layoutmask wall. if we hit a wall, false, otherwise true
+            bool canPlace = !Physics2D.Raycast(transform.position, (Vector2)pos - (Vector2)transform.position, Vector2.Distance(pos, transform.position), wallLayer);
+            
+            if (Vector2.Distance(b.transform.position, transform.position) > 10f && canPlace ){
                 if (BlockUIManager.Instance.currentBlockUI?.block == b){
                     //b.Use(this); could do this also, same thing basically as using should just close it       
                     BlockUIManager.Instance.CloseBlockUI();

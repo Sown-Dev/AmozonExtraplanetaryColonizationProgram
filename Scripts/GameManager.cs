@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using NewRunMenu;
+using UI.BlockUI;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
@@ -18,7 +21,7 @@ public class GameManager : MonoBehaviour{
 
     public PauseManager pauseManager;
 
-    public static bool DevMode;
+    public GameSettings settings;
 
     private void Awake(){
         if (Instance == null){
@@ -65,7 +68,10 @@ public class GameManager : MonoBehaviour{
 
     private void Update(){
         if (Input.GetKeyDown(KeyCode.Escape)){
-            pauseManager.Toggle();
+            if(BlockUIManager.Instance?.currentBlockUI== null ){
+                pauseManager.Toggle();
+            }
+            
         }
 
         if (Input.GetKeyDown(KeyCode.F11)){
@@ -119,11 +125,12 @@ public class GameManager : MonoBehaviour{
     }
 
     private void OnApplicationQuit(){
-        SaveStats();
         //close steamworks
 #if STEAMWORKS1
         Steamworks.SteamClient.Shutdown();
 #endif
+        SaveStats();
+
     }
 
     //Steamworks helper functions
@@ -159,3 +166,5 @@ public class GameManager : MonoBehaviour{
         }
     }
 }
+
+

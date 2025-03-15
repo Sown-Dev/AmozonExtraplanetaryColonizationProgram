@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Systems.Block.BlockStates;
 using Systems.Items;
+using UI.BlockUI;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,13 +22,12 @@ namespace Systems.Block{
         public BlockState currentState;
         protected BlockStateHolder stateHolder;
 
-        public List<ItemStack> lootTable;
-
-        
-        public Orientation rotation;
         public RuleTile tile;
 
-        [HideInInspector]public Vector2Int origin; // the origin is kind of the center, except since we can have even sized objects, it 
+
+        public BlockData data;
+        
+
 
 //#if UNITY_EDITOR  // i know this looks pointless, since it doesnt run in builds anyways, but this is more so it doesnt happen while running the game in editor
         private void OnValidate(){
@@ -66,9 +66,9 @@ namespace Systems.Block{
 
         public virtual void Init(Orientation orientation){
             bc.size = new Vector2(properties.size.x - 1 / 8f, properties.size.y - 1 / 8f); //remove 1 pixel on each
-            rotation = properties.invertRotation && properties.rotatable ? orientation.GetOpposite() : orientation;
+            data.rotation = properties.invertRotation && properties.rotatable ? orientation.GetOpposite() : orientation;
             if(currentState.rotateable){
-                currentState.SetOrientation(rotation);
+                currentState.SetOrientation(data.rotation);
             }
             UpdateSprite();
             
@@ -76,7 +76,7 @@ namespace Systems.Block{
             bc.enabled = properties.collidable;
 
             if (properties.myItem){
-                lootTable.Add(new ItemStack(properties.myItem, 1));
+                data.lootTable.Add(new ItemStack(properties.myItem, 1));
             }
             
 
@@ -86,7 +86,10 @@ namespace Systems.Block{
         }
 
         public virtual void Use(Unit user){
-            TileIndicatorManager.Instance.DrawIndicators(GetIndicators(), origin, rotation);
+            TileIndicatorManager.Instance.DrawIndicators(GetIndicators(), data.origin, data.rotation);
+            if(properties.blockUI)
+                BlockUIManager.Instance.GenerateBlockUI(this);
+
             Debug.Log("Used " + this.GetType().Name);
         }
         public virtual void Actuate(){
@@ -125,7 +128,7 @@ namespace Systems.Block{
 
                 /*if (properties?.myItem != null)  We no longer do this. instead add itemdrop to loot table on init
                     Utils.Instance.CreateItemDrop(new ItemStack(properties.myItem, 1));*/
-                foreach (ItemStack itemStack in lootTable){
+                foreach (ItemStack itemStack in data.lootTable){
                     Vector3 offset = new Vector3(UnityEngine.Random.Range(-0.125f, 0.125f), UnityEngine.Random.Range(-0.125f, 0.125f));
                     Utils.Instance.CreateItemDrop(itemStack, transform.position + offset);
                 }
@@ -143,11 +146,11 @@ namespace Systems.Block{
                 Vector2Int.RoundToInt((Vector2)transform.position + rot.GetVector2()));
         }
         public List<Block> GetAdjascent(){
-            return TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y);
+            return TerrainManager.Instance.GetAdjacentBlocks(data.origin, properties.size.x, properties.size.y);
         }
 
         public List<Vector2Int> GetPositions(){
-            return TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y);
+            return TerrainManager.Instance.GetBlockPositions(data.origin, properties.size.x, properties.size.y);
         }
         
         public virtual List<TileIndicator> GetIndicators(){
@@ -167,10 +170,22 @@ namespace Systems.Block{
 #if UNITY_EDITOR
         void OnDrawGizmos() 
         {
-            Handles.Label(transform.position, rotation.ToString());
+            Handles.Label(transform.position, data.rotation.ToString());
         }
         #endif
     }
+    
+    [Serializable]
+    public class BlockData{
+        
+        public List<ItemStack> lootTable;
+
+        
+        public Orientation rotation;
+        [HideInInspector]public Vector2Int origin; // the origin is kind of the center, except since we can have even sized objects, it 
+
+    }
+    
 
    
 }

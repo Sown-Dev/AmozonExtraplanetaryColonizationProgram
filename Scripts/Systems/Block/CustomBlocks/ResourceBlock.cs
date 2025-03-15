@@ -25,7 +25,8 @@ namespace Systems.Block.CustomBlocks{
             if (amount - amt <= 0){
                 amt = amount;
                 amount = 0;
-                BlockDestroy(false);
+                TerrainManager.Instance.RemoveBlock(origin, false);
+
                 return new ItemStack(item, amt * baseYield);   
             }
             amount -= amt;

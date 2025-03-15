@@ -1,16 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour{
     private CursorManager cmr;
     public CanvasGroup cg;
     public Animator am;
+
+    [SerializeField] public UIWindow settingsWindow;
     
     private void Start(){
         Close();
         cmr = CursorManager.Instance;
+        settingsWindow.Hide();
     }
     
    
@@ -36,7 +40,7 @@ public class PauseManager : MonoBehaviour{
             return;
 
         open = true;
-        //cmr.OpenUI();
+        cmr.OpenUI();
         
         am.SetBool("Open", open);
         cg.interactable = open;
@@ -47,16 +51,20 @@ public class PauseManager : MonoBehaviour{
         if (!open)
             return;
         open = false;
-        //cmr.CloseUI();
+        cmr.CloseUI();
         
         am.SetBool("Open", open);
         cg.interactable = open;
         cg.blocksRaycasts = open;
+        
+        settingsWindow.Hide();
     }
     //Button Functions:
     public void Settings(){
+        settingsWindow.Toggle();
     }
     public void Die(){
+        Player.Instance?.Die();
         Close();
     }
     public void Quit(){

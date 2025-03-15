@@ -3,6 +3,7 @@
 namespace Systems.Block.CustomBlocks{
     public class ProgressMachineBlock : TickingBlock, IMachineBlock{
         public ProgressBar progressBar;
+        
 
         public int speed{ get; set; } = 1;
         [field: SerializeField]public int baseSpeed{ get; set; } = 1;

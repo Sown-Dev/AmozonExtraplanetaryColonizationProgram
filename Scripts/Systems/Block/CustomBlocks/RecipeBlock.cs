@@ -13,6 +13,7 @@ namespace Systems.Block{
         
         public Container input;
         public ContainerProperties inputProperties;
+        
        
         public override bool Insert(ref ItemStack s, bool simulate = false){
             return input.Insert(ref s, simulate);
@@ -51,8 +52,11 @@ namespace Systems.Block{
         
         // we dont use base tick bc we want to only reset progress if we cant craft, but keep progress if we can progress, mainly for burner items
         public override void Tick(){
+            isCrafting = false;
+
             if (CanCraft()){
                 if (CanProgress()){
+                    isCrafting = true;
                     Progress();
                 }
             }
@@ -63,6 +67,8 @@ namespace Systems.Block{
             foreach (GameObject fx in CraftingFX){
                 fx.SetActive(isCrafting);
             }
+            progressBar.maxProgress = recipeSelector.currentRecipe.craftTime;
+
         }
 
         public override bool CanProgress(){
@@ -102,7 +108,8 @@ namespace Systems.Block{
                 List<Slot> newSlots = new List<Slot>();
                 for (int i = 0; i < recipeSelector.currentRecipe.ingredients.Count; i++){
                     newSlots.Add(new Slot());
-                    newSlots[i].filter = recipeSelector.currentRecipe.ingredients[i].item;
+                    
+                    newSlots[i].filter  = new Filter( recipeSelector.currentRecipe.ingredients[i].item);
                 }
 
                 inputProperties.size = recipeSelector.currentRecipe.ingredients.Count;

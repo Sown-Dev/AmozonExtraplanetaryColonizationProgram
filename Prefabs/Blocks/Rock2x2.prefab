@@ -105,6 +105,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.blockUI
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: properties.description
       value: big ol' rock. nothing you can do about it
       objectReference: {fileID: 0}

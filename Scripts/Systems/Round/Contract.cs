@@ -11,13 +11,13 @@ namespace Systems.Round{
         public int reward;
         public int signBonus;
 
-        public int TimeGiven;
+        public float TimeGiven;
         public Sponsor sponsor;
 
         public Contract(){ }
 
         public Contract(int tier, int itemsAmt, Sponsor s){
-            requiredQuota = (int)((400f * ((tier + 1f) * (tier / 2f)) + 300) / 50) * 50;
+            requiredQuota = (int)((500f * ((tier + 1f) * (tier / 2f)) + 300) / 25) * 25;
 
             sponsor = s; // (Sponsor)Random.Range(0, Sponsor.GetValues(typeof(Sponsor)).Length);
 
@@ -30,7 +30,7 @@ namespace Systems.Round{
             reward = (Random.Range(80, 160) + (3 - sellList.Count) * 40) * tier;
             signBonus = 0;
 
-            TimeGiven = 420 + (tier * (90 + Random.Range(-60, 45)));
+            TimeGiven = 440 + (tier * (100 + Random.Range(0, 20))) + Random.Range(-20, 20);
 
             switch (s){
                 case Sponsor.CorbCO:
@@ -40,9 +40,9 @@ namespace Systems.Round{
                     break;
                 case Sponsor.Anogen:
                     reward /= 2;
-                    requiredQuota += 100;
-                    TimeGiven += 80;
-                    signBonus += 40;
+                    requiredQuota += 200*tier;
+                    TimeGiven += 45*tier;
+                    signBonus += 100;
                     break;
                 case Sponsor.Silus:
                     TimeGiven -= 25;
@@ -56,10 +56,11 @@ namespace Systems.Round{
                     sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier - 1, 1));
                     TimeGiven -= 60;
                     reward = 0;
+                    TimeGiven *= 1.2f;
 
                     break;
                 case Sponsor.Amozon:
-                    reward += 50; //Partner bonus
+                    reward += 100; //Partner bonus
                     break;
                 case Sponsor.Pivot:
                     itemsAmt = 1;

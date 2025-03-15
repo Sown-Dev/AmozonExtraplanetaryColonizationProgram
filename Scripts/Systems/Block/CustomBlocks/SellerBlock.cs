@@ -5,10 +5,11 @@ using Systems.Round;
 
 public class SellerBlock: ProgressMachineContainerBlock{
     
+    public int progressPerCycle = 40;
     
     protected override void Awake(){
         base.Awake();
-        progressBar.maxProgress = 40;
+        progressBar.maxProgress = progressPerCycle;
     }
 
     public override bool CanProgress(){
@@ -24,6 +25,8 @@ public class SellerBlock: ProgressMachineContainerBlock{
             if(RoundManager.Instance.CanSell(s.ItemStack)){
                 RoundManager.Instance.Sell(s.ItemStack);
                 s.ItemStack = null;
+                
+                return;
             }
         }   
     }

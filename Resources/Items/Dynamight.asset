@@ -15,10 +15,10 @@ MonoBehaviour:
   <description>k__BackingField: Blows up rocks. Used to expand your factory
   <icon>k__BackingField: {fileID: 21300000, guid: c1b4dbf8fbb05854795470da59907ac3, type: 3}
   stackSize: 32
-  category: 3
+  category: 4
   useCursor: 1
   value: 40
   tier: 5
   fuelValue: 0
   throwPrefab: {fileID: 1858955622836358939, guid: a59726815ea8e7e4aa238d5bd8a20cdb, type: 3}
-  velocity: 8
+  velocity: 7

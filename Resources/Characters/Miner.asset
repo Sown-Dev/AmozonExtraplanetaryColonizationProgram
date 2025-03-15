@@ -16,6 +16,8 @@ MonoBehaviour:
     proper safety and operating procedures is concerning
   legalName: Gunther Shmauchenschmidt
   startingItems:
+  - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
+    amount: 1
   - item: {fileID: 11400000, guid: f6c49820d6b19c245ab0d6b1f9cd1880, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
@@ -28,8 +30,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 685810cb4d4a46e43b18299412e1409e, type: 2}
   portrait: {fileID: 21300000, guid: ec8e5616f7c5ba34b8ad9a0d9b9f114e, type: 3}
   icon: {fileID: 21300000, guid: 939f909e24cd047458e0117e5ff2d38f, type: 3}
-  shirtColor: {r: 0.46457815, g: 0.6368244, b: 0.6792453, a: 1}
-  pantsColor: {r: 0.85481304, g: 1, b: 0.24056602, a: 1}
+  shirtColor: {r: 0.7735849, g: 0.3823458, b: 0.21529014, a: 1}
+  pantsColor: {r: 0.77336174, g: 1, b: 0.3066038, a: 1}
   skinColor: {r: 0.5566038, g: 0.4869524, b: 0.375445, a: 0}
   hatColor: {r: 0, g: 0, b: 0, a: 0}
   stats:

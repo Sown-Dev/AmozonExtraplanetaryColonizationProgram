@@ -16,7 +16,7 @@ MonoBehaviour:
   legalName: Arthur LaQuavius
   startingItems:
   - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
-    amount: 1
+    amount: 2
   - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
     amount: 5
   - item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}

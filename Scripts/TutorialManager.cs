@@ -14,8 +14,6 @@ public class TutorialManager : MonoBehaviour{
    private Tutorial currentTutorial;
     
 
-    List<string> completedTutorials = new List<string>();
-
     private void Awake(){
  
         
@@ -61,42 +59,49 @@ public class TutorialManager : MonoBehaviour{
             return;
         }
 
+        if (GameManager.Instance.settings.completedTutorials.Contains(title)){
+            Debug.Log("tutorial already completed");
+            return;
+        }
+
         if (title.Length < 2){
             return;
         }
-        StartCoroutine(StartTutorialCoroutine(title, delay));
-    }
-
-    private System.Collections.IEnumerator StartTutorialCoroutine(string title, float delay){
-        yield return new WaitForSecondsRealtime(delay);
-
-        
-        if (completedTutorials.Contains(title)){
-            Debug.Log("tutorial already completed");
-            yield break;
-        }
-        
-        Debug.Log($"Starting tutorial {title}");
-        
         Tutorial t = tutorials.Find(tut => tut.title == title);
         if (t == null || t == currentTutorial || t.completed){
             Debug.LogWarning($"Tutorial of name '{title}' not found");
-            yield break;
+            return;
         }
 
         if (t.prerequisite.Length > 1){  //check to see if we actualy have a prerequisite, not just empty string
-            if (completedTutorials.Contains(t.prerequisite)){
+            if (GameManager.Instance.settings.completedTutorials.Contains(t.prerequisite)){
                 Debug.Log($"Prerequisite {t.prerequisite} already completed");
             }
             else{
                 Debug.Log($"Prerequisite {t.prerequisite} not completed, skipping tutorial");
-                yield break;
+                return;
             }
         }
+        
+        StartCoroutine(StartTutorialCoroutine(t, delay));
+    }
+
+    private System.Collections.IEnumerator StartTutorialCoroutine(Tutorial t, float delay){
+        yield return new WaitForSecondsRealtime(delay);
+        
+        
+        //in case tutorial gets started between coroutine start and now
+        if(currentTutorial != null){
+            Debug.Log($"Cannot start tutorial. one is already in progress");
+            yield break;
+        }
+        
+        
 
         CursorManager.Instance.OpenUI();
         blackBG.SetActive(true);
         Debug.Log($"Starting tutorial {t.title}");
+        
         currentTutorial = t;
         t.currentStep = 0;
         
@@ -115,7 +120,7 @@ public class TutorialManager : MonoBehaviour{
         
     }
     public void NextStep(){
-        Debug.Log($"Next step on {currentTutorial.title}. Current step: {currentTutorial.currentStep}/{currentTutorial.steps.Length-1}, next step will be {currentTutorial.currentStep+1}");
+        Debug.Log($"Next step on {currentTutorial.title}. Current step: {currentTutorial.currentStep}/{currentTutorial.steps.Length-1}");
         if (currentTutorial == null) return;
         if (currentTutorial.currentStep >= currentTutorial.steps.Length-1){
             EndTutorial();
@@ -131,7 +136,7 @@ public class TutorialManager : MonoBehaviour{
         CursorManager.Instance.CloseUI();
         blackBG.SetActive(false);
         String nextTutorial = currentTutorial.nextTutorial;
-        completedTutorials.Add(currentTutorial.title);
+        GameManager.Instance.settings.completedTutorials.Add(currentTutorial.title);
         currentTutorial.steps[currentTutorial.currentStep].gameObject.SetActive(false);
         currentTutorial.completed = true;
         currentTutorial = null;

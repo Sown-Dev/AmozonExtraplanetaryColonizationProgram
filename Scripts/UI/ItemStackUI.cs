@@ -23,18 +23,27 @@ public class ItemStackUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void Init(Item item){
+        if(item == null){
+            icon.sprite = Utils.Instance.blankIcon;
+            countText.text = "";
+            myItemStack = null;
+            return;
+        }
         myItemStack = new ItemStack(item, 1);
         icon.sprite = item.icon;
         countText.text = "";
     }
+    
 
     public void OnPointerEnter(PointerEventData eventData){
         //ItemInfoUI.Instance.Select(myItemStack);
-        TooltipManager.Instance.ShowItem(myItemStack.item, transform.position, gameObject);
+        if(myItemStack != null)
+            TooltipManager.Instance.ShowItem(myItemStack.item, transform.position, gameObject);
     }
 
     public void OnPointerExit(PointerEventData eventData){
         //ItemInfoUI.Instance.Deselect();
-        TooltipManager.Instance.Hide();
+        if(myItemStack != null)
+            TooltipManager.Instance.Hide();
     }
 }

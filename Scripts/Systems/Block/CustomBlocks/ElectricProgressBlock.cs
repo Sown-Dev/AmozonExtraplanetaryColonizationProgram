@@ -10,12 +10,15 @@ namespace Systems.Block{
         public PowerGrid myGrid{ get; set; }
         public Block myBlock => this;
         public IPowerConnector myConnector{ get; set; }
-        
-        
+
+
+
+        public int baseUsage;
         public int needed{ get; set; }
         public int providedPower{ get; set; }
 
         public override void Init(Orientation orientation){
+            needed = baseUsage;
             base.Init(orientation);
             GetConnected();
             

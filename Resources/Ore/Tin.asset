@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df92101969073b4d92b9089f1f6b7a3, type: 3}
   m_Name: Tin
   m_EditorClassIdentifier: 
-  threshold: 0.835
+  threshold: 0.82
   scale: 0.1
   minAmount: 300
   maxAmount: 800
@@ -22,3 +22,4 @@ MonoBehaviour:
     oreItem: {fileID: 11400000, guid: 6cbcc93b4ce4abb44afec485dc947ca6, type: 2}
     tile: {fileID: 11400000, guid: 84e0f661a23e0554cba446cb4d65f108, type: 2}
     amount: 0
+    position: {x: 0, y: 0}

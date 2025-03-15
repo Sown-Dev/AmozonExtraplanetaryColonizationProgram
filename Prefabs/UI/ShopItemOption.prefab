@@ -421,7 +421,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5493764380847866343}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.12756516}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -430,7 +430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 4.0568237, y: -34.189545}
+  m_AnchoredPosition: {x: 0, y: -34}
   m_SizeDelta: {x: 18, y: 12}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &4450468136646454742
@@ -584,7 +584,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 48, y: 66}
+  m_SizeDelta: {x: 40, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6742624001276772284
 CanvasRenderer:
@@ -641,6 +641,8 @@ MonoBehaviour:
     price: 0
     tier: 0
     stock: 0
+    overrideCategory: 0
+    blockCategory: 0
   ItemIconTransform: {fileID: 4650714636535450343}
   ItemIconPrefab: {fileID: 8465445973632796187, guid: 54ce2043af718e64e84028645f344d8c, type: 3}
   BlockParent: []

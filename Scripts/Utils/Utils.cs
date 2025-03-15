@@ -26,7 +26,12 @@ public class Utils: MonoBehaviour{
     private void Awake(){
         Instance = this;
     }
-    
+    public static Vector3 SnapToGrid(Vector3 position, float gridSize = 1f / 16f)
+    {
+        position.x = Mathf.Round(position.x / gridSize) * gridSize;
+        position.y = Mathf.Round(position.y / gridSize) * gridSize;
+        return position;
+    }
     
     public ItemDrop CreateItemDrop(ItemStack item, Vector3 pos){
         ItemDrop drop = Instantiate(itemDropPrefab, pos + (Vector3)(Random.insideUnitCircle*0.2f), Quaternion.identity);

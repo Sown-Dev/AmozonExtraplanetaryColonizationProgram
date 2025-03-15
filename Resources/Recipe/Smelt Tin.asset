@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95e4a02bec8c4a43bd39c378b823a04, type: 3}
+  m_Name: Smelt Tin
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 1efdf2832e12b3e45be6512da444d3fd, type: 3}
+  ingredients:
+  - item: {fileID: 11400000, guid: 6cbcc93b4ce4abb44afec485dc947ca6, type: 2}
+    amount: 3
+  newIngredients:
+  - isTag: 0
+    items:
+    - {fileID: 11400000, guid: 6cbcc93b4ce4abb44afec485dc947ca6, type: 2}
+    name: 
+    icon: {fileID: 0}
+  results:
+  - item: {fileID: 11400000, guid: 95300cbdad110a949bcdaad630bc66da, type: 2}
+    amount: 1
+  craftTime: 60

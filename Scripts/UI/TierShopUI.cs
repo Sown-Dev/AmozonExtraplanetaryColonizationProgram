@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Systems.Round;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -14,10 +15,12 @@ public class TierShopUI : MonoBehaviour{
     public Transform MiscList;
     public Transform RefineList;
     public Transform ElectricalList;
+    public Transform ExplosiveList;
 
     public Transform UpgradeList;
 
 
+    [FormerlySerializedAs("shopItemPrefab")] public GameObject shopBlockPrefab;
     public GameObject shopItemPrefab;
     public GameObject upgradeButtonPrefab;
 
@@ -38,13 +41,15 @@ public class TierShopUI : MonoBehaviour{
             if (!(child.GetComponent<LayoutElement>()?.ignoreLayout == true))
                 Destroy(child.gameObject);
         }
+        
+        
 
         if (tier.logistics.Length == 0){
             Destroy(LogisticsList.gameObject);
         }
         else{
             foreach (ShopOffer offer in tier.logistics){
-                ShopOfferUI offerUI = Instantiate(shopItemPrefab, LogisticsList).GetComponent<ShopOfferUI>();
+                ShopOfferUI offerUI = Instantiate(shopBlockPrefab, LogisticsList).GetComponent<ShopOfferUI>();
                 offerUI.Init(offer);
             }
         }
@@ -56,7 +61,7 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.production){
-                ShopOfferUI offerUI = Instantiate(shopItemPrefab, ProductionList).GetComponent<ShopOfferUI>();
+                ShopOfferUI offerUI = Instantiate(shopBlockPrefab, ProductionList).GetComponent<ShopOfferUI>();
                 offerUI.Init(offer);
             }
         }
@@ -66,7 +71,7 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.electrical){
-                ShopOfferUI offerUI = Instantiate(shopItemPrefab, ElectricalList).GetComponent<ShopOfferUI>();
+                ShopOfferUI offerUI = Instantiate(shopBlockPrefab, ElectricalList).GetComponent<ShopOfferUI>();
                 offerUI.Init(offer);
             }
         }
@@ -76,7 +81,7 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.refinement){
-                ShopOfferUI offerUI = Instantiate(shopItemPrefab, RefineList).GetComponent<ShopOfferUI>();
+                ShopOfferUI offerUI = Instantiate(shopBlockPrefab, RefineList).GetComponent<ShopOfferUI>();
                 offerUI.Init(offer);
             }
         }
@@ -86,7 +91,17 @@ public class TierShopUI : MonoBehaviour{
         }
         else{
             foreach (ShopOffer offer in tier.misc){
-                ShopOfferUI offerUI = Instantiate(shopItemPrefab, MiscList).GetComponent<ShopOfferUI>();
+                ShopOfferUI offerUI = Instantiate(shopBlockPrefab, MiscList).GetComponent<ShopOfferUI>();
+                offerUI.Init(offer);
+            }
+        }
+        
+        if (tier.explosives.Length == 0){
+            Destroy(ExplosiveList.gameObject);
+        }
+        else{
+            foreach (ShopOffer offer in tier.explosives){
+                ShopOfferUI offerUI = Instantiate(shopItemPrefab, ExplosiveList).GetComponent<ShopOfferUI>();
                 offerUI.Init(offer);
             }
         }

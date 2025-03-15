@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df92101969073b4d92b9089f1f6b7a3, type: 3}
   m_Name: Copper
   m_EditorClassIdentifier: 
-  threshold: 0.75
+  threshold: 0.79
   scale: 0.1
   minAmount: 100
   maxAmount: 300
@@ -22,3 +22,4 @@ MonoBehaviour:
     oreItem: {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}
     tile: {fileID: 11400000, guid: dc8a59f117d98e6449b4c94ea20af613, type: 2}
     amount: 0
+    position: {x: 0, y: 0}

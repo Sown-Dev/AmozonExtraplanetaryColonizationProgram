@@ -96,7 +96,7 @@ MonoBehaviour:
   onCollide: {fileID: 8368490557163509515, guid: ac217879d8abaf84e97c8caf0dc0f8f2, type: 3}
   DestroyOnCollide: 1
   destroyDelay: 0
-  expRadius: 3
+  expRadius: 3.6
 --- !u!212 &5622387015324751571 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8368856016182629934, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}

@@ -12,7 +12,7 @@ namespace Systems.Block.CustomBlocks{
 
         public override void CompleteCycle(){
             base.CompleteCycle();
-            foreach(Block b in TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y)){
+            foreach(Block b in TerrainManager.Instance.GetAdjacentBlocks(data.origin, properties.size.x, properties.size.y)){
                 b.Actuate();
             }
         }

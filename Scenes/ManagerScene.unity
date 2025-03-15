@@ -434,13 +434,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 550901511792262858, guid: ed7f7091bda7d52409f95603a8228741, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 124
+    - target: {fileID: 2159180848290595468, guid: ed7f7091bda7d52409f95603a8228741, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 550901511792262858, guid: ed7f7091bda7d52409f95603a8228741, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 180
+    - target: {fileID: 2159180848290595468, guid: ed7f7091bda7d52409f95603a8228741, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159180848290595468, guid: ed7f7091bda7d52409f95603a8228741, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159180848290595468, guid: ed7f7091bda7d52409f95603a8228741, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2432859097341783271, guid: ed7f7091bda7d52409f95603a8228741, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2601,6 +2609,7 @@ MonoBehaviour:
     itemsPickedUp: 0
     moneyEarned: 0
   pauseManager: {fileID: 2107895573}
+  settings: {fileID: 11400000, guid: 9600811bf944b574388b50fd9a669b78, type: 2}
   Achievements:
   - FIRST_ROUND
   - 1000_DOLLARS

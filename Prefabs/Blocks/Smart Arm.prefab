@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5505530899923860365
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2449576365950138683, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449576365950138683, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071626970990201939, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_Name
+      value: Smart Arm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560868191791535471, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02365df77ae6c8549a3906ec32038001, type: 3}
+    - target: {fileID: 4528264930813948543, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: properties.name
+      value: Smart Arm
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073425446056946076, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125982082512480245, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5625
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4528264930813948543, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3071626970990201939, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 309679128254801745}
+  m_SourcePrefab: {fileID: 100100000, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+--- !u!4 &811974651357535352 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5125982082512480245, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+  m_PrefabInstance: {fileID: 5505530899923860365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4221052700082215636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8571372903449190745, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+  m_PrefabInstance: {fileID: 5505530899923860365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf9151fc513fae4da41f9815b8f1634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7405904998661666782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3071626970990201939, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+  m_PrefabInstance: {fileID: 5505530899923860365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &309679128254801745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7405904998661666782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d98a17d7025444e916ca7ac9344b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 9010908930106011362}
+  bc: {fileID: 7897404542768349878}
+  baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
+  properties:
+    <myItem>k__BackingField: {fileID: 11400000, guid: 94160c7867e169d468782d6c2d706c2e, type: 2}
+    name: Smart Arm
+    indestructible: 0
+    rotatable: 1
+    invertRotation: 1
+    actuatable: 0
+    collidable: 1
+    blockUI: 1
+    destroyTime: 1
+    ttFlags: 0
+    size: {x: 1, y: 1}
+    description: like a robot arm, but smarter
+    bso: {fileID: 0}
+  currentState:
+    baseSprite:
+      sprites: []
+    rotateable: 0
+    orientation: 0
+    rotations: []
+    currentSprite:
+      sprites: []
+  lootTable: []
+  rotation: 0
+  tile: {fileID: 0}
+  origin: {x: 0, y: 0}
+  outputProperties:
+    size: 0
+    name: 
+    gridWidth: 0
+    scaleDownGridIfSmaller: 0
+    type: 0
+  toFace: 0
+  arm: {fileID: 811974651357535352}
+  hiddenDirSelect: 0
+  slotVisualizer: {fileID: 4221052700082215636}
+--- !u!61 &7897404542768349878 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2449576365950138683, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+  m_PrefabInstance: {fileID: 5505530899923860365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &9010908930106011362 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3560868191791535471, guid: f9e47a611485b49459fd43a82b2c257c, type: 3}
+  m_PrefabInstance: {fileID: 5505530899923860365}
+  m_PrefabAsset: {fileID: 0}

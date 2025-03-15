@@ -5167,6 +5167,7 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
     ttFlags: 4
     size: {x: 2, y: 2}
@@ -5198,6 +5199,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c2511a9a4c1dd494eb2a90d63e2e5f88, type: 2}
     - {fileID: 11400000, guid: c792facad87fd9947b731c5ddbd1a971, type: 2}
     - {fileID: 11400000, guid: d0f5d12283671e94b966f569709922eb, type: 2}
+    - {fileID: 11400000, guid: 48e3ee54b4d98704aa01a13e3fcd6404, type: 2}
     currentRecipe: {fileID: 0}
   inputProperties:
     size: 0

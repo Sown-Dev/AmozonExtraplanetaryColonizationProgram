@@ -13,15 +13,16 @@ public class PopupListUI : MonoBehaviour
 
     private List<PopupItem> popups = new List<PopupItem>();
 
-    void Update()
+    void FixedUpdate()
     {
         // Animate the position of each popup
         for (int i = 0; i < popups.Count; i++)
         {
             PopupItem popup = popups[i];
             Vector3 targetPosition =  new Vector3(0, (popups.Count + -i) * spacing, 0);
-            popup.rectTransform.anchoredPosition = Vector3.Lerp(popup.rectTransform.anchoredPosition, targetPosition, Time.deltaTime * animationSpeed);
-
+            popup.realPosition = Vector3.Lerp(popup.realPosition, targetPosition, Time.deltaTime * animationSpeed);
+        
+            popup.rectTransform.anchoredPosition = Utils.SnapToGrid(popup.realPosition, 1);
             // Update the timer and fade out if necessary
             popup.timer += Time.deltaTime;
             if (popup.timer >= popupDuration)
@@ -60,6 +61,7 @@ public class PopupListUI : MonoBehaviour
             timer = 0f
         };
         newPopup.rectTransform.anchoredPosition = new Vector3(0, -spacing, 0);
+        newPopup.realPosition = newPopup.rectTransform.anchoredPosition;
 
         // Add to the list
         popups.Add(newPopup);
@@ -78,5 +80,6 @@ public class PopupListUI : MonoBehaviour
         public RectTransform rectTransform;
         public CanvasGroup canvasGroup;
         public float timer;
+        public Vector3 realPosition;
     }
 }

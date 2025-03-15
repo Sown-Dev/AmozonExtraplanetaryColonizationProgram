@@ -94,6 +94,7 @@ public class PlayerUI : MonoBehaviour{
         blockInfoUI.block = player.myCursor.lookingBlock;
     }
     public void ToggleInventory(){
+        TutorialManager.Instance.StartTutorial("inventory");
         inventoryUIWindow.Toggle();
         inventoryUI.Refresh();
 

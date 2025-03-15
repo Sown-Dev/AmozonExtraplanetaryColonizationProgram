@@ -27,12 +27,13 @@ public class RoundInfoUI:MonoBehaviour{
     public GameObject sellUIPrefab;
 
     public void Update(){
-        
+        moneyText.text = "$" + RoundManager.Instance.money;
+
         if (RoundManager.Instance.currentContract == null){
             //Debug.Log(RoundManager.Instance.cooldownTimer);
-            if(RoundManager.Instance.cooldownTimer > -1){
+            if(RoundManager.Instance.roundTime > -1){
  
-                timeText.text =$"{(int)(RoundManager.Instance.cooldownTimer / 60)}:{(int)(RoundManager.Instance.cooldownTimer % 60):00}";
+                timeText.text =$"{(int)(RoundManager.Instance.roundTime / 60)}:{(int)(RoundManager.Instance.roundTime % 60):00}";
             }
             else{
 
@@ -51,7 +52,7 @@ public class RoundInfoUI:MonoBehaviour{
         if (RoundManager.Instance.currentContract == null){
             contractInfo.SetActive(false); 
             time.SetActive(false);
-            if( RoundManager.Instance.cooldownTimer > -1){
+            if( RoundManager.Instance.roundTime> -1){
                 time.SetActive(true);
             }
             contractText.text = "Awaiting Contract";
@@ -64,7 +65,6 @@ public class RoundInfoUI:MonoBehaviour{
             quotaText.text = RoundManager.Instance.currentContract.quota + "/" + RoundManager.Instance.currentContract.requiredQuota;
 
             //Update the money text
-            moneyText.text = "$" + RoundManager.Instance.money;
 
             //Update the upgrade list
 

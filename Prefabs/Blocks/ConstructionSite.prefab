@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: SellBlock
+      value: ConstructionSite
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 414f3bee52fe13342bf5eeb509ad5252, type: 3}
+      objectReference: {fileID: 21300000, guid: ed4f4130feaea614d9e4b21e207feaba, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -92,6 +92,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.name
+      value: Block1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.rotatable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.rotateable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: properties.invertRotation
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6474919723315122417, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
     m_RemovedGameObjects: []
@@ -99,7 +115,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6250332161238803911}
+      addedObject: {fileID: -5496934429802836403}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
 --- !u!61 &2449576365950138683 stripped
 BoxCollider2D:
@@ -111,7 +127,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-6250332161238803911
+--- !u!114 &-5496934429802836403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,19 +136,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 3071626970990201939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8430f616d828549857e01077ac93c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 157b55b5bf2b84f42a1f68fba4ebebfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
-    name: SellBlock
-    indestructible: 0
-    rotateable: 0
-    size: {x: 2, y: 2}
-    description: Sells blocks every few ticks
+    <myItem>k__BackingField: {fileID: 0}
+    name: ConstructionSite
+    indestructible: 1
+    rotatable: 0
+    invertRotation: 0
+    actuatable: 0
+    collidable: 1
+    blockUI: 1
+    destroyTime: 1
+    ttFlags: 0
+    size: {x: 3, y: 3}
+    description: Something was in the progress of being built. Finish it
     bso: {fileID: 0}
   currentState:
     baseSprite:
@@ -144,13 +166,18 @@ MonoBehaviour:
       sprites: []
   lootTable: []
   rotation: 0
+  tile: {fileID: 0}
   origin: {x: 0, y: 0}
-  outputProperties:
-    size: 14
-    name: Seller
-    gridWidth: 7
-    scaleDownGridIfSmaller: 0
-    type: 0
+  buildingProgress:
+    resourcesNeeded:
+    - item: {fileID: 11400000, guid: 50c4c47b96150104da4829c44e3b81c6, type: 2}
+      amount: 40
+    - item: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
+      amount: 100
+    - item: {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
+      amount: 25
+    progress: 000000000000000000000000
+  blockPrefab: {fileID: 4329347407540247257, guid: 6745ce6cd063b494ba345649fad37c4c, type: 3}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

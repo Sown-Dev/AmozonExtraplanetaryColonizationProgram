@@ -1,14 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Systems.Round;
 using TMPro;
-using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoundCompleteUI : MonoBehaviour{
-
+public class RoundCompleteUI : MonoBehaviour
+{
     public CanvasGroup earnedBarCG;
     public TMP_Text earnedBarText;
     public Image earnedBarFill;
@@ -16,7 +14,6 @@ public class RoundCompleteUI : MonoBehaviour{
     int realEarned;
     private int toEarned;
 
-    
     public CanvasGroup timeCG;
     public TMP_Text timeText;
     private float timeRemaining;
@@ -31,21 +28,25 @@ public class RoundCompleteUI : MonoBehaviour{
     public CanvasGroup rewardCG;
     public TMP_Text rewardText;
 
-    
     public CanvasGroup totalCG;
     public TMP_Text totalText;
 
     public Button continueButton;
 
-    
-    
-    
-    private void Awake(){
+    [Header("Animation Settings")]
+    public AnimationCurve easeInOutCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    private float earnProgress;
+    private float timeProgress;
+    private float earnStartValue;
+    private float timeStartValue;
+
+    private void Awake()
+    {
         continueButton.onClick.AddListener(Continue);
     }
 
-    public void Init(int earn, float time){
-        //set all elements to hide
+    public void Init(int earn, float time)
+    {
         earnedBarCG.alpha = 0;
         timeCG.alpha = 0;
         rewardCG.alpha = 0;
@@ -53,34 +54,32 @@ public class RoundCompleteUI : MonoBehaviour{
         addtimeCG.alpha = 0;
 
         continueButton.interactable = false;
-        addTime = time/ 2;
+        addTime = time / 2;
         RoundManager.Instance.addTime = addTime;
 
         StartCoroutine(StartSequence(earn, time));
     }
 
     private int totalBonus = 0;
-    //coroutine to start each element in order
-    IEnumerator StartSequence(int _earned, float _timeRemaining){
-        //TODO play sound on each start
+
+    IEnumerator StartSequence(int _earned, float _timeRemaining)
+    {
         yield return new WaitForSecondsRealtime(1f);
         StartEarned(_earned);
         yield return new WaitForSecondsRealtime(1f);
-        lerpEarn = true;
+        StartCoroutine(AnimateEarned());
         yield return new WaitForSecondsRealtime(2.5f);
         StartTime(_timeRemaining);
         yield return new WaitForSecondsRealtime(1f);
-        lerpTime = true;
+        StartCoroutine(AnimateTime());
         yield return new WaitForSecondsRealtime(1.5f);
-        addtimeText.text = $"Extra time for next contract:      <color=#118811ff>+{(int)(addTime/ 60)}:{(addTime % 60):00}</color>";
+        
+        addtimeText.text = $"Extra time for next contract:      <color=#118811ff>+{(int)(addTime/60)}:{(addTime % 60):00}</color>";
         addtimeCG.alpha = 1;
         yield return new WaitForSecondsRealtime(1f);
         
-        
         totalBonus = realTimeBonus + RoundManager.Instance.currentContract.reward;
         
-        
-
         rewardText.text = $"Contract Reward: <color=#118811ff>${RoundManager.Instance.currentContract.reward}</color>";
         rewardCG.alpha = 1;
         yield return new WaitForSecondsRealtime(1.5f);
@@ -91,70 +90,71 @@ public class RoundCompleteUI : MonoBehaviour{
         continueButton.interactable = true;
     }
 
-    float lerpFactor = 1.5f;
-
-    private bool lerpEarn;
-    private bool lerpTime;
-
-    private void Update(){
-        
+    private void Update()
+    {
         earnedBarText.text = (int)earned + " / " + RoundManager.Instance.currentContract.requiredQuota;
-        earnedBarFill.rectTransform.offsetMax =
-            new Vector2(-2 + ((1-(earned / RoundManager.Instance.currentContract.requiredQuota)) * -156), -2);
+        earnedBarFill.rectTransform.offsetMax = 
+            new Vector2(-2 + ((1 - (earned / RoundManager.Instance.currentContract.requiredQuota)) * -156), -2);
 
-        
         timeText.text =
             $"Time Remaining: <color=#226633ff>{(int)(timeRemaining / 60)}:{(timeRemaining % 60):00}</color>\nTime Bonus:    <color=#118811ff>+${(int)timeBonus}</color>";
-
-        if (lerpEarn){
-            
-            
-            earned = Mathf.Lerp(earned, toEarned, Time.fixedDeltaTime * lerpFactor);
-            if (earned / toEarned >= 0.99f)
-                earned = toEarned;
-
-        }
-
-        if (lerpTime){
-
-            timeRemaining = Mathf.Lerp(timeRemaining, toRemaining, Time.fixedDeltaTime * lerpFactor);
-            timeBonus =Mathf.Lerp(0, realTimeBonus,
-                1 - timeRemaining / RoundManager.Instance.roundTime);
-            if (timeRemaining <= 1){
-                timeRemaining = toRemaining;
-                timeBonus = realTimeBonus;
-            }
-        }
     }
 
-    public void StartEarned(int _earned){
+    public void StartEarned(int _earned)
+    {
         earned = 0;
         toEarned = _earned;
         realEarned = _earned;
-        
         earnedBarCG.alpha = 1;
     }
 
-    public void StartTime(float _timeRemaining){
+    public void StartTime(float _timeRemaining)
+    {
         timeRemaining = _timeRemaining;
         toRemaining = 0;
-        realTimeBonus = (int)(timeRemaining)  * (RoundManager.Instance.roundNum+1);
-
-        
+        realTimeBonus = (int)(timeRemaining) * (RoundManager.Instance.roundNum + 1);
         timeBonus = 0;
-        
         timeCG.alpha = 1;
     }
 
-    public void Continue(){
-        RoundManager.Instance.AddMoney( totalBonus, false);
+    private IEnumerator AnimateEarned()
+    {
+        float duration = 2.5f;
+        float startTime = Time.unscaledTime;
+        float startValue = earned;
 
-       RoundManager.Instance.StartCooldown(30);
-       
-                
+        while (Time.unscaledTime - startTime < duration)
+        {
+            float progress = (Time.unscaledTime - startTime) / duration;
+            earned = Mathf.Lerp(startValue, toEarned, easeInOutCurve.Evaluate(progress));
+            yield return null;
+        }
+        earned = toEarned;
+    }
+
+    private IEnumerator AnimateTime()
+    {
+        float duration = 1.5f;
+        float startTime = Time.unscaledTime;
+        float startValue = timeRemaining;
+
+        while (Time.unscaledTime - startTime < duration)
+        {
+            float progress = (Time.unscaledTime - startTime) / duration;
+            timeRemaining = Mathf.Lerp(startValue, 0, easeInOutCurve.Evaluate(progress));
+            timeBonus = Mathf.Lerp(0, realTimeBonus, 
+                1 - timeRemaining / RoundManager.Instance.roundTime);
+            yield return null;
+        }
+        timeRemaining = 0;
+        timeBonus = realTimeBonus;
+    }
+
+    public void Continue()
+    {
+        RoundManager.Instance.AddMoney(totalBonus, false);
+        RoundManager.Instance.CompleteRound();
         CursorManager.Instance.CloseUI();
-        
         Destroy(gameObject);
-
     }
 }

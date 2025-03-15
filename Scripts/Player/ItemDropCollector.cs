@@ -14,7 +14,7 @@ public class ItemDropCollector : MonoBehaviour{
         }
 
         var itemStack = itemDrop.Collect();
-        if (p.Insert(ref itemStack)){
+        if (p.Insert(ref itemStack) || itemStack==null || itemStack?.amount == 0){
             Destroy(itemDrop.gameObject);
         }
     }

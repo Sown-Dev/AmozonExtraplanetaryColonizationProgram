@@ -19,18 +19,20 @@ namespace Systems.Items{
             get => containerList.Length;
             private set{ } //TODO add resize
         }
+
         Action<ItemStack> OnInsert;
+
         //TODO: jenk workaround, but i only need to worry about this if i change the other constructor or how containers work
-        public Container(ContainerProperties props, List<Slot> slots, Action<ItemStack> _OnInsert=null){
+        public Container(ContainerProperties props, List<Slot> slots){
             this.properties = props;
             containerList = slots.ToArray();
-            if(_OnInsert!=null){
+            /*if (_OnInsert != null){ //not doing this incase of memory leaks. Don't have a good way to unsubscribe
                 AddOnInsert(_OnInsert);
-            }
+            }*/
         }
 
         public void AddOnInsert(Action<ItemStack> _OnInsert){
-            OnInsert+=_OnInsert;
+            OnInsert += _OnInsert;
         }
 
         public Container(ContainerProperties props){
@@ -63,18 +65,21 @@ namespace Systems.Items{
                     return false;
                 }
             }
+
             
-            /*if(GetInsertionSlot(s).Insert(ref s) && !simulate){
-                
-                return true;
-            }*/
+            //new code section
+            if (!simulate){
+                if (GetInsertionSlot(s).Insert(ref s)){
+                    return true;
+                }
+            }
 
             for (int i = 0; i < containerList.Length; i++){
                 var currentStack = containerList[i].ItemStack;
 
                 if (!simulate){
                     // If we're not simulating and the slot is empty, directly insert the item stack
-                    
+
                     if (containerList[i].Insert(ref s, simulate))
 
                         //OnInsert?.Invoke(containerList[i].ItemStack);
@@ -87,7 +92,7 @@ namespace Systems.Items{
                     if (containerList[i].Insert(ref s, simulate)){
                         return true;
                     }
-                    
+
                     /* OLD SIMULATE CODE
                     // Calculate space available in the current stack
                     int spaceAvailable = currentStack.item.stackSize - currentStack.amount;
@@ -103,13 +108,58 @@ namespace Systems.Items{
 
             return false;
         }
+        
+        /// <summary>
+        /// Returns the next EMPTY slot for another container to be insert into
+        /// </summary>
+        public Slot GetInsertionSlot(ItemStack insertItem = null){
+            switch (properties.type){
+                case ContainerType.FIFO:
+                    for (int i = 0; i < containerList.Length; i++){
+                        if (containerList[i].ItemStack != null){
+                            if (containerList[i].ItemStack.item == insertItem.item && containerList[i].Combine(ref insertItem, true)){
+                                return containerList[i];
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < containerList.Length; i++){
+                        if (containerList[i].ItemStack == null){
+                            return containerList[i];
+                        }
+                    }
+
+                    break;
+                case ContainerType.LIFO:
+                    for (int i = containerList.Length - 1; i >= 0; i--){
+                        if (containerList[i].ItemStack != null){
+                            if (containerList[i].ItemStack.item == insertItem.item && containerList[i].Combine(ref insertItem, true)){
+                                return containerList[i];
+                            }
+                        }
+                    }
+
+                    for (int i = containerList.Length - 1; i >= 0; i--){
+                        if (containerList[i].ItemStack == null){
+                            return containerList[i];
+                        }
+                    }
+
+                    break;
+                default:
+                    return null;
+            }
+
+            return null;
+        }
+
 
         public ItemStack Extract(){
             Slot extractionSlot = GetExtractionSlot();
             if (extractionSlot != null){
                 ItemStack ret = extractionSlot.ItemStack;
                 extractionSlot.ItemStack = null;
-                if(ret.amount == 0)
+                if (ret.amount == 0)
                     return null;
                 return ret;
             }
@@ -139,7 +189,6 @@ namespace Systems.Items{
                     if (s.ItemStack == null || s.ItemStack.amount == 0){
                         OnInsert?.Invoke(s.ItemStack);
                         return true;
-                        
                     }
                 }
             }
@@ -178,42 +227,7 @@ namespace Systems.Items{
             return null;
         }
 
-        /// <summary>
-        /// Returns the next EMPTY slot for another container to be insert into
-        /// </summary>
-        public Slot GetInsertionSlot(ItemStack insertItem = null){
-            switch (properties.type){
-                case ContainerType.FIFO:
-                    for (int i = 0; i < containerList.Length; i++){
-                        if (containerList[i].ItemStack == null){
-                            //|| (containerList[i].ItemStack.item == insertItem.item && containerList[i].ItemStack.amount < insertItem.amount)){
-                            return containerList[i];
-                        }
-                        if(containerList[i].ItemStack.item == insertItem.item && containerList[i].Combine( ref insertItem, true)){   
-                            return containerList[i];
-                        }
-                    }
-
-                    break;
-                case ContainerType.LIFO:
-                    for (int i = containerList.Length - 1; i >= 0; i--){
-                        if (containerList[i].ItemStack == null){
-                            // || (containerList[i].ItemStack.item == insertItem.item && containerList[i].ItemStack.amount < insertItem.amount)){
-                            return containerList[i];
-                        }
-                        if(containerList[i].ItemStack.item == insertItem.item && containerList[i].Combine( ref insertItem, true)){   
-                            return containerList[i];
-                        }
-                    }
-
-                    break;
-                default:
-                    return null;
-            }
-
-            return null;
-        }
-
+       
 
         public bool ExtractToSlot(Slot s){
             Slot extractionSlot = GetExtractionSlot();
@@ -223,8 +237,7 @@ namespace Systems.Items{
 
             return false;
         }
-        
-     
+
 
         public bool Contains(Item item){
             for (int i = 0; i < containerList.Length; i++){
@@ -333,11 +346,12 @@ namespace Systems.Items{
 
             return items;
         }
-        
+
         public List<ItemStack> SetSize(int size){
             if (size == containerList.Length){
                 return null;
             }
+
             List<ItemStack> overflow = new List<ItemStack>();
             Slot[] newContainerList = new Slot[size];
             int i = 0;
@@ -349,12 +363,13 @@ namespace Systems.Items{
                     newContainerList[i] = new Slot(null);
                 }
             }
-            for(;i<containerList.Length;i++){
-                if(containerList[i].ItemStack!=null){
+
+            for (; i < containerList.Length; i++){
+                if (containerList[i].ItemStack != null){
                     overflow.Add(containerList[i].ItemStack);
                 }
             }
-            
+
 
             containerList = newContainerList;
             return overflow;

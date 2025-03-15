@@ -15,12 +15,16 @@ MonoBehaviour:
   description: n/a (Frank refused Partner Assessment)
   legalName: Frank Formane
   startingItems:
+  - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
+    amount: 1
   - item: {fileID: 11400000, guid: d30994e50df07ca42870d6d29369701a, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: 93ad7c33e6ce94f44b60f2452e04813e, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: d6b65e7c3b8c022488f524059ba7c9e6, type: 2}
     amount: 10
+  - item: {fileID: 11400000, guid: 94160c7867e169d468782d6c2d706c2e, type: 2}
+    amount: 1
   startingUpgrades: []
   portrait: {fileID: 21300000, guid: df12b476cf172164aa6630b8021fee7f, type: 3}
   icon: {fileID: 21300000, guid: 0ccf18d22a4915b42bebb2a114e596bb, type: 3}

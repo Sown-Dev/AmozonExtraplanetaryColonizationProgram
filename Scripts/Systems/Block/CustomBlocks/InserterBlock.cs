@@ -22,11 +22,13 @@ namespace Systems.Block
         protected override void Awake()
         {
             DirSelect = new DirectionSelect();
+            DirSelect.Priority = -10; 
             DirSelect.Hidden = hiddenDirSelect;
             base.Awake();
 
             outputProperties.size = 1;
             output = new Container(outputProperties);
+            output.Priority = 2;
             mySlot = output.GetSlot(0);
             mySlot.Stacksize = 2;
 

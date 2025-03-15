@@ -5,14 +5,15 @@ using Systems;
 using Systems.Block;
 using Systems.Block.CustomBlocks;
 using Systems.Items;
+using Systems.Round;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public partial class Player : Unit{
-    
-    [Header("PlayerMove Fields")]
-    [SerializeField] protected Collider2D playerCollider; // Reference to the player's collider
+    [Header("PlayerMove Fields")] [SerializeField]
+    protected Collider2D playerCollider; // Reference to the player's collider
+
     [SerializeField] private SpriteRenderer shadow;
     [SerializeField] private Transform spriteHolder;
     [SerializeField] private Animator am;
@@ -21,8 +22,9 @@ public partial class Player : Unit{
     [SerializeField] private TileIndicatorManager indicatorManager;
     [SerializeField] private GameObject DropPod; //only spawned at beginning, destroyed on landing
     [SerializeField] private GameObject DropPodDestroy;
+    [SerializeField] private LayerMask wallLayer;
 
-    private float moveV = 4600f;
+    private float moveV = 4800f;
     private float maxSpeed = 10f;
     public float jumpVelocity = 10f; // The initial velocity applied when jumping   
     public float gravity = -36; // Gravity applied to the player
@@ -32,13 +34,14 @@ public partial class Player : Unit{
     private bool m_Grounded = false;
 
     private void Update(){
-        if(Time.timeScale<=0) return;
-        
-        Block standingBlock = TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(transform.position));
-        
-        handVisualizer.Refresh();
+        if (Time.timeScale <= 0) return;
 
         
+        Block standingBlock = TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(transform.position));
+
+        handVisualizer.Refresh();
+
+
         sr.sortingOrder = 0;
         shadow.sortingOrder = 0;
         shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b,
@@ -52,7 +55,6 @@ public partial class Player : Unit{
             // Check if player has landed
             if (spriteHolder.transform.localPosition.y <= groundLevel){
                 Land();
-               
             }
         }
         else{
@@ -80,23 +82,23 @@ public partial class Player : Unit{
         am.SetFloat("yVel", yVelocity);
 
 
-        
         //round position
-        
+
         // Disable or enable the collider based on height
         playerCollider.enabled = spriteHolder.transform.localPosition.y < disableColliderHeight;
 
         if (sr.sortingOrder == 0){
             sr.sortingOrder = spriteHolder.transform.localPosition.y < disableColliderHeight ? 0 : 2;
         }
+
         handVisualizer.spriteRenderer.sortingOrder = sr.sortingOrder;
 
         rb.drag = m_Grounded ? 10 : 9;
 
         Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-        
-        if(move != Vector2.zero){
-            TutorialManager.Instance.StartTutorial("interaction",1);
+
+        if (move != Vector2.zero){
+            TutorialManager.Instance.StartTutorial("interaction", 1);
         }
 
         if (move.x > 0){
@@ -105,42 +107,40 @@ public partial class Player : Unit{
         else if (move.x < 0){
             sr.transform.localScale = new Vector3(-1, 1, 1);
         }
-        
+
         foreach (Transform child in highlights.transform){
             Destroy(child.gameObject);
         }
-      
-        
+
+
         if (SelectedSlot.ItemStack?.item is BlockItem block && PlayerUI.Instance.OnTop.childCount == 0){
-            
-              
             int sx = block.blockPrefab.properties.size.x;
             int sy = block.blockPrefab.properties.size.y;
-            
-            if(( myCursor.cursorRotation== Orientation.Right || myCursor.cursorRotation== Orientation.Left) && block.blockPrefab.properties.rotatable){
-                (sx,sy) = (sy,sx);
+
+            if ((myCursor.cursorRotation == Orientation.Right || myCursor.cursorRotation == Orientation.Left) && block.blockPrefab.properties.rotatable){
+                (sx, sy) = (sy, sx);
             }
 
             buildingPreview.color = new Color(1, 1, 1, 0.5f);
-            myCursor.sr.size = Vector2.Lerp( myCursor.sr.size, new Vector2(sx,sy),Time.deltaTime * 12);
-            
-                
+            myCursor.sr.size = Vector2.Lerp(myCursor.sr.size, new Vector2(sx, sy), Time.deltaTime * 12);
+
+
             Orientation rot = block.blockPrefab.properties.rotatable ? myCursor.cursorRotation : Orientation.Up;
-            
+
             //indicators
             if (block.blockPrefab.GetIndicators()?.Count > 0){
                 indicatorManager.DrawIndicators(block.blockPrefab.GetIndicators(), myCursor.currentPos, rot);
             }
-            
+
             //invalid
-            foreach (var v2 in TerrainManager.Instance.GetBlockPositions(myCursor.currentPos, block.blockPrefab.properties.size.x, block.blockPrefab.properties.size.y,rot)){
+            foreach (var v2 in TerrainManager.Instance.GetBlockPositions(myCursor.currentPos, block.blockPrefab.properties.size.x,
+                         block.blockPrefab.properties.size.y, rot)){
                 if (TerrainManager.Instance.GetBlock(v2) != null || TerrainManager.Instance.IsWall((Vector3Int)v2)){
                     GameObject go = Instantiate(Invalid, highlights);
                     go.transform.position = (Vector3Int)v2;
                 }
-
             }
-            
+
 
             if ((block.blockPrefab.currentState?.rotateable ?? false) && block.blockPrefab.currentState
                     .rotations[(int)myCursor.cursorRotation].sprites.Length > 0){
@@ -149,10 +149,10 @@ public partial class Player : Unit{
             }
             else
                 buildingPreview.sprite = block.blockPrefab.sr.sprite;
-          
+
             myCursor.buildingPreview.transform.localPosition = new Vector2(
                 sx % 2 == 0 ? (sx / 2f) - 0.5f : 0,
-                sy% 2 == 0 ? (sy / 2f) - 0.5f : 0);
+                sy % 2 == 0 ? (sy / 2f) - 0.5f : 0);
 
             myCursor.directionArrow.gameObject.SetActive(block.blockPrefab.properties.rotatable);
         }
@@ -161,10 +161,15 @@ public partial class Player : Unit{
             buildingPreview.color = Color.clear;
             myCursor.buildingPreview.transform.localPosition = Vector2.zero;
             myCursor.directionArrow.gameObject.SetActive(false);
+
+            if (myCursor.lookingBlock){
+                indicatorManager.DrawIndicators(myCursor.lookingBlock.GetIndicators(), myCursor.lookingBlock.origin,
+                    myCursor.lookingBlock.properties.rotatable ?  myCursor.lookingBlock.rotation : Orientation.Up);
+                
+            }
         }
 
-        
-        
+
         //Destroying Blocks
 
         if (myCursor.currentPos != lastPos){
@@ -173,9 +178,9 @@ public partial class Player : Unit{
         }
 
         if (Input.GetKey(KeyCode.X) && Vector2.Distance(transform.position, myCursor.currentPos) < 8){
-            if ( TerrainManager.Instance.GetBlock(myCursor.currentPos)  != null){
+            if (TerrainManager.Instance.GetBlock(myCursor.currentPos) != null){
                 destroyDuration = TerrainManager.Instance.GetBlock(myCursor.currentPos).properties.destroyTime *
-                               baseDestroyDuration * finalStats[Statstype.MiningSpeed];
+                                  baseDestroyDuration * finalStats[Statstype.MiningSpeed];
                 if (!TerrainManager.Instance.GetBlock(myCursor.currentPos)?.properties.indestructible ?? false){
                     move = Vector2.zero;
                     destroyTimer += Time.deltaTime;
@@ -191,7 +196,7 @@ public partial class Player : Unit{
                 destroyTimer += Time.deltaTime;
                 if (destroyTimer > destroyDuration){
                     destroyTimer = 0;
-                    var extractOre = TerrainManager.Instance.ExtractOre(myCursor.currentPos, (int) finalStats[Statstype.MiningAmount]);
+                    var extractOre = TerrainManager.Instance.ExtractOre(myCursor.currentPos, (int)finalStats[Statstype.MiningAmount]);
                     Insert(ref extractOre);
                     /*if (extractOre != null || extractOre.amount >= 0){
                         Utils.Instance.CreateItemDrop(extractOre, (Vector2)myCursor.currentPos);
@@ -204,11 +209,13 @@ public partial class Player : Unit{
         }
         else{
             destroyTimer = 0;
-        } 
+        }
 
         rb.AddForce(move * (moveV * finalStats[Statstype.Movespeed]) * Time.deltaTime * (m_Grounded ? 1f : 1.2f));
     }
-bool firstLand = true;
+
+    bool firstLand = true;
+
     public void Land(){
         spriteHolder.transform.localPosition = new Vector3(0, groundLevel, 0); // Reset to ground level
         Debug.Log("Landed" + yVelocity);
@@ -218,16 +225,16 @@ bool firstLand = true;
 
         yVelocity = 0; // Reset vertical velocity
         m_Grounded = true; // Player is now grounded
-        
+
         if (firstLand){
             firstLand = false;
             myCursor.gameObject.SetActive(true);
-            TutorialManager.Instance.StartTutorial("controls",1);
+            RoundManager.Instance.StartCooldown(30);
+
+            TutorialManager.Instance.StartTutorial("controls", 1);
             Instantiate(DropPodDestroy, DropPod.transform.position, quaternion.identity);
             Destroy(DropPod);
         }
-        
-
     }
 
     [HideInInspector] public float destroyTimer = 0;

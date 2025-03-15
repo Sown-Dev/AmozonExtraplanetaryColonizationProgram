@@ -15,12 +15,40 @@ MonoBehaviour:
   m_TableCollectionName: tutorial
   m_TableCollectionNameGuidString: 58620fda1284ca84692a21dd50a8a090
   m_Entries:
+  - m_Id: 36621287002267648
+    m_Key: contracts0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36621635213385728
+    m_Key: contracts1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36622058137640960
+    m_Key: contracts2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36622260428922880
+    m_Key: contracts3
+    m_Metadata:
+      m_Items: []
   - m_Id: 18635087872
     m_Key: controls0
     m_Metadata:
       m_Items: []
   - m_Id: 570840375296
     m_Key: controls1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36683304530665472
+    m_Key: firstcontract0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36689022096826368
+    m_Key: firstcontract1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36689318629924864
+    m_Key: firstcontract2
     m_Metadata:
       m_Items: []
   - m_Id: 699018305536
@@ -33,6 +61,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 36682164917297152
     m_Key: interaction2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37059649458724864
+    m_Key: inventory0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37059032606629888
+    m_Key: inventory1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37059933903839232
+    m_Key: inventory2
     m_Metadata:
       m_Items: []
   - m_Id: 67889717370880
@@ -51,40 +91,12 @@ MonoBehaviour:
     m_Key: objectives3
     m_Metadata:
       m_Items: []
-  - m_Id: 36621287002267648
-    m_Key: contracts0
-    m_Metadata:
-      m_Items: []
-  - m_Id: 36621635213385728
-    m_Key: contracts1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 36622058137640960
-    m_Key: contracts2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 36622260428922880
-    m_Key: contracts3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 36683304530665472
-    m_Key: firstcontract0
-    m_Metadata:
-      m_Items: []
   - m_Id: 36683468506980352
     m_Key: shop0
     m_Metadata:
       m_Items: []
   - m_Id: 36683603987193856
     m_Key: shop1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 36689022096826368
-    m_Key: firstcontract1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 36689318629924864
-    m_Key: firstcontract2
     m_Metadata:
       m_Items: []
   m_Metadata:

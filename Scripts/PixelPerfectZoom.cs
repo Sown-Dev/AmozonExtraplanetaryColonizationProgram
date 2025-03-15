@@ -13,6 +13,8 @@ public class PixelPerfectCameraZoom : MonoBehaviour{
     int baseY;
     private int targetX;
 
+    
+    public Transform followTarget;
 
     private const int LERP_RATE = 24;
 
@@ -30,8 +32,9 @@ public class PixelPerfectCameraZoom : MonoBehaviour{
     public int minZoom = 1;
 
 
-    private void FixedUpdate(){
-       transform.localPosition= Vector3Int.RoundToInt( transform.localPosition/16)*16;
+    private void LateUpdate(){
+        if(followTarget)
+            transform.position = Utils.SnapToGrid(followTarget.position) + new Vector3(0, 0, -10);
 
     }
 

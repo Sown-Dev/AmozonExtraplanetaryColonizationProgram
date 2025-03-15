@@ -89,8 +89,8 @@ namespace UI{
             if (useOffset)
                 canvasPosition += offset;
 
-            Debug.Log($"our original pos is {pos}, end pos is{canvasPosition.x +width} and screen edge thresh is {screenDimensions.x}");
-
+//            Debug.Log($"our original pos is {pos}, end pos is{canvasPosition.x +width} and screen edge thresh is {screenDimensions.x}");
+            
             if (canvasPosition.x + width > screenDimensions.x / 2){
                 //Debug.Log("out of bounds");
                 canvasPosition.x = screenDimensions.x / 2 - (width);

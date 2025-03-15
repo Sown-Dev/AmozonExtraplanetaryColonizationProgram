@@ -28,7 +28,6 @@ namespace Systems.Block{
 
         public override void Use(Unit user){
             base.Use(user);
-            BlockUIManager.Instance.GenerateBlockUI(this);
         }
     }
 }

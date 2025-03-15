@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TutorialElement : MonoBehaviour {
     [SerializeField] private TMP_Text text;
     public Transform highlight;
+    public Button continueButton;
 
     public void Init(string key, Transform highlight) {
         if (text == null) {

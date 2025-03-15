@@ -44,16 +44,17 @@ namespace NewRunMenu{
             startButton.onClick.AddListener(() => StartGame());
             startButton.interactable = selectedChar != null;
 
-        //devmode
+            //devmode
             DevModeToggle.gameObject.SetActive(false);
 #if ALLITEMS1
-                DevModeToggle.gameObject.SetActive(true);
+            DevModeToggle.isOn = GameManager.Instance.settings.DevMode;
+            DevModeToggle.gameObject.SetActive(true);
 #endif
         }
-        
+
         public void SetDevMode(bool b){
-            GameManager.DevMode = b;
-            Debug.Log("DevMode is now " + GameManager.DevMode);
+            GameManager.Instance.settings.DevMode = b;
+            Debug.Log("DevMode is now " + GameManager.Instance.settings.DevMode);
         }
 
 

@@ -60,9 +60,9 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
     private void Update(){
         // if (Slot.dirty){
         Refresh();
-        slotImg.sprite = Slot.filter ? filtered : normal;
+        slotImg.sprite = Slot.filter?.filter ? filtered : normal;
         foreground.sprite = Slot.Selected ? selected : Utils.Instance.blankIcon;
-        background.sprite = Slot.filter ? Slot.filter.icon : Utils.Instance.blankIcon;
+        background.sprite = Slot.filter?.filter ? Slot.filter.filter.icon : Utils.Instance.blankIcon;
         Slot.dirty = false;
         //}
     }
@@ -111,7 +111,7 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
                         CU.Transfer(Slot, container);
                     }
                     else{
-                        CU.Transfer(Slot, Player.Instance.Inventory);
+                        CU.Transfer(Slot, Player.Instance);
                     }
                 }
             }

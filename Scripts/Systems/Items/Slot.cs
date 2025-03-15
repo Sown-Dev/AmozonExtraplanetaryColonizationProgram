@@ -1,13 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
+using UI;
 using UnityEngine;
 
 namespace Systems.Items{
     public class Slot{
         public ItemStack ItemStack;
 
-        public Item filter = null;
-        public int Stacksize = 64;
+        public Filter filter = null;
+        
+        public int Stacksize = 1000;
 
         public bool Selected;
         public Action OnChange;
@@ -21,7 +23,7 @@ namespace Systems.Items{
             //OnChange += ()=>{dirty = true;};
         }
 
-        public Slot(ItemStack i = null, int _Stacksize = 64){
+        public Slot(ItemStack i = null, int _Stacksize = 1000){
             ItemStack = i;
             Stacksize = _Stacksize;
             //OnChange += ()=>{dirty = true;};
@@ -189,7 +191,7 @@ namespace Systems.Items{
             if (other.ItemStack == null) return true;
 
             // Filter check
-            if (filter != null && filter != other.ItemStack.item){
+            if (filter != null && filter.filter != other.ItemStack.item){
                 Debug.Log("Can't accept due to filter mismatch.");
                 return false;
             }
@@ -201,7 +203,7 @@ namespace Systems.Items{
             if (other == null) return true;
 
             // Filter check
-            if (filter != null && filter != other.item){
+            if (filter != null && filter.filter != other.item){
                 Debug.Log("Can't accept due to filter mismatch.");
                 return false;
             }

@@ -2,16 +2,16 @@
 
 public class Dynamight : Throwable
 {
-    public int expRadius;
+    public float expRadius;
 
     public override void Collide()
     {
         base.Collide();
 
         Vector2 explosionCenter = transform.position;
-        for (int x = -expRadius; x <= expRadius; x++)
+        for (int x = (int)-expRadius; x <= expRadius; x++)
         {
-            for (int y = -expRadius; y <= expRadius; y++)
+            for (int y = (int)-expRadius-1; y <= expRadius+1; y++)
             {
                 Vector2 checkPos = explosionCenter + new Vector2(x, y);
                 if (Vector2.Distance(explosionCenter, checkPos) <= expRadius)

@@ -21,7 +21,7 @@ MonoBehaviour:
   - m_Id: 18635087872
     m_Localized: Welcome to your first day on the job! To get started, make sure
       to stretch your legs and move around a bit. Light exercise will reduce the
-      effects of cryosleep hangover. (Press Space to continue)
+      effects of cryosleep hangover. Press [Space] to advance the tutorial.
     m_Metadata:
       m_Items: []
   - m_Id: 570840375296
@@ -36,9 +36,9 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46420572561408
     m_Localized: 'You can interact with blocks in many ways. Right clicking will
-      interact with a block, which will usually open the block''s UI. Control-clicking
-      will take from a block''s inventory. You can also hold X to break blocks and
-      ores. '
+      interact with a block, which will usually open the block''s UI.  Left clicking
+      uses your currently held item. Control-clicking will take from a block''s inventory.
+      You can also hold X to break blocks and ores. '
     m_Metadata:
       m_Items: []
   - m_Id: 67889717370880
@@ -87,17 +87,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 36682164917297152
-    m_Localized: Pressing tab will open your inventory. You can move items by dragging
-      them, or hold control to split. Pressing 1-8 will select slots in your hotbar
-      to be used, but you can also middle mouse click any slot to select it in your
-      hand. Left clicking uses your currently held item.
+    m_Localized: Control-clicking a block will take items from it's inventory. You
+      can also hold X to break blocks and ores. Pressing tab will open your inventory.
+      Open it to process the tutorial.
     m_Metadata:
       m_Items: []
   - m_Id: 36683304530665472
     m_Localized: 'Good choice! Now that you have a contract, you must start producing
-      the required items and move them into the Sell Block. The first contract only
-      requires raw resources. These can be acquired either from ores, such as copper
-      or resource blocks such as trees. '
+      the required items and move them into the Fulfillment Center. The first contract
+      only requires raw resources. These can be acquired either from ores, such as
+      copper or resource blocks such as trees. '
     m_Metadata:
       m_Items: []
   - m_Id: 36683468506980352
@@ -111,13 +110,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 36689022096826368
-    m_Localized: Ores come from the ground and must be mined using miners. Resource
-      blocks require resource extracters to acquire their resources
+    m_Localized: Ores come from the ground and must be mined using miners or drills.
+      Resource blocks require extracters to acquire their resources
     m_Metadata:
       m_Items: []
   - m_Id: 36689318629924864
     m_Localized: You also have gained access to the store. Click this button to open
       it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37059032606629888
+    m_Localized: You can move items by draggiing and dropping them, or additionally
+      hold control on drop to split a stack in half. Pressing 1-8 will select slots
+      in your hotbar to be used, but you can also middle mouse click any slot to
+      select it in your hand.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37059649458724864
+    m_Localized: This is your inventory. Here you can see all the items in your pockets.
+      Our custom made texdura overalls provide you with ample space to hold resource
+      and machinery.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37059933903839232
+    m_Localized: If you have another window with an inventory open, you can move
+      items between your inventory and it by shift-clicking.
     m_Metadata:
       m_Items: []
   references:

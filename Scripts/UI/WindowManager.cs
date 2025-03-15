@@ -1,4 +1,5 @@
 ﻿using System;
+using Systems.Items;
 using UnityEngine;
 
 namespace UI{
@@ -8,8 +9,11 @@ namespace UI{
         public static WindowManager Instance;
         
         public GameObject GridWindowPrefab;
+        public UIWindow FilterSelectWindowPrefab;
         
         [HideInInspector]public PowerGridUI currentGridUI;
+        
+        [HideInInspector] public FilterSelectWindow currentFilterSelectWindow; 
         
 
         private void Awake(){
@@ -26,10 +30,23 @@ namespace UI{
             return gridUI;
         }
 
-        public UIWindow CreateWindow(UIWindow prefab, Vector2 pos =default){
-            UIWindow win = Instantiate(prefab, transform).GetComponent<UIWindow>();
+        public GameObject CreateWindow(UIWindow prefab, Vector2 pos =default){
+            GameObject go = Instantiate(prefab, transform).gameObject;
+            UIWindow win = go.GetComponent<UIWindow>();
             win.transform.localPosition = pos;
             win.manager = this;
+            return go;
+        }
+        
+        public FilterSelectWindow CreateFilterSelectWindow(Filter f){
+            if (currentFilterSelectWindow){
+                currentFilterSelectWindow.Close();
+                currentFilterSelectWindow=null;
+            }
+            
+            FilterSelectWindow win = CreateWindow(FilterSelectWindowPrefab).GetComponent<FilterSelectWindow>();
+            currentFilterSelectWindow = win;
+            win.Init(f);
             return win;
         }
 

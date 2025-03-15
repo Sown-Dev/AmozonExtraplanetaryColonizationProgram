@@ -25,7 +25,13 @@ namespace UI.BlockUI{
         [SerializeField] private GameObject numberSelectorUIPrefab;
         [SerializeField] private GameObject PowerProducerUIPrefab;
         [SerializeField] private GameObject PowerConsumerUIPrefab;
-
+        [SerializeField] private GameObject PowerBatteryUIPrefab;
+        [SerializeField] private GameObject BuildingProgressUIPrefab;
+        [SerializeField] private GameObject FilterSelectUIPrefab;
+        
+        
+        [SerializeField] private GameObject EmptySpacePrefab;
+        
         
         [SerializeField] private GameObject horizListPrefab;
 
@@ -58,6 +64,8 @@ namespace UI.BlockUI{
             foreach (Transform child in windowList.transform){
                 Destroy(child.gameObject);
             }
+            nameText.text = block.properties.name;
+
 
             // Retrieve all fields from the block that are of a type implementing IBlockComponent
             var componentFields = block.GetType()
@@ -91,23 +99,41 @@ namespace UI.BlockUI{
                     .GetComponent<PowerProducerUI>();
                 gridProducerUI.Init(powerProducer);
                 Instantiate(Utils.Instance.EmptyUI, windowList.transform);
+                
+                /*if( componentFields.Count == 0)
+                    Instantiate(Utils.Instance.EmptyUI, windowList.transform);*/
     
                 //windowList.padding.bottom = 12;
 
             }
             else if (block is IPowerConsumer powerConsumer){
                PowerConsumerUI gridConsumerUI = Instantiate(PowerConsumerUIPrefab,   windowList.transform)
-                    .GetComponent<PowerConsumerUI>();
+                    .GetComponent<PowerConsumerUI>();   
                 gridConsumerUI.Init(powerConsumer);
                 Instantiate(Utils.Instance.EmptyUI, windowList.transform);
+                
+               /* if( componentFields.Count == 0)
+                    Instantiate(Utils.Instance.EmptyUI, windowList.transform);*/
 
                 //windowList.padding.bottom = 12;
 
 
-            }
-            
+            }else if (block is IPowerBattery powerBattery){
+                /* TODO: all this shit
+                 gridBatteryUI = Instantiate(PowerBatteryUIPrefab, windowList.transform)
+                    .GetComponent<PowerBatteryUI>();
+                gridBatteryUI.Init(powerBattery);
+                Instantiate(Utils.Instance.EmptyUI, windowList.transform);
 
-            nameText.text = block.properties.name;
+                if (componentFields.Count == 0)
+                    Instantiate(Utils.Instance.EmptyUI, windowList.transform);
+
+                //windowList.padding.bottom = 12;*/
+            }
+
+            
+            //refresh
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
         }
 
         public void AddComponent(IBlockUI component, Transform parent){
@@ -148,6 +174,14 @@ namespace UI.BlockUI{
                 NumberSelectorUI numberSelectorUI = Instantiate(numberSelectorUIPrefab,  parent)
                     .GetComponent<NumberSelectorUI>();
                 numberSelectorUI.Init(numberSelector);
+            }else if (component is BuildingProgress buildingProgress){
+                BuildingProgressUI buildingProgressUI = Instantiate(BuildingProgressUIPrefab,  parent)
+                    .GetComponent<BuildingProgressUI>();
+                buildingProgressUI.Init(buildingProgress);
+            }else if(component is Filter filter){
+                FilterUI filterSelectUI = Instantiate(FilterSelectUIPrefab,  parent)
+                    .GetComponent<FilterUI>();
+                filterSelectUI.Init(filter);
             }
             
         }
