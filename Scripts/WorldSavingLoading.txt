@@ -1,0 +1,22 @@
+block save/load
+
+1) we have a list of blockloadstructs
+a struct that contains:
+1- position
+2- block data
+3- what block it is (prefab)
+4- other things
+
+
+we start by placing the block (3) and initing like normal. 
+Then, each block has a load(BlockData dat) function, which takes in blockdata and loads the block based on that.
+this has a few parts. 1) intrinsic block data: data that all blocks have, such as rotation, origin point, etc.
+2) custom vars. these are stored in nbt type containers with support for primitives like int, bool, and string. These are saved and loaded from here
+3) containers. since serializing containers is hard, we have a seperate system for storing and loading them. maybe?
+
+
+Alternative:
+extended blockdata. Each block has its own data type. Base is blockdata, same as before, but now, when saving, blocks will generate their custom DataObject. Blocks also hold their own data object.
+Issue: we want to have the data as a field, so its as simple as just saving and loading a serialized class, no extra stuff, but this has its own problem. The field would be of type blockdata, so we can't then access the custom extended functionality of custom blocks.
+Ideally, we would have the field of BlockData data, change type in subclasses so it can still be used as blockdata, but also for things like containers. But this isn't possible. The best one can do is maybe 2 fields, one that is blockdata, and one that is set per class??
+Not sure that that would work. 
