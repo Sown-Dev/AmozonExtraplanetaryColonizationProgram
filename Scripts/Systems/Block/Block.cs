@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Systems.Block{
-    public class Block : MonoBehaviour{
+    public class Block <DataType> : MonoBehaviour where DataType: BlockData, new(){
         public SpriteRenderer sr;
         [HideInInspector] public BoxCollider2D bc;
         protected Animator am;
@@ -25,7 +25,7 @@ namespace Systems.Block{
         public RuleTile tile;
 
 
-        public BlockData data;
+        public DataType data;
         
 
 
@@ -173,6 +173,12 @@ namespace Systems.Block{
             Handles.Label(transform.position, data.rotation.ToString());
         }
         #endif
+
+
+        public virtual void Load(BlockData d){
+            data = d;
+            
+        }
     }
     
     [Serializable]

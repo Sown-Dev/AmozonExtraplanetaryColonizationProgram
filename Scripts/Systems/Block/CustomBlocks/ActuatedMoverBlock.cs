@@ -64,8 +64,8 @@ namespace Systems.Block {
 
         // Transfer items from input to container, then from container to output.
         public void Click() {
-            Block prevBlock = TerrainManager.Instance.GetBlock(origin + rotation.GetOpposite().GetVectorInt());
-            Block nextBlock = TerrainManager.Instance.GetBlock(origin + rotation.GetVectorInt());
+            Block prevBlock = TerrainManager.Instance.GetBlock(data.origin + rotation.GetOpposite().GetVectorInt());
+            Block nextBlock = TerrainManager.Instance.GetBlock(data.origin + rotation.GetVectorInt());
 
             if (nextBlock != null) {
                 // Activate next block first.

@@ -2,13 +2,13 @@
 using UnityEngine;
 
 namespace Systems.Block{
-    public class TickingBlock : Block{
+    public class TickingBlock : Block<TickingBlockData>{
         public virtual void Tick(){
             
         }
         
         public void ResetActuated(){
-            actuatedThisTick = false;
+            data.actuatedThisTick = false;
             if (properties.actuatable)
                 mat.SetColor("_AddColor", new Color(0, 0, 0, 0));
 
@@ -16,11 +16,11 @@ namespace Systems.Block{
             UpdateSprite();
         }
 
-        protected bool actuatedThisTick = false;
+        
 
         public override void Actuate(){
-            if (actuatedThisTick) return;
-            actuatedThisTick = true;
+            if (data.actuatedThisTick) return;
+            data.actuatedThisTick = true;
             base.Actuate();
             if (properties.actuatable)
                 mat.SetColor("_AddColor", new Color(0.25f, 0.1f, 0.05f, 0));
@@ -29,5 +29,8 @@ namespace Systems.Block{
         public override void Use(Unit user){
             base.Use(user);
         }
+    }
+    public class TickingBlockData: BlockData{
+        public bool actuatedThisTick = false;
     }
 }
