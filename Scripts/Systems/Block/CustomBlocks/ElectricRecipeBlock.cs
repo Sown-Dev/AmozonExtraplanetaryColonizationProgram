@@ -21,7 +21,7 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public void GetConnected(){
-            foreach (var pos in TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y)){
+            foreach (var pos in TerrainManager.Instance.GetBlockPositions(data.origin, properties.size.x, properties.size.y)){
                 if (TerrainManager.Instance.powerClaims.ContainsKey(pos)){
                     TerrainManager.Instance.powerClaims[pos].Connect(this);
                     break;

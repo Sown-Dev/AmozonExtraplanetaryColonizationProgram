@@ -889,12 +889,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myOffer:
-    item: {fileID: 0}
+    itemID: 
     price: 0
     tier: 0
     stock: 0
-  ItemIconTransform: {fileID: 0}
-  ItemIconPrefab: {fileID: 0}
+    overrideCategory: 0
+    blockCategory: 0
+  ItemIconTransform: {fileID: 4650714636535450343}
+  ItemIconPrefab: {fileID: 8465445973632796187, guid: 54ce2043af718e64e84028645f344d8c, type: 3}
   BlockParent:
   - {fileID: 8885953465314256437}
   - {fileID: 3151868926513465216}

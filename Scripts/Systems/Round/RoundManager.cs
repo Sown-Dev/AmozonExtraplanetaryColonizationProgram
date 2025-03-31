@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using Systems.Items;
 using UI;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace Systems.Round{
 
         public float prevCDTime = 0f;
         private bool isInCooldown = false;
-        
+
         //loans
         public int debt;
         public int loansTaken;
@@ -54,33 +55,44 @@ namespace Systems.Round{
 
 
         void Awake(){
+            Instance = this;
+
             shopTiers = new List<ShopTier>();
 
             roundStats = new WorldStats();
             blockOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
+
+            if (!GameManager.Instance.currentWorld.generated){
+                InitRound();
+            }
+            else{
+                LoadRoundData(GameManager.Instance.currentWorld.roundData);
+            }
         }
 
         private void Start(){
-            Instance = this;
-            roundNum = -1;
             /*StartRound(new Contract{
                 quota = 0, requiredQuota = 300, sellList = ItemManager.Instance.GetRandomItemsByTier(0, 3).ToList(), reward = 50,
                 signBonus = 0, TimeGiven = 450, sponsor = Sponsor.Amozon
             });*/
-
-            StartCooldown(-1);
-
-
-            money = 100;
             infoUI.Refresh();
 
             CursorManager.Instance.uiDepth = 0;
         }
 
+        public void InitRound(){
+            StartCooldown(-1);
+            roundNum = -1;
+
+
+            money = 100;
+            infoUI.Refresh();
+        }
+
 
         // Modified FixedUpdate to handle cooldown
         private void FixedUpdate(){
-            if (currentContract != null){
+            if (!isInCooldown && currentContract != null){
                 // Handle contract timer
                 if (roundTime > 0){
                     roundTime -= Time.deltaTime;
@@ -89,21 +101,23 @@ namespace Systems.Round{
                     LoseRound();
                 }
             }
-            else if (isInCooldown){
-                //indefinite cooldown
-                if (roundTime == -1){ }
-                else{
-                    // Handle cooldown timer
-                    prevCDTime = roundTime;
-                    roundTime -= Time.deltaTime;
-                    if (prevCDTime > 3.5f && roundTime <= 3.5f){
-                        Player.Instance.Popup("Contract Incoming!", Color.yellow);
-                    }
+            else{
+                if (isInCooldown){
+                    //indefinite cooldown
+                    if (roundTime == -1){ }
+                    else{
+                        // Handle cooldown timer
+                        prevCDTime = roundTime;
+                        roundTime -= Time.deltaTime;
+                        if (prevCDTime > 3.5f && roundTime <= 3.5f){
+                            Player.Instance.Popup("Contract Incoming!", Color.yellow);
+                        }
 
-                    if (roundTime <= 0){
-                        isInCooldown = false;
-                        ChooseContract();
-                        //open contract ui
+                        if (roundTime <= 0){
+                            isInCooldown = false;
+                            ChooseContract();
+                            //open contract ui
+                        }
                     }
                 }
             }
@@ -135,7 +149,7 @@ namespace Systems.Round{
         }
 
         public bool CanSell(ItemStack stack){
-            return currentContract.sellList.Contains(stack.item);
+            return currentContract.sellList.Contains(stack.item.name);
         }
 
         public void AddMoney(int amount, bool countTowardsQuota = true){
@@ -195,8 +209,7 @@ namespace Systems.Round{
 
         public void CompleteRound(){
             StartCooldown(50);
-            GenerateNewShopTier(roundNum+1);
-            
+            GenerateNewShopTier(roundNum + 1);
         }
 
         // Modified StartRound to handle null contracts
@@ -225,10 +238,9 @@ namespace Systems.Round{
                 firstRound = false;
                 GenerateNewShopTier(roundNum);
             }
-            
+
             loansTaken = 0;
             loanAmount = 100 * (roundNum + 1);
-            
 
 
             infoUI.Refresh();
@@ -279,7 +291,7 @@ namespace Systems.Round{
             int electrical = tier >= 2 ? 1 : 0;
             int refine = tier == 0 ? 0 : 1;
             int production = 1;
-            int misc = tier==0 ?3:2;
+            int misc = tier == 0 ? 3 : 2;
             int explosives = 1;
 
             // Method to calculate price adjustments
@@ -352,26 +364,27 @@ namespace Systems.Round{
                 .Take(misc)
                 .ToArray();
             tierOffers.RemoveAll(x => miscOffers.Any(y => y.item == x.item));
-            
+
             ShopOffer[] explosivesOffers = itemOffers
                 .Where(t => (t.item?.category == ItemCategory.Explosive) && t.tier <= tier)
-                .Select(t => new ShopOffer(t, (int)(t.price*(0.15f*tier)),t.stock*tier))
+                .Select(t => new ShopOffer(t, (int)(t.price * (0.15f * tier)), t.stock * tier))
                 .Take(explosives)
                 .ToArray();
 
-            UpgradeOffer u = new UpgradeOffer(upgrades[Random.Range(0, upgrades.Length)],
+            UpgradeOffer u = new UpgradeOffer( (Upgrade)upgrades[Random.Range(0, upgrades.Length)].u.Clone(),
                 ((tier + 1) * 100 + Random.Range(-20, 20)));
 
-            ShopTier t = new ShopTier(logisticsOffers, electricalOffers, refineOffers, productionOffers, miscOffers, explosivesOffers,u, tier);
+            ShopTier t = new ShopTier(logisticsOffers, electricalOffers, refineOffers, productionOffers, miscOffers, explosivesOffers, u, tier);
             ShopUI.Instance.Refresh(); //prob should be elsewhere but this works
             return t;
         }
 
         private float interestRate = 1.5f;
+
         public void TakeLoan(){
             if (loansTaken < loanLimit && loansUnlocked){
-                AddMoney( loanAmount);
-                debt += (int) (loanAmount * interestRate);
+                AddMoney(loanAmount, false);
+                debt += (int)(loanAmount * interestRate);
                 loansTaken += 1;
             }
         }
@@ -413,5 +426,55 @@ namespace Systems.Round{
         private void OnValidate(){
             //sort by tier.
         }
+
+        public RoundData SaveRoundData(){
+            RoundData data = new RoundData();
+            data.roundNum = roundNum;
+            data.roundTime = roundTime;
+            data.isInCooldown = isInCooldown;
+            data.money = money;
+            data.debt = debt;
+            data.loansTaken = loansTaken;
+            data.loanLimit = loanLimit;
+            data.loanAmount = loanAmount;
+            if (currentContract != null)
+                data.currentContract = currentContract;
+            else{
+                data.currentContract = null;
+            }
+
+            data.shopTiers = shopTiers;
+
+            Debug.Log("Saved round data, current contract is null: " + (currentContract == null));
+            return data;
+        }
+
+        public void LoadRoundData(RoundData data){
+            roundNum = data.roundNum;
+            roundTime = data.roundTime;
+            isInCooldown = data.isInCooldown;
+            money = data.money;
+            debt = data.debt;
+            loansTaken = data.loansTaken;
+            loanLimit = data.loanLimit;
+            loanAmount = data.loanAmount;
+            currentContract = data.currentContract;
+            shopTiers = data.shopTiers;
+        }
+    }
+
+    [Serializable]
+    public class RoundData{
+        public int roundNum;
+        public bool isInCooldown;
+        public float roundTime;
+        public int money;
+        public int debt;
+        public int loansTaken;
+        public int loanLimit = 3;
+        public int loanAmount = 100;
+
+        public Contract currentContract;
+        [JsonIgnore]public List<ShopTier> shopTiers = new();
     }
 }

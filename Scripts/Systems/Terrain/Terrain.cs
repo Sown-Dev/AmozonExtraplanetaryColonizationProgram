@@ -14,10 +14,14 @@ namespace Systems.Terrain{
         }
 
         
-        public TerrainProperties myProperties;
+        public string myProperties;
 
+        public Terrain(){
+            
+        }
+        
         public Terrain(TerrainProperties properties){
-            myProperties = properties;
+            myProperties = properties.name;
             owned = false;
             instantiated = true;
         }

@@ -27,6 +27,9 @@ public class RoundCompleteUI : MonoBehaviour
 
     public CanvasGroup rewardCG;
     public TMP_Text rewardText;
+    
+    public CanvasGroup debtCG;
+    public TMP_Text debtText;
 
     public CanvasGroup totalCG;
     public TMP_Text totalText;
@@ -52,6 +55,7 @@ public class RoundCompleteUI : MonoBehaviour
         rewardCG.alpha = 0;
         totalCG.alpha = 0;
         addtimeCG.alpha = 0;
+        debtCG.alpha = 0;
 
         continueButton.interactable = false;
         addTime = time / 2;
@@ -77,12 +81,32 @@ public class RoundCompleteUI : MonoBehaviour
         addtimeText.text = $"Extra time for next contract:      <color=#118811ff>+{(int)(addTime/60)}:{(addTime % 60):00}</color>";
         addtimeCG.alpha = 1;
         yield return new WaitForSecondsRealtime(1f);
-        
-        totalBonus = realTimeBonus + RoundManager.Instance.currentContract.reward;
-        
         rewardText.text = $"Contract Reward: <color=#118811ff>${RoundManager.Instance.currentContract.reward}</color>";
         rewardCG.alpha = 1;
+        
+        totalBonus = realTimeBonus + RoundManager.Instance.currentContract.reward;
+
+
+        if (RoundManager.Instance.debt > 0){
+            yield return new WaitForSecondsRealtime(1.5f);
+            debtCG.alpha = 1;
+
+            if (totalBonus > RoundManager.Instance.debt){
+                totalBonus -= RoundManager.Instance.debt;
+                RoundManager.Instance.debt = 0;
+                debtText.text = $"Debt: <color=#881111ff>${RoundManager.Instance.debt}</color>";
+
+            }
+            else{
+                debtText.text = $"Debt Collection:  <color=#118811ff>-${RoundManager.Instance.debt}</color>";
+                totalBonus = 0;
+                RoundManager.Instance.debt -= totalBonus;
+
+            }
+        }
+
         yield return new WaitForSecondsRealtime(1.5f);
+        
         totalCG.alpha = 1;
         totalText.text = $"Total Bonus:    <color=#118811ff>${totalBonus}</color>";
         

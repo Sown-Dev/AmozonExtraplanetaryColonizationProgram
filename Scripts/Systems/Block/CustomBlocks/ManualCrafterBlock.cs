@@ -12,7 +12,7 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public override void Tick(){
-            if (TerrainManager.totalTicksElapsed % 2 == 0){
+            if (TerrainManager.Instance.totalTicksElapsed % 2 == 0){
                 actuatedThisTick = false;
                 if (properties.actuatable)
                     mat.SetColor("_AddColor", new Color(0, 0, 0, 0));

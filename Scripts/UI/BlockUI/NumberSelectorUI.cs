@@ -40,6 +40,8 @@ public class NumberSelectorUI : MonoBehaviour{
     }
 }
 
+[Serializable]
+
 public class NumberSelector: IBlockUI{
     public int value;
     public int min = 0;

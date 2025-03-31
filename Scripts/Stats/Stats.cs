@@ -28,7 +28,7 @@ public class Stats : ICloneable{
         }
     }
 
-
+    [Serializable]
     public enum StatsOperation{
         Multiply = 1,
         Add = 2,

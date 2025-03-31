@@ -17,8 +17,8 @@ public class TutorialElement : MonoBehaviour {
 
         RectTransform rect = GetComponent<RectTransform>();
         rect.localPosition = new Vector3(
-            Mathf.RoundToInt(rect.localPosition.x),
-            Mathf.RoundToInt(rect.localPosition.y),
+            Mathf.RoundToInt(rect.localPosition.x/2)*2,
+            Mathf.RoundToInt(rect.localPosition.y/2)*2,
             0);
 
         // Force content size fitter refresh if applicable

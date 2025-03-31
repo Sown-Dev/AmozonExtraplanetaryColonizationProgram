@@ -34,7 +34,7 @@ namespace UI{
                 cg.interactable = true;
                 nameText.text = myOre.myProperties?.name;
                 amountText.text = "Remaining: " + myOre.amount;
-                icon.sprite = myOre.tile.m_DefaultSprite;
+                icon.sprite = myOre.myProperties.tile.m_DefaultSprite;
                 layoutElement.ignoreLayout = false;
             }
             else{

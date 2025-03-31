@@ -5,22 +5,17 @@ using UnityEngine.Tilemaps;
 
 namespace Systems.Terrain{
     [CreateAssetMenu(fileName = "ore props", menuName = "ScriptableObjects/OreProperties", order = 0)]
-    public class OreProperties : ScriptableObject{
-        [Header("Ore Patch Rarity")]
-        public float threshold;
-        [Header("Ore Patch Size")]
-        public float scale;
+    public class OreProperties : ScriptableObject
+    {
+        [Header("Generation Settings")]
+        public float threshold = 0.5f;
+        public float scale = 50f;
+        public int minAmount = 1;
+        public int maxAmount = 10;
+        public int variance = 2;
         
-        public int minAmount;
-        public int maxAmount;
-        public int variance;
-
-
-        public Ore ore;
-
-
-        private void OnValidate(){
-            ore.myProperties = this;
-        }
+        [Header("Visual Settings")]
+        public RuleTile tile;
+        public Item oreItem;
     }
 }

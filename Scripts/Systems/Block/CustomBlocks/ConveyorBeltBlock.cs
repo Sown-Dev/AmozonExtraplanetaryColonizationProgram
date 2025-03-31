@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using Systems.Items;
 using UI.BlockUI;
 using Unity.VisualScripting;
@@ -17,8 +18,9 @@ namespace Systems.Block.CustomBlocks{
         public SlotVisualizer prefab;
 
         private int slots = 5;
-        protected override void Awake(){
-            base.Awake();
+        
+        public override void Init(Orientation orientation){
+            base.Init(orientation);
             availableSlots = new List<SlotVisualizer>();
             ConveyorContainer = new List<ConveyorSlot>();
             for (int i = 0; i < slots; i++){
@@ -27,15 +29,15 @@ namespace Systems.Block.CustomBlocks{
                 
             }
         }
-        
+       
         
         //needs to be in start bc init (which sets rotation) happens AFTER awake
-        private void Start(){
-            
+        protected override void Start(){
+            base.Start();
             //the reason the numbers are so stupid is bc 0.333 in the shader is 1 pixel. idk how it happened though prob bc base size for this is 48x48 not 16x16 which it was made for
-            mat.SetVector("_AreaSize" , rotation.isVertical()? new Vector4(4,5.333333f,0,0) : new Vector4(5.333333f,4,0,0));
-            mat.SetVector("_AreaOffset" , rotation.isVertical()? new Vector4(6,6,0,0) :  new Vector4(5.333333f,6.666666f,0,0));
-            mat.SetVector("_Direction", rotation.GetVector3() / 3);
+            mat.SetVector("_AreaSize" , data.rotation.isVertical()? new Vector4(4,5.333333f,0,0) : new Vector4(5.333333f,4,0,0));
+            mat.SetVector("_AreaOffset" , data.rotation.isVertical()? new Vector4(6,6,0,0) :  new Vector4(5.333333f,6.666666f,0,0));
+            mat.SetVector("_Direction", data.rotation.GetVector3() / 3);
             
         }
 
@@ -75,7 +77,7 @@ namespace Systems.Block.CustomBlocks{
                 availableSlots.Remove(cSlot.assignedSlot); //remove it after
                 ConveyorContainer.Add(cSlot);
                 cSlot.assignedSlot.transform.position =
-                    transform.position + (-0.5f * rotation.GetOpposite().GetVector3());
+                    transform.position + (-0.5f * data.rotation.GetOpposite().GetVector3());
                 return slot.Insert(ref s);
             }
             else{
@@ -91,7 +93,7 @@ namespace Systems.Block.CustomBlocks{
             for (int i = ConveyorContainer.Count - 1; i >= 0; i--){
                 ConveyorSlot cs = ConveyorContainer[i];
                 if (cs.distance <= 17){
-                    Vector3 direction = rotation.GetOpposite().GetVector3();
+                    Vector3 direction = data.rotation.GetOpposite().GetVector3();
 
                     if (i + 1 < ConveyorContainer.Count){
                         if (ConveyorContainer[i + 1].distance >= cs.distance + 4){
@@ -110,7 +112,7 @@ namespace Systems.Block.CustomBlocks{
 
             foreach (ConveyorSlot cs in ConveyorContainer){
                 if (cs.distance >= 17){
-                    if (GetDirection(rotation.GetOpposite()) is IContainerBlock icb){
+                    if (GetDirection(data.rotation.GetOpposite()) is IContainerBlock icb){
                         //attempt to insert
                         icb.Insert(ref cs.mySlot.ItemStack);
                         //if null, remove slot
@@ -136,7 +138,7 @@ namespace Systems.Block.CustomBlocks{
         public override bool BlockDestroy(bool dropLoot = true){
           //add all items to loot table
           foreach (ConveyorSlot cs in ConveyorContainer){
-              lootTable.Add(cs.mySlot.ItemStack);
+              data.lootTable.Add(cs.mySlot.ItemStack);
           }
 
           return base.BlockDestroy(dropLoot);
@@ -149,6 +151,17 @@ namespace Systems.Block.CustomBlocks{
             
             
             return e;
+        }
+
+        public override BlockData Save(){
+            BlockData d = base.Save();
+            d.data.SetString( "ConveyorContainer", JsonConvert.SerializeObject(ConveyorContainer,GameManager.JSONsettings));
+            
+            return d;
+        }
+        public override void Load(BlockData d){
+            base.Load(d);
+            ConveyorContainer = JsonConvert.DeserializeObject<List<ConveyorSlot>>(d.data.GetString("ConveyorContainer"),GameManager.JSONsettings);
         }
 
 

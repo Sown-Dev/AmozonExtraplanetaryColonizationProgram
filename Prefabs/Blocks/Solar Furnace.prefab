@@ -5169,6 +5169,7 @@ MonoBehaviour:
     collidable: 1
     blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
     size: {x: 5, y: 5}
     description: Uses the sun to effficiently smelt anything
@@ -5181,11 +5182,12 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
-  <baseSpeed>k__BackingField: 8
+  additionalLoot: []
+  addressableKey: Solar Furnace
+  hasSaved: 0
+  progressPerCycle: 40
+  <baseSpeed>k__BackingField: 2
   outputProperties:
     size: 9
     name: 

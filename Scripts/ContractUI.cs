@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Systems.Items;
 using Systems.Round;
 using TMPro;
@@ -33,7 +34,9 @@ public class ContractUI : MonoBehaviour
         foreach (Transform child in SellList.transform){
            Destroy(child.gameObject);
         }
-        foreach (Item i in myContract.sellList){
+        
+        //foreach string get item in itemmangager
+        foreach (Item i in myContract.sellList.Select(x => ItemManager.Instance.GetItemByID(x))){
             ItemStackUI ui =Instantiate(sellUIPrefab, SellList.transform).GetComponent<ItemStackUI>();
             ui.Init(i);
         }

@@ -7,12 +7,12 @@ public class BurnerItemGeneratorBlock: BurnerProgressBarBlock{
 
     public int time;
     
-    void Awake(){
-        base.Awake();
+
+    public override void Init(Orientation orientation){
+        base.Init(orientation);
         progressBar.maxProgress = time;
     }
-    
-    
+
     public override void CompleteCycle(){
         base.CompleteCycle();
         output.Insert(generatedItem.Clone());

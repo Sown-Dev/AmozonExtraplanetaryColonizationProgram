@@ -7,6 +7,8 @@ using Systems.Block;
 using Systems.Items;
 using Systems.Terrain;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Tilemaps;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
@@ -22,11 +24,17 @@ public partial class TerrainManager : MonoBehaviour{
     private Layer<Ore> oreLayer;
     private List<TickingBlock> tickingBlocks;
     public Dictionary<Vector2Int, IPowerConnector> powerClaims = new Dictionary<Vector2Int, IPowerConnector>();
+    
+    public Dictionary<string, TerrainProperties> terrainProperties = new Dictionary<string, TerrainProperties>();
 
+    
+    [Header("References")]
     [SerializeField] private Tilemap terrainTilemap;
     [SerializeField] private Tilemap oreTilemap;
     [SerializeField] private Tilemap blockTilemap;
     [SerializeField] private Tilemap wallTilemap;
+    
+    [SerializeField] private AudioSource audioSource;
 
 
     [SerializeField] private GameObject blockDebrisPrefab;
@@ -39,13 +47,27 @@ public partial class TerrainManager : MonoBehaviour{
         oreLayer = new Layer<Ore>();
         tickingBlocks = new List<TickingBlock>();
         powerClaims = new Dictionary<Vector2Int, IPowerConnector>();
-
         
+        // Load terrain properties
+       var  allProperties = Resources.LoadAll<TerrainProperties>("Terrain");
+        
+       terrainProperties = allProperties.ToDictionary(p => p.name, p => p);
+
+
         QuantumContainerBlock.InitContainers(); //cant think of a better place to put this
     }
 
     private void Start(){
-        GenerateTerrain();
+        if (!GameManager.Instance.currentWorld.generated){
+            //generate world
+            GenerateWorld();
+            GameManager.Instance.Save();
+        }
+        else{
+            //load world
+            LoadWorld();
+        }
+
         calculateStats();
         InitializeSunCurve();
     }
@@ -58,6 +80,18 @@ public partial class TerrainManager : MonoBehaviour{
     [CanBeNull]
     public Terrain GetTerrain(Vector2Int pos){
         return terrainLayer.Get(pos);
+    }
+    
+    public TerrainProperties GetTerrainProperties(Vector2Int pos){
+        Terrain t = GetTerrain(pos);
+        if (t == null)
+            return null;
+        return terrainProperties[t.myProperties];
+    }
+    public TerrainProperties GetTerrainProperties(string name){
+        if (terrainProperties.ContainsKey(name))
+            return terrainProperties[name];
+        return null;
     }
 
     public void SetWall(RuleTile tile, Vector3Int pos){
@@ -77,57 +111,47 @@ public partial class TerrainManager : MonoBehaviour{
         Instantiate(blockDebrisPrefab, pos, Quaternion.identity);
     }
 
-   
+    
+    public void SetTerrain(Vector2Int pos, string properties){
 
-    public void SetTerrain(Vector2Int pos, TerrainProperties t){
-        SetTerrain(pos, t.terrain);
+        SetTerrain(pos, terrainProperties[properties]);
     }
 
-    
-    
-    //NEW buffered terrain generation
-    private Dictionary<Vector3Int, TileBase> _terrainTileBuffer = new Dictionary<Vector3Int, TileBase>();
-    private Dictionary<Vector3Int, TileBase> _oreTileBuffer = new Dictionary<Vector3Int, TileBase>();
+    public void SetTerrain(Vector2Int pos, TerrainProperties properties){
+        Terrain t = new Terrain(properties);
+
+        SetTerrain(pos, t);
+    }
 
     public void SetTerrain(Vector2Int pos, Terrain terrain){
         Vector3Int position3D = (Vector3Int)pos;
-        _terrainTileBuffer[position3D] = terrain.myProperties.tile;
-
-        // Existing layer update
-        Terrain t = new Terrain(terrain.myProperties);
-        terrainLayer.Set(pos, t);
+        
+       TerrainProperties p = terrainProperties[terrain.myProperties];
+        
+        _terrainTileBuffer[position3D] = p.tile;
+        terrainLayer.Set(pos, terrain);
     }
 
-    public void SetOre(Vector2Int pos, Ore ore, int amount = -1){
+
+    //NEW buffered terrain generation
+    private Dictionary<Vector3Int, TileBase> _terrainTileBuffer = new Dictionary<Vector3Int, TileBase>();
+
+
+    public void SetOre(Vector2Int pos, OreProperties props, int amount = -1){
         Vector3Int position3D = (Vector3Int)pos;
-        _oreTileBuffer[position3D] = ore.tile;
 
-        // Existing layer update
-        Ore o = ore.Clone();
-        o.position = pos;
-        oreLayer.Set(pos, o);
 
-        if (amount > 0){
-            o.amount = amount;
-        }
-        else{
-            o.amount = 100;
-        }
+        var ore = new Ore(props, pos, amount);
+        oreLayer.Set(pos, ore);
+        oreTilemap.SetTile((Vector3Int)pos, props.tile);
     }
+
 
     private void ApplyBufferedTiles(){
         // Apply terrain tiles
         var terrainPositions = _terrainTileBuffer.Keys.ToArray();
         var terrainTiles = terrainPositions.Select(p => _terrainTileBuffer[p]).ToArray();
         terrainTilemap.SetTiles(terrainPositions, terrainTiles);
-
-        // Apply ore tiles
-        var orePositions = _oreTileBuffer.Keys.ToArray();
-        var oreTiles = orePositions.Select(p => _oreTileBuffer[p]).ToArray();
-        oreTilemap.SetTiles(orePositions, oreTiles);
-
-        // Optional: Only needed if you need immediate collision updates
-        // Physics2D.SyncTransforms();
     }
 
 
@@ -187,7 +211,8 @@ public partial class TerrainManager : MonoBehaviour{
 
         return stack;
     }
-     public bool PlaceBlock(Block blockPrefab, Vector2Int position, Orientation rot = Orientation.Up){
+
+    public bool PlaceBlock(Block blockPrefab, Vector2Int position,  Orientation rot = Orientation.Up,BlockData data=null){
         //Debug.Log("Placing block w rot" + rot);
         int sizex = blockPrefab.properties.size.x;
         int sizey = blockPrefab.properties.size.y;
@@ -222,11 +247,36 @@ public partial class TerrainManager : MonoBehaviour{
             sizey % 2 == 0 ? (sizey / 2f) - 0.5f : 0
         );
         // Instantiate the block
-        Block block = Instantiate(blockPrefab.gameObject, spawnPos, Quaternion.identity).GetComponent<Block>();
+        Block block;
+        GameObject blockGO = null;
+        try{
+            blockGO = Instantiate(blockPrefab.gameObject, spawnPos, Quaternion.identity);
+        }
+        catch (Exception e){
+            Debug.LogError($"Failed to instantiate block {blockPrefab.name}: {e}");
+        }
+
+        block = blockGO?.GetComponent<Block>();
+    
+        
+        if(data != null){
+            block.Load(data); // Load the block data if provided
+        }
+        else{
+            block.InitializeData();
+        }
         block.properties.size = new Vector2Int(sizex, sizey); // Set the block's size incase rotated
-        block.origin = position; // Set the block's origin
 
         block.Init(rot);
+
+        block.data.origin = position; // Set the block's origin
+        
+        
+        //sound effect
+        if( data == null && GameManager.Instance.currentWorld.generated){
+           audioSource.transform.position = spawnPos;
+           audioSource.Play();
+        }
 
 
         // Handle ticking blocks
@@ -370,27 +420,26 @@ public partial class TerrainManager : MonoBehaviour{
 
     //------------------TICK LOGIC--------------------------------
 
-    public static ulong totalTicksElapsed = 0;
+    public ulong totalTicksElapsed = 0;
     private float tickTimer;
     private float tickTime = 1 / 20f;
 
     public List<PowerGrid> powerGrids = new List<PowerGrid>();
 
     private void Update(){
-
         if (generatedWorld){
             generatedWorld = false;
             //log total time it took
             float endTime = Time.realtimeSinceStartup;
             Debug.Log("World generated in " + (endTime - startTime) + " seconds");
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             //add to file
-            System.IO.File.AppendAllText("worldgenlog.txt", $"World of size {worldSize} and seed {currentSeed} generated in {(endTime - startTime)} seconds\n");             
+            System.IO.File.AppendAllText("worldgenlog.txt", $"World of size {worldSize} and seed {currentSeed} generated in {(endTime - startTime)} seconds\n");
 #endif
         }
-        
+
         UpdateTime();
-        
+
         tickTimer += Time.deltaTime;
         if (tickTimer >= tickTime){
             tickTimer -= tickTime;
@@ -410,7 +459,7 @@ public partial class TerrainManager : MonoBehaviour{
                     tickingBlock.Tick();
                 }
                 catch (Exception e){
-                    Debug.LogError(e);
+                    Debug.LogWarning(e);
                 }
             }
 
@@ -425,8 +474,8 @@ public partial class TerrainManager : MonoBehaviour{
         Gizmos.color = Color.magenta;
 
         foreach (var pair in powerClaims != null ? powerClaims : new Dictionary<Vector2Int, IPowerConnector>()){
-            Debug.Log("Drawing power claim for" + pair.Value.myBlock.name);
-            Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.myBlock.origin);
+           // Debug.Log("Drawing power claim for" + pair.Value.myBlock.name);
+            Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.myBlock.data.origin);
         }
 
         Gizmos.color = Color.green;
@@ -435,5 +484,176 @@ public partial class TerrainManager : MonoBehaviour{
         foreach (var pair in blockLayer.GetDictionary()){
             //Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.origin);
         }
+    }
+
+    //SAVE/LOAD
+
+    public void SaveWorld(){
+        
+        GameManager.Instance.currentWorld.blocks.Clear();
+        GameManager.Instance.currentWorld.ticksElapsed = totalTicksElapsed; // Save the total ticks elapsed
+        // Save blocks
+        foreach (var block in blockLayer.GetDictionary().Values){
+            block.hasSaved = false; // Reset the hasSaved flag for all blocks
+        }
+
+
+        foreach (var block in blockLayer.GetDictionary().Values){
+            if (!block.hasSaved){
+                BlockLoadData blockData = new BlockLoadData{
+                    data = block.Save(),
+                    addressableKey = block.addressableKey, // Save addressable key
+                };
+                GameManager.Instance.currentWorld.blocks.Add(blockData); // Add to the world's block list
+                block.hasSaved = true;
+            }
+        }
+
+        Debug.Log("Saved Blocks");
+
+        GameManager.Instance.currentWorld.ores.Clear();
+        foreach (var pair in oreLayer.GetDictionary()){
+            OreData data = new OreData{
+                position = pair.Key,
+                oreName = pair.Value.myProperties.name, // Store the asset name
+                amount = pair.Value.amount
+            };
+            GameManager.Instance.currentWorld.ores.Add(data);
+        }
+
+        // Save terrain
+        GameManager.Instance.currentWorld.terrain.Clear();
+        foreach (var pair in terrainLayer.GetDictionary()){
+            GameManager.Instance.currentWorld.terrain.Add(new TerrainData{
+                pos = pair.Key,
+                t = pair.Value // Store the asset name
+            });
+        }
+
+
+        Debug.Log("Saved Terrain and Ores");
+
+
+        // Initialize flattened walls array
+        int totalCells = GameManager.Instance.currentWorld.worldSize.x * GameManager.Instance.currentWorld.worldSize.y;
+        GameManager.Instance.currentWorld.walls = new bool[totalCells];
+
+        // Save walls using 1D index
+        int halfX = GameManager.Instance.currentWorld.worldSize.x / 2;
+        int halfY = GameManager.Instance.currentWorld.worldSize.y / 2;
+
+        for (int i = -halfX; i < halfX; i++){
+            for (int j = -halfY; j < halfY; j++){
+                Vector3Int pos = new Vector3Int(i, j, 0);
+                bool hasWall = wallTilemap.GetTile(pos) != null;
+
+                // Calculate 1D index
+                int xIndex = i + halfX;
+                int yIndex = j + halfY;
+                int flatIndex = yIndex * GameManager.Instance.currentWorld.worldSize.x + xIndex;
+
+                GameManager.Instance.currentWorld.walls[flatIndex] = hasWall;
+            }
+        }
+
+
+        Debug.Log("Saved Terrain");
+    }
+
+    public void LoadWorld(){
+        totalTicksElapsed = GameManager.Instance.currentWorld.ticksElapsed; // Load the total ticks elapsed
+
+        // Load walls
+        int halfX = GameManager.Instance.currentWorld.worldSize.x / 2;
+        int halfY = GameManager.Instance.currentWorld.worldSize.y / 2;
+
+        for (int i = -halfX; i < halfX; i++){
+            for (int j = -halfY; j < halfY; j++){
+                Vector3Int pos = new Vector3Int(i, j, 0);
+
+                // Calculate 1D index
+                int xIndex = i + halfX;
+                int yIndex = j + halfY;
+                int flatIndex = yIndex * GameManager.Instance.currentWorld.worldSize.x + xIndex;
+
+                bool hasWall = GameManager.Instance.currentWorld.walls[flatIndex];
+                if (hasWall){
+                    SetWall(rockWall, pos);
+                }
+            }
+        }
+
+        Debug.Log("Loaded Walls");
+
+
+        // Load ores
+
+        foreach (OreData data in GameManager.Instance.currentWorld.ores){
+            OreProperties properties = ItemManager.Instance.GetOreProperties(data.oreName);
+
+            if (properties != null){
+                SetOre(data.position, properties, data.amount);
+            }
+        }
+
+        // Load terrain
+
+        foreach (TerrainData data in GameManager.Instance.currentWorld.terrain){
+            SetTerrain(data.pos, data.t);
+        }
+
+        ApplyBufferedTiles();
+
+
+        //load blocks
+        int errors = 0;
+        foreach (BlockLoadData blockData in GameManager.Instance.currentWorld.blocks){
+
+            try{
+                string key = blockData.addressableKey;
+
+                // Load as GameObject first
+                AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(key);
+
+                GameObject prefabObj = handle.WaitForCompletion();
+
+                if (prefabObj != null){
+                    // Get Block component from prefab
+                    Block blockPrefab = prefabObj.GetComponent<Block>();
+
+                    if (blockPrefab != null){
+                        Vector2Int pos = blockData.data.origin;
+                        if (GetBlock(pos) != null){
+                            Debug.LogWarning($"Block exists at {pos}");
+                            continue;
+                        }
+
+                        PlaceBlock(blockPrefab, pos, blockData.data.rotation, blockData.data); // Place the block at the specified position
+                        Block block = GetBlock(pos);
+                        if (blockPrefab == null){
+                            Debug.LogError("prefab is null");
+                        }
+
+                        if (block == null){
+                            Debug.LogError("block is null");
+                        }
+
+                        block.Load(blockData.data); // Load the block data
+                        
+                    }
+                    else{
+                        Debug.LogError($"Prefab {key} is missing Block component");
+                    }
+                }
+                else{
+                    Debug.LogError($"Failed to load Addressable: {key}");
+                }
+            }catch (Exception e){
+                Debug.LogError($"Error loading block with key {blockData.addressableKey}: {e}");
+                errors++;
+            }
+        }
+
+        Debug.Log($"Loaded {GameManager.Instance.currentWorld.blocks.Count} blocks with {errors} errors");
     }
 }

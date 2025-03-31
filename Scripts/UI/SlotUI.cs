@@ -34,6 +34,10 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
 
     public void Refresh(){
         if (Slot == null) return;
+        
+        
+        
+        
 
         if (Slot.ItemStack != null && Slot.ItemStack?.item == null){
             Debug.Log("ERROR: ITEM CANNOT BE NULL, there is bugged a not null itemstack somewhere");

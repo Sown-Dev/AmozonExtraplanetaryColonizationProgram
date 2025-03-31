@@ -32,17 +32,19 @@ public class PlayerUI : MonoBehaviour{
 
     void Awake(){
         Instance = this;
+        
+    }
+
+    private void Start(){
+        
         toolbar = new Slot[toolbarSize];
 
         for (int i = 0; i < toolbarSize; i++){
             toolbar[i] = player.Inventory.GetSlot(i);
         }
-    }
-
-    private void Start(){
         inventoryUI.Init(player.Inventory);
         inventoryUIWindow.Hide();
-        player.SelectSlot(toolbar[0]);
+        
     }
 
 

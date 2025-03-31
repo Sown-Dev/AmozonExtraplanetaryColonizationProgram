@@ -3,7 +3,7 @@
         public override void OnCartEnter(Cart cart){
             base.OnCartEnter(cart);
             //actuate all adjascent
-            foreach (var block in TerrainManager.Instance.GetAdjacentBlocks(origin, properties.size.x, properties.size.y)){
+            foreach (var block in TerrainManager.Instance.GetAdjacentBlocks(data.origin, properties.size.x, properties.size.y)){
                 block.Actuate();
             
             }

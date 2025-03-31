@@ -155,7 +155,9 @@ MonoBehaviour:
     invertRotation: 1
     actuatable: 0
     collidable: 0
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
     size: {x: 1, y: 1}
     description: belt of conveyors
@@ -177,10 +179,11 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d21a0ec938d49d748a25c22be690d869, type: 3}
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  addressableKey: Conveyor
+  hasSaved: 0
+  actuatedThisTick: 0
   Capacity: 1
   Speed: 1
   prefab: {fileID: 2233409248298448181, guid: 4e4f95e376e55b9488f84539fc7e9830, type: 3}

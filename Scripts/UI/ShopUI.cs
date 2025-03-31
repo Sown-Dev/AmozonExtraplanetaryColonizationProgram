@@ -18,7 +18,9 @@ namespace UI{
         
         public CanvasGroup loanCG;
         public TMP_Text debtText;
+        public TMP_Text loanText;
         public Button loanButton;
+        public TMP_Text loanButtonText;
 
         public override void Awake(){
             base.Awake();
@@ -30,6 +32,10 @@ namespace UI{
         void Start(){
             Hide();
             CGRefresh();
+        }
+
+        private void Update(){
+          
         }
 
         public override void Refresh(){
@@ -49,6 +55,11 @@ namespace UI{
             loanCG.blocksRaycasts = RoundManager.Instance.loansUnlocked;
             
             loanButton.interactable = RoundManager.Instance.loansTaken <= 3;
+
+            debtText.color = RoundManager.Instance.debt > 0 ? Color.red : Color.white;
+            debtText.text = "$"+ RoundManager.Instance.debt.ToString(); 
+            loanText.text = $"Loans: {RoundManager.Instance.loansTaken}/{RoundManager.Instance.loanLimit}";;
+            loanButtonText.text =  $"Take Loan \n({RoundManager.Instance.loanAmount})";
         }
     }
 

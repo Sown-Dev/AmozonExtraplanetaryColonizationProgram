@@ -16,7 +16,6 @@ public partial class TerrainManager : MonoBehaviour
     private const float SUNSET_DURATION = 0.1f;
     
     //light
-    [SerializeField] private Light2D globalLight;
     [SerializeField] private Color nightColor;
     [SerializeField] private Color dayColor;
     [SerializeField] private CanvasGroup nightFX;

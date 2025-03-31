@@ -150,7 +150,9 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
     size: {x: 1, y: 1}
     description: Contains random junk left behind by past visitors.
@@ -163,16 +165,18 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  blockPrefab: {fileID: 7092241141101289703}
+  hasSaved: 0
   outputProperties:
     size: 8
     name: loot!
     gridWidth: 4
     scaleDownGridIfSmaller: 0
     type: 0
+  extraTier: 0
+  baseDrops: 2
   drops:
   - item:
       item: {fileID: 11400000, guid: 66bc1101b67357444b94e68a451f0c08, type: 2}

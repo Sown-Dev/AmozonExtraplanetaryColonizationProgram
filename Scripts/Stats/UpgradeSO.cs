@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -9,4 +10,11 @@ public class UpgradeSO : ScriptableObject{
     public virtual Upgrade Create(){
         return (Upgrade)u.Clone();
     }
+
+    #if UNITY_EDITOR
+    public void OnValidate(){
+        u.name = name;
+        u.iconPath = Utils.GetResourcesPath(u.iconField);
+    }
+    #endif
 }

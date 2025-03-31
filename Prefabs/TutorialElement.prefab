@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 5175638908970341099}
   highlight: {fileID: 0}
+  continueButton: {fileID: 0}
 --- !u!225 &8840323040450082237
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5377358, g: 0.5098344, b: 0.5098344, a: 1}
+  m_Color: {r: 0.4811321, g: 0.43347278, b: 0.43347278, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

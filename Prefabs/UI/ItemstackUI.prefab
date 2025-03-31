@@ -210,7 +210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myItemStack:
-    item: {fileID: 0}
+    itemID: 
+    itemSO: {fileID: 0}
     amount: 0
   icon: {fileID: 8213011856093058579}
   countText: {fileID: 7050922947279276740}
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6552599, g: 0.7501861, b: 0.8962264, a: 1}
+  m_Color: {r: 0.70211816, g: 0.9245283, b: 0.9078232, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

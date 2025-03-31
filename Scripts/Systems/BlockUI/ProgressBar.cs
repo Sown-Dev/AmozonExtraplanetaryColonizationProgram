@@ -1,5 +1,7 @@
-﻿using Systems.BlockUI;
+﻿using System;
+using Systems.BlockUI;
 
+[Serializable]
 public class ProgressBar : IBlockUI{
     public int progress;
     public int maxProgress=100;

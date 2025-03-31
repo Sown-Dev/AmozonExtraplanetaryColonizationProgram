@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Systems.Items;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Systems.Round{
+    [Serializable]
     public class Contract{
         public int quota;
         public int requiredQuota;
-        public List<Item> sellList;
+        public List<string> sellList;
         public int reward;
         public int signBonus;
 
@@ -17,7 +20,7 @@ namespace Systems.Round{
         public Contract(){ }
 
         public Contract(int tier, int itemsAmt, Sponsor s){
-            requiredQuota = (int)((500f * ((tier + 1f) * (tier / 2f)) + 300) / 25) * 25;
+            requiredQuota = (int)((600f * ((tier + 1f) * (tier / 2f)) + 300) / 25) * 25;
 
             sponsor = s; // (Sponsor)Random.Range(0, Sponsor.GetValues(typeof(Sponsor)).Length);
 
@@ -25,12 +28,12 @@ namespace Systems.Round{
 
 
             // Generate random items to be part of the contract
-            sellList = new List<Item>();
+            sellList = new List<string>();
             // Randomly generate reward and sign bonus for the contract
             reward = (Random.Range(80, 160) + (3 - sellList.Count) * 40) * tier;
             signBonus = 0;
 
-            TimeGiven = 440 + (tier * (100 + Random.Range(0, 20))) + Random.Range(-20, 20);
+            TimeGiven = 480 + (tier * (150 + Random.Range(0, 20))) + Random.Range(-20, 20);
 
             switch (s){
                 case Sponsor.CorbCO:
@@ -49,11 +52,11 @@ namespace Systems.Round{
                     reward *= 2;
                     requiredQuota -= 100;
                     itemsAmt-=1;
-                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier + 1, 1));
+                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier + 1, 1).Select( x => x.name));
 
                     break;
                 case Sponsor.Toyoma:
-                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier - 1, 1));
+                    sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier - 1, 1). Select(x => x.name));
                     TimeGiven -= 60;
                     reward = 0;
                     TimeGiven *= 1.2f;
@@ -72,7 +75,7 @@ namespace Systems.Round{
                     break;
             }
             
-            sellList = ItemManager.Instance.GetRandomItemsByTier(tier, itemsAmt).ToList();
+            sellList.AddRange(ItemManager.Instance.GetRandomItemsByTier(tier, itemsAmt).ToList().Select(x => x.name));
 
 
             TimeGiven = Mathf.RoundToInt(TimeGiven / 15f) * 15;
@@ -81,7 +84,8 @@ namespace Systems.Round{
             // Debug.Log($"New contract generated for tier {tier} with {itemsAmt} items. Required quota: {requiredQuota}, Reward: {reward}, SignBonus: {signBonus}");
         }
     }
-
+    
+    [Serializable]
     public enum Sponsor{
         CorbCO,
         Anogen,

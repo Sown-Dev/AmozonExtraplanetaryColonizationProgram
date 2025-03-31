@@ -2,18 +2,24 @@
 using System.Collections;
 using System.Linq;
 using NewRunMenu;
-using Systems;
+using Newtonsoft.Json;
 using Systems.Block;
+using Systems.Block.CustomBlocks;
 using Systems.Items;
 using Systems.Round;
 using TMPro;
 using UI;
 using UI.BlockUI;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using Unit = Systems.Unit;
+using Terrain = Systems.Terrain.Terrain;
 
 public partial class Player : Unit, IContainer{
     public static Player Instance;
+    static Container inventorySave;  //just for testing
+
 
     [SerializeField] public Cursor myCursor;
 
@@ -31,19 +37,65 @@ public partial class Player : Unit, IContainer{
 
     public Slot SelectedSlot;
 
+    [Header("PlayerMove Fields")] [SerializeField]
+    protected Collider2D playerCollider; // Reference to the player's collider
+
+    [SerializeField] private SpriteRenderer shadow;
+    [SerializeField] private Transform spriteHolder;
+    [SerializeField] private SpriteRenderer hatSR;
+    [SerializeField] private Animator am;
+    [SerializeField] private Transform highlights;
+    [SerializeField] private GameObject Invalid;
+    [SerializeField] private TileIndicatorManager indicatorManager;
+    [SerializeField] private GameObject DropPod; //only spawned at beginning, destroyed on landing
+    [SerializeField] private GameObject DropPodDestroy;
+    [SerializeField] private LayerMask wallLayer;
+
+
+    //physics
+    private float moveV = 4800f;
+    private float maxSpeed = 10f;
+    public float y;
+    public float jumpVelocity = 10f; // The initial velocity applied when jumping   
+    public float gravity = -36; // Gravity applied to the player
+    private float yVelocity = 0f; // Current vertical velocity of the player
+    private float groundLevel = 0f; // The Y position that represents the ground level
+    private float disableColliderHeight = 1f; // Height at which the collider is disabled
+    private bool m_Grounded = false;
+
+    [HideInInspector] public float destroyTimer = 0;
+    [HideInInspector] public float destroyDuration;
+    float baseDestroyDuration = 1f;
+    Vector2Int lastPos;
+    
+    private Block standingBlock;
+    private Terrain standingTerrain;
+    
+    
+
+
     protected override void Awake(){
-        myCharacter = GameManager.Instance?.selectedChar ?? myCharacter;
-        //add upgrades
-        foreach (UpgradeSO u in myCharacter.startingUpgrades){
-            AddUpgrade((Upgrade)u.u, false);
-        }
+        Instance = this;
 
         base.Awake();
-        Instance = this;
+        myCharacter = GameManager.Instance.GetCharacter(GameManager.Instance?.currentWorld.playerCharacter) ?? myCharacter;
+
+        myCursor.gameObject.SetActive(false); //disable at first, enable when we land
+        if (!GameManager.Instance.currentWorld.generated){
+            InitPlayer();
+        }
+        else{
+            LoadPlayer(GameManager.Instance.currentWorld.playerData);
+            PlayerReady();
+        }
+
+
+        hatSR.sprite = myCharacter.HatSprite;
+
+
         myCursor.OnLeftClick.AddListener(ClickPos);
         myCursor.OnRightClick.AddListener(RightClickPos);
         myCursor.OnCTRLClick.AddListener(CTRLClickPos);
-        SelectSlot(Inventory.GetSlot(7));
         //Inventory.AddOnInsert(OnInsert); //shit doesnt work bruh
 
 
@@ -53,51 +105,69 @@ public partial class Player : Unit, IContainer{
         myMat.SetColor("_ReplaceColor3", myCharacter.skinColor);
 
         //used to be in start, but this is prob fine. reason is to maybe stop the particle system from blasting a bunch due to position change.
-        spriteHolder.transform.localPosition = new Vector3(0, 220, 0);
 
+        CalculateStats();
     }
 
-    private bool popup = true;
-    public bool Insert(ref ItemStack s, bool simulate=false){
-        if (s?.item == money){
-            RoundManager.Instance.AddMoney(s.amount, false);
-            s = null;
-            return true;
+    //called if new world
+    public void InitPlayer(){
+        y = 220;
+        yVelocity = -12;
+
+
+        //we only do this if new world, otherwise we load existing upgrades 
+
+        //add starting upgrades
+        foreach (UpgradeSO u in myCharacter.startingUpgrades){
+            AddUpgrade((Upgrade)u.u, false);
         }
 
-        if (s == null){
-            return false;
+        //add starting items
+        foreach (ItemStack i in myCharacter.startingItems){
+            Inventory.Insert(i.Clone(), false);
         }
 
-        if (!simulate && Inventory.Insert(ref s, true)){
-            Popup($"+{s.amount} {s.item.name}");
-
-        }
-
-        bool ret = Inventory.Insert(ref s, simulate);
-        
-        popup = true; //
-        return Inventory.Insert(s);
+        SelectSlot(Inventory.GetSlot(7)); //select first slot
     }
-    
-    public void OnInventoryChange(){
-        //check if we have any money
-        if(Inventory.Contains( money)){
-            //iterate to find it
-            for (int i = 0; i < Inventory.Size; i++){
-                if (Inventory.GetSlot(i).ItemStack?.item == money){
-                    //remove it
-                    RoundManager.Instance.AddMoney(Inventory.GetSlot(i).ItemStack.amount, false);
 
-                    Inventory.GetSlot(i).ItemStack = null;
-                    break;
-                }
+    public void LoadPlayer(PlayerData data){
+        transform.position = data.position;
+        y = data.y;
+
+        //print inventory
+        Debug.Log("loaded:" + JsonConvert.SerializeObject(data, GameManager.JSONsettings));
+        Inventory = new Container(data.Inventory);
+        //Inventory = inventorySave;
+
+        foreach (Upgrade u in data.upgrades){
+            //AddUpgrade(u, false);
+        }
+
+        Slot selected = Inventory.GetSlot(data.selectedSlotID);
+        selected.Selected = false;
+        SelectSlot(selected);
+    }
+
+
+    public PlayerData SavePlayer(){
+        PlayerData data = new PlayerData();
+        data.position = transform.position;
+        data.y = y;
+        data.Inventory = Inventory;
+        inventorySave = Inventory;
+        data.upgrades = upgrades.ToArray();
+        //get selected slot id
+        for (int i = 0; i < Inventory.Size; i++){
+            if (Inventory.GetSlot(i) == SelectedSlot){
+                data.selectedSlotID = i;
+                break;
             }
         }
-    }
 
-    public ItemStack Extract(){
-        return Inventory.Extract();
+        Debug.Log(JsonConvert.SerializeObject(data.Inventory, GameManager.JSONsettings));
+
+
+        return data;
     }
 
 
@@ -120,17 +190,55 @@ public partial class Player : Unit, IContainer{
 
 #endif
 
-        //add starting items
-        foreach (ItemStack i in myCharacter.startingItems){
-            Inventory.Insert(i.Clone(), false);
-        }
-
-        yVelocity = -10;
-
-        myCursor.gameObject.SetActive(false); //disable at first, enable when we land
+        //SelectSlot(Inventory.GetSlot(7));
+        prevPos = transform.position;
     }
 
-   
+
+    private bool popup = true;
+
+    public bool Insert(ref ItemStack s, bool simulate = false){
+        if (s?.item == money){
+            RoundManager.Instance.AddMoney(s.amount, false);
+            s = null;
+            return true;
+        }
+
+        if (s == null){
+            return false;
+        }
+
+        if (!simulate && Inventory.Insert(ref s, true)){
+            Popup($"+{s.amount} {s.item.name}");
+        }
+
+        bool ret = Inventory.Insert(ref s, simulate);
+
+        popup = true; //
+        return Inventory.Insert(s);
+    }
+
+    public void OnInventoryChange(){
+        //check if we have any money
+        if (Inventory.Contains(money)){
+            //iterate to find it
+            for (int i = 0; i < Inventory.Size; i++){
+                if (Inventory.GetSlot(i).ItemStack?.item == money){
+                    //remove it
+                    RoundManager.Instance.AddMoney(Inventory.GetSlot(i).ItemStack.amount, false);
+
+                    Inventory.GetSlot(i).ItemStack = null;
+                    break;
+                }
+            }
+        }
+    }
+
+    public ItemStack Extract(){
+        return Inventory.Extract();
+    }
+
+
     public void SelectSlot(Slot slot){
         if (SelectedSlot != null)
             SelectedSlot.Selected = false;
@@ -152,9 +260,10 @@ public partial class Player : Unit, IContainer{
 
         if (b){
             //raycast to target, using layoutmask wall. if we hit a wall, false, otherwise true
-            bool canPlace = !Physics2D.Raycast(transform.position, (Vector2)pos - (Vector2)transform.position, Vector2.Distance(pos, transform.position), wallLayer);
-            
-            if (Vector2.Distance(b.transform.position, transform.position) > 10f && canPlace ){
+            bool canPlace = !Physics2D.Raycast(transform.position, (Vector2)pos - (Vector2)transform.position, Vector2.Distance(pos, transform.position),
+                wallLayer);
+
+            if (Vector2.Distance(b.transform.position, transform.position) > 10f && canPlace){
                 if (BlockUIManager.Instance.currentBlockUI?.block == b){
                     //b.Use(this); could do this also, same thing basically as using should just close it       
                     BlockUIManager.Instance.CloseBlockUI();
@@ -166,9 +275,7 @@ public partial class Player : Unit, IContainer{
             }
             else{
                 b.Use(this);
-
             }
-
         }
     }
 
@@ -188,9 +295,8 @@ public partial class Player : Unit, IContainer{
         Instantiate(OnDeath, transform.position, quaternion.identity);
         myCam.transform.SetParent(transform.parent.parent);
         Destroy(gameObject);
-
     }
-  
+
     public override Stats CalculateStats(){
         finalStats = base.CalculateStats();
         finalStats.Combine(myCharacter.stats);
@@ -205,4 +311,264 @@ public partial class Player : Unit, IContainer{
     public void Popup(string s, Color c){
         popupList.AddPopup(s, c);
     }
+
+
+    private float distMoved;
+    private Vector3 prevPos;
+
+    private float footstepDist = 1.8f;
+
+    private void FixedUpdate(){
+        
+        if(m_Grounded)
+            distMoved += Vector3.Distance(transform.position, prevPos);
+        prevPos = transform.position;
+
+        //take a step
+        if (distMoved> footstepDist){
+            distMoved = 0;
+            if(standingTerrain != null ){
+                AudioClip[] clips = TerrainManager.Instance.GetTerrainProperties(standingTerrain.myProperties).footsteps;
+                if(clips.Length > 0){
+                  audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+                  audioSource.Play();
+                }
+            }
+        }
+    }
+
+
+
+    private void Update(){
+        if (Time.timeScale <= 0) return;
+
+
+         standingBlock= TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(transform.position));
+         standingTerrain = TerrainManager.Instance.GetTerrain( Vector2Int.RoundToInt(transform.position));
+        
+
+        handVisualizer.Refresh();
+
+
+        sr.sortingOrder = 0;
+        hatSR.sortingOrder = 1;
+        shadow.sortingOrder = 0;
+        shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b,
+            Mathf.Max(0.4f * (6 - y) / 8, 0.05f));
+        // Apply gravity if player is not grounded
+        if (!m_Grounded){
+            yVelocity += gravity * Time.deltaTime; // Apply gravity to vertical velocity
+            y += yVelocity * Time.deltaTime; // Update position based on velocity
+
+            // Check if player has landed
+            if (y <= groundLevel){
+                Land();
+            }
+        }
+        else{
+            //IF GROUNDED:
+
+            // Jumping and gravity simulation
+            if (Input.GetKeyDown(KeyCode.Space) && m_Grounded){
+                rb.AddForce(rb.velocity.normalized * 10f, ForceMode2D.Impulse);
+                yVelocity = jumpVelocity; // Apply initial jump velocity
+                m_Grounded = false; // Player is no longer grounded
+            }
+
+            //Conveyor
+            if (standingBlock is ConveyorBeltBlock conveyor){
+                rb.velocity += ((conveyor.data.rotation.GetOpposite().GetVector2() * (conveyor.Speed * 16 * Time.deltaTime)));
+                sr.sortingOrder = 2;
+                shadow.sortingOrder = 1;
+            }
+            else{
+                sr.sortingOrder = 0;
+            }
+        }
+
+        am.SetFloat("xVel", rb.velocity.magnitude);
+        am.SetFloat("yVel", yVelocity);
+
+
+        //round position
+
+        // Disable or enable the collider based on height
+        playerCollider.enabled = y < disableColliderHeight;
+
+        if (sr.sortingOrder == 0){
+            sr.sortingOrder = y < disableColliderHeight ? 0 : 2;
+            hatSR.sortingOrder = y < disableColliderHeight ? 1 : 3;
+        }
+
+        handVisualizer.spriteRenderer.sortingOrder = sr.sortingOrder;
+
+        rb.drag = m_Grounded ? 10 : 9;
+
+        Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+
+        if (move != Vector2.zero){
+            TutorialManager.Instance.StartTutorial("interaction", 1);
+        }
+
+        if (move.x > 0){
+            sr.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (move.x < 0){
+            sr.transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        foreach (Transform child in highlights.transform){
+            Destroy(child.gameObject);
+        }
+
+
+        if (SelectedSlot.ItemStack?.item is BlockItem block && PlayerUI.Instance.OnTop.childCount == 0){
+            int sx = block.blockPrefab.properties.size.x;
+            int sy = block.blockPrefab.properties.size.y;
+
+            if ((myCursor.cursorRotation == Orientation.Right || myCursor.cursorRotation == Orientation.Left) && block.blockPrefab.properties.rotatable){
+                (sx, sy) = (sy, sx);
+            }
+
+            buildingPreview.color = new Color(1, 1, 1, 0.5f);
+            myCursor.sr.size = Vector2.Lerp(myCursor.sr.size, new Vector2(sx, sy), Time.deltaTime * 12);
+
+
+            Orientation rot = block.blockPrefab.properties.rotatable ? myCursor.cursorRotation : Orientation.Up;
+
+            //indicators
+            if (block.blockPrefab.GetIndicators()?.Count > 0){
+                indicatorManager.DrawIndicators(block.blockPrefab.GetIndicators(), myCursor.currentPos, rot);
+            }
+
+            //invalid
+            foreach (var v2 in TerrainManager.Instance.GetBlockPositions(myCursor.currentPos, block.blockPrefab.properties.size.x,
+                         block.blockPrefab.properties.size.y, rot)){
+                if (TerrainManager.Instance.GetBlock(v2) != null || TerrainManager.Instance.IsWall((Vector3Int)v2)){
+                    GameObject go = Instantiate(Invalid, highlights);
+                    go.transform.position = (Vector3Int)v2;
+                }
+            }
+
+
+            if ((block.blockPrefab.currentState?.rotateable ?? false) && block.blockPrefab.currentState
+                    .rotations[(int)myCursor.cursorRotation].sprites.Length > 0){
+                buildingPreview.sprite =
+                    block.blockPrefab.currentState.rotations[(int)myCursor.cursorRotation].sprites[0];
+            }
+            else
+                buildingPreview.sprite = block.blockPrefab.sr.sprite;
+
+            myCursor.buildingPreview.transform.localPosition = new Vector2(
+                sx % 2 == 0 ? (sx / 2f) - 0.5f : 0,
+                sy % 2 == 0 ? (sy / 2f) - 0.5f : 0);
+
+            myCursor.directionArrow.gameObject.SetActive(block.blockPrefab.properties.rotatable);
+        }
+        else{
+            myCursor.sr.size = Vector2.one;
+            buildingPreview.color = Color.clear;
+            myCursor.buildingPreview.transform.localPosition = Vector2.zero;
+            myCursor.directionArrow.gameObject.SetActive(false);
+
+            if (myCursor.lookingBlock){
+                indicatorManager.DrawIndicators(myCursor.lookingBlock.GetIndicators(), myCursor.lookingBlock.data.origin,
+                    myCursor.lookingBlock.properties.rotatable ? myCursor.lookingBlock.data.rotation : Orientation.Up);
+            }
+        }
+
+
+        //Destroying Blocks
+
+        if (myCursor.currentPos != lastPos){
+            lastPos = myCursor.currentPos;
+            destroyTimer = 0;
+        }
+
+        if (Input.GetKey(KeyCode.X) && Vector2.Distance(transform.position, myCursor.currentPos) < 8){
+            if (TerrainManager.Instance.GetBlock(myCursor.currentPos) != null){
+                destroyDuration = TerrainManager.Instance.GetBlock(myCursor.currentPos).properties.destroyTime *
+                                  baseDestroyDuration * finalStats[Statstype.MiningSpeed];
+                if (!TerrainManager.Instance.GetBlock(myCursor.currentPos)?.properties.indestructible ?? false){
+                    move = Vector2.zero;
+                    destroyTimer += Time.deltaTime;
+                    if (destroyTimer > destroyDuration){
+                        destroyTimer = 0;
+                        TerrainManager.Instance.RemoveBlock(myCursor.currentPos);
+                    }
+                }
+            }
+            else if (TerrainManager.Instance.GetOre(myCursor.currentPos) != null){
+                destroyDuration = baseDestroyDuration * finalStats[Statstype.MiningSpeed];
+                move = Vector2.zero;
+                destroyTimer += Time.deltaTime;
+                if (destroyTimer > destroyDuration){
+                    destroyTimer = 0;
+                    var extractOre = TerrainManager.Instance.ExtractOre(myCursor.currentPos, (int)finalStats[Statstype.MiningAmount]);
+                    Insert(ref extractOre);
+                    /*if (extractOre != null || extractOre.amount >= 0){
+                        Utils.Instance.CreateItemDrop(extractOre, (Vector2)myCursor.currentPos);
+                    }*/
+                }
+            }
+            else{
+                destroyTimer = 0;
+            }
+        }
+        else{
+            destroyTimer = 0;
+        }
+
+        spriteHolder.transform.localPosition = new Vector3(0,
+            y, 0);
+        rb.AddForce(move * (moveV * finalStats[Statstype.Movespeed]) * Time.deltaTime * (m_Grounded ? 1f : 1.2f));
+    }
+
+    bool firstLand = true;
+
+    public void Land(){
+        y = groundLevel; // Reset to ground level
+        Debug.Log("Landed" + yVelocity);
+        if (yVelocity < -40 && !firstLand){
+            TerrainManager.Instance.CreateBlockDebris((Vector2)transform.position, Color.gray);
+        }
+
+        yVelocity = 0; // Reset vertical velocity
+        m_Grounded = true; // Player is now grounded
+
+        if (firstLand){
+            firstLand = false;
+            RoundManager.Instance.StartCooldown(30);
+
+            TutorialManager.Instance.StartTutorial("controls", 1);
+            Instantiate(DropPodDestroy, DropPod.transform.position, quaternion.identity);
+            PlayerReady();
+        }
+    }
+
+    //call when player is ready to start interacting with world
+    public void PlayerReady(){
+        firstLand = false;
+        myCursor.gameObject.SetActive(true);
+        if (DropPod != null){
+            Destroy(DropPod);
+        }
+    }
+    
+    public Slot GetSlot(int id){
+        return Inventory.GetSlot(id);
+    }
+}
+
+[Serializable]
+public class PlayerData{
+    public Vector2 position;
+    public float y;
+
+    public int selectedSlotID;
+
+    public Container Inventory;
+
+    //TODO: finish
+    public Upgrade[] upgrades; //save player upgrades
 }

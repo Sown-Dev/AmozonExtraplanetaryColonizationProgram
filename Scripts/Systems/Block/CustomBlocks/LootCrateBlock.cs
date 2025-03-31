@@ -7,25 +7,26 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Systems.Block.CustomBlocks{
-    public class LootCrateBlock:ContainerBlock{
-bool hasGenerated = false;
-public int extraTier = 0;
-public int baseDrops = 2;
-        public Drop[] drops;   
+    public class LootCrateBlock : ContainerBlock{
+        
+        public int extraTier = 0;
+        public int baseDrops = 2;
+
+        public bool hasGenerated = false;
+        public Drop[] drops;
+
         //generation logic
         public void GenerateLoot(){
-            if(hasGenerated) return;
+            if (hasGenerated) return;
             hasGenerated = true;
             int myTier = RoundManager.Instance.roundNum + extraTier;
-            int lootAmount = baseDrops + Random.Range(0, 2)+ (myTier/2);
-            
+            int lootAmount = baseDrops + Random.Range(0, 2) + (myTier / 2);
+
             Utils.Shuffle(drops);
             //drops.OrderBy( x => x.tier); used to order by tier, but whatever we can just skip over non matching tiers. no other code changes required
-            
+
             //add loot going from curent tier to 0
             while (lootAmount > 0){
-
-
                 for (int i = drops.Length - 1; i >= 0 && lootAmount > 0; i--){
                     if (drops[i].tier > myTier) continue;
 
@@ -36,17 +37,20 @@ public int baseDrops = 2;
                         lootAmount--;
                     }
                 }
-                
             }
         }
-        
-        
+
+
         public override void Use(Unit user){
             GenerateLoot();
             base.Use(user);
         }
         
-        
+        public override void InitializeData(){
+            myData = new LootCrateBlockData();
+        }
+
+
         /*//Can't extract
         public override ItemStack Extract(){
             return null;
@@ -63,11 +67,30 @@ public int baseDrops = 2;
             GenerateLoot();
             return base.BlockDestroy(dropItems);
         }
+
+        public override BlockData Save(){
+            BlockData d =base.Save();
+            d.data.SetBool("hasGenerated", hasGenerated);
+            return d;
+        }
+        
+        
+        public override void Load(BlockData d){
+            base.Load(d);
+            hasGenerated = d.data.GetBool("hasGenerated");
+        }
+        
     }
+
     [Serializable]
     public struct Drop{
         public ItemStack item;
         public float chance;
         public int tier;
+    }
+    [Serializable]
+    public class LootCrateBlockData : ContainerBlockData{
+        public bool hasGenerated = false;
+
     }
 }

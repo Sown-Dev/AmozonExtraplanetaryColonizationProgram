@@ -21,7 +21,8 @@ namespace NewRunMenu{
         public Color shirtColor;
         public Color pantsColor;
         public Color skinColor;
-        public Color hatColor;
+
+        public Sprite HatSprite;
         
         public Stats stats;
         

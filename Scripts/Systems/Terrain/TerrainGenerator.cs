@@ -13,9 +13,7 @@
     {
         [SerializeField] private RuleTile rockWall;
         
-        [Header("Generation Settings")]
-        [SerializeField] private int seed = 0;
-
+        
         private int currentSeed;
         [FormerlySerializedAs("size")] [SerializeField] private int worldSize = 500;
 
@@ -24,38 +22,42 @@
         [SerializeField] private TerrainProperties Stone;
 
         [Header("Blocks")] 
-        [SerializeField] private Block Tree;
         [SerializeField] private Block Sapling;
-        [SerializeField] private Block Crystal;
         [SerializeField] private Block Mushroom;
         [SerializeField] private Block LootCrate;
         [SerializeField] private Block SupplyCrate;
         
+        
+        [SerializeField] private Block Crystal;
+        [SerializeField] private Block Tree;
         [SerializeField] private Block CoalNode;
+        [SerializeField] private Block rockNode;
+        [SerializeField] public List<Block> resourceBlocks;
+        
         [SerializeField] private Block SellBlock;
         [SerializeField] private Block BigCrate;
         [SerializeField] private Block Rock2x;
         
         
         // construction sites (unused)
-        [SerializeField] private Block SolarFurnaceSite;
+        /*[SerializeField] private Block SolarFurnaceSite;
         [SerializeField] private Block WaterPumpSite;
-        [SerializeField] private Block RailWorkbenchSite;
+        [SerializeField] private Block RailWorkbenchSite;*/
 
         [SerializeField] private Block[] constructionSites;
         
         private float startTime;
         private bool generatedWorld;
 
-        public void GenerateTerrain()
+        public void GenerateWorld()
         {
+            
             startTime = Time.realtimeSinceStartup;
             generatedWorld = true;
             _terrainTileBuffer.Clear();
-            _oreTileBuffer.Clear();
             
             Random.State originalState = Random.state;
-            currentSeed = seed != 0 ? seed : Random.Range(int.MinValue, int.MaxValue);
+            currentSeed = GameManager.Instance.currentWorld.seed;
             Debug.Log($"Generating terrain with seed {currentSeed}");
             Random.InitState(currentSeed);
             
@@ -66,6 +68,29 @@
 
             float noiseOffset = 50000 * Random.value + 10000;
             int halfSize = worldSize / 2;
+            
+            
+            
+            //set resource blocks based on flags:
+            resourceBlocks = new List<Block>();
+            resourceBlocks.Add(Tree);
+            resourceBlocks.Add( Crystal);
+            
+            if (GameManager.Instance.currentWorld.flags.HasFlag(PlanetFlags.RockCoal)) 
+            {
+                resourceBlocks.Add(CoalNode);
+            }
+            if(GameManager.Instance.currentWorld.flags.HasFlag(PlanetFlags.StoneNodes))
+            {
+                resourceBlocks.Add(rockNode);
+            }
+            
+            
+        
+            
+            
+            
+            
 
             // Initial block placements
             //PlaceBlock(SellBlock, new Vector2Int(0, 1));
@@ -81,7 +106,7 @@
                         foreach (Item item in list)
                         {
                             ItemStack i = new ItemStack(item, item.stackSize);
-                            c.output.Insert(ref i);
+                            c.Insert(ref i);
                         }
                     }
                 }
@@ -163,7 +188,7 @@
                                                       (oreProperties.maxAmount - oreProperties.minAmount) *
                                                       (perlinValue - oreProperties.threshold) / 0.3f +
                                                       Random.Range(-oreProperties.variance, oreProperties.variance));
-                                    SetOre(position, oreProperties.ore, amount);
+                                    SetOre(position, oreProperties, amount);
                                     placedOre = true;
                                     break;
                                 }
@@ -220,7 +245,7 @@
             }
 
             // Random block placement
-            for (int i = 0; i < 440; i++)
+            for (int i = 0; i <  (halfSize*halfSize)/130; i++)
             {
                 Vector2Int pos = new Vector2Int(
                     Random.Range(-halfSize, halfSize),
@@ -229,15 +254,17 @@
 
                 if (IsWall((Vector3Int)pos)) { i--; continue; }
 
-                if (Random.value < 0.06f)
+                if (Random.value < 0.065f)
                 {
                     PlaceBlock(LootCrate, pos);
                     continue;
                 }
 
-                if (GetTerrain(pos).myProperties == Grass) PlaceBlock(Tree, pos);
-                else if (Random.value > 0.4f) PlaceBlock(CoalNode, pos);
-                else PlaceBlock(Crystal, pos);
+                if (GetTerrainProperties(pos) == Grass) PlaceBlock(Tree, pos);
+                else{
+                    PlaceBlock( resourceBlocks[Random.Range(0, resourceBlocks.Count)], pos);
+                }
+                
             }
 
             // Crystal cluster generation
@@ -276,10 +303,26 @@
                     }
                 }
             }
+            GameManager.Instance.currentWorld.generated = true;
 
             Random.state = originalState;
             
             ApplyBufferedTiles();
             GC.Collect();
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
+
+     
+        
     }

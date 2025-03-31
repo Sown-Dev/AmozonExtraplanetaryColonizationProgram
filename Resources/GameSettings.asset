@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DevMode: 0
   completedTutorials: []
+  masterVolume: 0.5
+  musicVolume: 0.6
+  sfxVolume: 1

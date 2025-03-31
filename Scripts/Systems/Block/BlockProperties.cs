@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Systems.Block.BlockStates;
 using Systems.Items;
+using UI.BlockUI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -20,6 +21,9 @@ public class BlockProperties{
     public bool collidable = true;
     public bool blockUI = true;
     public float destroyTime = 1;
+
+
+    public BlockUI customUI;
 
 
     public TooltipFlags ttFlags;

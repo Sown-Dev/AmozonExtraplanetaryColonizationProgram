@@ -1,15 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Systems.Block;
 using Systems.Items;
 using UI.BlockUI;
 
 public class QuantumContainerBlock:ContainerBlock{
     
+    
+    //public new QuantumContainerBlockData data => (QuantumContainerBlockData) base.data;
     public static List<Container> QuantumContainers = new List<Container>(10);
 
     public NumberSelector selector;
+
     
-    
-    
+    void Awake(){
+       selector = new NumberSelector(ChangeContainer,0,9);
+    }
         
     //Called in terrain manager
     public static void InitContainers(){
@@ -25,11 +31,9 @@ public class QuantumContainerBlock:ContainerBlock{
     }
     
 
-
-    protected override void Awake(){
-        base.Awake();
+    public override void Init(Orientation orientation){
+        base.Init(orientation);
         
-        selector = new NumberSelector(ChangeContainer,0,9);
         selector.Priority = 21;
         
         output = QuantumContainers[selector.value];
@@ -40,4 +44,20 @@ public class QuantumContainerBlock:ContainerBlock{
         BlockUIManager.Instance.CloseBlockUI();  // for refresh, but looks ugly
         BlockUIManager.Instance.GenerateBlockUI(this);
     }
+
+    public override BlockData Save(){
+        BlockData save = base.Save();
+        save.data.SetInt("selector", selector.value);
+        return save;
+    }
+    
+    public override void Load(BlockData save){
+        base.Load(save);
+        selector.Change(save.data.GetInt("selector"));
+    }
+}
+[Serializable]
+public class QuantumContainerBlockData : ContainerBlockData{
+    public NumberSelector selector;
+
 }

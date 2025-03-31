@@ -1,4 +1,5 @@
-﻿using Systems.Items;
+﻿using System.Linq;
+using Systems.Items;
 using Systems.Round;
 using TMPro;
 using UI;
@@ -74,14 +75,14 @@ public class RoundInfoUI:MonoBehaviour{
 
             }
 
-            foreach (Item i in RoundManager.Instance.currentContract.sellList){
+            foreach (Item i in RoundManager.Instance.currentContract.sellList.Select(x => ItemManager.Instance.GetItemByID(x))){
                 ItemStackUI ui = GameObject.Instantiate(sellUIPrefab, sellList.transform).GetComponent<ItemStackUI>();
                 ui.Init(i);
             }
         }
-        
-        
-        shopButton.interactable = RoundManager.Instance.roundNum > -1; //first round is 0
+
+
+        shopButton.interactable = RoundManager.Instance.shopTiers.Count > 0; //first round is 0
 
         /*
         foreach (Transform child in upgradeList.transform){

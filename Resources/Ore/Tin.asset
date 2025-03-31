@@ -14,12 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threshold: 0.82
   scale: 0.1
-  minAmount: 300
+  minAmount: 400
   maxAmount: 800
-  variance: 500
-  ore:
-    myProperties: {fileID: 11400000}
-    oreItem: {fileID: 11400000, guid: 6cbcc93b4ce4abb44afec485dc947ca6, type: 2}
-    tile: {fileID: 11400000, guid: 84e0f661a23e0554cba446cb4d65f108, type: 2}
-    amount: 0
-    position: {x: 0, y: 0}
+  variance: 390
+  tile: {fileID: 11400000, guid: 84e0f661a23e0554cba446cb4d65f108, type: 2}
+  oreItem: {fileID: 11400000, guid: 6cbcc93b4ce4abb44afec485dc947ca6, type: 2}

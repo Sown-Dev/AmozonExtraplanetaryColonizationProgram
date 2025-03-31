@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <description>k__BackingField: 1 Space credit
   <icon>k__BackingField: {fileID: 21300000, guid: 8a834f259657f854883fc06d1778c6d2, type: 3}
-  stackSize: 100
+  stackSize: 999
   category: 1
   useCursor: 0
   value: 1

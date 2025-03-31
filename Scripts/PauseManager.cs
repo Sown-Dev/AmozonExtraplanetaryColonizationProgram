@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour{
     private CursorManager cmr;
@@ -10,23 +11,29 @@ public class PauseManager : MonoBehaviour{
     public Animator am;
 
     [SerializeField] public UIWindow settingsWindow;
-    
+
+    public Button saveButton;
+
+
     private void Start(){
         Close();
         cmr = CursorManager.Instance;
         settingsWindow.Hide();
     }
-    
-   
+
 
     public void Toggle(){
         if (open){
             Close();
-        }else{
+        }
+        else{
             Open();
         }
-        
-        
+    }
+
+    private void Update(){
+        //savebutton only if we have a world loaded
+        saveButton.gameObject.SetActive(GameManager.Instance.inGame);
     }
 
     private bool open;
@@ -41,7 +48,7 @@ public class PauseManager : MonoBehaviour{
 
         open = true;
         cmr.OpenUI();
-        
+
         am.SetBool("Open", open);
         cg.interactable = open;
         cg.blocksRaycasts = open;
@@ -52,22 +59,31 @@ public class PauseManager : MonoBehaviour{
             return;
         open = false;
         cmr.CloseUI();
-        
+
         am.SetBool("Open", open);
         cg.interactable = open;
         cg.blocksRaycasts = open;
-        
+
         settingsWindow.Hide();
     }
+
     //Button Functions:
     public void Settings(){
         settingsWindow.Toggle();
     }
-    public void Die(){
-        Player.Instance?.Die();
+
+    public void Save(){
         Close();
+        GameManager.Instance.Save();
     }
+
+    public void ExitMain(){
+        Close();
+        GameManager.Instance.ExitToMain();
+    }
+
     public void Quit(){
-        Application.Quit();
+        Close();
+        GameManager.Instance.Quit();
     }
 }

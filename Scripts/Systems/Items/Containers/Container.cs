@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using Systems.BlockUI;
 using Systems.Items;
 using UnityEngine;
 
 namespace Systems.Items{
-    //[Serializable]
+    [Serializable]
     public class Container : IBlockUI, IContainer{
         public List<Item> filterList = new List<Item>();
         public bool blackList = true;
 
-        public Slot[] containerList{ get; protected set; }
+        public Slot[] containerList;
         public ContainerProperties properties;
 
-
+        
+        [JsonIgnore]
         public int Size{
             get => containerList.Length;
             private set{ } //TODO add resize
         }
 
-        Action<ItemStack> OnInsert;
+        //Action<ItemStack> OnInsert;
 
         //TODO: jenk workaround, but i only need to worry about this if i change the other constructor or how containers work
         public Container(ContainerProperties props, List<Slot> slots){
@@ -31,8 +33,29 @@ namespace Systems.Items{
             }*/
         }
 
-        public void AddOnInsert(Action<ItemStack> _OnInsert){
+        public Container(Container c){
+            this.properties = c.properties;
+            containerList = new Slot[c.containerList.Length];
+            for (int i = 0; i < c.containerList.Length; i++){
+                containerList[i] = c.containerList[i];
+                if(String.IsNullOrEmpty(containerList[i].ItemStack.itemID)){
+                    containerList[i].ItemStack = null;
+                }
+            }
+            
+            
+        }
+
+        /*public void AddOnInsert(Action<ItemStack> _OnInsert){
             OnInsert += _OnInsert;
+        }*/
+        [JsonConstructor]
+        public Container(){
+            /*properties = new ContainerProperties();
+            containerList = new Slot[properties.size];
+            for (int i = 0; i < properties.size; i++){
+                containerList[i] = new Slot(null);
+            }*/
         }
 
         public Container(ContainerProperties props){
@@ -187,7 +210,7 @@ namespace Systems.Items{
             for (int i = 0; i < containerList.Length; i++){
                 if (containerList[i].Insert(s)){
                     if (s.ItemStack == null || s.ItemStack.amount == 0){
-                        OnInsert?.Invoke(s.ItemStack);
+                        //OnInsert?.Invoke(s.ItemStack);
                         return true;
                     }
                 }

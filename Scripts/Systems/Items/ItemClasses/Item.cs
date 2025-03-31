@@ -1,8 +1,10 @@
 ﻿using System;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Systems.Items{
+ 
     [CreateAssetMenu(fileName = "ItemBase", menuName = "ScriptableObjects/Items/Item", order = 0)]
     public class Item: DescriptableSo{
         public int stackSize= 32;

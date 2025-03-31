@@ -161,7 +161,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: Inserter
+      value: Robot Arm
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -282,13 +282,15 @@ MonoBehaviour:
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
-    name: Inserter
+    name: Robot Arm
     indestructible: 0
     rotatable: 1
-    invertRotation: 1
+    invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
     size: {x: 1, y: 1}
     description: moves items between nearby inventories by rotating
@@ -301,18 +303,38 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  addressableKey: Robot Arm
+  hasSaved: 0
+  actuatedThisTick: 0
   outputProperties:
     size: 1
     name: Arm
     gridWidth: 1
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
+  mySlot:
+    ItemStack:
+      itemID: 
+      itemSO: {fileID: 0}
+      amount: 0
+    Stacksize: 1000
+    Selected: 0
+    dirty: 1
   toFace: 0
   arm: {fileID: 5125982082512480245}
+  hiddenDirSelect: 0
   slotVisualizer: {fileID: 8571372903449190745}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:

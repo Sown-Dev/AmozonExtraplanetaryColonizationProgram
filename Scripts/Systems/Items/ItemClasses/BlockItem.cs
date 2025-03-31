@@ -31,7 +31,7 @@ namespace Systems.Items{
         }
     }
 }
-[Flags]
+[Flags][Serializable]
 public enum BlockCategory{
     Other=0,
     Logistics=1,//moving stuff, including both inserting and extracting

@@ -17,9 +17,5 @@ MonoBehaviour:
   minAmount: 100
   maxAmount: 300
   variance: 20
-  ore:
-    myProperties: {fileID: 11400000}
-    oreItem: {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}
-    tile: {fileID: 11400000, guid: dc8a59f117d98e6449b4c94ea20af613, type: 2}
-    amount: 0
-    position: {x: 0, y: 0}
+  tile: {fileID: 11400000, guid: dc8a59f117d98e6449b4c94ea20af613, type: 2}
+  oreItem: {fileID: 11400000, guid: 904a0606101e14240ae93b170059aee2, type: 2}

@@ -1,23 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Systems.Items;
 using UnityEngine;
 
 namespace Systems.Block{
     public class DrillBlock : ContainerBlock{
+        
+        
+        //public new DrillBlockData data => (DrillBlockData)base.data;
+        
         public int DrillTime = 80;
         public int DrillAmount=1;
 
         public List<Vector2Int> DrillPositions;
 
-        public ProgressBar progressBar = new ProgressBar(21);
 
         public List<GameObject> DrillFX;
+        
+        public ProgressBar progressBar = new ProgressBar(21);
 
 
-        protected override void Awake(){
-            base.Awake();
-            
+
+        public override void Init(Orientation orientation){
+            base.Init(orientation);
+            progressBar = new ProgressBar(21);
+            progressBar.progress = 0;
             progressBar.maxProgress = DrillTime;
+
+            
         }
 
         public override void Tick(){
@@ -30,7 +41,7 @@ namespace Systems.Block{
 
             progressBar.progress++;
 
-            if (progressBar.progress >= progressBar.maxProgress){
+            if (progressBar.progress >=progressBar.maxProgress){
                 progressBar.progress = 0;
                 Drill();
             }
@@ -40,8 +51,8 @@ namespace Systems.Block{
 
         public virtual void Drill(){
             ItemStack item =
-                TerrainManager.Instance.ExtractOre(origin+ DrillPositions[i], 1);
-            while (TerrainManager.Instance.GetOre(origin+ DrillPositions[i]) ==
+                TerrainManager.Instance.ExtractOre(data.origin+ DrillPositions[i], 1);
+            while (TerrainManager.Instance.GetOre(data.origin+ DrillPositions[i]) ==
                    null){
                 i++;
                 i %= DrillPositions.Count;
@@ -55,8 +66,8 @@ namespace Systems.Block{
             if(output.isFull()) return false;
             
             foreach (Vector2Int pos in DrillPositions){
-                if (TerrainManager.Instance.GetOre(origin+ pos) != null){
-                    if (TerrainManager.Instance.GetOre(origin+ pos).amount > 0){
+                if (TerrainManager.Instance.GetOre(data.origin+ pos) != null){
+                    if (TerrainManager.Instance.GetOre(data.origin+ pos).amount > 0){
                         return true;
                     }
                 }
@@ -70,6 +81,22 @@ namespace Systems.Block{
             e.Add(new TileIndicator(DrillPositions.ToArray(), IndicatorType.Mining));
             return e;
         }
+
+        public override BlockData Save(){
+            BlockData d =base.Save();
+            d.data.SetString( "progressBar", JsonConvert.SerializeObject( progressBar, GameManager.JSONsettings));
+            return d;
+        }
+        public override void Load(BlockData d){
+            base.Load(d);
+            progressBar = JsonConvert.DeserializeObject<ProgressBar>(d.data.GetString("progressBar"), GameManager.JSONsettings);
+        }
+    }
+    [Serializable]
+    public class DrillBlockData : ContainerBlockData{
+        
+        
+        public ProgressBar progressBar = new ProgressBar(21);
 
     }
     

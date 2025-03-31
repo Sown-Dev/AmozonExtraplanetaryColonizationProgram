@@ -5,6 +5,7 @@ using Systems.Items;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Recipe", menuName = "ScriptableObjects/Recipe")]
+[Serializable]
 public class Recipe: ScriptableObject{
     
     public Sprite icon;
@@ -20,9 +21,9 @@ public class Recipe: ScriptableObject{
         if (icon == null){
             icon = results[0].item.icon;
         }
-        newIngredients = new List<ItemWrapper>();
+        //newIngredients = new List<ItemWrapper>();
         foreach (ItemStack itemStack in ingredients){
-            newIngredients.Add(new ItemWrapper(itemStack.item));
+            //newIngredients.Add(new ItemWrapper(itemStack.item));
         }
     }
 }

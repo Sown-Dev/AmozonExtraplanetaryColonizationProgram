@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Tungsten Carbide Pick
   m_EditorClassIdentifier: 
   su:
-    <name>k__BackingField: Tungsten Carbide Pick
     stats:
       stats:
       - type: 4
         amount: 1
         operation: 2
+    <name>k__BackingField: Tungsten Carbide Pick
     <description>k__BackingField: Gain +1 extra resource when mining.
-    <icon>k__BackingField: {fileID: 21300000, guid: c2b8c8f23c4919f4d96b24fa0ade432d, type: 3}
+    iconPath: 
+    iconField: {fileID: 21300000, guid: c2b8c8f23c4919f4d96b24fa0ade432d, type: 3}

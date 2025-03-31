@@ -15,8 +15,19 @@ this has a few parts. 1) intrinsic block data: data that all blocks have, such a
 3) containers. since serializing containers is hard, we have a seperate system for storing and loading them. maybe?
 
 
-Alternative:
+Alternative: (DOING THIS)
 extended blockdata. Each block has its own data type. Base is blockdata, same as before, but now, when saving, blocks will generate their custom DataObject. Blocks also hold their own data object.
 Issue: we want to have the data as a field, so its as simple as just saving and loading a serialized class, no extra stuff, but this has its own problem. The field would be of type blockdata, so we can't then access the custom extended functionality of custom blocks.
 Ideally, we would have the field of BlockData data, change type in subclasses so it can still be used as blockdata, but also for things like containers. But this isn't possible. The best one can do is maybe 2 fields, one that is blockdata, and one that is set per class??
 Not sure that that would work. 
+
+
+WORLDS:
+Each new game creates a new world. World is a simple class(?) (could be struct but it has lists)
+World has the following: world name, seed, and save data
+
+Save Data:
+1) list of blockloadstructs
+2) list of terrain, ores, walls, etc
+3) player data
+4) round data

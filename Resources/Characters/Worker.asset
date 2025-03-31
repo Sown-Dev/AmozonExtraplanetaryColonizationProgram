@@ -32,6 +32,6 @@ MonoBehaviour:
   shirtColor: {r: 0.4206123, g: 0.6415094, b: 0.58220905, a: 1}
   pantsColor: {r: 0.064836234, g: 0.1239811, b: 0.2924528, a: 0}
   skinColor: {r: 0.6886792, g: 0.5637678, b: 0.38007298, a: 1}
-  hatColor: {r: 0, g: 0, b: 0, a: 0}
+  HatSprite: {fileID: 21300000, guid: d787fb1b54440eb4d986d1d11ee694c4, type: 3}
   stats:
     stats: []

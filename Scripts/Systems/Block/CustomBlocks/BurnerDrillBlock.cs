@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 using Systems.Items;
 
 namespace Systems.Block.CustomBlocks{
     public class BurnerDrillBlock:DrillBlock{
     
-        public Burner burner;
+        //public new BurnerDrillBlockData data => (BurnerDrillBlockData)base.data;
+        public Burner burner= new Burner();
 
-        protected override void Awake(){
+        
+        public override void Init(Orientation orientation){
+            base.Init(orientation);
             burner.Init();
             burner.Priority = 4;
-            base.Awake();
         }
 
         public override bool CanMine(){
@@ -35,8 +39,22 @@ namespace Systems.Block.CustomBlocks{
         
         //burner drops
         public override bool BlockDestroy(bool dropItems = true){
-            lootTable.AddRange(burner.fuelContainer.GetItems());
+            data.lootTable.AddRange(burner.fuelContainer.GetItems());
             return base.BlockDestroy(dropItems);
         }
+        
+        public override BlockData Save(){
+            BlockData d= base.Save();
+            d.data.SetString("burner", JsonConvert.SerializeObject(burner, GameManager.JSONsettings));
+            return d;
+        }
+        public override void Load(BlockData d){
+            base.Load(d);
+            burner = JsonConvert.DeserializeObject<Burner>(d.data.GetString("burner"), GameManager.JSONsettings);
+        }
+    }
+    [Serializable]
+    public class BurnerDrillBlockData : DrillBlockData{
+        public Burner burner= new Burner();
     }
 }

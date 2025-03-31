@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Boots
   m_EditorClassIdentifier: 
   su:
-    <name>k__BackingField: Boots
     stats:
       stats:
       - type: 2
         amount: 0.1
         operation: 2
+    <name>k__BackingField: Boots
     <description>k__BackingField: Gives +10% movement speed
-    <icon>k__BackingField: {fileID: 21300000, guid: 7970b099e7d048440a1decf0eb7a4548, type: 3}
+    iconPath: 
+    iconField: {fileID: 21300000, guid: 7970b099e7d048440a1decf0eb7a4548, type: 3}

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Systems.Block.CustomBlocks;
 using Systems.Items;
 using UnityEngine;
@@ -7,45 +9,55 @@ namespace Systems.Block{
     public class RecipeBlock : ProgressMachineContainerBlock{
         public GameObject[] CraftingFX;
     
-
-
+    
+        
+        //need a new solution for keeping track of recipes but still saving them
         public RecipeSelector recipeSelector;
+
         
-        public Container input;
+        //public RecipeBlockData data => (RecipeBlockData)base.data;
         public ContainerProperties inputProperties;
-        
-       
+            public Container input;
+
+        public override void InitializeData(){
+            myData = new RecipeBlockData();
+        }
+
         public override bool Insert(ref ItemStack s, bool simulate = false){
-            return input.Insert(ref s, simulate);
+            return 
+                input.Insert(ref s, simulate);
         }
         
         
         public override bool BlockDestroy(bool dropItems){
-            lootTable.AddRange(input.GetItems());
+            data.lootTable.AddRange( 
+                input.GetItems());
             return base.BlockDestroy();
         }
 
         protected override void Awake(){
             base.Awake();
             
-            input = new Container(inputProperties);
-    
-            
-            recipeSelector.Priority = 10;
-
-            input.Priority = 20;
-            progressBar.Priority = 21;
-            output.Priority = 22;
-            
-            
 
         
+           
 
-            recipeSelector.onRecipeChanged += SetRecipe;
+        }
+
+        public override void Init(Orientation orientation){
+            base.Init(orientation); 
+            input = new Container(inputProperties); 
+            input.Priority = 20; 
+            progressBar.Priority = 21; 
+            output.Priority = 22;
+    
+
         }
 
         private void Start(){
-            recipeSelector.SelectRecipe(recipeSelector.recipes[0]);
+            recipeSelector.onRecipeChanged += SetRecipe;
+            recipeSelector.Priority = 10;
+            recipeSelector.SelectRecipe(0);
         }
 
         bool isCrafting = false;
@@ -93,7 +105,7 @@ namespace Systems.Block{
                 }
             }
         }
-
+        //TODO: somehow make recipeselector 
         public virtual bool CanCraft(){
             return input.Contains(recipeSelector.currentRecipe?.ingredients);
         }
@@ -118,9 +130,31 @@ namespace Systems.Block{
                 input.blackList = true;
                 input.Priority = 20;
             }
-            //move all input items to output
+            //move all data.input items to output
         
             UpdateUI?.Invoke();
         }
+        
+        public override BlockData Save(){
+            BlockData d = base.Save();
+            d.data.SetInt( "selectedRecipe", recipeSelector.currentRecipeIndex);
+            d.data.SetString( "input", JsonConvert.SerializeObject( input, GameManager.JSONsettings ) );
+return d;
+        }
+
+        public override void Load(BlockData d){
+            base.Load(d);
+            //recipeSelector.SelectRecipe( JsonConvert.DeserializeObject<Recipe>( d.data.GetString( "selectedRecipe" ), GameManager.JSONsettings ) );
+            input = JsonConvert.DeserializeObject<Container>( d.data.GetString( "input" ), GameManager.JSONsettings );
+            recipeSelector.SelectRecipe( d.data.GetInt( "selectedRecipe" ) );
+            SetRecipe();
+        }
+    }
+    [Serializable]
+    public class RecipeBlockData : ProgressMachineContainerBlockData{
+        
+        public Recipe selectedRecipe;
+        public Container input;
+
     }
 }

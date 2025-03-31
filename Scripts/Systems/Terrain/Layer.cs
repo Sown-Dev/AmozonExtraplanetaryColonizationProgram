@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
+[Serializable]
 public class Layer<ObjectType> where ObjectType: class{
 
 

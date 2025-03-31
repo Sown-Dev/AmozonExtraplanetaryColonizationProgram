@@ -21,7 +21,7 @@ public class CardinalPole : BaseConnector{
         foreach (Vector2Int dir in new Vector2Int[]
                      { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right }){
             for (int i = 1; i < poleRange; i++){
-                coverage.Add(origin+dir*i);
+                coverage.Add(data.origin+dir*i);
             }
         }
         return coverage.ToArray();
@@ -31,7 +31,7 @@ public class CardinalPole : BaseConnector{
         List<Vector2Int> coverage = new();
         for (int i = -area.x; i <= area.x; i++){
             for (int j = -area.y; j <= area.y; j++){
-                coverage.Add(origin +new Vector2Int(i, j));
+                coverage.Add(data.origin +new Vector2Int(i, j));
             }
         }
         return coverage.ToArray();

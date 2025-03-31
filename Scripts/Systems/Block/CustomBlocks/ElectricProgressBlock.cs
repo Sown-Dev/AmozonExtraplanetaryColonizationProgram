@@ -26,23 +26,20 @@ namespace Systems.Block{
         }
 
         public void GetConnected(){
-            Debug.Log("size +"+TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y).Count);
-            foreach (var pos in TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y)){
+            Debug.Log("size +"+TerrainManager.Instance.GetBlockPositions(data.origin, properties.size.x, properties.size.y).Count);
+            foreach (var pos in TerrainManager.Instance.GetBlockPositions(data.origin, properties.size.x, properties.size.y)){
                 if (TerrainManager.Instance.powerClaims.ContainsKey(pos)){
                     TerrainManager.Instance.powerClaims[pos].Connect(this);
                     
                 }
-
-                
-
             }
         }
 
         private void OnDrawGizmos(){
             Gizmos.color = Color.blue;
-            foreach (var pos in TerrainManager.Instance.GetBlockPositions(origin, properties.size.x, properties.size.y)){
+            foreach (var pos in TerrainManager.Instance.GetBlockPositions(data.origin, properties.size.x, properties.size.y)){
                
-                Gizmos.DrawLine((Vector2)pos, (Vector2)origin);
+                Gizmos.DrawLine((Vector2)pos, (Vector2)data.origin);
                 
 
             }

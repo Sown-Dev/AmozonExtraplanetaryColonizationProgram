@@ -8,7 +8,7 @@ namespace Systems.Block.CustomBlocks{
 
         public override void Drill(){
             if (Durability < 0){
-                TerrainManager.Instance.RemoveBlock(origin);    
+                TerrainManager.Instance.RemoveBlock(data.origin);    
                 return;
             }
             base.Drill();
@@ -17,7 +17,7 @@ namespace Systems.Block.CustomBlocks{
 
         public override bool BlockDestroy(bool dropItems = true){
             //remove self from drops    
-            lootTable = lootTable.FindAll(i => i.item != properties.myItem); 
+            data.lootTable = data.lootTable.FindAll(i => i.item != properties.myItem); 
             
             return base.BlockDestroy(dropItems);
         }

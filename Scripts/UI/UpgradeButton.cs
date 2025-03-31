@@ -32,7 +32,7 @@ namespace UI{
             if(RoundManager.Instance.SpendMoney( myOffer.price) && !myOffer.bought){
                 
 
-                Player.Instance.AddUpgrade((Upgrade) myOffer.upgrade.u.Clone());
+                Player.Instance.AddUpgrade((Upgrade) myOffer.upgrade);
                 myOffer.bought  = true;
                 Refresh();
 

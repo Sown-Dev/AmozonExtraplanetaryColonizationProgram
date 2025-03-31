@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Systems.Items;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Systems{
@@ -17,7 +18,15 @@ namespace Systems{
         public AudioSource audioSource;
 
 
-        public Container Inventory;
+        
+        private Container inventory;
+
+        [DoNotSerialize] 
+        public Container Inventory
+        {
+            get { return inventory; }
+            set { inventory = value; }
+        }
         public ContainerProperties InventoryProperties;
 
 
@@ -27,7 +36,7 @@ namespace Systems{
             foreach (UpgradeSO upgrade in BaseUpgrades){
                 AddUpgrade(upgrade.u, recalculate: false);
             }
-
+            
             CalculateStats();
 
         }

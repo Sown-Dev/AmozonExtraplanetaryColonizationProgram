@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using Systems.Block.BlockStates;
 using Systems.Items;
 using UI.BlockUI;
 using UnityEditor;
+#if UNITY_EDITOR
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
+#endif
 using UnityEngine;
 
 namespace Systems.Block
@@ -26,11 +31,17 @@ namespace Systems.Block
         protected BlockStateHolder stateHolder;
 
         public RuleTile tile;
+        
+        public List<ItemStack> additionalLoot = new List<ItemStack>();
 
-        private BlockData myData;
+        protected BlockData myData;
         public BlockData data => myData;
 
-        //#if UNITY_EDITOR  // i know this looks pointless, since it doesnt run in builds anyways, but this is more so it doesnt happen while running the game in editor
+        public String addressableKey; 
+
+        [HideInInspector] public bool hasSaved;
+
+#if UNITY_EDITOR  // i know this looks pointless, since it doesnt run in builds anyways, but this is more so it doesnt happen while running the game in editor
         private void OnValidate()
         {
             baseColor = /* TODO: MAYBE FIX THIS??? Utils.FindMostProminentColor(sr.sprite) ??*/
@@ -50,9 +61,37 @@ namespace Systems.Block
             {
                 // Debug.LogError("Block " + name + " does not have a corresponding item");
             }
+
+            addressableKey = gameObject.name;
+            if (String.IsNullOrEmpty(addressableKey)){
+                string prefabPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
+                if (!string.IsNullOrEmpty(prefabPath)){
+                    // Convert the prefab path to its GUID.
+                    string guid = AssetDatabase.AssetPathToGUID(prefabPath);
+
+                    // Try to get the Addressable settings.
+                    AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
+                    if (settings != null){
+                        // Look up the asset entry by its GUID.
+                        AddressableAssetEntry entry = settings.FindAssetEntry(guid);
+                        if (entry != null){
+                            // Set the addressableKey to the Addressable address.
+                            addressableKey = entry.address;
+                        }
+                        else{
+                            // If the prefab isn't part of the Addressables, fallback to its asset name.
+                            addressableKey = System.IO.Path.GetFileNameWithoutExtension(prefabPath);
+                        }
+                    }
+                    else{
+                        // If Addressable settings can't be found, fallback to asset name.
+                        addressableKey = System.IO.Path.GetFileNameWithoutExtension(prefabPath);
+                    }
+                }
+            }
         }
 
-        //#endif
+#endif
 
         protected virtual void Awake()
         {
@@ -69,9 +108,24 @@ namespace Systems.Block
             Deselect();
             mat.SetFloat("_PixelsPerUnit", sr.sprite.texture.width);
         }
+        
+        protected virtual void Start()
+        {
+            
+        }
+
+        public virtual void InitializeData(){
+                myData = new BlockData();
+            
+        }
+        
 
         public virtual void Init(Orientation orientation)
         {
+            
+            if( data == null)
+                InitializeData();
+            
             bc.size = new Vector2(properties.size.x - 1 / 8f, properties.size.y - 1 / 8f); //remove 1 pixel on each
             data.rotation =
                 properties.invertRotation && properties.rotatable
@@ -205,24 +259,33 @@ namespace Systems.Block
             Handles.Label(transform.position, data.rotation.ToString());
         }
 #endif
+        
+        public virtual BlockData Save(){
+            if (myData == null)
+                return null;
+            myData.typeName = GetType().AssemblyQualifiedName; // Save full type name
+            return myData;
+        }
 
         public virtual void Load(BlockData d)
         {
-            data = d;
+            myData = d;
         }
+        
     }
 
     [Serializable]
     public class BlockData
     {
-        public List<ItemStack> lootTable;
+        public List<ItemStack> lootTable =new ();
 
         public Orientation rotation;
 
-        [HideInInspector]
         public Vector2Int origin; // the origin is kind of the center, except since we can have even sized objects, it
 
         public string typeName; // Stores the class type
+
+        public DataStorage data = new DataStorage();
 
         public BlockData()
         {

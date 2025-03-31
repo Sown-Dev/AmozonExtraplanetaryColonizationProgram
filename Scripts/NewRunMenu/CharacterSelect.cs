@@ -94,7 +94,7 @@ namespace NewRunMenu{
 
         public void StartGame(){
             GameManager.Instance.selectedChar = selectedChar;
-            GameManager.Instance.StartRun();
+            GameManager.Instance.StartNewRun();
         }
     }
 }

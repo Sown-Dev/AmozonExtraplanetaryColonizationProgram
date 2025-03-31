@@ -1,0 +1,345 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Blocks
+  m_EditorClassIdentifier: 
+  m_GroupName: Blocks
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 0479944b15e4dc84a8349c8b5319e3df
+  m_SerializeEntries:
+  - m_GUID: 468c029c71d14934c9d411a29b5ac406
+    m_Address: Actuated Mover
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43800e57a1ef2a245a51ec581d3bddc9
+    m_Address: Actuator Rail
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 042f56d3f8445914dad03b470d2c7b64
+    m_Address: Assembler
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61d9bbc3a37acfc47bb7f084b3f00f6c
+    m_Address: Block1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66c739dbf8fa09c4592c73c10f4fc048
+    m_Address: Burner Crusher
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d30c4e2363bab54e97635978deecc74
+    m_Address: Burner Excavator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddf0395b21dab6b4d812166cfcde7f87
+    m_Address: Burner Extractor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 123f99951ab4c7a44981f30bfbe227cb
+    m_Address: Burner Mover
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a4ce41684532ee4a84191f3aad00a53
+    m_Address: Burner Water Pump
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b52ff9b3a6944294ea1b274d8ac7ac61
+    m_Address: Cable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d39a01d439438c34881e3635d0a35a76
+    m_Address: Catapult
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b61cfb4d5a444648a434f62d1d2cfbf
+    m_Address: Charcoal Furnace
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fd77a04f6bba1347838852f661689de
+    m_Address: Chemical Furnace
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c3d7671da40b404da5240ede45acb2c
+    m_Address: Chemical Purifier
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd51c20b19bc34042b986d6fda42e091
+    m_Address: Coal Node
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b582688f161ecc4f9f43752a9e7b474
+    m_Address: Compost Pile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ba8b0d1ec0b1c049b9e7280674ad7da
+    m_Address: ConstructionSite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8597b695a1032e14a8f56950226f9605
+    m_Address: Conveyor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36eae34f705e5804a9f06591c215a879
+    m_Address: Crate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a44684cb3799fe48890db7c08da980d
+    m_Address: Crystal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5156b29489497946bc32ced0aea08da
+    m_Address: Crystal Grower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d0b131ac0d6f0e47abc6d449d6a6abf
+    m_Address: Custom Workbench
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6745ce6cd063b494ba345649fad37c4c
+    m_Address: Deep Vein Miner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47a49dd8a8f2bd74f8ad77cc133c6a38
+    m_Address: Drill Base
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4acf1ec9dfb14fb409edbf3fbce48ed0
+    m_Address: Electric Drill
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 463300650c03d4d46846327ad6c04587
+    m_Address: Electric Hammer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7281cf1035369004ca85f6216a8b0d20
+    m_Address: Electric Water Pump
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ff597709e9f5c449959ff5d85386511
+    m_Address: Electricity Seller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05c5e5d507d61b14e83255454a3bc200
+    m_Address: Empty Supply Crate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a248b97823489cc41821e66abb610c4e
+    m_Address: Extractor Chest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0d83dce5094bf44aa6bfa30470bf41b
+    m_Address: Fulfillment Center
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c09fc081b5645ad4d94ded2290a89a6f
+    m_Address: Induction Furnace
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28873d6d1e210fd4d8a44b0a3d9199f4
+    m_Address: Large Crate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6ddd726324ac284fa12d5a72f9e7322
+    m_Address: Long Crate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ff31e83a1c3e054ea9682dd10a1b865
+    m_Address: Manual Crusher
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17a3498710727094e8cc1b4d209b2c6c
+    m_Address: Mixer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de988ded7d7302e43ac6357319537ac7
+    m_Address: Mushroom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5723563f1481827469645ade5de3d043
+    m_Address: Mushroom Farm
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebac24ce8a1dcef4d8d9e8e0155070bb
+    m_Address: Old Crate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 551fff57797650e47917753ab276a1b1
+    m_Address: Old Excavator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca5878a6eefaf7d49bc8f407270838a3
+    m_Address: Pole
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84dea805e064c0a40a12ced07cab268b
+    m_Address: Portable Excavator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cef52991c428f4447b1673a5f515d89c
+    m_Address: Portable Generator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 887ff25476b28a946a50680ebd79580b
+    m_Address: Quantum Container
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ad956d56f3c6f246a4522f737fd2810
+    m_Address: Rail Block
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 072c94690f494224592d0a2d35f6d84d
+    m_Address: Rail Construction Site
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55c483e6dc6b08b45a33307a8ba349e3
+    m_Address: Rail Workbench
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3aa0df70759066478eee659b1ce96a1
+    m_Address: Refiner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 171cd17f0e65b8343b07a464f215ff0e
+    m_Address: ResourceExtractor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9e47a611485b49459fd43a82b2c257c
+    m_Address: Robot Arm
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 09d8d09e3583de74e8d85b4d944180c7
+    m_Address: Big Rock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77102cd4aebc3784e91e966d4aec2833
+    m_Address: Sapling
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 053b218873c0b24459b1c46d19d994ef
+    m_Address: Shipping Crate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 593996b711351ee459009e68b020668c
+    m_Address: Simple Battery
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e41c73e3dc1bbb46a1d30b9c2ba7a60
+    m_Address: Smart Arm
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51742ba2eb210764da5e2a63f88b04d3
+    m_Address: Solar Furnace
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6794d4b155b3994d97bd0b0b0da97f4
+    m_Address: Solar Furnace Site
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f4579ed9af90734fb5238a0c3f0ab09
+    m_Address: Solar Panel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bdda01d9e24c4ee4b920a1865492d478
+    m_Address: Supply Crate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b4774ae127334c42b741e3b1b32a598
+    m_Address: Tree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddb87845d405360429e05c1c6de11c7f
+    m_Address: Wind Actuator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60e21d184deeee34e99680aacc81bfa7
+    m_Address: Wind Turbine
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d395687100de82140aebe0439342dbb1
+    m_Address: Workbench
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fccde88757cf9cb45b4a1387c6727c39
+    m_Address: Boulder
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 440db29cf27d2c049bfd22847fdb042f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 01529b38c29254445a3d20996ca9a940, type: 2}
+    - {fileID: 11400000, guid: fbf715590aa4b2042a05f37f434229f4, type: 2}

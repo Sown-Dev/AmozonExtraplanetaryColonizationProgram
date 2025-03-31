@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace Systems.Block{
     public class BaseConnector : Block, IPowerConnector{
+        
+        //dont save, redo on place
         public int Priority{ get; } = 0;
         public Block myBlock => this;
 
@@ -101,7 +103,7 @@ namespace Systems.Block{
         }
 
         public virtual Vector2Int[] GetBlockCoverage(){
-            return TerrainManager.Instance.GetAdjacentPositions(origin, properties.size.x, properties.size.y);
+            return TerrainManager.Instance.GetAdjacentPositions(data.origin, properties.size.x, properties.size.y);
         }
 
         public virtual Vector2Int[] GetConnectorCoverage(){
@@ -215,20 +217,20 @@ namespace Systems.Block{
             //draw yellow to all blocks, red to all connectors
             Gizmos.color = Color.yellow;
             foreach (var block in connectedBlocks){
-                Gizmos.DrawLine((Vector2)origin, (Vector2)block.myBlock.origin);
+                Gizmos.DrawLine((Vector2)data.origin, (Vector2)block.myBlock.data.origin);
             }
 
             Gizmos.color = Color.red;
             foreach (var connector in connectors){
 
-                Gizmos.DrawLine((Vector2)origin, (Vector2)connector.myBlock.origin);
+                Gizmos.DrawLine((Vector2)data.origin, (Vector2)connector.myBlock.data.origin);
                 //Gizmos.DrawLine((Vector2)origin, (Vector2)connector.myBlock.origin+Vector2.up);
 
             }
         
             if(myGrid!=null){
                 Gizmos.color = Utils.GenerateUniqueColor(myGrid);
-                Gizmos.DrawSphere( (Vector2)origin, 0.25f);
+                Gizmos.DrawSphere( (Vector2)data.origin, 0.25f);
             }
         }
         public override List<TileIndicator> GetIndicators(){

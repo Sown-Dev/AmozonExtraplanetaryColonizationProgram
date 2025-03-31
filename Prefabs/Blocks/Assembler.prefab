@@ -138,7 +138,9 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 1
     size: {x: 3, y: 2}
     description: Uses robot arms and CNC to create complex components.
@@ -151,10 +153,10 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  blockPrefab: {fileID: -3326135092744310711}
+  hasSaved: 0
   <baseSpeed>k__BackingField: 2
   outputProperties:
     size: 3

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Rusty Watch
   m_EditorClassIdentifier: 
   su:
-    <name>k__BackingField: Rusty Pocketwatch
     stats:
       stats:
       - type: 6
         amount: 30
         operation: 2
+    <name>k__BackingField: Rusty Pocketwatch
     <description>k__BackingField: Start each contract with +30s extra time
-    <icon>k__BackingField: {fileID: 21300000, guid: e90113b6e429dfd46934939219637c3d, type: 3}
+    iconPath: 
+    iconField: {fileID: 21300000, guid: e90113b6e429dfd46934939219637c3d, type: 3}

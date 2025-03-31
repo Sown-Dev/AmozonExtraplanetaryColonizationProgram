@@ -137,8 +137,7 @@ public class Utils: MonoBehaviour{
     }
     #endif
 
-    public GameObject highlightSprite;
-    
+/*    
     public void GenerateHighlights(Vector2 origin, List<Vector2> positions, Transform parent){
         foreach (Vector2 pos in positions){
             //generate highlight: sprite if not ui, otherwise image
@@ -155,7 +154,7 @@ public class Utils: MonoBehaviour{
             }
             
         }
-    }
+    }*/
 
 
     public static void Actuate(Block b)
@@ -220,6 +219,23 @@ public class Utils: MonoBehaviour{
 
         return new Color(r, g, b);
     }
+    #if UNITY_EDITOR
+    public static string GetResourcesPath(UnityEngine.Object asset)
+    {
+        string fullPath = AssetDatabase.GetAssetPath(asset); // e.g., "Assets/Resources/Sprites/Upgrades/myIcon.png"
+        int index = fullPath.IndexOf("Resources/");
+        if (index < 0)
+        {
+            Debug.LogWarning("Asset is not in a Resources folder!");
+            return null;
+        }
+        // Extract path after "Resources/"
+        string relativePath = fullPath.Substring(index + "Resources/".Length);
+        // Remove extension
+        relativePath = System.IO.Path.ChangeExtension(relativePath, null);
+        return relativePath;
+    }
+#endif
     
     
     //Draw Arrow

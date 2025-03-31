@@ -1,35 +1,60 @@
-﻿using Systems.Block;
+﻿using System;
+using Newtonsoft.Json;
+using Systems.Block;
 using Systems.Items;
 
-public class ContainerBlock: TickingBlock<ContainerBlockData>, IContainerBlock{
+public class ContainerBlock: TickingBlock, IContainerBlock{
+    public ContainerProperties outputProperties;
+
+    public Container output;
+
+   // public new ContainerBlockData data => (ContainerBlockData)base.data;
     
-    
-    protected override void Awake(){
-        base.Awake();
-        data.output = new Container(data.outputProperties);
+
+    public override void Init(Orientation orientation){
+        base.Init(orientation);
+        output = new Container(outputProperties);
+        output.Priority = 1;
     }
-    
+
+
+    public override void InitializeData(){
+        
+        myData = new ContainerBlockData();
+    }
+
     public virtual bool Insert(ref ItemStack mySlot, bool simulate = false){
-        return data.output.Insert(ref mySlot, simulate);
+        return output.Insert(ref mySlot, simulate);
         
     }
 
     public virtual  ItemStack Extract(){
-        return data.output.Extract();
+        return output.Extract();
 
     }
     
     public Slot GetInsertionSlot( ItemStack s = null){
-        return data.output.GetInsertionSlot(s);
+        return output.GetInsertionSlot(s);
     }
 
     public override bool BlockDestroy(bool dropItems = true){
-        lootTable.AddRange(output.GetItems());
+        data.lootTable.AddRange(output.GetItems());
         return base.BlockDestroy(dropItems);
     }
-}
 
+    public override void Load(BlockData d){
+        base.Load(d);
+        output = JsonConvert.DeserializeObject<Container>(d.data.GetString("output"), GameManager.JSONsettings);
+    }
+
+    public override BlockData Save(){
+        BlockData b = base.Save();
+        b.data.SetString( "output", JsonConvert.SerializeObject(output, GameManager.JSONsettings));
+        return b;
+
+    }
+}
+[Serializable]
 public class ContainerBlockData: TickingBlockData{
     public Container output;
-    public ContainerProperties outputProperties;
 }

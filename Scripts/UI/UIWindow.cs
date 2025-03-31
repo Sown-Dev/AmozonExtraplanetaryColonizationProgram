@@ -27,7 +27,7 @@ namespace UI{
             // Calculate the offset between the mouse position and the element's anchor
             offset = eventData.position - (Vector2)transform.position;
             OnDragStart();
-            RecipeToolTip.Instance.Close(); // prevents wierd behaviour when dragging recipe window
+            RecipeToolTip.Instance?.Close(); // prevents wierd behaviour when dragging recipe window
         }
 
         public void OnDrag(PointerEventData eventData){

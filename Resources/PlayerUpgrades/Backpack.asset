@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Backpack
   m_EditorClassIdentifier: 
   su:
-    <name>k__BackingField: Backpack
     stats:
       stats:
       - type: 1
         amount: 8
         operation: 2
+    <name>k__BackingField: Backpack
     <description>k__BackingField: Increases your inventory size by +8 slots
-    <icon>k__BackingField: {fileID: 21300000, guid: 99c9d6e45329c7645a7d0d10af9c2ae3, type: 3}
+    iconPath: 
+    iconField: {fileID: 21300000, guid: 99c9d6e45329c7645a7d0d10af9c2ae3, type: 3}
