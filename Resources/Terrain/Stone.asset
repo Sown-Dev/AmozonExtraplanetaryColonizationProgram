@@ -19,3 +19,5 @@ MonoBehaviour:
   footsteps:
   - {fileID: 8300000, guid: c82efe334cd0f3f4e80e91fd1e38103d, type: 3}
   - {fileID: 8300000, guid: e0183fc7cb8cef24a801e0d3b26a6970, type: 3}
+  myItem: {fileID: 0}
+  walkSpeed: 1

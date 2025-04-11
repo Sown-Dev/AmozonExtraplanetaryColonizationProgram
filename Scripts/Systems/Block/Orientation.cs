@@ -11,6 +11,15 @@ namespace Systems.Block{
         Left =2,
         Right=3
     }
+    
+    [Serializable, Flags]
+    public enum OrientationFlags{
+        None=0,
+        Up=1,
+        Down=2,
+        Left=4,
+        Right=8,
+    }
 
     public static class OrientationFunction{
         public static Vector2 GetVector2(this Orientation orientation){

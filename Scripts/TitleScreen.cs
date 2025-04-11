@@ -48,4 +48,12 @@ public class TitleScreen : MonoBehaviour{
     public void LoadWorld(){
         worldSelect.Toggle();
     }
+    
+    public void Settings(){
+        GameManager.Instance.ToggleSettings();
+    }
+
+    public void Quit(){
+        GameManager.Instance.Quit();    
+    }
 }

@@ -18,9 +18,7 @@ namespace Systems.Block.CustomBlocks{
         }
 
 
-        public override void InitializeData(){
-            myData = new ProgressMachineContainerBlockData();
-        }
+        
 
         public virtual bool Insert(ref ItemStack mySlot, bool simulate = false){
             return output.Insert(ref mySlot, simulate);

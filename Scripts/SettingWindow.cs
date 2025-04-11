@@ -17,7 +17,10 @@ public class SettingWindow : UIWindow {
 
     public override void Awake() {
         base.Awake();
-
+        
+        soundVolumeSlider.value = GameManager.Instance.settings.sfxVolume;
+        musicVolumeSlider.value = GameManager.Instance.settings.musicVolume;
+        masterVolumeSlider.value = GameManager.Instance.settings.masterVolume;
         masterVolumeSlider.onValueChanged.AddListener( f => {
             GameManager.Instance.settings.masterVolume = f;
             SetVolume(GameManager.Instance.settings.masterVolume, "Master");
@@ -35,9 +38,6 @@ public class SettingWindow : UIWindow {
 
     private void Start(){
         
-        soundVolumeSlider.value = GameManager.Instance.settings.sfxVolume;
-        musicVolumeSlider.value = GameManager.Instance.settings.musicVolume;
-        masterVolumeSlider.value = GameManager.Instance.settings.masterVolume;
         SetVolume(GameManager.Instance.settings.sfxVolume, "SFX");
         SetVolume(GameManager.Instance.settings.musicVolume, "Music");
         SetVolume(GameManager.Instance.settings.masterVolume, "Master");

@@ -25,12 +25,7 @@ namespace Systems.Block
             
             buildingProgress.progress = new int[buildingProgress.resourcesNeeded.Length];
         }
-        
-        public override void InitializeData()
-        {
-            myData = new BuildingBlockData();
-        }
-
+      
     
 
 

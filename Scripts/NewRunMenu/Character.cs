@@ -5,7 +5,9 @@ using UnityEngine;
 namespace NewRunMenu{
     [CreateAssetMenu(fileName = "FILENAME", menuName = "ScriptableObjects/character", order = 0)]
     public class Character : ScriptableObject{
-
+    
+        
+        [TextArea(3, 10)]
         public string description;
         public string legalName;
         //public int startingMoney; //think i'll remove this

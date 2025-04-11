@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tallcapsule2_0: -2258340347279682592
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

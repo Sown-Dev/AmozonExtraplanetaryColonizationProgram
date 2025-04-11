@@ -399,7 +399,7 @@ namespace Systems.Items{
         }
     }
 }
-
+[Serializable]
 public enum ContainerType{
     FIFO,
     LIFO,

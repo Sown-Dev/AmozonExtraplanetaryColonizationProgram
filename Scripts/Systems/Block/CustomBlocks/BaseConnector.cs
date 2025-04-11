@@ -235,8 +235,8 @@ namespace Systems.Block{
         }
         public override List<TileIndicator> GetIndicators(){
             var e = base.GetIndicators();
-            e.Add(new TileIndicator(GetConnectorCoverage().ToArray(), IndicatorType.PowerConnector));
-            e.Add( new TileIndicator(GetBlockCoverage(), IndicatorType.BlockPower));
+            e.Add(new TileIndicator(GetConnectorCoverage().Select(t => t-data.origin).ToArray(), IndicatorType.PowerConnector));
+            e.Add( new TileIndicator(GetBlockCoverage().Select(t => t-data.origin).ToArray(), IndicatorType.BlockPower));
             return e;
         }
     }

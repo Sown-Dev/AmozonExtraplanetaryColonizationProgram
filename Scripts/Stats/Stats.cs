@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
+[Serializable]
 public enum Statstype{
     InventorySlots=1,
     Movespeed=2,

@@ -137,7 +137,9 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
     size: {x: 1, y: 3}
     description: throws items
@@ -159,18 +161,51 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 5dd5882725fa98440aba166f6216958b, type: 3}
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+    typeName: Systems.Block.BlockData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  addressableKey: Catapult
+  hasSaved: 0
+  actuatedThisTick: 0
   outputProperties:
     size: 0
     name: 
     gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
+  selector:
+    value: 2
+    min: 2
+    max: 32
+  timeElapsed: 0
+  state: 0
   slotVisualizer: {fileID: 9186878986681706151}
   stackSize: 2
+  mySlot:
+    ItemStack:
+      itemID: 
+      itemSO: {fileID: 0}
+      amount: 0
+    filter:
+      filterID: 
+    Stacksize: 1000
+    Selected: 0
+    dirty: 1
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 481a073333d312b41a63ebe8806412ee, type: 3}
   ingredients:
-  - item: {fileID: 11400000, guid: 36ed01c65fbe70c43a7cbefd9f55f92d, type: 2}
+  - itemID: 
+    itemSO: {fileID: 11400000, guid: 36ed01c65fbe70c43a7cbefd9f55f92d, type: 2}
     amount: 1
   newIngredients:
   - isTag: 0
@@ -23,6 +24,7 @@ MonoBehaviour:
     name: 
     icon: {fileID: 0}
   results:
-  - item: {fileID: 11400000, guid: 38e206629554f554fad0036485653864, type: 2}
+  - itemID: 
+    itemSO: {fileID: 11400000, guid: a96d9a31e0367254eb5d4fdab546cf0b, type: 2}
     amount: 1
   craftTime: 80

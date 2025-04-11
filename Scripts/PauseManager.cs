@@ -10,7 +10,6 @@ public class PauseManager : MonoBehaviour{
     public CanvasGroup cg;
     public Animator am;
 
-    [SerializeField] public UIWindow settingsWindow;
 
     public Button saveButton;
 
@@ -18,7 +17,6 @@ public class PauseManager : MonoBehaviour{
     private void Start(){
         Close();
         cmr = CursorManager.Instance;
-        settingsWindow.Hide();
     }
 
 
@@ -64,12 +62,12 @@ public class PauseManager : MonoBehaviour{
         cg.interactable = open;
         cg.blocksRaycasts = open;
 
-        settingsWindow.Hide();
+        GameManager.Instance.CloseSettings();
     }
 
     //Button Functions:
     public void Settings(){
-        settingsWindow.Toggle();
+        GameManager.Instance.ToggleSettings();
     }
 
     public void Save(){

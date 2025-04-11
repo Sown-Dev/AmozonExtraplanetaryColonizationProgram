@@ -10,10 +10,7 @@ namespace Systems.Block.CustomBlocks{
         //public new BurnerCrafterBlockData data => (BurnerCrafterBlockData)base.data;
         public Burner burner;
 
-        public override void InitializeData(){
-            myData = new BurnerCrafterBlockData();
-        }
-
+      
         public override void Init(Orientation orientation){
             base.Init(orientation);
             burner.Init();

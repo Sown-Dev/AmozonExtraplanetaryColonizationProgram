@@ -19,9 +19,7 @@ namespace Systems.Block{
         public ContainerProperties inputProperties;
             public Container input;
 
-        public override void InitializeData(){
-            myData = new RecipeBlockData();
-        }
+       
 
         public override bool Insert(ref ItemStack s, bool simulate = false){
             return 

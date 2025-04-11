@@ -20,6 +20,8 @@
         [Header("Terrain")] 
         [SerializeField] private TerrainProperties Grass;
         [SerializeField] private TerrainProperties Stone;
+        [SerializeField] private TerrainProperties Sand;
+        
 
         [Header("Blocks")] 
         [SerializeField] private Block Sapling;
@@ -172,7 +174,13 @@
                         
                         if (perlin2 > 0.25f)
                         {
-                            SetTerrain(position, perlin2 * perlin2 > 0.65f + Random.Range(0, 0.05f) ? Grass : Stone);
+
+                            if (perlin2 <0.6f && perlin1 < 0.2f && perlin3 > 0.5f){
+                                SetTerrain(position, Sand);
+                            }else{
+                                SetTerrain(position, perlin2 * perlin2 > 0.65f + Random.Range(0, 0.05f) ? Grass : Stone);
+
+                            }
 
                             int k=0;
                             foreach (OreProperties oreProperties in ItemManager.Instance.allOres){
@@ -299,6 +307,10 @@
                         if ((falloff >0.25 && perlin > 0.5) || falloff>0.8f)
                         {
                             SetWall(null, new Vector3Int(site.x + i, site.y + j, 0));
+                            if(Random.value < 0.8f && distance<2)   
+                            {
+                                SetTerrain(new Vector2Int(site.x + i, site.y + j), Sand);
+                            }
                         }
                     }
                 }

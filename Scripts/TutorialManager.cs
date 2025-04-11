@@ -60,7 +60,7 @@ public class TutorialManager : MonoBehaviour{
         }
 
         if (GameManager.Instance.settings.completedTutorials.Contains(title)){
-            Debug.Log("tutorial already completed");
+            //Debug.Log("tutorial already completed");
             return;
         }
 

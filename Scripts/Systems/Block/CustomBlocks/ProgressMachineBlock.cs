@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Systems.Block.CustomBlocks{
@@ -15,18 +16,19 @@ namespace Systems.Block.CustomBlocks{
         public int speed{ get; set; } = 1;
         [field: SerializeField]public int baseSpeed{ get; set; } = 1;
 
+
+        protected override void Awake(){
+            base.Awake();
+            
+        }
+        
         public override void Init(Orientation orientation){
             base.Init(orientation);
             progressBar = new ProgressBar(21);
-            progressBar.progress = 0;
             progressBar.maxProgress = progressPerCycle;
         }
 
-        
-        public override void InitializeData(){
-            myData = new ProgressMachineBlockData();
-        }
-
+       
         public override void Tick(){
             base.Tick();
             if (!CanProgress()){
@@ -51,6 +53,19 @@ namespace Systems.Block.CustomBlocks{
 
         //what it does when progress complete
         public virtual void CompleteCycle(){ }
+        
+        public override void Load(BlockData d){
+            base.Load(d);
+            progressBar = JsonConvert.DeserializeObject<ProgressBar>(d.data.GetString("progressBar"), GameManager.JSONsettings);
+        }
+        
+        public override BlockData Save(){
+            BlockData b = base.Save();
+            b.data.SetString( "progressBar", JsonConvert.SerializeObject(progressBar, GameManager.JSONsettings));
+            return b;
+        }
+        
+        
     }
     
     [Serializable]

@@ -29,5 +29,6 @@ namespace Systems.Items{
         Building=2,
         Misc=3,
         Explosive=4,
+        Floor=5,
     }
 }

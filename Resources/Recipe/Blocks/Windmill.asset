@@ -14,16 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 4b00b6622262a794f99ba1bf2217ed63, type: 3}
   ingredients:
-  - item: {fileID: 11400000, guid: 7015589ffc44cd04ea006b5df0442071, type: 2}
+  - itemID: Crude Lumber
+    itemSO: {fileID: 11400000, guid: 39aafaf71556ae74da8b564a368241b0, type: 2}
     amount: 6
-  - item: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
+  - itemID: Stone
+    itemSO: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
     amount: 10
-  - item: {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
+  - itemID: Copper Chunk
+    itemSO: {fileID: 11400000, guid: eec750874ff64f04fb0102d6385f4c72, type: 2}
     amount: 4
   newIngredients:
   - isTag: 0
     items:
-    - {fileID: 11400000, guid: 7015589ffc44cd04ea006b5df0442071, type: 2}
+    - {fileID: 0}
     name: 
     icon: {fileID: 0}
   - isTag: 0
@@ -37,6 +40,7 @@ MonoBehaviour:
     name: 
     icon: {fileID: 0}
   results:
-  - item: {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
+  - itemID: Wind Actuator
+    itemSO: {fileID: 11400000, guid: d814b1d5b71af0b48b14c1d9901607cb, type: 2}
     amount: 1
   craftTime: 160

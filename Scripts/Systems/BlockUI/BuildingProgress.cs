@@ -1,6 +1,7 @@
 ﻿// BuildingProgress.cs
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Systems.BlockUI;
 using Systems.Items;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class BuildingProgress : IBlockUI
     public int[] progress;
     
     // Callback with container reference for potential partial completion handling
-    public Action OnBuildComplete;
+    [JsonIgnore]public Action OnBuildComplete;
 
     public int Priority { get; set; }
     public bool Hidden { get; set; }

@@ -24,16 +24,17 @@ public partial class TerrainManager : MonoBehaviour{
     private Layer<Ore> oreLayer;
     private List<TickingBlock> tickingBlocks;
     public Dictionary<Vector2Int, IPowerConnector> powerClaims = new Dictionary<Vector2Int, IPowerConnector>();
-    
+
     public Dictionary<string, TerrainProperties> terrainProperties = new Dictionary<string, TerrainProperties>();
 
-    
-    [Header("References")]
-    [SerializeField] private Tilemap terrainTilemap;
+
+    [Header("References")] [SerializeField]
+    private Tilemap terrainTilemap;
+
     [SerializeField] private Tilemap oreTilemap;
     [SerializeField] private Tilemap blockTilemap;
     [SerializeField] private Tilemap wallTilemap;
-    
+
     [SerializeField] private AudioSource audioSource;
 
 
@@ -47,11 +48,11 @@ public partial class TerrainManager : MonoBehaviour{
         oreLayer = new Layer<Ore>();
         tickingBlocks = new List<TickingBlock>();
         powerClaims = new Dictionary<Vector2Int, IPowerConnector>();
-        
+
         // Load terrain properties
-       var  allProperties = Resources.LoadAll<TerrainProperties>("Terrain");
-        
-       terrainProperties = allProperties.ToDictionary(p => p.name, p => p);
+        var allProperties = Resources.LoadAll<TerrainProperties>("Terrain");
+
+        terrainProperties = allProperties.ToDictionary(p => p.name, p => p);
 
 
         QuantumContainerBlock.InitContainers(); //cant think of a better place to put this
@@ -69,7 +70,6 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
         calculateStats();
-        InitializeSunCurve();
     }
 
     [CanBeNull]
@@ -81,13 +81,14 @@ public partial class TerrainManager : MonoBehaviour{
     public Terrain GetTerrain(Vector2Int pos){
         return terrainLayer.Get(pos);
     }
-    
+
     public TerrainProperties GetTerrainProperties(Vector2Int pos){
         Terrain t = GetTerrain(pos);
         if (t == null)
             return null;
         return terrainProperties[t.myProperties];
     }
+
     public TerrainProperties GetTerrainProperties(string name){
         if (terrainProperties.ContainsKey(name))
             return terrainProperties[name];
@@ -111,25 +112,34 @@ public partial class TerrainManager : MonoBehaviour{
         Instantiate(blockDebrisPrefab, pos, Quaternion.identity);
     }
 
-    
-    public void SetTerrain(Vector2Int pos, string properties){
 
-        SetTerrain(pos, terrainProperties[properties]);
+    public void SetTerrain(Vector2Int pos, string properties, bool dropItems = false){
+        SetTerrain(pos, terrainProperties[properties], dropItems);
     }
 
-    public void SetTerrain(Vector2Int pos, TerrainProperties properties){
+    public void SetTerrain(Vector2Int pos, TerrainProperties properties, bool dropItems = false){
         Terrain t = new Terrain(properties);
 
-        SetTerrain(pos, t);
+        SetTerrain(pos, t, dropItems);
     }
 
-    public void SetTerrain(Vector2Int pos, Terrain terrain){
+    public void SetTerrain(Vector2Int pos, Terrain terrain, bool dropItems = false){
+        
         Vector3Int position3D = (Vector3Int)pos;
+        TerrainProperties properties = terrainProperties[terrain.myProperties];
+        TerrainProperties posProperties = GetTerrainProperties(pos);
+
+        if (dropItems && GetTerrain( pos ).myProperties != terrain.myProperties && posProperties?.myItem){
+            //drop items
+            ItemStack stack = new ItemStack(posProperties.myItem, 1);
+            //spawn itemdrop
+            Utils.Instance.CreateItemDrop(stack, (Vector2)pos);
+        }
         
-       TerrainProperties p = terrainProperties[terrain.myProperties];
-        
-        _terrainTileBuffer[position3D] = p.tile;
         terrainLayer.Set(pos, terrain);
+
+
+        _terrainTileBuffer[position3D] = properties.tile;
     }
 
 
@@ -147,11 +157,13 @@ public partial class TerrainManager : MonoBehaviour{
     }
 
 
-    private void ApplyBufferedTiles(){
+    public void ApplyBufferedTiles(){
         // Apply terrain tiles
         var terrainPositions = _terrainTileBuffer.Keys.ToArray();
         var terrainTiles = terrainPositions.Select(p => _terrainTileBuffer[p]).ToArray();
         terrainTilemap.SetTiles(terrainPositions, terrainTiles);
+        
+        _terrainTileBuffer.Clear(); // Clear the buffer after applying
     }
 
 
@@ -212,7 +224,7 @@ public partial class TerrainManager : MonoBehaviour{
         return stack;
     }
 
-    public bool PlaceBlock(Block blockPrefab, Vector2Int position,  Orientation rot = Orientation.Up,BlockData data=null){
+    public bool PlaceBlock(Block blockPrefab, Vector2Int position, Orientation rot = Orientation.Up, BlockData data = null){
         //Debug.Log("Placing block w rot" + rot);
         int sizex = blockPrefab.properties.size.x;
         int sizey = blockPrefab.properties.size.y;
@@ -257,25 +269,24 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
         block = blockGO?.GetComponent<Block>();
-    
-        
-        if(data != null){
+
+
+        if (data != null){
             block.Load(data); // Load the block data if provided
         }
         else{
-            block.InitializeData();
+            block.Init(rot);
         }
+
         block.properties.size = new Vector2Int(sizex, sizey); // Set the block's size incase rotated
 
-        block.Init(rot);
-
         block.data.origin = position; // Set the block's origin
-        
-        
+
+
         //sound effect
-        if( data == null && GameManager.Instance.currentWorld.generated){
-           audioSource.transform.position = spawnPos;
-           audioSource.Play();
+        if (data == null && GameManager.Instance.currentWorld.generated){
+            audioSource.transform.position = spawnPos;
+            audioSource.Play();
         }
 
 
@@ -474,7 +485,7 @@ public partial class TerrainManager : MonoBehaviour{
         Gizmos.color = Color.magenta;
 
         foreach (var pair in powerClaims != null ? powerClaims : new Dictionary<Vector2Int, IPowerConnector>()){
-           // Debug.Log("Drawing power claim for" + pair.Value.myBlock.name);
+            // Debug.Log("Drawing power claim for" + pair.Value.myBlock.name);
             Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.myBlock.data.origin);
         }
 
@@ -489,7 +500,6 @@ public partial class TerrainManager : MonoBehaviour{
     //SAVE/LOAD
 
     public void SaveWorld(){
-        
         GameManager.Instance.currentWorld.blocks.Clear();
         GameManager.Instance.currentWorld.ticksElapsed = totalTicksElapsed; // Save the total ticks elapsed
         // Save blocks
@@ -608,7 +618,6 @@ public partial class TerrainManager : MonoBehaviour{
         //load blocks
         int errors = 0;
         foreach (BlockLoadData blockData in GameManager.Instance.currentWorld.blocks){
-
             try{
                 string key = blockData.addressableKey;
 
@@ -639,7 +648,6 @@ public partial class TerrainManager : MonoBehaviour{
                         }
 
                         block.Load(blockData.data); // Load the block data
-                        
                     }
                     else{
                         Debug.LogError($"Prefab {key} is missing Block component");
@@ -648,7 +656,8 @@ public partial class TerrainManager : MonoBehaviour{
                 else{
                     Debug.LogError($"Failed to load Addressable: {key}");
                 }
-            }catch (Exception e){
+            }
+            catch (Exception e){
                 Debug.LogError($"Error loading block with key {blockData.addressableKey}: {e}");
                 errors++;
             }

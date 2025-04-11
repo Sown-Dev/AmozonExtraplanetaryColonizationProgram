@@ -49,6 +49,10 @@ public class NumberSelector: IBlockUI{
     
     public Action OnChange;
     
+    public NumberSelector(){
+        value = min;
+    }
+    
     public NumberSelector( Action change,int min = 0, int max = 32){
         this.min = min;
         this.max = max;

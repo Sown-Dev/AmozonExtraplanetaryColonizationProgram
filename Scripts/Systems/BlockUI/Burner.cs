@@ -11,9 +11,9 @@ public class Burner : IBlockUI, IContainer{
 
     public Container fuelContainer;
 
-    [HideInInspector] public int fuelTime = 0;
-    [HideInInspector] public int burnTimeTotal = 100;
-     public int burnRate=1;
+    [HideInInspector] public short fuelTime = 0;
+    [HideInInspector] public short burnTimeTotal = 100;
+     public float burnRate=1;
     public ContainerProperties properties;
     
     
@@ -23,7 +23,7 @@ public class Burner : IBlockUI, IContainer{
     }
     
     [Obsolete("Not currently used. we rely on setting the burner properties in the block itself")]
-    public Burner( int _burnRate, Item[] filter = null){
+    public Burner( short _burnRate, Item[] filter = null){
         fuelContainer = new Container(properties);
         //if (filter != null){
         //new filter code: for now, just use burnables. maybe later add some custom option that prevents you from inserting certain items.
@@ -44,21 +44,32 @@ public class Burner : IBlockUI, IContainer{
 
         Priority = 100; 
     }
-    
 
+    private int burnTimer = 0;
     public bool Burn(){
         burnRate = 1;
 
         if (fuelTime > 0){
-            fuelTime -= burnRate;
+            if(burnRate>1f){
+                fuelTime -= (short)burnRate;
+            }
+            else{
+                burnTimer++;
+                if (burnTimer >= 1/burnRate){
+                    fuelTime--;
+                    burnTimer = 0;
+                }
+            }
             return true;
         }
         else{
+            burnTimer = 0;
+
             if (!fuelContainer.isEmpty()){
                 Slot s= fuelContainer.GetExtractionSlot();
                 if (s !=null  && s.ItemStack?.item.fuelValue > 0){
                     //need temp values bc decrement sets to null
-                    int fuelValue = s.ItemStack.item.fuelValue;
+                    short fuelValue = (short)s.ItemStack.item.fuelValue;
                     if (s.Decrement()){
                         fuelTime = fuelValue;
                         burnTimeTotal = fuelTime;

@@ -12,6 +12,9 @@ public class BaseIPowerBatteryBlock: BaseIPowerBlock, IPowerBattery{
 
     public override void Init(Orientation orientation){
         base.Init(orientation);
+    }
+    protected override void Start(){
+        base.Start();
         capacity = baseCapacity;
     }
 
@@ -19,7 +22,7 @@ public class BaseIPowerBatteryBlock: BaseIPowerBlock, IPowerBattery{
         if (myGrid != null){
             return base.GetDescription().AppendFormat("\nStored: {0}W/{1}W", myGrid.storedPower/myGrid.capacity * capacity, capacity);
         }
-        return base.GetDescription().AppendFormat("\nStored: {0}W/{1}W", storedPower, capacity);
+        return base.GetDescription().AppendFormat("\nStored: {0}W/{1}W", storedPower, baseCapacity);
 
     }
 

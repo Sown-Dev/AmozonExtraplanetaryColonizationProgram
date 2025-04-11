@@ -12,9 +12,12 @@ namespace Systems.Block.CustomBlocks{
 
         public override void Init(Orientation orientation){
             base.Init(orientation);
+        }
+
+        protected override void Start(){
+            base.Start();
             GetConnected();
-            
-            
+
         }
 
         public void GetConnected(){

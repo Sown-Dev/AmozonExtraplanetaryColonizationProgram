@@ -20,22 +20,30 @@ namespace Systems.Block{
         public Vector2 ToOutput;
         public int StackSize = 8;
         private Vector2 slotPos;
-        
+
         public bool ExtractedItemThisTick = false;
         public bool isOutputAnimating = false;
 
 
         public override void Init(Orientation orientation){
             base.Init(orientation);
-            
+
+
+            output.GetSlot(0).Stacksize = StackSize;
+        }
+
+        protected override void Start(){
+            base.Start();
             ExtractedItemThisTick = false;
             isOutputAnimating = false;
-            InputSlotVis.SetSlot(output.GetSlot(0));
-            output.GetSlot(0).Stacksize = StackSize;
-            
-            
+
+
             button = new BlockUIButton(Click, null);
+            
+            InputSlotVis.SetSlot(output.GetSlot(0));
+
             slotPos = InputSlotVis.transform.position;
+
         }
 
         public override void Tick(){
@@ -111,7 +119,7 @@ namespace Systems.Block{
                     bool t = CU.Transfer(prevCon, this) || amt < (output.GetSlot(0).ItemStack?.amount ?? 0);
                     if (t){
                         Animate(data.rotation.GetOpposite().GetVector2() + data.origin);
-                        
+
                         ExtractedItemThisTick = true;
                     }
                 }
@@ -135,6 +143,7 @@ namespace Systems.Block{
             return e;
         }
     }
+
     [Serializable]
     public class ActuatedMoverBlockData : ContainerBlockData{
         public bool ExtractedItemThisTick = false;

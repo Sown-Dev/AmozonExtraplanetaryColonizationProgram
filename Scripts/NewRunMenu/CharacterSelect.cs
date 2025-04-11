@@ -29,6 +29,7 @@ namespace NewRunMenu{
 
 
         void Start(){
+            //selectedChar = GameManager.Instance.selectedChar;
             foreach (Transform child in charList){
                 Destroy(child.gameObject);
             }
@@ -95,6 +96,10 @@ namespace NewRunMenu{
         public void StartGame(){
             GameManager.Instance.selectedChar = selectedChar;
             GameManager.Instance.StartNewRun();
+        }
+
+        public void Back(){
+            GameManager.Instance.ExitToMain();
         }
     }
 }

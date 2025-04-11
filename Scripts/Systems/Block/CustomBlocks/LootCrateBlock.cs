@@ -46,10 +46,7 @@ namespace Systems.Block.CustomBlocks{
             base.Use(user);
         }
         
-        public override void InitializeData(){
-            myData = new LootCrateBlockData();
-        }
-
+   
 
         /*//Can't extract
         public override ItemStack Extract(){

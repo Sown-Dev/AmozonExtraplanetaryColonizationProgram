@@ -16,15 +16,20 @@ MonoBehaviour:
     his productivity
   legalName: Alan Smith
   startingItems:
-  - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
+  - itemID: Fulfilment Center
+    itemSO: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
+  - itemID: Old Drill
+    itemSO: {fileID: 11400000, guid: 11ee9dab92da5c742abb1b3115d6f626, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
+  - itemID: Charcoal Furnace
+    itemSO: {fileID: 11400000, guid: 70ecadee46955fa45a5143a59eab2fe3, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
+  - itemID: Conveyor Belt
+    itemSO: {fileID: 11400000, guid: 7a59acdb11d09e547bfb90ac212740db, type: 2}
     amount: 8
-  - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
+  - itemID: Robot Arm
+    itemSO: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
     amount: 3
   startingUpgrades: []
   portrait: {fileID: 21300000, guid: 0821c4ca694491344bd51240ec5ffbaa, type: 3}

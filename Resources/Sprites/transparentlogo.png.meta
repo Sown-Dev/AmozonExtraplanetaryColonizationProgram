@@ -1212,7 +1212,52 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      transparentlogo_0: -8731968813225011231
+      transparentlogo_1: 6386739291094055948
+      transparentlogo_10: -3298140253189513841
+      transparentlogo_11: 2150990300142825718
+      transparentlogo_12: -515436890502419449
+      transparentlogo_13: 1547154688473207559
+      transparentlogo_14: 5682727029484103382
+      transparentlogo_15: -4335755208946056213
+      transparentlogo_16: 959364867730293601
+      transparentlogo_17: -6937955039161179181
+      transparentlogo_18: -5945841757968522569
+      transparentlogo_19: -2768009614081952829
+      transparentlogo_2: -7357166805456476479
+      transparentlogo_20: 7187221119670145547
+      transparentlogo_21: 3287935695473629686
+      transparentlogo_22: -5855712283273947529
+      transparentlogo_23: -9104836978621180613
+      transparentlogo_24: 7705837014749185471
+      transparentlogo_25: -4032120296925666593
+      transparentlogo_26: -9211480600418924831
+      transparentlogo_27: 2098341714537147242
+      transparentlogo_28: 8448960191340050438
+      transparentlogo_29: 8805624454097227519
+      transparentlogo_3: -1522806131255708486
+      transparentlogo_30: 5145847359691546628
+      transparentlogo_31: 3823774237511383385
+      transparentlogo_32: 856247299488421649
+      transparentlogo_33: -7281278427451631871
+      transparentlogo_34: -5136084659046830374
+      transparentlogo_35: 8554389341129540002
+      transparentlogo_36: -2155413049382005005
+      transparentlogo_37: -8121896050423874368
+      transparentlogo_38: -8577684097916378031
+      transparentlogo_39: -6502371052645742420
+      transparentlogo_4: 5281621970745960194
+      transparentlogo_40: 7042841165562677934
+      transparentlogo_41: 8062111216619497182
+      transparentlogo_42: -6740276585091053110
+      transparentlogo_43: 4387563360772301755
+      transparentlogo_44: -8441339372175383316
+      transparentlogo_5: -3168414907505007027
+      transparentlogo_6: 5904212986904938349
+      transparentlogo_7: -2348159446012234497
+      transparentlogo_8: -5483889377009487503
+      transparentlogo_9: -7039831630180777319
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -55,6 +55,10 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
             case ItemCategory.Material:
                 tint.color = new Color(0.1f, 0.8f, 0.3f, 0.2f);
                 break;
+            case ItemCategory.Floor:
+                tint.color = new Color(0.2f, 0.4f, 0.7f, 0.2f);
+                break;
+            
             default:
                 tint.color = Color.clear;
                 break;
@@ -106,7 +110,7 @@ public class SlotUI : MonoBehaviour, IDropHandler, IPointerClickHandler, IPointe
         if (eventData.button == PointerEventData.InputButton.Middle){
             Player.Instance.SelectSlot(Slot);
         }
-
+        Debug.Log("Clicked Slot");  
         if (eventData.button == PointerEventData.InputButton.Left){
             if (Input.GetKey(KeyCode.LeftShift)){
                 if (BlockUIManager.Instance.currentBlockUI?.block is IContainerBlock container){

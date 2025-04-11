@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class FixedSizeSprite : MonoBehaviour
 {
     public float fixedWidth = 16f; // Desired fixed width in pixels
     public float fixedHeight = 16f; // Desired fixed height in pixels
-
+    public float scaleModifier = 1f; // Scale modifier to adjust the size
     private void Start()
     {
         AdjustScale();
@@ -20,6 +21,11 @@ public class FixedSizeSprite : MonoBehaviour
     }
 #endif
 
+    public void Update(){
+        //AdjustScale();
+        
+    }
+
     void AdjustScale()
     {
         Camera camera = Camera.main;
@@ -29,6 +35,6 @@ public class FixedSizeSprite : MonoBehaviour
         float spriteWidthInUnits = fixedWidth /s.texture.width;
         float spriteHeightInUnits = fixedHeight / s.texture.height;
 
-        transform.localScale = new Vector3(spriteWidthInUnits, spriteHeightInUnits, 1f);
+        transform.localScale = new Vector3(spriteWidthInUnits, spriteHeightInUnits, 1f) * scaleModifier;
     }
 }

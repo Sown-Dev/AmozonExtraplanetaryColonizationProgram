@@ -210,7 +210,9 @@ namespace Systems.Round{
         public void CompleteRound(){
             StartCooldown(50);
             GenerateNewShopTier(roundNum + 1);
-        }
+            infoUI.Refresh();
+
+        }       
 
         // Modified StartRound to handle null contracts
         private bool firstRound = true;

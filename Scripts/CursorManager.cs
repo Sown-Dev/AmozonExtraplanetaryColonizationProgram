@@ -46,7 +46,7 @@ public class CursorManager : MonoBehaviour{
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointer, results);
 
-//            Debug.Log("Hovering over: " + string.Join(", ", results.ConvertAll(r => r.gameObject.name)));
+           Debug.Log("Hovering over: " + string.Join(", ", results.ConvertAll(r => r.gameObject.name)));
         }
 
        

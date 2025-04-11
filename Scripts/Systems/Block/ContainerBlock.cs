@@ -18,10 +18,6 @@ public class ContainerBlock: TickingBlock, IContainerBlock{
     }
 
 
-    public override void InitializeData(){
-        
-        myData = new ContainerBlockData();
-    }
 
     public virtual bool Insert(ref ItemStack mySlot, bool simulate = false){
         return output.Insert(ref mySlot, simulate);

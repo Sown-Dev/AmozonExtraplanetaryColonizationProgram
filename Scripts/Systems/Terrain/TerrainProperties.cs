@@ -10,9 +10,13 @@ namespace Systems.Terrain{
         public Terrain terrain;
 
         public AudioClip[] footsteps;
+        public Item myItem;
 
         private void OnValidate(){
             terrain.myProperties = this.name;
         }
+        
+        //stats
+        public float walkSpeed = 1f;
     }
 }

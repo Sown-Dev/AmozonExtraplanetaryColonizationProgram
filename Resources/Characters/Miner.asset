@@ -12,19 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867aba9949ccf1244bf2f66f76499b8c, type: 3}
   m_Name: Miner
   m_EditorClassIdentifier: 
-  description: Gunther is passionate about his work, but his lack of concern for
-    proper safety and operating procedures is concerning
+  description: Gunther is highly skilled, but frequently goes against company procedure.
   legalName: Gunther Shmauchenschmidt
   startingItems:
-  - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
+  - itemID: Fulfilment Center
+    itemSO: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: f6c49820d6b19c245ab0d6b1f9cd1880, type: 2}
+  - itemID: Burner Extractor
+    itemSO: {fileID: 11400000, guid: f6c49820d6b19c245ab0d6b1f9cd1880, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
+  - itemID: Burner Drill
+    itemSO: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
+  - itemID: Dynamight
+    itemSO: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
     amount: 2
-  - item: {fileID: 11400000, guid: 62b580cf9896fa149a6caf23ce7b604a, type: 2}
+  - itemID: Gunther's Homemade Fuel Cell
+    itemSO: {fileID: 11400000, guid: 62b580cf9896fa149a6caf23ce7b604a, type: 2}
     amount: 4
   startingUpgrades:
   - {fileID: 11400000, guid: 685810cb4d4a46e43b18299412e1409e, type: 2}

@@ -9,7 +9,7 @@ public class ItemDropCollector : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         ItemDrop itemDrop = other.gameObject.GetComponent<ItemDrop>();
 
-        if (itemDrop == null){
+        if (itemDrop == null || itemDrop.myItem == null || !itemDrop.enablePickup){
             return;
         }
 

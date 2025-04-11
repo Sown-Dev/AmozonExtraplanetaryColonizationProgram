@@ -17,15 +17,15 @@ namespace Systems.Block.CustomBlocks{
         public Color color;
 
         public int hardness = 0;
-
-        
-        
-        
         
         public override void InitializeData(){
             base.InitializeData();
-            amount = baseAmount + Random.Range(-range, range);
 
+        }
+        
+        public override void Init(Orientation orientation){
+            base.Init(orientation);
+            amount = baseAmount + Random.Range(-range, range);
         }
 
         public ItemStack Extract(int amt){

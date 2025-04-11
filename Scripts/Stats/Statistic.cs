@@ -2,6 +2,9 @@
 
 [Serializable]
 public class Statistic{
+     public Statstype type;
+    public double amount;
+    public Stats.StatsOperation operation;
     public Statistic(){
         type = Statstype.InventorySlots;
         amount = 0;
@@ -14,7 +17,5 @@ public class Statistic{
         operation = op;
     }
     
-    public Statstype type;
-    public double amount;
-    public Stats.StatsOperation operation;
+   
 }

@@ -2,28 +2,33 @@
 using UnityEngine;
 
 namespace Systems.Block.CustomBlocks{
-    public class ManualCrafterBlock: RecipeBlock{
+    public class ManualCrafterBlock : RecipeBlock{
         public BlockUIButton craftButton;
         public Sprite icon;
         public int TicksPerClick = 10;
+        public bool passiveCraft = false;
+
         protected override void Awake(){
             base.Awake();
             craftButton = new BlockUIButton(AddProgress, icon, 32);
         }
 
         public override void Tick(){
-            if (TerrainManager.Instance.totalTicksElapsed % 2 == 0){
-                actuatedThisTick = false;
-                if (properties.actuatable)
-                    mat.SetColor("_AddColor", new Color(0, 0, 0, 0));
-
-                currentState.SetNextSprite();
-                UpdateSprite();
+            if (passiveCraft){
+                base.Tick();
             }
-            //base.Tick(); do nothing, we only craft on click
-            
-            progressBar.maxProgress = recipeSelector.currentRecipe.craftTime;
+            else{
+                if (TerrainManager.Instance.totalTicksElapsed % 2 == 0){
+                    actuatedThisTick = false;
+                    if (properties.actuatable)
+                        mat.SetColor("_AddColor", new Color(0, 0, 0, 0));
 
+                    currentState.SetNextSprite();
+                    UpdateSprite();
+                }
+
+                progressBar.maxProgress = recipeSelector.currentRecipe.craftTime;
+            }
         }
 
         public void AddProgress(){
@@ -36,6 +41,5 @@ namespace Systems.Block.CustomBlocks{
                 }
             }
         }
-    
     }
 }

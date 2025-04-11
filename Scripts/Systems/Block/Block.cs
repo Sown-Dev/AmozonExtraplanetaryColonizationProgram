@@ -34,8 +34,7 @@ namespace Systems.Block
         
         public List<ItemStack> additionalLoot = new List<ItemStack>();
 
-        protected BlockData myData;
-        public BlockData data => myData;
+        public BlockData data= new BlockData();
 
         public String addressableKey; 
 
@@ -111,12 +110,17 @@ namespace Systems.Block
         
         protected virtual void Start()
         {
-            
+            UpdateSprite();
+            bc.enabled = properties.collidable;
+            bc.size = new Vector2(properties.size.x - 1 / 8f, properties.size.y - 1 / 8f); //remove 1 pixel on each
+            if (currentState.rotateable)
+            {
+                currentState.SetOrientation(data.rotation);
+            }
         }
 
         public virtual void InitializeData(){
-                myData = new BlockData();
-            
+                data = new BlockData();
         }
         
 
@@ -124,20 +128,14 @@ namespace Systems.Block
         {
             
             if( data == null)
-                InitializeData();
+                //InitializeData();
             
-            bc.size = new Vector2(properties.size.x - 1 / 8f, properties.size.y - 1 / 8f); //remove 1 pixel on each
             data.rotation =
                 properties.invertRotation && properties.rotatable
                     ? orientation.GetOpposite()
                     : orientation;
-            if (currentState.rotateable)
-            {
-                currentState.SetOrientation(data.rotation);
-            }
-            UpdateSprite();
-
-            bc.enabled = properties.collidable;
+           
+            
 
             if (properties.myItem)
             {
@@ -261,15 +259,15 @@ namespace Systems.Block
 #endif
         
         public virtual BlockData Save(){
-            if (myData == null)
+            if (data == null)
                 return null;
-            myData.typeName = GetType().AssemblyQualifiedName; // Save full type name
-            return myData;
+            data.typeName = GetType().AssemblyQualifiedName; // Save full type name
+            return data;
         }
 
         public virtual void Load(BlockData d)
         {
-            myData = d;
+            data = d;
         }
         
     }
