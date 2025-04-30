@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0853b38927e7ef04fa6bc3d965a4e0be, type: 3}
+  m_Name: Lake
+  m_EditorClassIdentifier: 
+  threshold:
+    perlin2threshold: 0.25
+    invertHeight: 0
+    height: 0
+    invertHeat: 0
+    heat: 0
+    invertWetness: 0
+    wetness: 0.75
+    invertWind: 0
+    wind: 0
+  terrains:
+  - priority: 1
+    terrain: {fileID: 11400000, guid: 04d156819c9be7044a36cb1fa79760fa, type: 2}
+    threshold:
+      perlin2threshold: 0
+      invertHeight: 0
+      height: 0
+      invertHeat: 0
+      heat: 0
+      invertWetness: 0
+      wetness: 0.8
+      invertWind: 0
+      wind: 0
+  - priority: 0
+    terrain: {fileID: 11400000, guid: 1bc5daf453265574cbbf50b02f9d2b0c, type: 2}
+    threshold:
+      perlin2threshold: 0
+      invertHeight: 1
+      height: 0
+      invertHeat: 0
+      heat: 0.5
+      invertWetness: 0
+      wetness: 0
+      invertWind: 0
+      wind: 0
+  - priority: 0
+    terrain: {fileID: 11400000, guid: 7e85de4112d07d04ca7f1210d1e4715e, type: 2}
+    threshold:
+      perlin2threshold: 0
+      invertHeight: 1
+      height: 0
+      invertHeat: 1
+      heat: 0.5
+      invertWetness: 0
+      wetness: 0
+      invertWind: 0
+      wind: 0
+  blocks:
+  - block: {fileID: -8526707392088505906, guid: 1b4774ae127334c42b741e3b1b32a598, type: 3}
+    chance: 0
+    threshold:
+      perlin2threshold: 0
+      invertHeight: 0
+      height: 0
+      invertHeat: 0
+      heat: 0
+      invertWetness: 1
+      wetness: 0.7
+      invertWind: 0
+      wind: 0.1
+  - block: {fileID: -8526707392088505906, guid: 07634b8b55999c34ebe7500fcca7a157, type: 3}
+    chance: 0.08
+    threshold:
+      perlin2threshold: 0
+      invertHeight: 0
+      height: 0
+      invertHeat: 0
+      heat: 0
+      invertWetness: 1
+      wetness: 0.7
+      invertWind: 0
+      wind: 0.1
+  wallModifier: 0.1

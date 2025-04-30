@@ -126,6 +126,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6102254685564439975}
   m_SourcePrefab: {fileID: 100100000, guid: 2b61cfb4d5a444648a434f62d1d2cfbf, type: 3}
+--- !u!82 &2006912358256007757 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1601412673517536103, guid: 2b61cfb4d5a444648a434f62d1d2cfbf, type: 3}
+  m_PrefabInstance: {fileID: 999975587397409066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!61 &7454480620947731815 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 7679484945097419853, guid: 2b61cfb4d5a444648a434f62d1d2cfbf, type: 3}
@@ -149,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8640077656265709875}
+  source: {fileID: 2006912358256007757}
   bc: {fileID: 7454480620947731815}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
@@ -159,8 +165,11 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 1
+    soundMaterial: 1
     size: {x: 1, y: 1}
     description: Grows crystals out of coal using electricity.
     bso: {fileID: 0}
@@ -172,10 +181,19 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Crystal Grower
+  hasSaved: 0
+  actuatedThisTick: 0
+  progressBar:
+    progress: 0
+    maxProgress: 100
+  progressPerCycle: 40
   <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 2
@@ -183,17 +201,37 @@ MonoBehaviour:
     gridWidth: 2
     scaleDownGridIfSmaller: 1
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   CraftingFX: []
   recipeSelector:
     recipes:
     - {fileID: 11400000, guid: ef12f978ed5c7e64e8438a90ea436bc0, type: 2}
-    currentRecipe: {fileID: 0}
+    currentRecipeIndex: 0
   inputProperties:
     size: 2
     name: Input
     gridWidth: 3
     scaleDownGridIfSmaller: 1
     type: 0
+  input:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   baseUsage: 40
 --- !u!212 &8640077656265709875 stripped
 SpriteRenderer:

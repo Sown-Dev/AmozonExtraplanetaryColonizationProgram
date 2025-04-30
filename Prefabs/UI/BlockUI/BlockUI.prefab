@@ -549,7 +549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
+  shadow: {fileID: 0}
   block: {fileID: 0}
+  nameText: {fileID: 1757955303609185320}
   containerUIPrefab: {fileID: 6549746029553024634, guid: 56152a5742462264ead2a7ee897dfc32, type: 3}
   progressBarUIPrefab: {fileID: 5205864184136404721, guid: 8dd89af2e3b04a641873842adc42c8ed, type: 3}
   DirectionalSelectUIPrefab: {fileID: 2386457054399807745, guid: ce507cb1f7581cd4596790319936d43e, type: 3}
@@ -561,11 +563,11 @@ MonoBehaviour:
   PowerConsumerUIPrefab: {fileID: 8104889433414936184, guid: 9aedc3c645a29174988277336e26a60a, type: 3}
   PowerBatteryUIPrefab: {fileID: 0}
   BuildingProgressUIPrefab: {fileID: 5205864184136404721, guid: 41d3d11f0f2bd1241b2a596716b1fa79, type: 3}
-  FilterSelectUIPrefab: {fileID: 2386457054399807745, guid: 84ce707c4453c964cb6503b5cd394bbf, type: 3}
+  filterSelectUIPrefab: {fileID: 0}
+  labelPrefab: {fileID: 5205864184136404721, guid: b0bd8911cb578254fa91e516f8ceb5ac, type: 3}
   EmptySpacePrefab: {fileID: 6456073567424550539, guid: e2d2494d8483a0640baefde1cda7c9a6, type: 3}
   horizListPrefab: {fileID: 6549746029553024634, guid: da8351cb089b3ee4f9f9e0d68794a82a, type: 3}
   windowList: {fileID: 9169797684487031392}
-  nameText: {fileID: 1757955303609185320}
   baseButton: {fileID: 21300000, guid: 6931b87c552c6c14fa0028ad30f1d002, type: 3}
 --- !u!1001 &2373490430729503068
 PrefabInstance:

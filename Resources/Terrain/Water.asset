@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450845b571dcd7442880d80ab8963bf8, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: dbc1161a4c71d404487c35a311a66669, type: 2}
+  tile: {fileID: 11400000, guid: 108f10c9506afe34aa2379ffe3ffec6c, type: 2}
   terrain:
     owned: 1
     myProperties: Water
   footsteps:
   - {fileID: 8300000, guid: 4ee6cdba91c208741992698c6a9b4a1c, type: 3}
   myItem: {fileID: 0}
-  walkSpeed: 0.8
+  walkSpeed: 0.5
+  collider: 1

@@ -10,6 +10,7 @@ public enum Statstype{
     MiningAmount=4,
     Range=5,
     ExtraTime=6,
+    ExtraMoney=7,
 }
 
 [Serializable]

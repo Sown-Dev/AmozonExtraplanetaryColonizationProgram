@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3071626970990201939, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
       propertyPath: m_Name
-      value: Burner Drill
+      value: Burner Excavator
       objectReference: {fileID: 0}
     - target: {fileID: 3560868191791535471, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
       propertyPath: m_Sprite
@@ -162,6 +162,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5073425446056946076, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
   m_PrefabInstance: {fileID: 5146225667049544844}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1891488524800461469 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6725275230908569105, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
+  m_PrefabInstance: {fileID: 5146225667049544844}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5728273675372029780 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 582647105868872664, guid: 47a49dd8a8f2bd74f8ad77cc133c6a38, type: 3}
@@ -190,18 +195,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8503269141988542947}
+  source: {fileID: 1891488524800461469}
   bc: {fileID: 7392012565483234743}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
-    name: Burner Drill
+    name: Burner Excavator
     indestructible: 0
     rotatable: 0
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 4
+    soundMaterial: 1
     size: {x: 3, y: 2}
     description: uses fuel to drill
     bso: {fileID: 0}
@@ -213,16 +222,31 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Burner Excavator
+  hasSaved: 0
+  actuatedThisTick: 0
   outputProperties:
     size: 6
     name: out
     gridWidth: 3
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   DrillTime: 30
   DrillAmount: 1
   DrillPositions:
@@ -235,7 +259,29 @@ MonoBehaviour:
   - {fileID: 1155815059171592075}
   - {fileID: 6851408089109659832}
   - {fileID: 2625709457039232128}
+  progressBar:
+    progress: 0
+    maxProgress: 100
   burner:
+    fuelContainer:
+      filterList: []
+      blackList: 0
+      containerList:
+      - ItemStack:
+          itemID: 
+          itemSO: {fileID: 0}
+          amount: 0
+        filter:
+          filterID: 
+        Stacksize: 1000
+        Selected: 0
+        dirty: 1
+      properties:
+        size: 1
+        name: 
+        gridWidth: 8
+        scaleDownGridIfSmaller: 1
+        type: 0
     fuelTime: 0
     burnTimeTotal: 0
     burnRate: 0

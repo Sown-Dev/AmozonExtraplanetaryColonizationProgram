@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace DefaultNamespace{
-    [CreateAssetMenu(fileName = "FILENAME", menuName = "Settings", order = 0)]
-    public class GameSettings : ScriptableObject{
+    //[CreateAssetMenu(fileName = "FILENAME", menuName = "Settings", order = 0)]
+    [Serializable]
+    public class GameSettings{
         public bool DevMode;
         public List<string> completedTutorials = new List<string>();
 
@@ -11,5 +12,8 @@ namespace DefaultNamespace{
         public float musicVolume = 0.9f;
         public float sfxVolume = 0.9f;
 
+        public bool TerrainInfo = false;
+        public bool OreInfo = true;
+        public bool BlockInfo = true;
+        
     }
-}

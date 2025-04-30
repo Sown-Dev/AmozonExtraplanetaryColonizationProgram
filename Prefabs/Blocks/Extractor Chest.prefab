@@ -5135,6 +5135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
@@ -5145,8 +5146,11 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 1
     size: {x: 2, y: 1}
     description: extracts items from nearby inventories every few seconds.
     bso: {fileID: 0}
@@ -5158,10 +5162,19 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Extractor Chest
+  hasSaved: 0
+  actuatedThisTick: 0
+  progressBar:
+    progress: 0
+    maxProgress: 100
+  progressPerCycle: 40
   <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 8
@@ -5169,6 +5182,16 @@ MonoBehaviour:
     gridWidth: 4
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   ps: {fileID: 1880228341453890191}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
@@ -5178,5 +5201,10 @@ SpriteRenderer:
 --- !u!4 &5073425446056946076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}

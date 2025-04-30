@@ -170,8 +170,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: 0}
-  m_SizeDelta: {x: 172, y: 64}
+  m_AnchoredPosition: {x: -16, y: 0}
+  m_SizeDelta: {x: 128, y: 56}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &2051336684815245515
 GameObject:
@@ -283,7 +283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 8, y: -4}
+  m_AnchoredPosition: {x: 12, y: -4}
   m_SizeDelta: {x: 64, y: 24}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7210780542512019959
@@ -542,7 +542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: -12}
+  m_AnchoredPosition: {x: 12, y: -8}
   m_SizeDelta: {x: 60, y: 28}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2826606977764533894
@@ -708,7 +708,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 16, y: 20}
-  m_SizeDelta: {x: 240, y: 60}
+  m_SizeDelta: {x: 224, y: 56}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3928190572602616502
 CanvasRenderer:
@@ -731,14 +731,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9622642, g: 0.9400303, b: 0.9032574, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7508080088d6ca344817979e52ca0ba0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45b07712ed32fcd4aa16d91692b3a4f3, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -794,8 +794,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 128, y: 32}
+  m_AnchoredPosition: {x: 0, y: -4}
+  m_SizeDelta: {x: 128, y: 24}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2903895882768824815
 CanvasRenderer:
@@ -1175,6 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
+  shadow: {fileID: 0}
   layoutGroup: {fileID: 998994346645280636}
   shopItemPrefab: {fileID: 8634968627581307482, guid: fe00ef0cb9e2f554ca503346c4c7fdf9, type: 3}
   shopTierPrefab: {fileID: 5315058598680508278, guid: ab895635fdfa5a84aac976e1db3f6fc5, type: 3}
@@ -1230,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3591109301210473677, guid: f58562b3bbcbc8e4eabf387e22972f44, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 34
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 3591109301210473677, guid: f58562b3bbcbc8e4eabf387e22972f44, type: 3}
       propertyPath: m_LocalPosition.x

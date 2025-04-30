@@ -17,6 +17,7 @@ namespace UI{
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text amountText;
         [SerializeField] private Image icon;
+        [SerializeField] private ItemStackUI itemStackUI;
 
         private Ore myOre;
 
@@ -36,6 +37,7 @@ namespace UI{
                 amountText.text = "Remaining: " + myOre.amount;
                 icon.sprite = myOre.myProperties.tile.m_DefaultSprite;
                 layoutElement.ignoreLayout = false;
+                itemStackUI.Init( myOre.myProperties.oreItem);
             }
             else{
                 cg.alpha = 0;

@@ -535,7 +535,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 8a5688fe1b8b04e4b871c5eaa8c20f69, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -597,6 +597,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b121338077aee6445bdd44eedd8989b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Slot:
+    ItemStack:
+      itemID: 
+      itemSO: {fileID: 0}
+      amount: 0
+    filter:
+      filterID: 
+    Stacksize: 1000
+    Selected: 0
+    dirty: 1
   draggable: {fileID: 6818724573061756475}
   tint: {fileID: 8567446536481267284}
   background: {fileID: 2631479735918355071}

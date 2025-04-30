@@ -19,6 +19,6 @@ MonoBehaviour:
   category: 3
   useCursor: 0
   value: 40
-  tier: 3
+  tier: 2
   fuelValue: 0
   cartPrefab: {fileID: 6769077052568743214, guid: c690a008b26392a458978a715e632884, type: 3}

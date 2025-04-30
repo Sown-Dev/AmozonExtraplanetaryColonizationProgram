@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Script: {fileID: 11500000, guid: 05a07a92bfd9a8c4bbaabc9424e133dd, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 21300000, guid: e15e5d64131ef4342816fec0acf4144e, type: 3}
@@ -18,7 +18,7 @@ MonoBehaviour:
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: 21300000, guid: e15e5d64131ef4342816fec0acf4144e, type: 3}
+    - {fileID: 21300000, guid: b431352a7a077e346b5547862827fefe, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
@@ -37,3 +37,4 @@ MonoBehaviour:
     - {x: 0, y: -1, z: 0}
     - {x: 1, y: -1, z: 0}
     m_RuleTransform: 0
+  hasCollider: 0

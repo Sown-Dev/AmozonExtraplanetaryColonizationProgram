@@ -96,7 +96,7 @@ public partial class TerrainManager : MonoBehaviour{
     }
 
     public void SetWall(RuleTile tile, Vector3Int pos){
-        if (GetBlock((Vector2Int)pos) != null)
+        if (GetBlock((Vector2Int)pos) != null || (GetTerrainProperties((Vector2Int)pos)?.collider ??false))
             return;
         wallTilemap.SetTile(pos, tile);
     }
@@ -148,6 +148,10 @@ public partial class TerrainManager : MonoBehaviour{
 
 
     public void SetOre(Vector2Int pos, OreProperties props, int amount = -1){
+        //can't place on water 
+        if(GetTerrainProperties((Vector2Int)pos)?.collider ?? false )
+            return;
+        
         Vector3Int position3D = (Vector3Int)pos;
 
 
@@ -224,16 +228,7 @@ public partial class TerrainManager : MonoBehaviour{
         return stack;
     }
 
-    public bool PlaceBlock(Block blockPrefab, Vector2Int position, Orientation rot = Orientation.Up, BlockData data = null){
-        //Debug.Log("Placing block w rot" + rot);
-        int sizex = blockPrefab.properties.size.x;
-        int sizey = blockPrefab.properties.size.y;
-
-        if ((rot == Orientation.Left || rot == Orientation.Right) && blockPrefab.properties.rotatable){
-            //swap dimensions
-            (sizex, sizey) = (sizey, sizex);
-        }
-
+    public bool CanPlaceBlock(int sizex, int sizey, Vector2Int position){
         if (sizex < 1 || sizex > 32 || sizey < 1 || sizey > 32){
             return false;
         }
@@ -243,7 +238,7 @@ public partial class TerrainManager : MonoBehaviour{
 
         // Check if all the positions are valid (e.g., not overlapping with other blocks or tiles)
         foreach (Vector2Int pos in positions){
-            if ( /*terrainLayer.Get(pos) != null && */
+            if (( (!GetTerrainProperties( pos)?.collider) ?? true ) &&
                 blockLayer.Get(pos) == null && wallTilemap.GetTile((Vector3Int)pos) == null) //remove terrain check bc its pointless
             {
                 // Valid position, continue
@@ -251,6 +246,26 @@ public partial class TerrainManager : MonoBehaviour{
             else{
                 return false; // Invalid position, abort placement
             }
+        }
+
+        return true;
+    }
+
+    public bool PlaceBlock(Block blockPrefab, Vector2Int position, Orientation rot = Orientation.Up, BlockData data = null, bool makeSound=false){
+        //Debug.Log("Placing block w rot" + rot);
+        int sizex = blockPrefab.properties.size.x;
+        int sizey = blockPrefab.properties.size.y;
+
+        if ((rot == Orientation.Left || rot == Orientation.Right) && blockPrefab.properties.rotatable){
+            //swap dimensions
+            (sizex, sizey) = (sizey, sizex);
+        }
+        
+        
+        List<Vector2Int> positions = GetBlockPositions(position, sizex, sizey);
+        if( !CanPlaceBlock(sizex, sizey, position)){
+            //Debug.Log("Cannot place block at " + position);
+            return false;
         }
 
         // Calculate the spawn position (with adjustment for even-sized blocks)
@@ -284,9 +299,13 @@ public partial class TerrainManager : MonoBehaviour{
 
 
         //sound effect
-        if (data == null && GameManager.Instance.currentWorld.generated){
+        /*if (data == null && GameManager.Instance.currentWorld.generated){
             audioSource.transform.position = spawnPos;
             audioSource.Play();
+        }*/
+        if (makeSound){
+            AudioClip clip = Utils.Instance.getMaterialSound(block.properties.soundMaterial).place;
+            block.source.PlayOneShot(clip);
         }
 
 

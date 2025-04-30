@@ -30,7 +30,7 @@ public class Cursor : MonoBehaviour
     public Block lookingBlock;
     public Ore lookingOre;
 
-    public Terrain lookingTerrain;
+    public TerrainProperties lookingTerrain;
 
     private void Awake()
     {
@@ -99,6 +99,9 @@ public class Cursor : MonoBehaviour
         lookingBlock?.Select();
 
         lookingOre = TerrainManager.Instance.GetOre(currentPos);
+        
+        OreInfoUI.Instance.gameObject.SetActive(GameManager.Instance.settings.OreInfo);
+        
         if (lookingOre != null)
         {
             OreInfoUI.Instance.Select(lookingOre);
@@ -108,7 +111,17 @@ public class Cursor : MonoBehaviour
             OreInfoUI.Instance.Deselect();
         }
 
-        lookingTerrain = TerrainManager.Instance.GetTerrain(currentPos);
+        lookingTerrain = TerrainManager.Instance.GetTerrainProperties(currentPos);
+        TerrainInfoUI.Instance.gameObject.SetActive(GameManager.Instance.settings.TerrainInfo);
+
+        if(lookingTerrain != null)
+        {
+            TerrainInfoUI.Instance.terrain = lookingTerrain;
+        }
+        else
+        {
+            TerrainInfoUI.Instance.terrain = null;
+        }
     }
 
 #if UNITY_EDITOR

@@ -5060,7 +5060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -5169,6 +5169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
@@ -5179,8 +5180,11 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 1
     size: {x: 2, y: 1}
     description: Extracts resources from adjascent blocks
     bso: {fileID: 0}
@@ -5192,21 +5196,59 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Burner Extractor
+  hasSaved: 0
+  actuatedThisTick: 0
   outputProperties:
     size: 4
     name: 
     gridWidth: 2
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   DrillTime: 100
   DrillAmount: 1
+  progressBar:
+    progress: 0
+    maxProgress: 100
   ExtractPositions:
   - {x: 2, y: 0}
+  whiteList: []
   burner:
+    fuelContainer:
+      filterList: []
+      blackList: 0
+      containerList:
+      - ItemStack:
+          itemID: 
+          itemSO: {fileID: 0}
+          amount: 0
+        filter:
+          filterID: 
+        Stacksize: 1000
+        Selected: 0
+        dirty: 1
+      properties:
+        size: 1
+        name: 
+        gridWidth: 8
+        scaleDownGridIfSmaller: 1
+        type: 0
     fuelTime: 0
     burnTimeTotal: 20
     burnRate: 1
@@ -5224,6 +5266,11 @@ SpriteRenderer:
 --- !u!4 &5073425446056946076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7681788848054234811

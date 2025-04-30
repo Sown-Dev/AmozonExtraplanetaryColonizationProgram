@@ -13,14 +13,12 @@ using UnityEditor.AddressableAssets.Settings;
 #endif
 using UnityEngine;
 
-namespace Systems.Block
-{
-    public class Block : MonoBehaviour
-    {
+namespace Systems.Block{
+    public class Block : MonoBehaviour{
         public SpriteRenderer sr;
+        public AudioSource source;
 
-        [HideInInspector]
-        public BoxCollider2D bc;
+        [HideInInspector] public BoxCollider2D bc;
         protected Animator am;
         protected Material mat;
 
@@ -31,20 +29,19 @@ namespace Systems.Block
         protected BlockStateHolder stateHolder;
 
         public RuleTile tile;
-        
+
         public List<ItemStack> additionalLoot = new List<ItemStack>();
 
-        public BlockData data= new BlockData();
+        public BlockData data = new BlockData();
 
-        public String addressableKey; 
+        public String addressableKey;
 
         [HideInInspector] public bool hasSaved;
 
-#if UNITY_EDITOR  // i know this looks pointless, since it doesnt run in builds anyways, but this is more so it doesnt happen while running the game in editor
-        private void OnValidate()
-        {
+#if UNITY_EDITOR // i know this looks pointless, since it doesnt run in builds anyways, but this is more so it doesnt happen while running the game in editor
+        private void OnValidate(){
             baseColor = /* TODO: MAYBE FIX THIS??? Utils.FindMostProminentColor(sr.sprite) ??*/
-            new Color(0.35f, 0.32f, 0.27f);
+                new Color(0.35f, 0.32f, 0.27f);
 
             properties.name = name;
 
@@ -52,12 +49,15 @@ namespace Systems.Block
 
             bc = GetComponent<BoxCollider2D>();
 
-            try
-            {
+            
+            if(source == null){
+                source = gameObject.GetComponent<AudioSource>();
+            }
+
+            try{
                 properties.myItem = ItemManager.Instance.blocks.First(x => x.blockPrefab == this);
             }
-            catch (Exception e)
-            {
+            catch (Exception e){
                 // Debug.LogError("Block " + name + " does not have a corresponding item");
             }
 
@@ -92,13 +92,12 @@ namespace Systems.Block
 
 #endif
 
-        protected virtual void Awake()
-        {
-            if (currentState == null || currentState?.baseSprite.sprites?.Length == 0)
-            {
+        protected virtual void Awake(){
+            if (currentState == null || currentState?.baseSprite.sprites?.Length == 0){
                 currentState = new BlockState();
-                currentState.baseSprite = new SpriteSheet() { sprites = new[] { sr.sprite } };
+                currentState.baseSprite = new SpriteSheet(){ sprites = new[]{ sr.sprite } };
             }
+
             currentState.currentSprite = currentState.baseSprite;
 
             am = GetComponent<Animator>();
@@ -107,49 +106,43 @@ namespace Systems.Block
             Deselect();
             mat.SetFloat("_PixelsPerUnit", sr.sprite.texture.width);
         }
-        
-        protected virtual void Start()
-        {
+
+        protected virtual void Start(){
             UpdateSprite();
             bc.enabled = properties.collidable;
             bc.size = new Vector2(properties.size.x - 1 / 8f, properties.size.y - 1 / 8f); //remove 1 pixel on each
-            if (currentState.rotateable)
-            {
+            if (currentState.rotateable){
                 currentState.SetOrientation(data.rotation);
             }
         }
 
         public virtual void InitializeData(){
-                data = new BlockData();
+            data = new BlockData();
         }
-        
 
-        public virtual void Init(Orientation orientation)
-        {
-            
-            if( data == null)
-                //InitializeData();
-            
+
+        public virtual void Init(Orientation orientation){
+            if (data == null){
+                data = new BlockData();
+            }
+            //InitializeData();
+
             data.rotation =
                 properties.invertRotation && properties.rotatable
                     ? orientation.GetOpposite()
                     : orientation;
-           
-            
 
-            if (properties.myItem)
-            {
+
+            if (properties.myItem){
                 data.lootTable.Add(new ItemStack(properties.myItem, 1));
             }
         }
 
-        public void UpdateSprite()
-        {
+        public void UpdateSprite(){
             sr.sprite = currentState.CurrentSprite();
         }
 
-        public virtual void Use(Unit user)
-        {
+        public virtual void Use(Unit user){
             TileIndicatorManager.Instance.DrawIndicators(
                 GetIndicators(),
                 data.origin,
@@ -157,50 +150,44 @@ namespace Systems.Block
             );
             if (properties.blockUI)
                 BlockUIManager.Instance.GenerateBlockUI(this);
+            
+            source.PlayOneShot( Utils.Instance.getMaterialSound(properties.soundMaterial).use);
 
             Debug.Log("Used " + this.GetType().Name);
         }
 
-        public virtual void Actuate()
-        {
+        public virtual void Actuate(){
             Utils.Actuate(this);
         }
 
-        public void Select()
-        {
+        public void Select(){
             mat.SetFloat("_OutlineThickness", 1);
             mat.SetColor("_OutlineColor", Color.white);
         }
 
-        public void Deselect()
-        {
+        public void Deselect(){
             mat.SetFloat("_OutlineThickness", 0);
             mat.SetColor("_OutlineColor", new Color(22 / 255f, 21 / 255f, 24 / 255f));
         }
 
         public Action DestroyAction;
 
-        public void OnDestroy()
-        {
+        public void OnDestroy(){
             DestroyAction?.Invoke();
         }
 
         //true if block gets destroyed
-        public virtual bool BlockDestroy(bool dropLoot = true)
-        {
+        public virtual bool BlockDestroy(bool dropLoot = true){
             Destroy(gameObject);
 
-            foreach (var blockpos in GetPositions())
-            {
+            foreach (var blockpos in GetPositions()){
                 TerrainManager.Instance.BlockLayerRemove(blockpos);
             }
 
-            if (dropLoot)
-            {
+            if (dropLoot){
                 /*if (properties?.myItem != null)  We no longer do this. instead add itemdrop to loot table on init
                     Utils.Instance.CreateItemDrop(new ItemStack(properties.myItem, 1));*/
-                foreach (ItemStack itemStack in data.lootTable)
-                {
+                foreach (ItemStack itemStack in data.lootTable){
                     Vector3 offset = new Vector3(
                         UnityEngine.Random.Range(-0.125f, 0.125f),
                         UnityEngine.Random.Range(-0.125f, 0.125f)
@@ -208,23 +195,21 @@ namespace Systems.Block
                     Utils.Instance.CreateItemDrop(itemStack, transform.position + offset);
                 }
             }
+
             return true;
         }
 
-        public virtual StringBuilder GetDescription()
-        {
+        public virtual StringBuilder GetDescription(){
             return new StringBuilder(properties.description);
         }
 
-        public Block GetDirection(Orientation rot)
-        {
+        public Block GetDirection(Orientation rot){
             return TerrainManager.Instance.GetBlock(
                 Vector2Int.RoundToInt((Vector2)transform.position + rot.GetVector2())
             );
         }
 
-        public List<Block> GetAdjascent()
-        {
+        public List<Block> GetAdjascent(){
             return TerrainManager.Instance.GetAdjacentBlocks(
                 data.origin,
                 properties.size.x,
@@ -232,8 +217,7 @@ namespace Systems.Block
             );
         }
 
-        public List<Vector2Int> GetPositions()
-        {
+        public List<Vector2Int> GetPositions(){
             return TerrainManager.Instance.GetBlockPositions(
                 data.origin,
                 properties.size.x,
@@ -241,53 +225,42 @@ namespace Systems.Block
             );
         }
 
-        public virtual List<TileIndicator> GetIndicators()
-        {
+        public virtual List<TileIndicator> GetIndicators(){
             return new List<TileIndicator>();
         }
 
         //prob a more elegant way to do this, but this works
-        public virtual void OnUIClose() { }
+        public virtual void OnUIClose(){ }
 
         public Action UpdateUI;
 
 #if UNITY_EDITOR
-        void OnDrawGizmos()
-        {
+        void OnDrawGizmos(){
             Handles.Label(transform.position, data.rotation.ToString());
         }
 #endif
-        
+
         public virtual BlockData Save(){
             if (data == null)
                 return null;
-            data.typeName = GetType().AssemblyQualifiedName; // Save full type name
             return data;
         }
 
-        public virtual void Load(BlockData d)
-        {
+        public virtual void Load(BlockData d){
             data = d;
         }
-        
     }
-
+    
+    public enum SoundMaterial{
+        Wood,
+        Metal,
+        Stone,
+        Natural
+    }
     [Serializable]
-    public class BlockData
-    {
-        public List<ItemStack> lootTable =new ();
-
-        public Orientation rotation;
-
-        public Vector2Int origin; // the origin is kind of the center, except since we can have even sized objects, it
-
-        public string typeName; // Stores the class type
-
-        public DataStorage data = new DataStorage();
-
-        public BlockData()
-        {
-            typeName = GetType().AssemblyQualifiedName; // Save full type name
-        }
+    public struct SoundMaterialSounds{
+        public AudioClip place;
+        public AudioClip use;
+        public AudioClip destroy;
     }
 }

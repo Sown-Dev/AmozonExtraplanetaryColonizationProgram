@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: Sell Block
+      value: Fulfillment Center
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -99,7 +99,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6250332161238803911}
+      addedObject: {fileID: -9173761175733534727}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
 --- !u!61 &2449576365950138683 stripped
 BoxCollider2D:
@@ -111,7 +111,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-6250332161238803911
+--- !u!114 &-9173761175733534727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,22 +120,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3071626970990201939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8430f616d828549857e01077ac93c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d34b433c80f3c24895a9ff33fbab9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
-    name: Sell Block
+    name: Fulfillment Center
     indestructible: 0
     rotatable: 0
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 1
     size: {x: 2, y: 2}
     description: Sells items for contracts every few seconds
     bso: {fileID: 0}
@@ -147,20 +151,44 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Fulfillment Center
+  hasSaved: 0
+  actuatedThisTick: 0
+  progressBar:
+    progress: 0
+    maxProgress: 100
+  progressPerCycle: 100
   <baseSpeed>k__BackingField: 1
   outputProperties:
-    size: 14
-    name: Seller
-    gridWidth: 7
+    size: 8
+    name: 
+    gridWidth: 4
     scaleDownGridIfSmaller: 0
     type: 0
-  progressPerCycle: 100
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
+  rate: 1
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}

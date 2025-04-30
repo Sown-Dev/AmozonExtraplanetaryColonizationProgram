@@ -20,5 +20,5 @@ MonoBehaviour:
         operation: 2
     <name>k__BackingField: Tungsten Carbide Pick
     <description>k__BackingField: Gain +1 extra resource when mining.
-    iconPath: 
-    iconField: {fileID: 21300000, guid: c2b8c8f23c4919f4d96b24fa0ade432d, type: 3}
+    iconPath: Sprites/Upgrades/Pickaxe
+    iconField: {fileID: 21300000, guid: 68b35a45a62f04d40851d9c180e3bca5, type: 3}

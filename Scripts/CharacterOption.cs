@@ -14,15 +14,26 @@ public class CharacterOption : MonoBehaviour{
    
    public void Init(Character c, CharacterSelect cs){
        icon.sprite = c.icon;
-       button.onClick.AddListener(() => cs.SelectChar(c)); //cant believe i dont use this pattern more often
+       button.onClick.AddListener(() => {
+           Select();
+       }); 
        character = c;
        characterSelect = cs;
    }
 
    public void Update(){
-       if (characterSelect.selectedChar == character){
+       /*if (characterSelect.selectedChar == character){
            button.Select();
-       }
+       }*/
        
+   }
+
+   public void Select(){
+       characterSelect.SelectChar(character);
+         button.interactable = false;
+   }
+   public void Select(CharacterSelect cs, Character c){
+       cs.SelectChar(c);
+       button.interactable = false;
    }
 }

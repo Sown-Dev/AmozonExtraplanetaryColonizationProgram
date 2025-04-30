@@ -19,7 +19,7 @@ using Terrain = Systems.Terrain.Terrain;
 
 public partial class Player : Unit, IContainer{
     public static Player Instance;
-    static Container inventorySave;  //just for testing
+    static Container inventorySave; //just for testing
 
 
     [SerializeField] public Cursor myCursor;
@@ -68,11 +68,10 @@ public partial class Player : Unit, IContainer{
     [HideInInspector] public float destroyDuration;
     float baseDestroyDuration = 1f;
     Vector2Int lastPos;
-    
+
     private Block standingBlock;
     private Terrain standingTerrain;
     private TerrainProperties standingTerrainProperties;
-    
 
 
     protected override void Awake(){
@@ -82,16 +81,6 @@ public partial class Player : Unit, IContainer{
         myCharacter = GameManager.Instance.GetCharacter(GameManager.Instance?.currentWorld.playerCharacter) ?? myCharacter;
 
         myCursor.gameObject.SetActive(false); //disable at first, enable when we land
-        if (!GameManager.Instance.currentWorld.generated){
-            InitPlayer();
-        }
-        else{
-            LoadPlayer(GameManager.Instance.currentWorld.playerData);
-            PlayerReady();
-        }
-
-
-        hatSR.sprite = myCharacter.HatSprite;
 
 
         myCursor.OnLeftClick.AddListener(ClickPos);
@@ -125,7 +114,8 @@ public partial class Player : Unit, IContainer{
 
         //add starting items
         foreach (ItemStack i in myCharacter.startingItems){
-            Inventory.Insert(i.Clone(), false);
+            ItemStack item = i.Clone();
+            Insert(ref item, false);
         }
 
         SelectSlot(Inventory.GetSlot(7)); //select first slot
@@ -173,6 +163,15 @@ public partial class Player : Unit, IContainer{
 
 
     private void Start(){
+        if (!GameManager.Instance.currentWorld.generated){
+            InitPlayer();
+        }
+        else{
+            LoadPlayer(GameManager.Instance.currentWorld.playerData);
+            PlayerReady();
+        }
+
+        hatSR.sprite = myCharacter.HatSprite;
 #if PLAYERITEMS1
         Debug.Log("Adding dev inventory");
         Inventory.Insert(new ItemStack(Utils.Instance.furnaceBlock, 12));
@@ -194,14 +193,20 @@ public partial class Player : Unit, IContainer{
         //SelectSlot(Inventory.GetSlot(7));
         prevPos = transform.position;
     }
-    
-      private void Update(){
+
+    private void Update(){
         if (Time.timeScale <= 0) return;
 
 
-         standingBlock= TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(transform.position));
-         standingTerrain = TerrainManager.Instance.GetTerrain( Vector2Int.RoundToInt(transform.position));
-        standingTerrainProperties = TerrainManager.Instance.GetTerrainProperties(standingTerrain.myProperties);
+        standingBlock = TerrainManager.Instance.GetBlock(Vector2Int.RoundToInt(transform.position));
+
+        standingTerrain = TerrainManager.Instance.GetTerrain(Vector2Int.RoundToInt(transform.position));
+
+        if (standingTerrain != null)
+            standingTerrainProperties = TerrainManager.Instance.GetTerrainProperties(standingTerrain.myProperties);
+        else{
+            standingTerrainProperties = null;
+        }
 
         handVisualizer.Refresh();
 
@@ -379,10 +384,10 @@ public partial class Player : Unit, IContainer{
         spriteHolder.transform.localPosition = new Vector3(0,
             y, 0);
 
-        float moveForce =  (moveV * finalStats[Statstype.Movespeed]);
-        moveForce *= (m_Grounded ? standingTerrainProperties.walkSpeed: 1.2f); //either use terrain speed or air speed, which is 1.2x base speed.
-        
-        rb.AddForce(move* moveForce * Time.deltaTime );
+        float moveForce = (moveV * finalStats[Statstype.Movespeed]);
+        moveForce *= (m_Grounded ? standingTerrainProperties?.walkSpeed ?? 1 : 1.2f); //either use terrain speed or air speed, which is 1.2x base speed.
+
+        rb.AddForce(move * moveForce * Time.deltaTime);
     }
 
 
@@ -483,6 +488,17 @@ public partial class Player : Unit, IContainer{
     }
 
     public void Die(){
+        
+
+        Instantiate(OnDeath, transform.position, quaternion.identity);
+        myCam.transform.SetParent(transform.parent.parent);
+        Destroy(gameObject);
+        StartCoroutine(AfterDeath());
+    }
+
+    public IEnumerator AfterDeath(){
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.ExitToMain(false);
         try{
             GameManager.Instance.DeleteWorld(GameManager.Instance.currentWorld);
         }
@@ -490,9 +506,6 @@ public partial class Player : Unit, IContainer{
             Debug.LogError(e);
         }
 
-        Instantiate(OnDeath, transform.position, quaternion.identity);
-        myCam.transform.SetParent(transform.parent.parent);
-        Destroy(gameObject);
     }
 
     public override Stats CalculateStats(){
@@ -517,27 +530,23 @@ public partial class Player : Unit, IContainer{
     private float footstepDist = 1.8f;
 
     private void FixedUpdate(){
-        
-        if(m_Grounded)
+        if (m_Grounded)
             distMoved += Vector3.Distance(transform.position, prevPos);
         prevPos = transform.position;
 
         //take a step
-        if (distMoved> footstepDist){
+        if (distMoved > footstepDist){
             distMoved = 0;
-            if(standingTerrain != null ){
+            if (standingTerrain != null){
                 AudioClip[] clips = TerrainManager.Instance.GetTerrainProperties(standingTerrain.myProperties).footsteps;
-                if(clips.Length > 0){
-                  audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
-                  audioSource.Play();
+                if (clips.Length > 0){
+                    audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+                    audioSource.Play();
                 }
             }
         }
     }
 
-
-
-  
 
     bool firstLand = true;
 
@@ -569,7 +578,7 @@ public partial class Player : Unit, IContainer{
             Destroy(DropPod);
         }
     }
-    
+
     public Slot GetSlot(int id){
         return Inventory.GetSlot(id);
     }

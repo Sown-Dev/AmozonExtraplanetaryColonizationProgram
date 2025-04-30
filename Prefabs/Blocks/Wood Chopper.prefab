@@ -5169,6 +5169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
@@ -5183,13 +5184,14 @@ MonoBehaviour:
     destroyTime: 1
     customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 0
     size: {x: 1, y: 1}
     description: Chops wood from trees
     bso: {fileID: 0}
   currentState:
     baseSprite:
       sprites:
-      - {fileID: 21300000, guid: ab6e0f59a5947194c87dc81ac35afa40, type: 3}
+      - {fileID: 21300000, guid: a1724ad01664ee8498c6fce83c19edf3, type: 3}
     rotateable: 1
     orientation: 0
     rotations:
@@ -5205,6 +5207,10 @@ MonoBehaviour:
       sprites: []
   tile: {fileID: 0}
   additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
   addressableKey: Wood Chopper
   hasSaved: 0
   actuatedThisTick: 0
@@ -5233,6 +5239,7 @@ MonoBehaviour:
   - {x: 0, y: 1}
   whiteList:
   - {fileID: -8526707392088505906, guid: 1b4774ae127334c42b741e3b1b32a598, type: 3}
+  - {fileID: -8526707392088505906, guid: 252f0a6d6fbf006438173b44511199be, type: 3}
   burner:
     fuelContainer:
       filterList:
@@ -5240,7 +5247,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 732b2f58216f5854281079899f7baa01, type: 2}
       - {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
       - {fileID: 11400000, guid: 2a2072a15f8f35545a162b737649293f, type: 2}
-      - {fileID: 11400000, guid: 7015589ffc44cd04ea006b5df0442071, type: 2}
+      - {fileID: 0}
       - {fileID: 11400000, guid: 5ccfdc5997f0a674daba36a7e2378d92, type: 2}
       - {fileID: 11400000, guid: 62b580cf9896fa149a6caf23ce7b604a, type: 2}
       - {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
@@ -5281,6 +5288,11 @@ SpriteRenderer:
 --- !u!4 &5073425446056946076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7681788848054234811

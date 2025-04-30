@@ -16,6 +16,7 @@ public class PlayerUI : MonoBehaviour{
     [SerializeField] private ContainerUI inventoryUI;
 
     [SerializeField] private BlockInfoUI blockInfoUI;
+    
     [SerializeField] private SlicedFilledImage destroyBar;
     [SerializeField] private CanvasGroup destroyBarCG;
 
@@ -94,6 +95,7 @@ public class PlayerUI : MonoBehaviour{
 
 
         blockInfoUI.block = player.myCursor.lookingBlock;
+        
     }
     public void ToggleInventory(){
         TutorialManager.Instance.StartTutorial("inventory");

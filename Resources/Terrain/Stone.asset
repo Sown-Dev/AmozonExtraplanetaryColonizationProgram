@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450845b571dcd7442880d80ab8963bf8, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 406220d42656c3a44909d2ed0bc58b46, type: 2}
+  tile: {fileID: 11400000, guid: 7da4a9b327045cd4d81e53c1527ff0d2, type: 2}
   terrain:
     owned: 1
     myProperties: Stone
   footsteps:
   - {fileID: 8300000, guid: c82efe334cd0f3f4e80e91fd1e38103d, type: 3}
   - {fileID: 8300000, guid: e0183fc7cb8cef24a801e0d3b26a6970, type: 3}
-  myItem: {fileID: 0}
+  myItem: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
   walkSpeed: 1
+  collider: 0

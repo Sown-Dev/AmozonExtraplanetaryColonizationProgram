@@ -44,8 +44,6 @@ public class LoseGameUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         Player.Instance.Die();
-        yield return new WaitForSeconds(2f);
-        GameManager.Instance.ExitToMain();
 
 
     }

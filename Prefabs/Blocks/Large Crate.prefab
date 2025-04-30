@@ -65,6 +65,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
+      propertyPath: addressableKey
+      value: Large Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.name
       value: Large Crate
       objectReference: {fileID: 0}
@@ -87,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: properties.description
       value: Bulk storage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
+      propertyPath: properties.soundMaterial
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8785166793706096183, guid: 36eae34f705e5804a9f06591c215a879, type: 3}
       propertyPath: outputProperties.gridWidth

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450845b571dcd7442880d80ab8963bf8, type: 3}
   m_Name: Sand
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 246f5990f0694654b8bb04f03611aa89, type: 2}
+  tile: {fileID: 11400000, guid: 81ca5cc850cf9ff4a82e7c1a7500a44e, type: 2}
   terrain:
     owned: 1
     myProperties: Sand
   footsteps:
   - {fileID: 8300000, guid: 2219778ac66eb874093ec49287d8a5e3, type: 3}
   myItem: {fileID: 11400000, guid: a96d9a31e0367254eb5d4fdab546cf0b, type: 2}
-  walkSpeed: 0.8
+  walkSpeed: 0.9
+  collider: 0

@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450845b571dcd7442880d80ab8963bf8, type: 3}
   m_Name: Grass
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 1e96b07da4622264c8b9fa4990e193b1, type: 2}
+  tile: {fileID: 11400000, guid: 54797813dc3681944992775215ca3854, type: 2}
   terrain:
     owned: 1
     myProperties: Grass
   footsteps:
-  - {fileID: 8300000, guid: 2219778ac66eb874093ec49287d8a5e3, type: 3}
+  - {fileID: 8300000, guid: 46b32220631dcfd43b6081cd87bc0a2a, type: 3}
   - {fileID: 8300000, guid: 4ee6cdba91c208741992698c6a9b4a1c, type: 3}
   - {fileID: 8300000, guid: 74c1e74bd4e75d048844c0055c6eabdf, type: 3}
-  - {fileID: 8300000, guid: 47747d0d1c669df4c92b3e249ee71b62, type: 3}
+  - {fileID: 8300000, guid: 2219778ac66eb874093ec49287d8a5e3, type: 3}
   myItem: {fileID: 11400000, guid: 32abc2c38d30b694a8c78e4841a79078, type: 2}
   walkSpeed: 1
+  collider: 0

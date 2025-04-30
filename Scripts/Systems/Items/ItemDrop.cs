@@ -12,9 +12,19 @@ namespace Systems.Items{
         [SerializeField] private Collider2D col;
         [SerializeField] private SpriteRenderer sr;
         [SerializeField] private Animator am;
+        [SerializeField] private AudioSource audiosource;
 
         public bool finishedAnimating = false;
         public bool enablePickup = true;
+
+        public void Awake(){
+            StartCoroutine(soundDelay());
+        }
+
+        public IEnumerator soundDelay(){
+            yield return new WaitForSeconds(Random.Range(0, 0.02f));
+            audiosource.Play();
+        }
 
         public void Init(ItemStack item){
             myItem = item;
@@ -59,6 +69,7 @@ namespace Systems.Items{
             Destroy(other.gameObject);
             enablePickup = true;
             am.SetTrigger("Drop");
+            audiosource.Play();
         }
 
         public void GoToDrop(ItemDrop other){

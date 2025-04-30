@@ -342,6 +342,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07634b8b55999c34ebe7500fcca7a157
+    m_Address: Sand Pile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23f13fbdbd2730b459d4b720b28ffbeb
+    m_Address: Omni Seller
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 252f0a6d6fbf006438173b44511199be
+    m_Address: Snowy Tree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 440db29cf27d2c049bfd22847fdb042f, type: 2}
   m_SchemaSet:

@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
@@ -150,8 +151,11 @@ MonoBehaviour:
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 1
     size: {x: 2, y: 2}
     description: Pumps water from underground reservoirs using fuel. Quite a simple
       yet elegant contraption once you know how it works. Can be placed anywhere.
@@ -164,10 +168,19 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Burner Water Pump
+  hasSaved: 0
+  actuatedThisTick: 0
+  progressBar:
+    progress: 0
+    maxProgress: 100
+  progressPerCycle: 40
   <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 4
@@ -175,7 +188,36 @@ MonoBehaviour:
     gridWidth: 2
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   burner:
+    fuelContainer:
+      filterList: []
+      blackList: 0
+      containerList:
+      - ItemStack:
+          itemID: 
+          itemSO: {fileID: 0}
+          amount: 0
+        filter:
+          filterID: 
+        Stacksize: 1000
+        Selected: 0
+        dirty: 1
+      properties:
+        size: 1
+        name: 
+        gridWidth: 8
+        scaleDownGridIfSmaller: 1
+        type: 0
     fuelTime: 0
     burnTimeTotal: 20
     burnRate: 1
@@ -186,11 +228,17 @@ MonoBehaviour:
       scaleDownGridIfSmaller: 1
       type: 0
   generatedItem:
-    item: {fileID: 11400000, guid: d2c784fdcaacab8479c69a9862657988, type: 2}
+    itemID: 
+    itemSO: {fileID: 11400000, guid: d2c784fdcaacab8479c69a9862657988, type: 2}
     amount: 1
   time: 100
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}

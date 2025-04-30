@@ -17,7 +17,6 @@ namespace Systems{
         public Rigidbody2D rb;
         public AudioSource audioSource;
 
-
         
         private Container inventory;
 

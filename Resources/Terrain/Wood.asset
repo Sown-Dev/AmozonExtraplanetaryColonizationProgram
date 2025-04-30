@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450845b571dcd7442880d80ab8963bf8, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 13029dcc08c63d444be929a09d2404ee, type: 2}
+  tile: {fileID: 11400000, guid: 6d67625da8bdd714e9083d06bf125bcc, type: 2}
   terrain:
     owned: 1
     myProperties: Wood
   footsteps:
-  - {fileID: 8300000, guid: c82efe334cd0f3f4e80e91fd1e38103d, type: 3}
+  - {fileID: 8300000, guid: 822eb0a01d45ba94496bc7b8c4c53adb, type: 3}
+  - {fileID: 8300000, guid: 5875e69702912634ab39fc5f525fc441, type: 3}
+  - {fileID: 8300000, guid: 8aedf0df1336d934da0154d4b6c6851f, type: 3}
+  - {fileID: 8300000, guid: 319c0b01d7c47264a84f6de6300b2f05, type: 3}
+  - {fileID: 8300000, guid: 3589a5ca28d3cd94a888479261def9cc, type: 3}
   myItem: {fileID: 11400000, guid: 39aafaf71556ae74da8b564a368241b0, type: 2}
   walkSpeed: 1.4
+  collider: 0

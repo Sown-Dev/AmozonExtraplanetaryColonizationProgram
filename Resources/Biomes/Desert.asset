@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0853b38927e7ef04fa6bc3d965a4e0be, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: 
+  threshold:
+    perlin2threshold: 0.15
+    invertHeight: 1
+    height: 0.4
+    invertHeat: 0
+    heat: 0.65
+    invertWetness: 1
+    wetness: 0.45
+    invertWind: 0
+    wind: 0
+  terrains:
+  - priority: 0
+    terrain: {fileID: 11400000, guid: 1bc5daf453265574cbbf50b02f9d2b0c, type: 2}
+    threshold:
+      perlin2threshold: 0
+      invertHeight: 1
+      height: 0.2
+      invertHeat: 0
+      heat: 0.3
+      invertWetness: 1
+      wetness: 0.6
+      invertWind: 0
+      wind: 0
+  blocks:
+  - block: {fileID: -8526707392088505906, guid: 07634b8b55999c34ebe7500fcca7a157, type: 3}
+    chance: 0.01
+    threshold:
+      perlin2threshold: 0.5
+      invertHeight: 0
+      height: 0
+      invertHeat: 0
+      heat: 0.6
+      invertWetness: 1
+      wetness: 0.4
+      invertWind: 0
+      wind: 0
+  - block: {fileID: -8526707392088505906, guid: 6a44684cb3799fe48890db7c08da980d, type: 3}
+    chance: 0.005
+    threshold:
+      perlin2threshold: 0.2
+      invertHeight: 0
+      height: 0.3
+      invertHeat: 0
+      heat: 0.6
+      invertWetness: 0
+      wetness: 0.4
+      invertWind: 1
+      wind: 0.2
+  wallModifier: 0.7
+  customWallTile: {fileID: 0}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450845b571dcd7442880d80ab8963bf8, type: 3}
+  m_Name: Rock
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: 6b0a96051b134534db0631ebb5b78d14, type: 2}
+  terrain:
+    owned: 1
+    myProperties: Stone
+  footsteps:
+  - {fileID: 8300000, guid: c82efe334cd0f3f4e80e91fd1e38103d, type: 3}
+  - {fileID: 8300000, guid: e0183fc7cb8cef24a801e0d3b26a6970, type: 3}
+  myItem: {fileID: 0}
+  walkSpeed: 1

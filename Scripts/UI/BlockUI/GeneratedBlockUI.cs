@@ -26,7 +26,8 @@ namespace UI.BlockUI{
         [SerializeField] private GameObject PowerConsumerUIPrefab;
         [SerializeField] private GameObject PowerBatteryUIPrefab;
         [SerializeField] private GameObject BuildingProgressUIPrefab;
-        [SerializeField] private GameObject FilterSelectUIPrefab;
+        [SerializeField] private GameObject filterSelectUIPrefab;
+        [SerializeField] private GameObject labelPrefab;
         
         
         [SerializeField] private GameObject EmptySpacePrefab;
@@ -36,7 +37,6 @@ namespace UI.BlockUI{
 
         [SerializeField] private VerticalLayoutGroup windowList;
         
-        [SerializeField] private TMP_Text nameText;
 
         [SerializeField] private Sprite baseButton;
 
@@ -173,9 +173,10 @@ namespace UI.BlockUI{
                     new Vector2(buttonUI.image.sprite.texture.width, buttonUI.image.sprite.texture.height);
                 buttonUI.onClick.AddListener(new UnityAction(button.OnClick));
             }
-            else if (component is StringBlockUI textBlock){
-                TMP_Text textUI = Instantiate(nameText,  parent);
-                textUI.text = textBlock.text;
+            else if (component is Label textBlock){
+                
+                LabelUI labelUI = Instantiate(labelPrefab,  parent).GetComponent<LabelUI>();
+                labelUI.Init(textBlock);
             }
             else if (component is Burner burner){
                 BurnerUI burnerUI = Instantiate(burnerUIPrefab,  parent).GetComponent<BurnerUI>();
@@ -190,7 +191,7 @@ namespace UI.BlockUI{
                     .GetComponent<BuildingProgressUI>();
                 buildingProgressUI.Init(buildingProgress);
             }else if(component is Filter filter){
-                FilterUI filterSelectUI = Instantiate(FilterSelectUIPrefab,  parent)
+                FilterUI filterSelectUI = Instantiate(filterSelectUIPrefab,  parent)
                     .GetComponent<FilterUI>();
                 filterSelectUI.Init(filter);
             }

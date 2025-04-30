@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867aba9949ccf1244bf2f66f76499b8c, type: 3}
   m_Name: Analyst
   m_EditorClassIdentifier: 
-  description: Arthur shows high competence and is very methodical about his work
-  legalName: Arthur LaQuavius
+  description: Sebastian shows high competence and is very methodical about his work
+  legalName: Sebastian Delino
   startingItems:
-  - item: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
+  - itemID: Fulfilment Center
+    itemSO: {fileID: 11400000, guid: 56be2ab6b0c455f40bd60cf159376168, type: 2}
     amount: 2
-  - item: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
+  - itemID: Robot Arm
+    itemSO: {fileID: 11400000, guid: 947a43fc98efe9b4dbea18c8ccd561dd, type: 2}
     amount: 5
-  - item: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
+  - itemID: Portable Drill
+    itemSO: {fileID: 11400000, guid: feb36f0a766039e4e9e563b1bcdb76dc, type: 2}
     amount: 3
   startingUpgrades:
   - {fileID: 11400000, guid: e25e37babf96b74418b0c5ab81acb2da, type: 2}

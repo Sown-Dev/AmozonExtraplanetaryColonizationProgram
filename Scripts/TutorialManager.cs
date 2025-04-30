@@ -75,7 +75,7 @@ public class TutorialManager : MonoBehaviour{
 
         if (t.prerequisite.Length > 1){  //check to see if we actualy have a prerequisite, not just empty string
             if (GameManager.Instance.settings.completedTutorials.Contains(t.prerequisite)){
-                Debug.Log($"Prerequisite {t.prerequisite} already completed");
+                //Debug.Log($"Prerequisite {t.prerequisite} already completed");
             }
             else{
                 Debug.Log($"Prerequisite {t.prerequisite} not completed, skipping tutorial");
@@ -92,7 +92,7 @@ public class TutorialManager : MonoBehaviour{
         
         //in case tutorial gets started between coroutine start and now
         if(currentTutorial != null){
-            Debug.Log($"Cannot start tutorial. one is already in progress");
+            //Debug.Log($"Cannot start tutorial. one is already in progress");
             yield break;
         }
         

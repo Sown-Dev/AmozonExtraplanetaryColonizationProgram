@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: Rock
+      value: Boulder
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -160,11 +160,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 0}
-    name: Rock
+    name: Boulder
     indestructible: 0
     rotatable: 0
     invertRotation: 0
@@ -174,6 +175,7 @@ MonoBehaviour:
     destroyTime: 1
     customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 2
     size: {x: 1, y: 1}
     description: can be mined for stone
     bso: {fileID: 0}
@@ -188,7 +190,11 @@ MonoBehaviour:
       sprites: []
   tile: {fileID: 0}
   additionalLoot: []
-  addressableKey: Rock
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Boulder
   hasSaved: 0
   item: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
   baseYield: 1
@@ -200,5 +206,10 @@ MonoBehaviour:
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}

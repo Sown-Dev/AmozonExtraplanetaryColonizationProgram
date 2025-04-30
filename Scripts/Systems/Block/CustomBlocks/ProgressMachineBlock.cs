@@ -8,7 +8,7 @@ namespace Systems.Block.CustomBlocks{
         
         //public new ProgressMachineBlockData data => (ProgressMachineBlockData)base.data;
         
-        public ProgressBar progressBar;
+        [HideInInspector]public ProgressBar progressBar;
 
         
         public int progressPerCycle = 40;
@@ -24,7 +24,7 @@ namespace Systems.Block.CustomBlocks{
         
         public override void Init(Orientation orientation){
             base.Init(orientation);
-            progressBar = new ProgressBar(21);
+            progressBar = new ProgressBar(23);
             progressBar.maxProgress = progressPerCycle;
         }
 

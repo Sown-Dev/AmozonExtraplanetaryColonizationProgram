@@ -1,4 +1,5 @@
-﻿using Systems.Items;
+﻿using System.Collections.Generic;
+using Systems.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -27,25 +28,28 @@ namespace NewRunMenu{
         public GameObject charOptionPrefab;
         public Transform charList;
 
-
+        public List<CharacterOption> charOptions = new List<CharacterOption>();
         void Start(){
             //selectedChar = GameManager.Instance.selectedChar;
             foreach (Transform child in charList){
                 Destroy(child.gameObject);
             }
-
+            charOptions.Clear();
+            
             foreach (Character c in GameManager.Instance.allCharacters){
                 GameObject go = Instantiate(charOptionPrefab, charList);
-                go.GetComponent<CharacterOption>().Init(c, this);
-                if (selectedChar == null){
-                    SelectChar(c);
-                }
+                CharacterOption co = go.GetComponent<CharacterOption>();
+                co.Init(c, this);
+                charOptions.Add(co);
+                
             }
+            charOptions[0].Select();
+            
 
             startButton.onClick.AddListener(() => StartGame());
             startButton.interactable = selectedChar != null;
 
-            //devmode
+            //devmode   
             DevModeToggle.gameObject.SetActive(false);
 #if ALLITEMS1
             DevModeToggle.isOn = GameManager.Instance.settings.DevMode;
@@ -61,6 +65,13 @@ namespace NewRunMenu{
 
         public void SelectChar(Character c){
             if (c == selectedChar) return;
+            
+            foreach (CharacterOption co in charOptions){
+                co.button.interactable = true;
+            }
+            
+            GameManager.Instance.selectedChar = c;
+            
             barCode.Rotate(new Vector3(0, 0, 180));
             selectedChar = c;
             charName.text = c.legalName.Replace(" ", "\n");
@@ -94,7 +105,7 @@ namespace NewRunMenu{
         }
 
         public void StartGame(){
-            GameManager.Instance.selectedChar = selectedChar;
+            GameManager.Instance.currentWorld.playerCharacter = selectedChar.name;
             GameManager.Instance.StartNewRun();
         }
 

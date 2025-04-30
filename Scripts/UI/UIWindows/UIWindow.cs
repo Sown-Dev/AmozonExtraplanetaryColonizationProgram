@@ -83,8 +83,9 @@ namespace UI
                 newAnchoredPos.y = Mathf.Clamp(newAnchoredPos.y, bottomBound, topBound);
 
                 // Apply the calculated position.
-                newAnchoredPos.x = Mathf.Round(newAnchoredPos.x/2)*2;
-                newAnchoredPos.y = Mathf.Round(newAnchoredPos.y/2)*2;
+                int r = 1;  //round to nearest r
+                newAnchoredPos.x = Mathf.Round(newAnchoredPos.x/r)*r;
+                newAnchoredPos.y = Mathf.Round(newAnchoredPos.y/r)*r;
                 
                 windowRectTransform.anchoredPosition = newAnchoredPos;
             }

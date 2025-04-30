@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -41,13 +41,17 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Size.y
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ed4f4130feaea614d9e4b21e207feaba, type: 3}
+      objectReference: {fileID: 21300000, guid: 2b07b7d81c45ca14487e1b72f165f33b, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -143,7 +147,7 @@ MonoBehaviour:
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
-    <myItem>k__BackingField: {fileID: 0}
+    <myItem>k__BackingField: {fileID: 11400000, guid: 9c6a2684c80dd2c4a82e0a7f370f20ef, type: 2}
     name: ConstructionSite
     indestructible: 1
     rotatable: 0
@@ -152,6 +156,7 @@ MonoBehaviour:
     collidable: 1
     blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
     size: {x: 3, y: 3}
     description: Something was in the progress of being built. Finish it
@@ -164,20 +169,27 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: ConstructionSite
+  hasSaved: 0
   buildingProgress:
     resourcesNeeded:
-    - item: {fileID: 11400000, guid: 50c4c47b96150104da4829c44e3b81c6, type: 2}
+    - itemID: 
+      itemSO: {fileID: 11400000, guid: 50c4c47b96150104da4829c44e3b81c6, type: 2}
       amount: 40
-    - item: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
+    - itemID: 
+      itemSO: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
       amount: 100
-    - item: {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
+    - itemID: 
+      itemSO: {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
       amount: 25
     progress: 000000000000000000000000
-  blockPrefab: {fileID: 4329347407540247257, guid: 6745ce6cd063b494ba345649fad37c4c, type: 3}
+  buildingbPrefab: {fileID: 0}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

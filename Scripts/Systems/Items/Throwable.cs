@@ -14,11 +14,11 @@ public class Throwable:MonoBehaviour{
     public void Throw(Vector3 pos, float vel,float _yVel){
          rb.velocity =( pos-transform.position ).normalized * vel;
         yVel = _yVel;
-        y = 0.25f;
+        y = 0.2f;
     }
     
     private void FixedUpdate(){
-        sr.transform.localPosition = new Vector3(0, y*0.8f, 0);
+        sr.transform.localPosition = new Vector3(0, y*0.5f, 0);
         yVel+= -11*Time.deltaTime; //grav
         if (y > 0){
             y += yVel * Time.deltaTime;
@@ -50,7 +50,7 @@ public class Throwable:MonoBehaviour{
         }
 
         if(onCollide)
-            Instantiate(onCollide, (transform.position+sr.transform.position)/2, Quaternion.identity);
+            Instantiate(onCollide,transform.position /*(transform.position+sr.transform.position)/2*/, Quaternion.identity);
         if(DestroyOnCollide)
             Destroy(gameObject, destroyDelay);
     }

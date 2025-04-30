@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using DefaultNamespace;
 using NewRunMenu;
 using Systems.Block;
 using Systems.Items;
@@ -33,18 +32,24 @@ public class GameManager : MonoBehaviour{
 
     public WorldStats myStats;
 
-    public PauseManager pauseManager;
-
-    public GameSettings settings;
-    public UIWindow settingsWindow;
+    
     
     public Vector4 windowMargin = new Vector4(0, 0, 0, 60);
+    
+    public GameData gameData;
 
     [HideInInspector] [DoNotSerialize] public List<World> worlds = new List<World>();
     //logic to know if we're creating a new world or loading one
 
     //make into property to avoid unity serialization issues
     private World _currentWorld;
+    public GameSettings settings;
+
+
+    [Header("References")] [SerializeField]
+    private CanvasGroup saveIconCG;
+    public PauseManager pauseManager;
+    public UIWindow settingsWindow;
 
     [HideInInspector]
     [DoNotSerialize]
@@ -78,12 +83,23 @@ public class GameManager : MonoBehaviour{
 
         currentWorld = null;
         inGame = false;
+                saveIconCG.alpha = 0;
+
 
         LoadStats();
         InvokeRepeating(nameof(SaveStats), 300f, 300f);
 
         StartCoroutine(PreloadLocalization());
 
+        
+        //load settings
+        if (PlayerPrefs.HasKey("GameSettings")){
+            string json = PlayerPrefs.GetString("GameSettings");
+            settings = JsonUtility.FromJson<GameSettings>(json);
+        }
+        else{
+            settings = new GameSettings(); 
+        }
 
         worlds = new List<World>();
         //load all worlds from PlayerPrefs
@@ -119,6 +135,14 @@ public class GameManager : MonoBehaviour{
         }
         catch (Exception e){
             Debug.LogError($"Failed to load worlds from PlayerPrefs: {e.StackTrace}");
+        }
+        //load gamedata
+        if (PlayerPrefs.HasKey("GameData")){
+            string json = PlayerPrefs.GetString("GameData");
+            gameData = JsonUtility.FromJson<GameData>(json);
+        }
+        else{
+            gameData = new GameData(); // Default if no data is saved
         }
 
 
@@ -170,8 +194,8 @@ public class GameManager : MonoBehaviour{
         SceneManager.LoadScene("Scenes/Titlescreen");
     }
 
-    public void ExitToMain(){
-        if (TerrainManager.Instance != null){
+    public void ExitToMain(bool save = true){
+        if (TerrainManager.Instance != null && save){
             Save();
         }
 
@@ -237,8 +261,12 @@ public class GameManager : MonoBehaviour{
         return allCharacters.FirstOrDefault(c => c.name == name);
     }
 
-
-    public void Save(){
+    
+    public IEnumerator SaveCR(){
+        saveIconCG.alpha = 1;
+         string settingsJSON = JsonConvert.SerializeObject(settings,JSONsettings);
+        PlayerPrefs.SetString("GameSettings", settingsJSON);
+        
         try{
             Debug.Log("Saving World");
             SaveStats();
@@ -298,6 +326,13 @@ public class GameManager : MonoBehaviour{
         catch (Exception e){
             Debug.LogError($"Failed to save world: {e.StackTrace}");
         }
+        saveIconCG.alpha = 0;
+        yield return null;
+
+    }
+    public void Save(){
+       
+        StartCoroutine( SaveCR());
     }
 
     private void SaveWorlds(){
@@ -392,6 +427,27 @@ public class GameManager : MonoBehaviour{
     public void CloseSettings(){
         settingsWindow.Hide();
     }
+    public void LoadScene(Scenum scene){
+        switch (scene){
+            case Scenum.RunStart:
+                SceneManager.LoadScene("Scenes/Run Start");
+                break;
+            case Scenum.MainMenu:
+                SceneManager.LoadScene("Scenes/MainMenu");
+                break;
+            case Scenum.Titlescreen:
+                SceneManager.LoadScene("Scenes/Titlescreen");
+                break;
+        }   
+    }
+}
+
+public enum Scenum{
+    None=-1,
+    Titlescreen=1,
+    RunStart=2,
+    MainMenu=3,
+    
 }
 
 [JsonObject(ItemNullValueHandling = NullValueHandling.Include)]
@@ -430,7 +486,7 @@ public class World{
     public PlanetFlags flags = PlanetFlags.None;
 
     static string[] planetNames = new string[]{
-        "Kepler", "Proxima", "Pluto","Gemini","Bezos", "Leporis", "Gliese", "Upsilon", "Librae", "Resonare", "Tau", "WASP", "Borealis", "Primus", "Incendo"
+        "Kepler", "Proxima", "Pluto","Gemini","Bezos", "Leporis", "Gliese", "Upsilon", "Librae", "Resonare", "Tau", "WASP", "Borealis", "Primus", "TESS", "CoRoT"
     };
     //generate world
     public World(int _seed){
@@ -490,4 +546,16 @@ public class OreData{
 public class TerrainData{
     public Terrain t;
     public Vector2Int pos;
+}
+
+[Serializable]
+public class GameData{
+    //level
+    public int level;
+    public double xp;
+    public double maxXp;
+    
+    
+
+
 }

@@ -6,7 +6,7 @@ namespace Systems.Terrain{
     [Serializable]
     [CreateAssetMenu(fileName = "terr props", menuName = "ScriptableObjects/TerrainProperties", order = 0)]
     public class TerrainProperties : ScriptableObject{
-        public RuleTile tile;
+        public CustomRuleTile tile;
         public Terrain terrain;
 
         public AudioClip[] footsteps;
@@ -14,9 +14,11 @@ namespace Systems.Terrain{
 
         private void OnValidate(){
             terrain.myProperties = this.name;
+            tile.hasCollider = collider;
         }
         
         //stats
         public float walkSpeed = 1f;
+        public bool collider = false;
     }
 }

@@ -5036,7 +5036,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: BurnerCrusher
+      value: Burner Crusher
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -5139,6 +5139,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5644562763396864304, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 4850456076238693850}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1601412673517536103 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 4850456076238693850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7047352849423587621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
@@ -5157,18 +5162,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8793023899972616217}
+  source: {fileID: 1601412673517536103}
   bc: {fileID: 7679484945097419853}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: c4aebc36696f0134e835b443c43d83ff, type: 2}
-    name: BurnerCrusher
+    name: Burner Crusher
     indestructible: 0
     rotatable: 0
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 4
+    soundMaterial: 1
     size: {x: 3, y: 2}
     description: Crushes rock by burning fuel
     bso: {fileID: 0}
@@ -5180,10 +5189,19 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Burner Crusher
+  hasSaved: 0
+  actuatedThisTick: 0
+  progressBar:
+    progress: 0
+    maxProgress: 100
+  progressPerCycle: 40
   <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 4
@@ -5191,6 +5209,16 @@ MonoBehaviour:
     gridWidth: 2
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   CraftingFX:
   - {fileID: 6821569010845340664}
   recipeSelector:
@@ -5199,14 +5227,43 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9dc977d2f813be44daec8dd420bbad5a, type: 2}
     - {fileID: 11400000, guid: 4b802d3e047627c42a9666acfeaa8ec6, type: 2}
     - {fileID: 11400000, guid: 20d05e5b7c658074c922f075f4a2b202, type: 2}
-    currentRecipe: {fileID: 0}
+    currentRecipeIndex: 0
   inputProperties:
     size: 0
     name: 
     gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
+  input:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   burner:
+    fuelContainer:
+      filterList: []
+      blackList: 0
+      containerList:
+      - ItemStack:
+          itemID: 
+          itemSO: {fileID: 0}
+          amount: 0
+        filter:
+          filterID: 
+        Stacksize: 1000
+        Selected: 0
+        dirty: 1
+      properties:
+        size: 1
+        name: 
+        gridWidth: 8
+        scaleDownGridIfSmaller: 1
+        type: 0
     fuelTime: 1
     burnTimeTotal: 0
     burnRate: 2

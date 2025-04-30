@@ -17,7 +17,7 @@ MonoBehaviour:
   stackSize: 32
   category: 5
   useCursor: 1
-  value: 16
-  tier: 2
+  value: 0
+  tier: -1
   fuelValue: 0
   terrain: {fileID: 11400000, guid: 04d156819c9be7044a36cb1fa79760fa, type: 2}

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Tin
   m_EditorClassIdentifier: 
   threshold: 0.82
-  scale: 0.1
+  heightThreshold: 0.4
+  heatThreshold: 0
+  scale: 0.07
   minAmount: 400
   maxAmount: 800
   variance: 390

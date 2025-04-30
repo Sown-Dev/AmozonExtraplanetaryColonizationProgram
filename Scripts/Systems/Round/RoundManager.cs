@@ -12,6 +12,7 @@ namespace Systems.Round{
     public class RoundManager : MonoBehaviour{
         public static RoundManager Instance;
 
+        public List<Item[]> contractItems = new List<Item[]>();
 
         //References
         [SerializeField] private RoundInfoUI infoUI;
@@ -143,8 +144,8 @@ namespace Systems.Round{
 
 
         //only call after checking if the item is in the sell list
-        public void Sell(ItemStack stack){
-            AddMoney(stack.item.value * stack.amount);
+        public void Sell(ItemStack stack, float rate=1){
+            AddMoney(Mathf.RoundToInt(stack.item.value * stack.amount * rate));
             stack.amount = 0;
         }
 
@@ -231,9 +232,15 @@ namespace Systems.Round{
             currentContract = newContract;
             roundTime = currentContract.TimeGiven;
 
+            addTime += Player.Instance.finalStats[Statstype.ExtraTime];
+            
             if (addTime > 0){
                 roundTime += addTime;
                 addTime = 0;
+            }
+            int extraMoney = Mathf.RoundToInt(Player.Instance.finalStats[Statstype.ExtraMoney]);
+            if(extraMoney > 0){
+               AddMoney(extraMoney,false);
             }
 
             if (firstRound){
@@ -246,8 +253,9 @@ namespace Systems.Round{
 
 
             infoUI.Refresh();
-
+            
             TutorialManager.Instance.StartTutorial("firstcontract", 0.1f);
+
         }
 
         public void GenerateNewShopTier(int tierNum){
@@ -477,6 +485,6 @@ namespace Systems.Round{
         public int loanAmount = 100;
 
         public Contract currentContract;
-        [JsonIgnore]public List<ShopTier> shopTiers = new();
+        public List<ShopTier> shopTiers = new();
     }
 }

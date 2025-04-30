@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8843764941062863404
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -4788089487448818009, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 9b7423c98d3f3644cb940945eda2888a, type: 2}
+    - target: {fileID: -4788089487448818009, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -2191679372146513533, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: onCollide
+      value: 
+      objectReference: {fileID: 6797750658225141016, guid: 904e4cee28395fb48b0f83717c5cc68f, type: 3}
+    - target: {fileID: -2191679372146513533, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: destroyDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648861872465042746, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_Name
+      value: Snowball
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499599138610635657, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368856016182629934, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a95a11cfb0dc2545a6c4703a740cd70, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0133702d0f988a446aec9beb1bf827ff, type: 3}

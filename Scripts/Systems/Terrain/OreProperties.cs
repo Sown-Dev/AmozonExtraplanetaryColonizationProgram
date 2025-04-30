@@ -9,6 +9,10 @@ namespace Systems.Terrain{
     {
         [Header("Generation Settings")]
         public float threshold = 0.5f;
+        public float heightThreshold = 0.1f;
+        public float heatThreshold = 0.1f;
+        
+        
         public float scale = 50f;
         public int minAmount = 1;
         public int maxAmount = 10;

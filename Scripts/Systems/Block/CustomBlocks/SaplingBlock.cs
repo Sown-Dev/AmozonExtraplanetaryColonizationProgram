@@ -10,10 +10,15 @@ public class SaplingBlock: TickingBlock{
     public Block treePrefab;
     public float timeElapsed = 0;
 
+    protected override void Awake(){
+        base.Awake();
+        growTime = Random.Range(3000, 6000) + Random.Range(-1500, 7000);
+
+    }
+
     public override void Init(Orientation orientation){
         base.Init(orientation);
         timeElapsed = Random.Range(0, growTime/5);
-        growTime = Random.Range(3000, 6000) + Random.Range(-1500, 7000);
     }
     
    

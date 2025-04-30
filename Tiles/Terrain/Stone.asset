@@ -9,23 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Script: {fileID: 11500000, guid: 05a07a92bfd9a8c4bbaabc9424e133dd, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: f20e03ab7a0d78a4ba0044ddbce8d2b7, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: 8acffde475f809f45b5e8f8d1ae0534e, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: 21300000, guid: f20e03ab7a0d78a4ba0044ddbce8d2b7, type: 3}
-    - {fileID: 21300000, guid: 95102c1fe8e93194abbb3bccdf64b7bd, type: 3}
-    - {fileID: 21300000, guid: 68ccf0f1c69555b42a0db1adc49406de, type: 3}
-    - {fileID: 21300000, guid: 1fb2196cd438fd644853ad24f228730f, type: 3}
-    - {fileID: 21300000, guid: b1d34274372c47443b3c1bd43751fe60, type: 3}
-    - {fileID: 21300000, guid: 2734d821633980a4b942440f5a8c0bc8, type: 3}
-    - {fileID: 21300000, guid: 1a5cb44e5a6577c4a8d8d463a341ee28, type: 3}
-    - {fileID: 21300000, guid: ebbd9f84af6d60744ab22d17eda207ca, type: 3}
+    - {fileID: 21300000, guid: 8acffde475f809f45b5e8f8d1ae0534e, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
@@ -44,3 +37,4 @@ MonoBehaviour:
     - {x: 0, y: -1, z: 0}
     - {x: 1, y: -1, z: 0}
     m_RuleTransform: 0
+  hasCollider: 0

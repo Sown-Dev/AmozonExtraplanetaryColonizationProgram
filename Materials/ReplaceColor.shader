@@ -57,7 +57,7 @@ Shader "Custom/ColorReplacerWithShading"
             }
 
             // Compute luminance (perceived brightness)
-            float Luminance(float3 color)
+            float MyLuminance(float3 color)
             {
                 return dot(color, float3(0.299, 0.587, 0.114)); // Standard RGB luminance formula
             }
@@ -71,8 +71,8 @@ Shader "Custom/ColorReplacerWithShading"
                 if (distance < threshold)
                 {
                     // Compute the brightness adjustment
-                    float originalLuminance = Luminance(currentColor.rgb);
-                    float targetLuminance = Luminance(targetColor.rgb);
+                    float originalLuminance = MyLuminance(currentColor.rgb);
+                    float targetLuminance = MyLuminance(targetColor.rgb);
                     float luminanceRatio = originalLuminance / (targetLuminance + 0.0001); // Avoid division by zero
 
                     // Scale the replacement color by the luminance ratio

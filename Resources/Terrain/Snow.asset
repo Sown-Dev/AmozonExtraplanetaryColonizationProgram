@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450845b571dcd7442880d80ab8963bf8, type: 3}
+  m_Name: Snow
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: 84fb250600cbbed45885e5dccb6d0962, type: 2}
+  terrain:
+    owned: 1
+    myProperties: Snow
+  footsteps:
+  - {fileID: 8300000, guid: 47747d0d1c669df4c92b3e249ee71b62, type: 3}
+  myItem: {fileID: 11400000, guid: dc73c05aba4308249a702f4937f633b9, type: 2}
+  walkSpeed: 0.75
+  collider: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Systems.Block;
 using Systems.Block.BlockStates;
 using Systems.Items;
 using UI.BlockUI;
@@ -27,7 +28,7 @@ public class BlockProperties{
 
 
     public TooltipFlags ttFlags;
-
+    public SoundMaterial soundMaterial;
 
     //public float blockHeight = 1;
     public Vector2Int size = new(1, 1);

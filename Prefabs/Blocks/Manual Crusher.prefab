@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: Manual Grinder
+      value: Manual Crusher
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -109,6 +109,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2216268374412577613}
   m_SourcePrefab: {fileID: 100100000, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+--- !u!82 &3514503578098741243 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 7327095114234317126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5130268643145463225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
@@ -127,18 +132,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 6699177649049906309}
+  source: {fileID: 3514503578098741243}
   bc: {fileID: 5506874210771108049}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 36723bb9f1926c74abd47ad8038f71ab, type: 2}
-    name: Manual Grinder
+    name: Manual Crusher
     indestructible: 0
     rotatable: 0
     invertRotation: 0
     actuatable: 1
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 8
+    soundMaterial: 1
     size: {x: 1, y: 2}
     description: Crushes down materials when actuated
     bso: {fileID: 0}
@@ -150,10 +159,19 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Manual Crusher
+  hasSaved: 0
+  actuatedThisTick: 0
+  progressBar:
+    progress: 0
+    maxProgress: 100
+  progressPerCycle: 40
   <baseSpeed>k__BackingField: 1
   outputProperties:
     size: 2
@@ -161,21 +179,42 @@ MonoBehaviour:
     gridWidth: 2
     scaleDownGridIfSmaller: 0
     type: 0
+  output:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   CraftingFX: []
   recipeSelector:
     recipes:
     - {fileID: 11400000, guid: fedf26971bfa3674e9b20b0e9c595d23, type: 2}
     - {fileID: 11400000, guid: 9dc977d2f813be44daec8dd420bbad5a, type: 2}
     - {fileID: 11400000, guid: 4b802d3e047627c42a9666acfeaa8ec6, type: 2}
-    currentRecipe: {fileID: 0}
+    currentRecipeIndex: 0
   inputProperties:
     size: 0
     name: in
     gridWidth: 0
     scaleDownGridIfSmaller: 0
     type: 0
+  input:
+    filterList: []
+    blackList: 1
+    containerList: []
+    properties:
+      size: 0
+      name: 
+      gridWidth: 0
+      scaleDownGridIfSmaller: 0
+      type: 0
   icon: {fileID: 21300000, guid: 6931b87c552c6c14fa0028ad30f1d002, type: 3}
   TicksPerClick: 10
+  passiveCraft: 0
 --- !u!61 &5506874210771108049 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

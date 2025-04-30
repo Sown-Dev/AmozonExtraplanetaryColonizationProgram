@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chainsaw3_0: 8576362154199178533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

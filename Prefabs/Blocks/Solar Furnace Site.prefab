@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -41,13 +41,17 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+      propertyPath: m_Size.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Size.y
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a1bcf1b189747eb47ac806a139814445, type: 3}
+      objectReference: {fileID: 21300000, guid: b0b14446e159e9841b73137483837f6c, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -152,6 +156,7 @@ MonoBehaviour:
     collidable: 1
     blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
     size: {x: 5, y: 5}
     description: An abandoned worksite for a solar furnace. Perhaps you could finish
@@ -165,20 +170,29 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+    typeName: Systems.Block.BlockData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  addressableKey: Solar Furnace Site
+  hasSaved: 0
   buildingProgress:
     resourcesNeeded:
-    - item: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
+    - itemID: 
+      itemSO: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
       amount: 100
-    - item: {fileID: 11400000, guid: 6cbcc93b4ce4abb44afec485dc947ca6, type: 2}
+    - itemID: 
+      itemSO: {fileID: 11400000, guid: 6cbcc93b4ce4abb44afec485dc947ca6, type: 2}
       amount: 50
-    - item: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
+    - itemID: 
+      itemSO: {fileID: 11400000, guid: 8afc69edbf4095f46b55ce9750b334d3, type: 2}
       amount: 50
     progress: 000000000000000000000000
-  blockPrefab: {fileID: 3708733674678587739, guid: 51742ba2eb210764da5e2a63f88b04d3, type: 3}
+  buildingbPrefab: {fileID: 0}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
