@@ -3209,7 +3209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.9, y: -0}
+  m_AnchoredPosition: {x: 0, y: -0}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1833899898
@@ -3525,8 +3525,6 @@ MonoBehaviour:
     xp: 0
     maxXp: 0
   worlds: []
-  saveIconCG: {fileID: 2048438473}
-  pauseManager: {fileID: 2107895573}
   settings:
     DevMode: 0
     completedTutorials: []
@@ -3536,6 +3534,8 @@ MonoBehaviour:
     TerrainInfo: 0
     OreInfo: 1
     BlockInfo: 1
+  saveIconCG: {fileID: 2048438473}
+  pauseManager: {fileID: 2107895573}
   settingsWindow: {fileID: 710011650}
   inGame: 0
   Achievements:

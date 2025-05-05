@@ -49,4 +49,4 @@ MonoBehaviour:
       invertWind: 0
       wind: 0
   wallModifier: 1
-  customWallTile: {fileID: 11400000, guid: 84b43be23513057478c76dcf8abc80aa, type: 2}
+  customWallTile: {fileID: 11400000, guid: 2d9f92616c4be354e952cc646b51aba8, type: 2}

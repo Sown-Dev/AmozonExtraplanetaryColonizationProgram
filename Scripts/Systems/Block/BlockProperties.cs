@@ -32,6 +32,7 @@ public class BlockProperties{
 
     //public float blockHeight = 1;
     public Vector2Int size = new(1, 1);
+    public float height = 1;
 
     public string description = "";
     [Header("BlockState")] public BlockStateSO bso;
