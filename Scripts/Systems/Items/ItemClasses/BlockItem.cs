@@ -11,7 +11,7 @@ namespace Systems.Items{
         
         public override void Use(Vector2Int pos, Unit user, Slot slot){
             base.Use(pos, user,slot);
-            if (TerrainManager.Instance.PlaceBlock(blockPrefab, pos,  Cursor.Instance.cursorRotation)){
+            if (TerrainManager.Instance.PlaceBlock(blockPrefab, pos,  Cursor.Instance.cursorRotation, makeSound:true)){
                 slot.ItemStack.amount--;
                 if (slot.ItemStack.amount <= 0){
                     slot.ItemStack = null;

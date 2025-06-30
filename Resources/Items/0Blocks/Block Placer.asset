@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefa2b0a88f56894f9dac97a97d098ad, type: 3}
+  m_Name: Block Placer
+  m_EditorClassIdentifier: 
+  <description>k__BackingField: 
+  <icon>k__BackingField: {fileID: 21300000, guid: 66cd6b6742ea83d459bf5de01496c797, type: 3}
+  stackSize: 16
+  category: 2
+  useCursor: 1
+  value: 40
+  tier: -1
+  fuelValue: 0
+  blockPrefab: {fileID: -1243196546203837172, guid: df74dfd924cc972438cdb111f9b4707d, type: 3}
+  blockCategory: 0

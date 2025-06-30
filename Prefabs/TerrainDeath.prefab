@@ -5000,7 +5000,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 7510349666525268291, guid: ade9d512f8c0a7c4e947ab4f9755afa9, type: 2}
   m_audioClip: {fileID: 8300000, guid: 1229b2cb8fbf8a240a75b3fbe2e405c4, type: 3}
   m_Resource: {fileID: 8300000, guid: 1229b2cb8fbf8a240a75b3fbe2e405c4, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.086
   m_Pitch: 1
   Loop: 0
@@ -5012,7 +5012,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 24
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

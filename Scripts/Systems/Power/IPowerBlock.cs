@@ -24,7 +24,8 @@ public interface IPowerConsumer: IPowerBlock{
 
 public interface IPowerBattery: IPowerBlock{
     public int capacity{ get; set; }
-    public int storedPower{ get; set; }
+    public float storedPower{ get; set; }
+    public int transferRate{ get; set; } //how much power can be transferred per tick
 }
 
 public interface IPowerConnector{

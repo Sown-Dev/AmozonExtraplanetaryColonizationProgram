@@ -16,7 +16,10 @@ public class PowerProducerUI : ElectricityUI
         this.producer = _producer;
         plug.sprite = producer.myGrid != null ? plugOn : plugOff;
         
-        plugButton.onClick.AddListener(() => WindowManager.Instance.CreateGridWindow( producer.myGrid));
+        plugButton.onClick.AddListener(() => {
+            if(producer.myGrid != null)
+                WindowManager.Instance.CreateGridWindow(producer.myGrid);
+        });
 
     }
    

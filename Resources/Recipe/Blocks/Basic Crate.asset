@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: b5ceab370a772a24c83fdebc77d21710, type: 3}
   ingredients:
-  - item: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
-    amount: 12
+  - itemID: Wood
+    itemSO: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
+    amount: 8
+  newIngredients: []
   results:
-  - item: {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
+  - itemID: Crate
+    itemSO: {fileID: 11400000, guid: 516b1cc56851b114aae8c4dc45d170a8, type: 2}
     amount: 1
   craftTime: 100

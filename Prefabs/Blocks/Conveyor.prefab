@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3801151613052395935}
+  source: {fileID: 6412602164649468641}
   bc: {fileID: 2617854964096732619}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
@@ -159,7 +160,9 @@ MonoBehaviour:
     destroyTime: 1
     customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 1
     size: {x: 1, y: 1}
+    height: 1
     description: belt of conveyors
     bso: {fileID: 0}
   currentState:
@@ -181,6 +184,10 @@ MonoBehaviour:
       sprites: []
   tile: {fileID: 0}
   additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
   addressableKey: Conveyor
   hasSaved: 0
   actuatedThisTick: 0
@@ -190,5 +197,10 @@ MonoBehaviour:
 --- !u!212 &3801151613052395935 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 979313002749674588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6412602164649468641 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 979313002749674588}
   m_PrefabAsset: {fileID: 0}

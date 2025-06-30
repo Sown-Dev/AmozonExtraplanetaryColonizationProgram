@@ -2,167 +2,156 @@
 using System.Linq;
 using UnityEngine;
 
-public class PowerGrid{
+public class PowerGrid {
     public List<IPowerBlock> blocks;
     public List<IPowerConnector> connectors;
 
-    public int size{
-        get{ return blocks.Count + connectors.Count; }
-    }
-    
-    
-    //local vars
-    
-    //stored power and max capacity
-    public int capacity;
+    public float capacity;
     public float storedPower;
-    
-    //production and max production
     public int producing;
     public int productionCapacity;
-    
-    //consumption and max consumption (if we don't have enough power we have less consumption than max)
     public int consuming;
     public int powerNeeded;
-    
-    private int id = 0; // an unnecessary id. it is only used for debugging as it allows serialized representations to be unique
-    public PowerGrid(){
+    public float unitDivider = 1f;
+    public float storedPerSecond;
+    public float usedPerSecond;
+
+    private int id = 0;
+    public PowerGrid() {
         blocks = new List<IPowerBlock>();
         connectors = new List<IPowerConnector>();
         TerrainManager.Instance.powerGrids.Add(this);
         id = Random.Range(0, 6000);
-        capacity = 0;
-        storedPower = 0;
+        capacity = 0f;
+        storedPower = 0f;
     }
 
-    public void GridTick(){
-        producing = 0; //how much power we are producing
-        powerNeeded = 0; //how much power we need
-        consuming = 0; //keeps track of how much power we are consuming. can be seperate from needs if we are overconsuming
-        
-        foreach (IPowerConsumer block in blocks.OfType<IPowerConsumer>()){
-            powerNeeded += block.needed;
-        }
-        
-        foreach (IPowerProducer generator in blocks.OfType<IPowerProducer>().OrderBy(x => x.Priority)){
-            generator.neededOn = producing < powerNeeded;
-            //idea: could maybe put a function in between here that lets us get our power production based on whether we need it or not
-            producing += generator.producing;
-        }
-        int remainingPower = producing; //we use this to keep track of how much power we have left to give to consumers, but still need to keep track of how much power we produce
+    public void GridTick() {
+        producing = 0;
+        productionCapacity = 0;
+        powerNeeded = 0;
+        consuming = 0;
+        storedPerSecond = 0f;
+        usedPerSecond = 0f;
+        capacity = 0f;
+        storedPower = 0f;
 
+        float delta = Time.deltaTime * unitDivider;
 
-        if (producing > powerNeeded){
-            //add difference to stored power
-            StorePower(producing - powerNeeded, Time.deltaTime);
-            remainingPower-= producing - powerNeeded;
-        }
-        if(producing < powerNeeded){
-            //use stored power
-            remainingPower+=UsePower(powerNeeded - producing, Time.deltaTime);
-        }
-        
+        var batteries = blocks.OfType<IPowerBattery>().ToList();
+        var producers = blocks.OfType<IPowerProducer>().OrderBy(x => x.Priority).ToList();
+        var consumers = blocks.OfType<IPowerConsumer>().ToList();
 
-        foreach (IPowerConsumer block in blocks.OfType<IPowerConsumer>()){
-            if (remainingPower>= block.needed){
-                block.providedPower = block.needed;
-                remainingPower-= block.needed;
-                consuming += block.needed;
-            }
-            else{
-                block.providedPower = remainingPower;
-                consuming += remainingPower;
-                remainingPower = 0;
+        foreach (var b in batteries) {
+            capacity += b.capacity;
+            storedPower += b.storedPower;
+        }
+
+        foreach (var c in consumers) {
+            powerNeeded += c.needed;
+        }
+
+        foreach (var p in producers) {
+            productionCapacity += p.maxProduction;
+            producing += p.producing;
+        }
+
+        if (producing < powerNeeded) {
+            foreach (var p in producers) {
+                if (!p.neededOn) {
+                    p.neededOn = true;
+                    producing += p.producing;
+                }
             }
         }
-        
-        
-    }
-    
-    public void StorePower(int power, float deltaTime){
-        Debug.Log($"Storing {power} power");
-        storedPower += power*deltaTime;
-        if (storedPower > capacity){
-            storedPower = capacity;
+
+        float availablePower = producing * delta;
+
+        if (producing < powerNeeded) {
+            float deficit = (powerNeeded - producing) * delta;
+            foreach (var b in batteries) {
+                float provide = Mathf.Min(deficit, b.storedPower, b.transferRate * delta);
+                b.storedPower -= provide;
+                storedPower -= provide;
+                usedPerSecond += provide / Time.deltaTime;
+                availablePower += provide;
+                deficit -= provide;
+                if (deficit <= 0f) break;
+            }
         }
-    }
-    
-    public int UsePower(int power, float deltaTime){
-        float storedNeeded = power*deltaTime;
-        if (storedPower >= storedNeeded){
-            storedPower -= storedNeeded;
-            Debug.Log($"Using {power} power, but only {storedPower} is available. Used {power} power");
-            return power;
+        else if (producing > powerNeeded) {
+            float surplus = (producing - powerNeeded) * delta;
+            foreach (var b in batteries) {
+                float space = b.capacity - b.storedPower;
+                float store = Mathf.Min(surplus, space, b.transferRate * delta);
+                b.storedPower += store;
+                storedPower += store;
+                storedPerSecond += store / Time.deltaTime;
+                surplus -= store;
+                if (surplus <= 0f) break;
+            }
         }
-        else{
-            Debug.Log($"Using {power} power, but only {storedPower} is available. Used 0 power");
-            return 0;
+
+        foreach (var c in consumers) {
+            float needed = c.needed * delta;
+            if (availablePower >= needed) {
+                c.providedPower = c.needed;
+                availablePower -= needed;
+                consuming += c.needed;
+            } else {
+                c.providedPower = Mathf.FloorToInt(availablePower / delta);
+                consuming += c.providedPower;
+                availablePower = 0f;
+            }
         }
     }
 
-    public bool HasBlock(IPowerBlock block){
+    public bool HasBlock(IPowerBlock block) {
         return blocks.Contains(block);
     }
 
-    public void AddBlock(IPowerBlock block){
-        block.myGrid?.RemoveBlock(block); //remove from old grid if any
+    public void AddBlock(IPowerBlock block) {
+        block.myGrid?.RemoveBlock(block);
         blocks.Add(block);
         block.myGrid = this;
-        if(block is IPowerBattery battery){
-            capacity += battery.capacity;
-            storedPower += battery.storedPower;
-        }
     }
 
-    public void AddConnector(IPowerConnector connector){
-        connector.myGrid?.RemoveConnector(connector); //remove from old grid if any
-
+    public void AddConnector(IPowerConnector connector) {
+        connector.myGrid?.RemoveConnector(connector);
         connectors.Add(connector);
         connector.myGrid = this;
     }
 
-    public void RemoveBlock(IPowerBlock block){
+    public void RemoveBlock(IPowerBlock block) {
         blocks.Remove(block);
         block.myGrid = null;
-        if(block is IPowerBattery battery){
-            capacity -= battery.capacity;
-            int powerTransfer = UsePower((int)  storedPower/capacity*battery.capacity, Time.deltaTime);
-            battery.storedPower = powerTransfer;
-        }
     }
 
-    public void RemoveConnector(IPowerConnector connector){
+    public void RemoveConnector(IPowerConnector connector) {
         connectors.Remove(connector);
         connector.myGrid = null;
     }
 
-
-    public void MergeGrid(PowerGrid other){
+    public void MergeGrid(PowerGrid other) {
         if (other == null) return;
-        //other grid is destroyed
-        foreach (IPowerBlock block in other.blocks.ToList()){
+        foreach (var block in other.blocks.ToList()) {
             other.RemoveBlock(block);
             AddBlock(block);
         }
-
-        foreach (IPowerConnector connector in other.connectors.ToList()){
+        foreach (var connector in other.connectors.ToList()) {
             other.RemoveConnector(connector);
             AddConnector(connector);
         }
-
-
         other.KillGrid();
     }
 
-    public void KillGrid(){
-        foreach (var block in blocks.ToList()){
+    public void KillGrid() {
+        foreach (var block in blocks.ToList()) {
             RemoveBlock(block);
         }
-
-        foreach (var connector in connectors.ToList()){
+        foreach (var connector in connectors.ToList()) {
             RemoveConnector(connector);
         }
-
         TerrainManager.Instance.powerGrids.Remove(this);
     }
 }

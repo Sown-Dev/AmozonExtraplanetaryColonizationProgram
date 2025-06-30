@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 0}
-  m_SizeDelta: {x: 288, y: 24}
+  m_AnchoredPosition: {x: -96, y: 0}
+  m_SizeDelta: {x: 256, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114125165
 MonoBehaviour:
@@ -1255,6 +1255,81 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &1550110665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1550110666}
+  - component: {fileID: 1550110668}
+  - component: {fileID: 1550110667}
+  m_Layer: 0
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1550110666
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550110665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1754723294}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: -120}
+  m_SizeDelta: {x: 144, y: 176}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1550110667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550110665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.81394625, g: 0.8514296, b: 0.8584906, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a02943993e441c9479e0a06eb2ef41a9, type: 3}
+  m_Type: 2
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1550110668
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550110665}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1584233815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2004,6 +2079,7 @@ RectTransform:
   - {fileID: 1610212996}
   - {fileID: 1306416271}
   - {fileID: 2032009454}
+  - {fileID: 1550110666}
   - {fileID: 114125164}
   - {fileID: 411053269}
   - {fileID: 1864411184}
@@ -2042,7 +2118,7 @@ MonoBehaviour:
   - Success is measured in output.\nHow will you be remembered?
   - Quality is our promise. Expedience is our guarantee.
   - "A better tomorrow starts with meeting today\u2019s quota!"
-  - Clock in, cash in!
+  - Clock in, cash out!
   - Logistics is our bread and butter!
   - Grow the yield, own the field!
   - Grind away, earn your stay!
@@ -2054,7 +2130,7 @@ MonoBehaviour:
   - History remembers the pioneers. And the shareholders.
   - A new planet. A new start.\nA new opportunity.
   - The universe is vast, but our reach is vaster
-  - Progress waits for nobody
+  - Progress waits for no one.
   - We turn challenges into opportunities
   - All planetary disputes will be resolved in arbitration.
   - If you're reading this, GET BACK TO WORK!
@@ -2065,6 +2141,29 @@ MonoBehaviour:
   - From A to Z, we make it (almost) free
   - The universe's biggest bookstore
   - In the event of emergency, always dump cargo before self-destructing
+  - 01100111 01100101 01110100 00100000 01100010 01100001 01100011 01101011 00100000
+    01110100 01101111 00100000 01110111 01101111 01110010 01101011
+  - From the creators of the worlds greatest ingergalactic shipping and bioprocessing
+    service!
+  - Get a job!
+  - At last, true purpose
+  - Better than TedEx!
+  - Now with 30% extra food rations!
+  - This world is your oyster
+  - Moving humanity forward
+  - Amozon does not cover the costs of canaries. Bring your own!
+  - Now with paid healthcare!
+  - 'Remember: we do not cover workplace related injuries'
+  - Choose a better life!
+  - Now with 4.5% fewer conveyor belt injuries!
+  - yes
+  - Amozon Extraplanetary Colonization Program
+  - I hear gas giants are all the rave these days
+  - Failure to administer a biweekly full body drug and implant test can and will
+    result in termination!
+  - We wait for no one.
+  - Take your next vacation on an ocean planet!
+  - 
   music: {fileID: 1754723296}
 --- !u!82 &1754723296
 AudioSource:
@@ -2366,7 +2465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: -80}
+  m_AnchoredPosition: {x: -100, y: -96}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1864411185

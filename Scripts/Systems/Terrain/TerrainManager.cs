@@ -26,7 +26,7 @@ public partial class TerrainManager : MonoBehaviour{
     public Dictionary<Vector2Int, IPowerConnector> powerClaims = new Dictionary<Vector2Int, IPowerConnector>();
 
     public Dictionary<string, TerrainProperties> terrainProperties = new Dictionary<string, TerrainProperties>();
-
+    public List<TileBase> wallTilesRegistry = new List<TileBase>();
 
     [Header("References")] [SerializeField]
     private Tilemap terrainTilemap;
@@ -96,9 +96,21 @@ public partial class TerrainManager : MonoBehaviour{
     }
 
     public void SetWall(RuleTile tile, Vector3Int pos){
+        
         if (GetBlock((Vector2Int)pos) != null || (GetTerrainProperties((Vector2Int)pos)?.collider ??false))
             return;
         wallTilemap.SetTile(pos, tile);
+    }
+
+    public void SetWall(int index, Vector3Int pos){
+        if (index <= 0 || index >= wallTilesRegistry.Count)
+            return;
+
+        TileBase tile = wallTilesRegistry[index-1];
+        if (tile == null)
+            return;
+
+        SetWall((RuleTile)tile, pos);
     }
 
     public bool IsWall(Vector3Int pos){
@@ -187,7 +199,9 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
 
-        CreateBlockDebris(block.transform.position, block.baseColor);
+        GameObject debris =CreateBlockDebris(block.transform.position, block.baseColor).gameObject;
+        debris.GetComponent<AudioSource>().clip = Utils.Instance.getMaterialSound(block.properties.soundMaterial).destroy;
+        debris.GetComponent<AudioSource>().Play();
 
         if (block is TickingBlock){
             tickingBlocks.Remove((TickingBlock)block);
@@ -305,7 +319,9 @@ public partial class TerrainManager : MonoBehaviour{
         }*/
         if (makeSound){
             AudioClip clip = Utils.Instance.getMaterialSound(block.properties.soundMaterial).place;
-            block.source.PlayOneShot(clip);
+            //block.source.PlayOneShot(clip);
+            audioSource.transform.position = spawnPos;
+            audioSource.PlayOneShot(clip);
         }
 
 
@@ -565,7 +581,7 @@ public partial class TerrainManager : MonoBehaviour{
 
         // Initialize flattened walls array
         int totalCells = GameManager.Instance.currentWorld.worldSize.x * GameManager.Instance.currentWorld.worldSize.y;
-        GameManager.Instance.currentWorld.walls = new bool[totalCells];
+        GameManager.Instance.currentWorld.walls = new short[totalCells];
 
         // Save walls using 1D index
         int halfX = GameManager.Instance.currentWorld.worldSize.x / 2;
@@ -581,7 +597,7 @@ public partial class TerrainManager : MonoBehaviour{
                 int yIndex = j + halfY;
                 int flatIndex = yIndex * GameManager.Instance.currentWorld.worldSize.x + xIndex;
 
-                GameManager.Instance.currentWorld.walls[flatIndex] = hasWall;
+                GameManager.Instance.currentWorld.walls[flatIndex] = (short)( hasWall ? 1:-1);
             }
         }
 
@@ -605,9 +621,9 @@ public partial class TerrainManager : MonoBehaviour{
                 int yIndex = j + halfY;
                 int flatIndex = yIndex * GameManager.Instance.currentWorld.worldSize.x + xIndex;
 
-                bool hasWall = GameManager.Instance.currentWorld.walls[flatIndex];
+                bool hasWall = GameManager.Instance.currentWorld.walls[flatIndex] >0;
                 if (hasWall){
-                    SetWall(rockWall, pos);
+                    SetWall(GameManager.Instance.currentWorld.walls[flatIndex], pos);
                 }
             }
         }

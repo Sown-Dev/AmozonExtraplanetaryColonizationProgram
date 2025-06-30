@@ -6,9 +6,10 @@ using UnityEngine;
 public class BaseIPowerBatteryBlock: BaseIPowerBlock, IPowerBattery{
     
     [SerializeField] private int baseCapacity = 1000;
-    
-    public int capacity{ get; set; }
-    public int storedPower{ get; set; }
+    [SerializeField] private int baseTransferRate = 20;
+    public int capacity{ get; set; } = 1000;
+    public float storedPower{ get; set; }
+    public int transferRate{ get; set; } = 10;
 
     public override void Init(Orientation orientation){
         base.Init(orientation);
@@ -16,14 +17,17 @@ public class BaseIPowerBatteryBlock: BaseIPowerBlock, IPowerBattery{
     protected override void Start(){
         base.Start();
         capacity = baseCapacity;
+        transferRate = baseTransferRate;
     }
 
     public override StringBuilder GetDescription(){
-        if (myGrid != null){
-            return base.GetDescription().AppendFormat("\nStored: {0}W/{1}W", myGrid.storedPower/myGrid.capacity * capacity, capacity);
-        }
-        return base.GetDescription().AppendFormat("\nStored: {0}W/{1}W", storedPower, baseCapacity);
-
+      
+        return base.GetDescription().AppendFormat(
+            "\nStored: {0:F1}W/{1}W\nTransfer Rate: {2}W/S",
+            storedPower,
+            baseCapacity,
+            baseTransferRate
+        );
     }
 
 }

@@ -131,7 +131,7 @@ public partial class TerrainManager{
         for (int i = -worldSize; i < worldSize; i++){
             for (int j = -worldSize; j < worldSize; j++){
                 Vector2Int position = new Vector2Int(i, j);
-                float perlin1 = Mathf.PerlinNoise(i * 0.1f - (noiseOffset / 3 * 3), j * 0.1f - noiseOffset * 2)
+                float perlin1 = Mathf.PerlinNoise(i * 0.09f - (noiseOffset / 3 * 3), j * 0.09f - noiseOffset * 2)
                                 + Random.Range(-0.01f, 0.01f);
                 float perlin2 = Mathf.PerlinNoise(i * 0.08f + (noiseOffset * 3), j * 0.08f + (noiseOffset * 3))
                                 + Random.Range(-0.01f, 0.01f);
@@ -139,14 +139,14 @@ public partial class TerrainManager{
 
 
                 //heat is from 0-1, but we want this to be in our scale of max and minheat, ie if max is 2, itll be from 0-2, etc
-                float heat = Mathf.PerlinNoise(i * 0.03f - noiseOffset2, j * 0.03f - noiseOffset2);
+                float heat = Mathf.PerlinNoise(i * 0.02f - noiseOffset2, j * 0.02f - noiseOffset2);
                 heat = Mathf.Lerp(minHeat, maxHeat, heat);
 
 
-                float height = Mathf.PerlinNoise(i * 0.01f - noiseOffset2, j * 0.01f - noiseOffset2);
-                float wetness = Mathf.PerlinNoise(i * 0.02f - noiseOffset2, j * 0.02f - noiseOffset2);
+                float height = Mathf.PerlinNoise(i * 0.008f - noiseOffset2, j * 0.008f - noiseOffset2);
+                float wetness = Mathf.PerlinNoise(i * 0.015f - noiseOffset2, j * 0.015f - noiseOffset2);
                 wetness = Mathf.Lerp(minWetness, maxWetness, wetness);
-                float wind = Mathf.PerlinNoise(i * 0.04f - noiseOffset2, j * 0.04f - noiseOffset2);
+                float wind = Mathf.PerlinNoise(i * 0.03f - noiseOffset2, j * 0.03f - noiseOffset2);
                 float simplex = noise.GetNoise(i, j);
 
                 worldMaps["perlin1"][i + worldSize][j + worldSize] = perlin1;
@@ -444,7 +444,8 @@ public partial class TerrainManager{
 
                     if (oreProperties.threshold < perlinValue + Random.Range(-0.01f, 0.01f) &&
                         oreProperties.heatThreshold < getNoisePosition(position, "heat") &&
-                        oreProperties.heightThreshold < getNoisePosition(position, "height")){
+                        oreProperties.heightThreshold < getNoisePosition(position, "height") &&
+                        oreProperties.chance > Random.value){
                         int amount = (int)(oreProperties.minAmount +
                                            (oreProperties.maxAmount - oreProperties.minAmount) *
                                            (perlinValue - oreProperties.threshold) / 0.3f +

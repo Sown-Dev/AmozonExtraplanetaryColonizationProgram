@@ -148,10 +148,10 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 612
+      x: 1130
       y: 1092
-      width: 600
-      height: 97
+      width: 623
+      height: 63
     spriteID: 670ad4f99b314544b9b71a51fdef3449
     spriteBone: []
     spriteOutline: []
@@ -160,7 +160,27 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 612, y: 1092}
+    uvTransform: {x: 1130, y: 1092}
+  - name: AECP
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1199
+      width: 359
+      height: 97
+    spriteID: 5ca181ac063bab14ba09109a0cd753a8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1199}
   - name: Layer 3
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -172,7 +192,7 @@ ScriptedImporter:
       y: 1092
       width: 600
       height: 99
-    spriteID: 4d6001d861d9e5948b46cd45205957ad
+    spriteID: 12e3d87a90a6acb41bf41532e3c7ad75
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -188,11 +208,11 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1220
+      x: 612
       y: 1092
       width: 510
       height: 92
-    spriteID: 85c2d74595e2c0b4fa52d903496b8bc0
+    spriteID: 59991db8efd2c40489fc20cfaf53cac9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,7 +220,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 1220, y: 1092}
+    uvTransform: {x: 612, y: 1092}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -230,15 +250,32 @@ ScriptedImporter:
     - name: Layer 1
       frameIndex: 0
       cellRect:
-        x: 0
-        y: 744
-        width: 600
-        height: 97
+        x: -23
+        y: 792
+        width: 623
+        height: 63
       spriteId: 670ad4f99b314544b9b71a51fdef3449
     linkedCells: []
     parentIndex: -1
-  - layerIndex: 2
-    guid: 1317221948
+  - layerIndex: 3
+    guid: -1341188568
+    name: AECP
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: AECP
+      frameIndex: 0
+      cellRect:
+        x: 112
+        y: 756
+        width: 359
+        height: 97
+      spriteId: 5ca181ac063bab14ba09109a0cd753a8
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 4
+    guid: 1317221946
     name: Layer 3
     layerFlags: 3
     layerType: 0
@@ -251,11 +288,11 @@ ScriptedImporter:
         y: 622
         width: 600
         height: 99
-      spriteId: 4d6001d861d9e5948b46cd45205957ad
+      spriteId: 12e3d87a90a6acb41bf41532e3c7ad75
     linkedCells: []
     parentIndex: -1
-  - layerIndex: 4
-    guid: 1317221557
+  - layerIndex: 6
+    guid: 1317221559
     name: Layer 2
     layerFlags: 3
     layerType: 0
@@ -268,7 +305,7 @@ ScriptedImporter:
         y: 626
         width: 510
         height: 92
-      spriteId: 85c2d74595e2c0b4fa52d903496b8bc0
+      spriteId: 59991db8efd2c40489fc20cfaf53cac9
     linkedCells: []
     parentIndex: -1
   platformSettings:

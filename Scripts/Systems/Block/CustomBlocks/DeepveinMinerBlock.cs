@@ -4,11 +4,9 @@ using UnityEngine;
 namespace Systems.Block.CustomBlocks{
     public class DeepveinMinerBlock:ElectricProgressBlock{
         public int miningTime = 50;
-        public int powerConsumption = 200;
         protected override void Awake(){
             base.Awake();
             progressBar.maxProgress = miningTime;
-            needed = powerConsumption;
         }
 
         public override bool CanProgress(){

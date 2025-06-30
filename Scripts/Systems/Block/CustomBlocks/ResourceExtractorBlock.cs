@@ -17,7 +17,11 @@ namespace Systems.Block.CustomBlocks{
 
         public List<ResourceBlock> whiteList = new List<ResourceBlock>();
 
-        
+        public override void Init(Orientation orientation){
+            base.Init(orientation);
+           
+        }
+
         public override void Tick(){
             base.Tick();
             if (currentResource == null){
@@ -51,7 +55,7 @@ namespace Systems.Block.CustomBlocks{
 
        
         public ResourceBlock FindResource(){
-            foreach (Vector2Int pos in ExtractPositions){
+            foreach (Vector2Int pos in ExtractPositions.RotateList(data.rotation, Vector2Int.zero)){
                 if (TerrainManager.Instance.GetBlock(data.origin + pos) is ResourceBlock block){
                     if (whiteList.Any(t => t.addressableKey == block.addressableKey)  || whiteList.Count == 0){
                         currentResource = block;
@@ -64,7 +68,7 @@ namespace Systems.Block.CustomBlocks{
         }
 
         public override List<TileIndicator> GetIndicators(){
-            return new List<TileIndicator>(){ new TileIndicator(ExtractPositions.Select((t) => t+data.origin).ToArray(), IndicatorType.Harvesting) };
+            return new List<TileIndicator>(){ new TileIndicator(ExtractPositions.Select((t) => t).ToArray(), IndicatorType.Harvesting) };
         }
     }
 }

@@ -126,11 +126,12 @@ namespace Systems.Block{
                 data = new BlockData();
             }
             //InitializeData();
-
-            data.rotation =
-                properties.invertRotation && properties.rotatable
-                    ? orientation.GetOpposite()
-                    : orientation;
+            if (properties.rotatable){
+                data.rotation =
+                    properties.invertRotation
+                        ? orientation.GetOpposite()
+                        : orientation;
+            }
 
 
             if (properties.myItem){

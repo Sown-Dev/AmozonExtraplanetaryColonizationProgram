@@ -84,7 +84,11 @@ namespace Systems.Round{
         public void InitRound(){
             StartCooldown(-1);
             roundNum = -1;
-
+        
+            
+            
+            loansTaken = 0;
+            loanAmount = 100 * (roundNum + 2);
 
             money = 100;
             infoUI.Refresh();
@@ -212,6 +216,9 @@ namespace Systems.Round{
             StartCooldown(50);
             GenerateNewShopTier(roundNum + 1);
             infoUI.Refresh();
+            
+            loansTaken = 0;
+            loanAmount = 100 * (roundNum + 1);
 
         }       
 
@@ -247,9 +254,6 @@ namespace Systems.Round{
                 firstRound = false;
                 GenerateNewShopTier(roundNum);
             }
-
-            loansTaken = 0;
-            loanAmount = 100 * (roundNum + 1);
 
 
             infoUI.Refresh();

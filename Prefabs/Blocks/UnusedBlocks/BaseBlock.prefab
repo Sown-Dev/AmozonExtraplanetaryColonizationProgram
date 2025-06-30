@@ -65,6 +65,7 @@ MonoBehaviour:
     ttFlags: 0
     soundMaterial: 1
     size: {x: 1, y: 1}
+    height: 1
     description: 
     bso: {fileID: 0}
   currentState:
@@ -205,7 +206,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 24
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

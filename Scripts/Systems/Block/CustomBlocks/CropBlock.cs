@@ -1,33 +1,47 @@
 ﻿using System;
 using System.Text;
 using Systems.Block;
+using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class SaplingBlock: TickingBlock{
+public class CropBlock: TickingBlock{
     
     //public new SaplingBlockData data => (SaplingBlockData)myData;
-    private int growTime;
+    public int growTime;
     public Block treePrefab;
-    public float timeElapsed = 0;
-
+    [FormerlySerializedAs("timeElapsed")] public int ticksElapsed = 0;
+    public bool randomStartTime = false;
+    public int growTimeRange;
+    public Sprite[] stages;
     protected override void Awake(){
         base.Awake();
-        growTime = Random.Range(3000, 6000) + Random.Range(-1500, 7000);
-
+        
     }
 
     public override void Init(Orientation orientation){
         base.Init(orientation);
-        timeElapsed = Random.Range(0, growTime/5);
+        ticksElapsed = 0;
+        growTime += Random.Range(-growTimeRange, growTimeRange);
+        if(randomStartTime)
+            ticksElapsed = Random.Range(0, growTime/5);
     }
     
    
 
     public override void Tick(){
         base.Tick();
-        timeElapsed++;
-        if (timeElapsed >= growTime){
-            timeElapsed = -2;
+        ticksElapsed++;
+        // set spriteto aceetain stage based on growth. should be split evenly,and make sure it is atthe start, so we dont go to end stateright before growth
+        
+        int stage = Mathf.FloorToInt(ticksElapsed / (growTime / stages.Length));
+        //only usestage ifstagesisnt  empty 
+        if (stages.Length > 0 && stage < stages.Length){
+            sr.sprite= stages[stage];
+        }
+        
+        if (ticksElapsed >= growTime){
+            ticksElapsed = -2;
             //grow tree
             TerrainManager.Instance.RemoveBlock(data.origin, false);
             TerrainManager.Instance.PlaceBlock( treePrefab, data.origin,data.rotation);
@@ -44,18 +58,18 @@ public class SaplingBlock: TickingBlock{
 
     public override StringBuilder GetDescription(){
         return base.GetDescription().AppendFormat
-            ("This sapling is {0}s old.\nSaplings grow up after an average of 5 minutes, although it varies a lot.", (int)(timeElapsed/20f *10) /10);
+            ("This plant is {0}s old.\nAvg Growth time: {1}s", (int)(ticksElapsed/20f *10) /10, (int)(growTime/20f *10) /10);
     }
 
     public override BlockData Save(){
         BlockData d = base.Save();
-        d.data.SetFloat("timeElapsed", timeElapsed);
+        d.data.SetInt("timeElapsed", ticksElapsed);
         return d;
     }
     
     public override void Load(BlockData d){
         base.Load(d);
-        timeElapsed = d.data.GetFloat("timeElapsed");
+        ticksElapsed = d.data.GetInt("timeElapsed");
     }
 }
 [Serializable]

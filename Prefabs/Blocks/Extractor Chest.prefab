@@ -5150,8 +5150,9 @@ MonoBehaviour:
     destroyTime: 1
     customUI: {fileID: 0}
     ttFlags: 0
-    soundMaterial: 1
+    soundMaterial: 2
     size: {x: 2, y: 1}
+    height: 1
     description: extracts items from nearby inventories every few seconds.
     bso: {fileID: 0}
   currentState:

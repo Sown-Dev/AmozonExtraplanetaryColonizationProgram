@@ -130,14 +130,14 @@ namespace UI.BlockUI{
 
 
             }else if (block is IPowerBattery powerBattery){
-                /* TODO: all this shit
-                 gridBatteryUI = Instantiate(PowerBatteryUIPrefab, windowList.transform)
-                    .GetComponent<PowerBatteryUI>();
+                // TODO: all this shit
+                PowerStorageUI gridBatteryUI = Instantiate(PowerBatteryUIPrefab, windowList.transform)
+                    .GetComponent<PowerStorageUI>();
                 gridBatteryUI.Init(powerBattery);
                 Instantiate(Utils.Instance.EmptyUI, windowList.transform);
-
-                if (componentFields.Count == 0)
-                    Instantiate(Utils.Instance.EmptyUI, windowList.transform);
+                
+               // if (componentFields.Count == 0)
+                   // Instantiate(Utils.Instance.EmptyUI, windowList.transform);
 
                 //windowList.padding.bottom = 12;*/
             }

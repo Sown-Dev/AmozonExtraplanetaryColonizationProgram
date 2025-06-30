@@ -11,6 +11,7 @@ namespace Systems.Terrain{
         public float threshold = 0.5f;
         public float heightThreshold = 0.1f;
         public float heatThreshold = 0.1f;
+        public float chance = 1f;
         
         
         public float scale = 50f;

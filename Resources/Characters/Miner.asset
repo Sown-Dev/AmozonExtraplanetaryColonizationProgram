@@ -24,7 +24,7 @@ MonoBehaviour:
   - itemID: Burner Drill
     itemSO: {fileID: 11400000, guid: 32021bbf16ba899408b23d29dff2bc5f, type: 2}
     amount: 1
-  - itemID: Dynamight
+  - itemID: Dyna-MIGHT
     itemSO: {fileID: 11400000, guid: 7170e20dd905a5b4898a8be9ad0e6782, type: 2}
     amount: 2
   - itemID: Gunther's Homemade Fuel Cell

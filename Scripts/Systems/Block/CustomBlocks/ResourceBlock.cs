@@ -18,6 +18,8 @@ namespace Systems.Block.CustomBlocks{
 
         public int hardness = 0;
         
+        public Block depletedBlock;
+        
         public override void InitializeData(){
             base.InitializeData();
 
@@ -33,9 +35,18 @@ namespace Systems.Block.CustomBlocks{
             if (amount - amt <= 0){
                 amt = amount;
                 amount = 0;
+                    
+                //Depletion Code
                 TerrainManager.Instance.RemoveBlock(data.origin, false);
 
-                return new ItemStack(item, amt * baseYield);   
+                if( depletedBlock != null){
+
+                    TerrainManager.Instance.PlaceBlock(depletedBlock, data.origin,data.rotation);
+                }
+                else{
+                }
+
+                return new ItemStack(item, amt);   
             }
             amount -= amt;
             //create block debris

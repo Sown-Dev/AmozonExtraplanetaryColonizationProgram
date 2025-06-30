@@ -157,8 +157,9 @@ MonoBehaviour:
     ttFlags: 0
     soundMaterial: 1
     size: {x: 2, y: 2}
-    description: Pumps water from underground reservoirs using fuel. Quite a simple
-      yet elegant contraption once you know how it works. Can be placed anywhere.
+    height: 1
+    description: Pumps water from underground reservoirs using fuel. Can be placed
+      anywhere.
     bso: {fileID: 0}
   currentState:
     baseSprite:

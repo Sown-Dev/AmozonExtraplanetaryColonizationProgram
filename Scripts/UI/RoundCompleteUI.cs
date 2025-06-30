@@ -93,17 +93,20 @@ public class RoundCompleteUI : MonoBehaviour
 
             if (totalBonus > RoundManager.Instance.debt){
                 totalBonus -= RoundManager.Instance.debt;
+                debtText.text = $"Debt Collection: <color=#881111ff>-${RoundManager.Instance.debt}</color>";
                 RoundManager.Instance.debt = 0;
-                debtText.text = $"Debt: <color=#881111ff>${RoundManager.Instance.debt}</color>";
 
             }
             else{
-                debtText.text = $"Debt Collection:  <color=#118811ff>-${RoundManager.Instance.debt}</color>";
-                totalBonus = 0;
+                debtText.text = $"Debt Collection:  <color=#118811ff>-${RoundManager.Instance.debt -totalBonus}</color>";
                 RoundManager.Instance.debt -= totalBonus;
+                totalBonus = 0;
+
 
             }
+
         }
+
 
         yield return new WaitForSecondsRealtime(1.5f);
         

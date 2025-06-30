@@ -177,6 +177,7 @@ MonoBehaviour:
     ttFlags: 0
     soundMaterial: 3
     size: {x: 1, y: 1}
+    height: 1
     description: just a tree
     bso: {fileID: 0}
   currentState:
@@ -203,6 +204,7 @@ MonoBehaviour:
   amount: 0
   color: {r: 0.5660378, g: 0.27225316, b: 0.15218939, a: 1}
   hardness: 0
+  depletedBlock: {fileID: 5901517970904080477, guid: f29dff9f434cae145af00a3c6271a8ba, type: 3}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}

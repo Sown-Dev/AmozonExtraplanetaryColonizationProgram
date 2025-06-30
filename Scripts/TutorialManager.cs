@@ -117,6 +117,7 @@ public class TutorialManager : MonoBehaviour{
             }
         }
         currentTutorial.steps[t.currentStep].gameObject.SetActive(true);
+        currentTutorial.steps[t.currentStep].continueButton.onClick.AddListener(NextStep);
         
     }
     public void NextStep(){
@@ -129,6 +130,13 @@ public class TutorialManager : MonoBehaviour{
         currentTutorial.steps[currentTutorial.currentStep].gameObject.SetActive(false);
         currentTutorial.currentStep++;
         currentTutorial.steps[currentTutorial.currentStep].gameObject.SetActive(true);
+        currentTutorial.steps[currentTutorial.currentStep].continueButton.onClick.AddListener(NextStep);
+        
+        //if last step, change text to end
+        if (currentTutorial.currentStep == currentTutorial.steps.Length - 1){
+            currentTutorial.steps[currentTutorial.currentStep].continueButton.GetComponentInChildren<TMPro.TMP_Text>().text = "Complete";
+        }
+
     }
     
     public void EndTutorial(){

@@ -22,8 +22,9 @@ public class TileIndicatorManager : MonoBehaviour{
     public void DrawIndicators(IEnumerable<TileIndicator> indicators, Vector2Int origin = default, Orientation rot = Orientation.Up){
         Clear();
         foreach (TileIndicator indicator in indicators){
-            
+            //do  rotate
             DrawIndicator(indicator.pos.RotateArray(rot, Vector2Int.zero),indicator.type, origin);
+            //DrawIndicator( indicator.pos, indicator.type, origin);
         }
     }
 

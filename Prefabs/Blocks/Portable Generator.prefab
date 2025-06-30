@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2494275154875350271, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Name
-      value: PortableGenerator
+      value: Portable Generator
       objectReference: {fileID: 0}
     - target: {fileID: 3009331184047638935, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -140,19 +140,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
     <myItem>k__BackingField: {fileID: 11400000, guid: 08dc00519e6c18e4280f1a0008359605, type: 2}
-    name: PortableGenerator
+    name: Portable Generator
     indestructible: 0
     rotatable: 0
     invertRotation: 0
     actuatable: 0
     collidable: 1
+    blockUI: 1
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 4
+    soundMaterial: 1
     size: {x: 1, y: 1}
+    height: 1
     description: "A compact power source perfect for remote outposts or small scale
       electric grids. It provides energy as long as you supply fuel, but don\u2019t
       expect much in terms of efficiency."
@@ -165,12 +170,47 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable: []
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Portable Generator
+  hasSaved: 0
+  actuatedThisTick: 0
   baseRate: 80
   burner:
+    fuelContainer:
+      filterList:
+      - {fileID: 11400000, guid: 39aafaf71556ae74da8b564a368241b0, type: 2}
+      - {fileID: 11400000, guid: 2a2072a15f8f35545a162b737649293f, type: 2}
+      - {fileID: 11400000, guid: 62b580cf9896fa149a6caf23ce7b604a, type: 2}
+      - {fileID: 11400000, guid: c34fb669fdcdf2d47b2db6754f16846c, type: 2}
+      - {fileID: 11400000, guid: 732b2f58216f5854281079899f7baa01, type: 2}
+      - {fileID: 11400000, guid: c0daf9eafa2880e43803b73ecd7b4e4a, type: 2}
+      - {fileID: 11400000, guid: 5ccfdc5997f0a674daba36a7e2378d92, type: 2}
+      - {fileID: 11400000, guid: ee35d8670a2239b4ab216038b67bf310, type: 2}
+      - {fileID: 11400000, guid: 0fe1fb369b9640f48820cc810a6aa325, type: 2}
+      - {fileID: 11400000, guid: 081f0a82a1910e44693054f6e1ed1284, type: 2}
+      - {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
+      blackList: 0
+      containerList:
+      - ItemStack:
+          itemID: 
+          itemSO: {fileID: 0}
+          amount: 0
+        filter:
+          filterID: 
+        Stacksize: 1000
+        Selected: 0
+        dirty: 1
+      properties:
+        size: 1
+        name: 
+        gridWidth: 8
+        scaleDownGridIfSmaller: 1
+        type: 0
     fuelTime: 0
     burnTimeTotal: 0
     burnRate: 0
@@ -183,5 +223,10 @@ MonoBehaviour:
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}

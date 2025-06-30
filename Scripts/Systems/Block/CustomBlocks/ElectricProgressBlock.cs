@@ -17,10 +17,15 @@ namespace Systems.Block{
         public int needed{ get; set; }
         public int providedPower{ get; set; }
 
+        
+        protected override void Start(){
+            base.Start();
+            GetConnected();
+
+        }
         public override void Init(Orientation orientation){
             needed = baseUsage;
             base.Init(orientation);
-            GetConnected();
             
             
         }

@@ -141,6 +141,7 @@ MonoBehaviour:
     ttFlags: 0
     soundMaterial: 1
     size: {x: 1, y: 1}
+    height: 0.5
     description: 
     bso: {fileID: 0}
   currentState:

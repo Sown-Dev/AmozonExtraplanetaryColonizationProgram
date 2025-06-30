@@ -1,0 +1,1172 @@
+fileFormatVersion: 2
+guid: adcb36f9109a87a4da0bfff49fdb182d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9190018705392656211
+    second: nobg_0
+  - first:
+      213: 4481505661688288110
+    second: nobg_1
+  - first:
+      213: 4788970369010550732
+    second: nobg_2
+  - first:
+      213: 2222793685024147680
+    second: nobg_3
+  - first:
+      213: -3775883668535855503
+    second: nobg_4
+  - first:
+      213: 9067431846091574958
+    second: nobg_5
+  - first:
+      213: -8667804161152680125
+    second: nobg_6
+  - first:
+      213: -4256942747194473954
+    second: nobg_7
+  - first:
+      213: -3428432872282112377
+    second: nobg_8
+  - first:
+      213: 5127117761264216431
+    second: nobg_9
+  - first:
+      213: -8088231742070679786
+    second: nobg_10
+  - first:
+      213: -8117193188202922538
+    second: nobg_11
+  - first:
+      213: -6309465633828493702
+    second: nobg_12
+  - first:
+      213: -4198068521953590041
+    second: nobg_13
+  - first:
+      213: -6786492776593303929
+    second: nobg_14
+  - first:
+      213: 5145208458044030804
+    second: nobg_15
+  - first:
+      213: -1669381868630648802
+    second: nobg_16
+  - first:
+      213: -7463336059378418044
+    second: nobg_17
+  - first:
+      213: 131473307776300761
+    second: nobg_18
+  - first:
+      213: -7086123224553709859
+    second: nobg_19
+  - first:
+      213: -8804125315200741599
+    second: nobg_20
+  - first:
+      213: -8696466582430653832
+    second: nobg_21
+  - first:
+      213: -3498621906513143214
+    second: nobg_22
+  - first:
+      213: 6398948538474505497
+    second: nobg_23
+  - first:
+      213: 5392428356268981581
+    second: nobg_24
+  - first:
+      213: -1717591597182234392
+    second: nobg_25
+  - first:
+      213: -8506953479106174442
+    second: nobg_26
+  - first:
+      213: 5727270135298972470
+    second: nobg_27
+  - first:
+      213: 464595511650655998
+    second: nobg_28
+  - first:
+      213: 891658408245332786
+    second: nobg_29
+  - first:
+      213: 2282420735609244262
+    second: nobg_30
+  - first:
+      213: 1431544142376154684
+    second: nobg_31
+  - first:
+      213: 9066101870153300718
+    second: nobg_32
+  - first:
+      213: 447430111315357544
+    second: nobg_33
+  - first:
+      213: -4218180817458545699
+    second: nobg_34
+  - first:
+      213: 8686960729604749195
+    second: nobg_35
+  - first:
+      213: 7362509704457100513
+    second: nobg_36
+  - first:
+      213: -102519927354543769
+    second: nobg_37
+  - first:
+      213: 1199707059897531339
+    second: nobg_38
+  - first:
+      213: 4154852984905458403
+    second: nobg_39
+  - first:
+      213: -3789342860682197933
+    second: nobg_40
+  - first:
+      213: -4956073583807644524
+    second: nobg_41
+  - first:
+      213: -4969834258529543270
+    second: nobg_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: nobg_0
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 179
+        width: 842
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da020e1adae767080800000000000000
+      internalID: -9190018705392656211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_1
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 179
+        width: 197
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6315dfb7a1813e30800000000000000
+      internalID: 4481505661688288110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_2
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 101
+        width: 35
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc7ceb47d27d57240800000000000000
+      internalID: 4788970369010550732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_3
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 32
+        width: 152
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e888d46413f8de10800000000000000
+      internalID: 2222793685024147680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_4
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 101
+        width: 59
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 176b8b71fcd599bc0800000000000000
+      internalID: -3775883668535855503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_5
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 101
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eae4a53093df5dd70800000000000000
+      internalID: 9067431846091574958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_6
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 101
+        width: 29
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34f77d71a06c5b780800000000000000
+      internalID: -8667804161152680125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_7
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 101
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e124c4c202d4ce4c0800000000000000
+      internalID: -4256942747194473954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_8
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 101
+        width: 38
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78e3a5f9772cb60d0800000000000000
+      internalID: -3428432872282112377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_9
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 101
+        width: 32
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f69efb1707e272740800000000000000
+      internalID: 5127117761264216431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_10
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 101
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61796d87514d0cf80800000000000000
+      internalID: -8088231742070679786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_11
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 101
+        width: 26
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ddb1f35dcfe95f80800000000000000
+      internalID: -8117193188202922538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_12
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 101
+        width: 23
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a762e1d5f664078a0800000000000000
+      internalID: -6309465633828493702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_13
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 101
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e4053eebe67db5c0800000000000000
+      internalID: -4198068521953590041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_14
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 86
+        width: 35
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 786d66ca6c881d1a0800000000000000
+      internalID: -6786492776593303929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_15
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 101
+        width: 11
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45fbc0505d3776740800000000000000
+      internalID: 5145208458044030804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_16
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 101
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e18dac5090a25d8e0800000000000000
+      internalID: -1669381868630648802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_17
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 101
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48eb26d7567ec6890800000000000000
+      internalID: -7463336059378418044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_18
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 101
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d6b37fd64613d100800000000000000
+      internalID: 131473307776300761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_19
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 101
+        width: 26
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dde94dd987809ad90800000000000000
+      internalID: -7086123224553709859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_20
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 101
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12f8f6d0ca671d580800000000000000
+      internalID: -8804125315200741599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_21
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 86
+        width: 62
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8726a2918b1ff4780800000000000000
+      internalID: -8696466582430653832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_22
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 86
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25a52ea99e5627fc0800000000000000
+      internalID: -3498621906513143214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_23
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 74
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91527cbeac1adc850800000000000000
+      internalID: 6398948538474505497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_24
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 32
+        width: 26
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4df72c0501c5da40800000000000000
+      internalID: 5392428356268981581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_25
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 74
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e0d1c4ea83e928e0800000000000000
+      internalID: -1717591597182234392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_26
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 32
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6126a1de1ea31f980800000000000000
+      internalID: -8506953479106174442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_27
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 68
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63bd23bf7d95b7f40800000000000000
+      internalID: 5727270135298972470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_28
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 68
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efe9d240823927600800000000000000
+      internalID: 464595511650655998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_29
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 32
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b047c199ecf5c00800000000000000
+      internalID: 891658408245332786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_30
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 32
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66a89f5f099ccaf10800000000000000
+      internalID: 2282420735609244262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_31
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 32
+        width: 11
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c363f9610ddddd310800000000000000
+      internalID: 1431544142376154684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_32
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 32
+        width: 29
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeafdfbdd9341dd70800000000000000
+      internalID: 9066101870153300718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_33
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 32
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86fe3cec057953600800000000000000
+      internalID: 447430111315357544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_34
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 32
+        width: 11
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddb340935e20675c0800000000000000
+      internalID: -4218180817458545699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_35
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 32
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b87fbd112c84e8870800000000000000
+      internalID: 8686960729604749195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_36
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 32
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ec18856193ec2660800000000000000
+      internalID: 7362509704457100513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_37
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 32
+        width: 23
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76132a35ba6c39ef0800000000000000
+      internalID: -102519927354543769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_38
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 32
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb78b3f63736a010800000000000000
+      internalID: 1199707059897531339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_39
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 17
+        width: 38
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e2e243c6c009a930800000000000000
+      internalID: 4154852984905458403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_40
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 32
+        width: 23
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35400e8bebc896bc0800000000000000
+      internalID: -3789342860682197933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_41
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 32
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49cb27c755d783bb0800000000000000
+      internalID: -4956073583807644524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nobg_42
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 32
+        width: 56
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9b97cbb21a970bb0800000000000000
+      internalID: -4969834258529543270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class ElectricityUI : MonoBehaviour
 {
-    
     public Image plug;
     public Button plugButton;
     public Sprite plugOn;

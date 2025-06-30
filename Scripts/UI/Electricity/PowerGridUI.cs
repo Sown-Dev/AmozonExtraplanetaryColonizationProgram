@@ -18,6 +18,8 @@ namespace UI{
         public TMP_Text producing;
         public TMP_Text consuming;
         public TMP_Text stored;
+        public TMP_Text storingPerSecond;
+        public TMP_Text dischargePerSecond;
         
         public SlicedFilledImage producingBar;
         public SlicedFilledImage storedBar;
@@ -50,7 +52,13 @@ namespace UI{
             
             producing.text = myGrid.producing + "W/" + myGrid.productionCapacity + "W";
             consuming.text = myGrid.consuming + "W/" + myGrid.powerNeeded + "W";
-            stored.text = myGrid.storedPower + "W/" + myGrid.capacity + "W";
+            stored.text = (int)myGrid.storedPower + "W/" + myGrid.capacity + "W";
+            
+            storingPerSecond.gameObject.SetActive(myGrid.storedPerSecond > 0);
+            storingPerSecond.text = "+"+myGrid.storedPerSecond + "W";
+            
+            dischargePerSecond.gameObject.SetActive(myGrid.usedPerSecond > 0);
+            dischargePerSecond.text = "-" + myGrid.usedPerSecond + "W";
             
             //make bars empty if the value doesn't apply.
             producingBar.fillAmount = myGrid.producing>0?(float)myGrid.producing / myGrid.productionCapacity:0;

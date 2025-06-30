@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Smart Arm
   m_EditorClassIdentifier: 
   <description>k__BackingField: 
-  <icon>k__BackingField: {fileID: 21300000, guid: 02365df77ae6c8549a3906ec32038001, type: 3}
+  <icon>k__BackingField: {fileID: 21300000, guid: fbc16757846198147a7274957e3976d5, type: 3}
   stackSize: 16
   category: 2
   useCursor: 1

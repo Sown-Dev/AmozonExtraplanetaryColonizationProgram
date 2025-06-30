@@ -77,7 +77,7 @@ namespace Systems.Block{
                 //Debug.Log("Connecting "+block.myBlock.origin);
             //}
         }
-        public void Disconnect(IPowerBlock block){
+        public virtual void Disconnect(IPowerBlock block){
             //Debug.Log("Disconnecting "+block.myBlock.origin);
             if (connectedBlocks.Contains(block)){
                 connectedBlocks.Remove(block);
@@ -90,7 +90,7 @@ namespace Systems.Block{
         private void Start(){
             GetConnected();
             GetGrid();
-            foreach (var block in connectedBlocks){
+            foreach (var block in connectedBlocks.ToList()){
                 Connect(block);
             }
 

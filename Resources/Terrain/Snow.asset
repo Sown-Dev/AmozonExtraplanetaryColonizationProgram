@@ -17,7 +17,7 @@ MonoBehaviour:
     owned: 1
     myProperties: Snow
   footsteps:
-  - {fileID: 8300000, guid: 47747d0d1c669df4c92b3e249ee71b62, type: 3}
+  - {fileID: 8300000, guid: 46b32220631dcfd43b6081cd87bc0a2a, type: 3}
   myItem: {fileID: 11400000, guid: dc73c05aba4308249a702f4937f633b9, type: 2}
   walkSpeed: 0.75
   collider: 0

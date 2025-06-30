@@ -133,8 +133,8 @@ namespace Systems.Block
         public override List<TileIndicator> GetIndicators(){
             var e = base.GetIndicators();
             //add input and output indicators
-            e.Add( new TileIndicator(new Vector2Int[]{DirSelect.inputOrientation.GetVectorInt()+data.origin}, IndicatorType.InsertingTo));
-            e.Add( new TileIndicator(new Vector2Int[]{DirSelect.outputOrientation.GetVectorInt()+data.origin}, IndicatorType.ExtractingFrom));
+            e.Add( new TileIndicator(new Vector2Int[]{DirSelect.inputOrientation.GetVectorInt()}, IndicatorType.InsertingTo));
+            e.Add( new TileIndicator(new Vector2Int[]{DirSelect.outputOrientation.GetVectorInt()}, IndicatorType.ExtractingFrom));
             
             
             return e;

@@ -18,7 +18,7 @@ MonoBehaviour:
   category: 1
   useCursor: 1
   value: 40
-  tier: 5
+  tier: -1
   fuelValue: 0
   throwPrefab: {fileID: 1958725412703769519, guid: 2a1d7e0f5bc1107418dd263e973f9e27, type: 3}
   xVelocity: 10

@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: aae84c5df9c42da4096b1beed37f00b3, type: 3}
+      objectReference: {fileID: 21300000, guid: 29556a124182d8d4a9f2d5b47f0b0bd7, type: 3}
     - target: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 3560868191791535471}
+  source: {fileID: 6725275230908569105}
   bc: {fileID: 2449576365950138683}
   baseColor: {r: 0.35, g: 0.32, b: 0.27, a: 1}
   properties:
@@ -152,8 +153,11 @@ MonoBehaviour:
     collidable: 1
     blockUI: 0
     destroyTime: 1
+    customUI: {fileID: 0}
     ttFlags: 0
+    soundMaterial: 3
     size: {x: 1, y: 1}
+    height: 1
     description: 
     bso: {fileID: 0}
   currentState:
@@ -164,15 +168,31 @@ MonoBehaviour:
     rotations: []
     currentSprite:
       sprites: []
-  lootTable:
-  - item: {fileID: 11400000, guid: c84668e992e278b469a1465de6a64705, type: 2}
-    amount: 2
-  rotation: 0
   tile: {fileID: 0}
-  origin: {x: 0, y: 0}
+  additionalLoot: []
+  data:
+    lootTable: []
+    rotation: 0
+    origin: {x: 0, y: 0}
+  addressableKey: Sapling
+  hasSaved: 0
+  actuatedThisTick: 0
+  growTime: 6000
   treePrefab: {fileID: -8526707392088505906, guid: 1b4774ae127334c42b741e3b1b32a598, type: 3}
+  ticksElapsed: 0
+  randomStartTime: 0
+  growTimeRange: 0
+  stages:
+  - {fileID: 21300000, guid: 29556a124182d8d4a9f2d5b47f0b0bd7, type: 3}
+  - {fileID: 21300000, guid: 1efbeacbe0fc670479e82d9023df8fe2, type: 3}
+  - {fileID: 21300000, guid: 051acd4a083257f47b8e5ec4e212cbeb, type: 3}
 --- !u!212 &3560868191791535471 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4131859953494582723, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
+  m_PrefabInstance: {fileID: 593892948568715436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6725275230908569105 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6154472689827702461, guid: 01e2a8f3a5b131b4592850b6fc50978b, type: 3}
   m_PrefabInstance: {fileID: 593892948568715436}
   m_PrefabAsset: {fileID: 0}

@@ -13,10 +13,14 @@ namespace Systems.Block.CustomBlocks{
 
         public int baseUsage = 100;
 
+        protected override void Start(){
+            base.Start();
+            GetConnected();
+
+        }
+        
         public override void Init(Orientation orientation){
             base.Init(orientation);
-            GetConnected();
-            
             
         }
 

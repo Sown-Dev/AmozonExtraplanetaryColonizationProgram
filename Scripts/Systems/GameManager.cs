@@ -164,6 +164,17 @@ public class GameManager : MonoBehaviour{
 
     public void Start(){
         settingsWindow.Hide();
+
+
+        //stupid piece of code to disable dev mode unless we have the directive
+        bool disableDevMode = true;
+#if ALLITEMS1
+        disableDevMode = false; 
+#endif
+        if (disableDevMode){
+            settings.DevMode = false;
+        }
+
     }
 
     private IEnumerator PreloadLocalization(){
@@ -472,7 +483,7 @@ public class World{
 
     //other things:world stats, player info, terrain data
     public List<BlockLoadData> blocks = new List<BlockLoadData>();
-    public bool[] walls;
+    public short[] walls;
 
     public List<OreData> ores = new List<OreData>(); //list of ores to spawn
     public List<TerrainData> terrain = new List<TerrainData>(); //list of terrain to spawn

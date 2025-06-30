@@ -357,6 +357,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f29dff9f434cae145af00a3c6271a8ba
+    m_Address: Tree Stump
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df74dfd924cc972438cdb111f9b4707d
+    m_Address: Block Placer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41d0367902f80a04498b8ff397174053
+    m_Address: Mature Cactus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc17ec485f61d094a82cc5b1ac28a269
+    m_Address: Cactus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 440db29cf27d2c049bfd22847fdb042f, type: 2}
   m_SchemaSet:

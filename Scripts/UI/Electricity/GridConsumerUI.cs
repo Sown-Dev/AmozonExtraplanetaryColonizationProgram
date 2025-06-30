@@ -7,13 +7,15 @@ namespace UI{
     public class GridConsumerUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler{
         
         private IPowerConsumer myConsumer;
-            
-        public TMP_Text nameText;
+        public ItemStackUI itemStackUI;
+
+        //public TMP_Text nameText;
         public TMP_Text powerText;
         public Image icon;
         public void Init(IPowerConsumer consumer){
+            itemStackUI.Init(consumer.myBlock.properties.myItem);
             myConsumer = consumer;
-            nameText.text = myConsumer.myBlock.properties.name;
+            //nameText.text = myConsumer.myBlock.properties.name;
             powerText.text = myConsumer.providedPower + "W ";
             icon.sprite = myConsumer.myBlock.properties.myItem.icon;
 

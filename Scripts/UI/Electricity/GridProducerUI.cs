@@ -7,13 +7,15 @@ namespace UI{
     public class GridProducerUI : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler{
         
         private IPowerProducer myProducer;
-            
-        public TMP_Text nameText;
+        public ItemStackUI itemStackUI;
+
+        //public TMP_Text nameText;
         public TMP_Text powerText;
         public Image icon;
         public void Init(IPowerProducer prod){
+            itemStackUI.Init(prod.myBlock.properties.myItem);
             myProducer = prod;
-            nameText.text = myProducer.myBlock.properties.name;
+            //nameText.text = myProducer.myBlock.properties.name;
             powerText.text = myProducer.producing + "W ";
             icon.sprite = myProducer.myBlock.properties.myItem.icon;
 

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3018182443641059951, guid: 562166d340c51ba41a63489c5e2e1b09, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 48
+      objectReference: {fileID: 0}
     - target: {fileID: 6569521397696946706, guid: 562166d340c51ba41a63489c5e2e1b09, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -34,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6569521397696946706, guid: 562166d340c51ba41a63489c5e2e1b09, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 144
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 6569521397696946706, guid: 562166d340c51ba41a63489c5e2e1b09, type: 3}
       propertyPath: m_SizeDelta.y
@@ -122,15 +126,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2065785185410278256 stripped
+--- !u!114 &7499781293323607620 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 485593028988307724, guid: 562166d340c51ba41a63489c5e2e1b09, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8215299914537219128, guid: 562166d340c51ba41a63489c5e2e1b09, type: 3}
   m_PrefabInstance: {fileID: 1879699683256167036}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2acd0bddf2bab354f9b27f588b4417ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7909335590301442086 stripped
@@ -150,6 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c037d0ce8d4534dadf5c59f2cebd86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 2065785185410278256}
+  itemStackUI: {fileID: 7499781293323607620}
   powerText: {fileID: 1133450123073278415}
   icon: {fileID: 167058451850164718}

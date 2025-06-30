@@ -14,6 +14,7 @@ using UI.BlockUI;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Unit = Systems.Unit;
 using Terrain = Systems.Terrain.Terrain;
 
@@ -51,6 +52,7 @@ public partial class Player : Unit, IContainer{
     [SerializeField] private GameObject DropPod; //only spawned at beginning, destroyed on landing
     [SerializeField] private GameObject DropPodDestroy;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private CanvasGroup CloudEffectCG;
 
 
     //physics
@@ -72,6 +74,9 @@ public partial class Player : Unit, IContainer{
     private Block standingBlock;
     private Terrain standingTerrain;
     private TerrainProperties standingTerrainProperties;
+
+     public bool itemNotify = true;
+
 
 
     protected override void Awake(){
@@ -112,11 +117,13 @@ public partial class Player : Unit, IContainer{
             AddUpgrade((Upgrade)u.u, false);
         }
 
+        itemNotify = false;
         //add starting items
         foreach (ItemStack i in myCharacter.startingItems){
             ItemStack item = i.Clone();
             Insert(ref item, false);
         }
+        itemNotify = true;
 
         SelectSlot(Inventory.GetSlot(7)); //select first slot
     }
@@ -332,7 +339,7 @@ public partial class Player : Unit, IContainer{
             myCursor.directionArrow.gameObject.SetActive(false);
 
             if (myCursor.lookingBlock){
-                indicatorManager.DrawIndicators(myCursor.lookingBlock.GetIndicators(), Vector2Int.zero,
+                indicatorManager.DrawIndicators(myCursor.lookingBlock.GetIndicators(), myCursor.lookingBlock.data.origin ,
                     myCursor.lookingBlock.properties.rotatable ? myCursor.lookingBlock.data.rotation : Orientation.Up);
             }
         }
@@ -383,6 +390,10 @@ public partial class Player : Unit, IContainer{
 
         spriteHolder.transform.localPosition = new Vector3(0,
             y, 0);
+        
+        
+        //show clouds if height is more than 100
+        CloudEffectCG.alpha = Mathf.Clamp01((y - 100) / 100);
 
         float moveForce = (moveV * finalStats[Statstype.Movespeed]);
         moveForce *= (m_Grounded ? standingTerrainProperties?.walkSpeed ?? 1 : 1.2f); //either use terrain speed or air speed, which is 1.2x base speed.
@@ -391,7 +402,6 @@ public partial class Player : Unit, IContainer{
     }
 
 
-    private bool popup = true;
 
     public bool Insert(ref ItemStack s, bool simulate = false){
         if (s?.item == money){
@@ -404,13 +414,12 @@ public partial class Player : Unit, IContainer{
             return false;
         }
 
-        if (!simulate && Inventory.Insert(ref s, true)){
+        if (!simulate && Inventory.Insert(ref s, true) && itemNotify){
             Popup($"+{s.amount} {s.item.name}");
         }
 
         bool ret = Inventory.Insert(ref s, simulate);
 
-        popup = true; //
         return Inventory.Insert(s);
     }
 
@@ -492,8 +501,9 @@ public partial class Player : Unit, IContainer{
 
         Instantiate(OnDeath, transform.position, quaternion.identity);
         myCam.transform.SetParent(transform.parent.parent);
+        GameManager.Instance.StartCoroutine(AfterDeath());
         Destroy(gameObject);
-        StartCoroutine(AfterDeath());
+
     }
 
     public IEnumerator AfterDeath(){
