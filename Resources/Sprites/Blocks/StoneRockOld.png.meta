@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      StoneRockOld_0: -1394761742459497278
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

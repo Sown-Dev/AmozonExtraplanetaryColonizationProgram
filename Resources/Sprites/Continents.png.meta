@@ -324,7 +324,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Continents_0: 8958582959516302084
+      Continents_1: 6194903611760304424
+      Continents_2: 5808851753372480491
+      Continents_3: -2638972627483248427
+      Continents_4: 5047432825928606726
+      Continents_5: -2494430186447602618
+      Continents_6: 7521618866322485602
+      Continents_7: -8439349718349726987
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

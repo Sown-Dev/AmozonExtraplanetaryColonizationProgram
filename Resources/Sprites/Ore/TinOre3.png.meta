@@ -180,7 +180,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TinOre3_0: -4648864173384167981
+      TinOre3_1: 5693934797199299097
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

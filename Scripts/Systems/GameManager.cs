@@ -32,10 +32,9 @@ public class GameManager : MonoBehaviour{
 
     public WorldStats myStats;
 
-    
-    
+
     public Vector4 windowMargin = new Vector4(0, 0, 0, 60);
-    
+
     public GameData gameData;
 
     [HideInInspector] [DoNotSerialize] public List<World> worlds = new List<World>();
@@ -48,6 +47,7 @@ public class GameManager : MonoBehaviour{
 
     [Header("References")] [SerializeField]
     private CanvasGroup saveIconCG;
+
     public PauseManager pauseManager;
     public UIWindow settingsWindow;
 
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour{
 
         currentWorld = null;
         inGame = false;
-                saveIconCG.alpha = 0;
+        saveIconCG.alpha = 0;
 
 
         LoadStats();
@@ -91,14 +91,14 @@ public class GameManager : MonoBehaviour{
 
         StartCoroutine(PreloadLocalization());
 
-        
+
         //load settings
         if (PlayerPrefs.HasKey("GameSettings")){
             string json = PlayerPrefs.GetString("GameSettings");
             settings = JsonUtility.FromJson<GameSettings>(json);
         }
         else{
-            settings = new GameSettings(); 
+            settings = new GameSettings();
         }
 
         worlds = new List<World>();
@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour{
         catch (Exception e){
             Debug.LogError($"Failed to load worlds from PlayerPrefs: {e.StackTrace}");
         }
+
         //load gamedata
         if (PlayerPrefs.HasKey("GameData")){
             string json = PlayerPrefs.GetString("GameData");
@@ -169,12 +170,11 @@ public class GameManager : MonoBehaviour{
         //stupid piece of code to disable dev mode unless we have the directive
         bool disableDevMode = true;
 #if ALLITEMS1
-        disableDevMode = false; 
+        disableDevMode = false;
 #endif
         if (disableDevMode){
             settings.DevMode = false;
         }
-
     }
 
     private IEnumerator PreloadLocalization(){
@@ -245,7 +245,6 @@ public class GameManager : MonoBehaviour{
 
 
     public void StartNewRun(){
-       
         SceneManager.LoadScene("Game");
     }
 
@@ -254,11 +253,10 @@ public class GameManager : MonoBehaviour{
         inGame = true;
         currentWorld = new World(Random.Range(-100000, 100000));
         //currentWorld.name = "Kepler-" + (char) Random.Range(97,122) + Random.Range(0, 99);
-    
-        if(selectedChar)
+
+        if (selectedChar)
             currentWorld.playerCharacter = selectedChar.name;
         currentWorld.oreProperties = ItemManager.Instance.allOres.Select(ore => ore.name).ToArray();
-
     }
 
     public void LoadWorld(World world){
@@ -272,16 +270,26 @@ public class GameManager : MonoBehaviour{
         return allCharacters.FirstOrDefault(c => c.name == name);
     }
 
-    
+
     public IEnumerator SaveCR(){
         saveIconCG.alpha = 1;
-         string settingsJSON = JsonConvert.SerializeObject(settings,JSONsettings);
+        string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
         PlayerPrefs.SetString("GameSettings", settingsJSON);
-        
+
         try{
             Debug.Log("Saving World");
             SaveStats();
 
+            //player save
+            if (Player.Instance)
+                currentWorld.playerData = Player.Instance.SavePlayer();
+            Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+
+            //round save
+            if (RoundManager.Instance)
+                currentWorld.roundData = RoundManager.Instance.SaveRoundData();
+
+            // Save the current world data
             TerrainManager.Instance.SaveWorld();
 
             // Check if the current world is already in the list
@@ -296,15 +304,6 @@ public class GameManager : MonoBehaviour{
                 worlds[index] = currentWorld;
             }
 
-            //player save
-            if (Player.Instance)
-                currentWorld.playerData = Player.Instance.SavePlayer();
-
-            Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
-
-            //round save
-            if (RoundManager.Instance)
-                currentWorld.roundData = RoundManager.Instance.SaveRoundData();
 
             // Save the current world to PlayerPrefs
 
@@ -316,6 +315,7 @@ public class GameManager : MonoBehaviour{
 #endif
             //string json = JsonUtility.ToJson(currentWorld);
             PlayerPrefs.SetString(currentWorld.name, json);
+            
 
 #if UNITY_STANDALONE_WIN
             try{
@@ -337,13 +337,13 @@ public class GameManager : MonoBehaviour{
         catch (Exception e){
             Debug.LogError($"Failed to save world: {e.StackTrace}");
         }
+
         saveIconCG.alpha = 0;
         yield return null;
-
     }
+
     public void Save(){
-       
-        StartCoroutine( SaveCR());
+        StartCoroutine(SaveCR());
     }
 
     private void SaveWorlds(){
@@ -438,6 +438,7 @@ public class GameManager : MonoBehaviour{
     public void CloseSettings(){
         settingsWindow.Hide();
     }
+
     public void LoadScene(Scenum scene){
         switch (scene){
             case Scenum.RunStart:
@@ -449,16 +450,15 @@ public class GameManager : MonoBehaviour{
             case Scenum.Titlescreen:
                 SceneManager.LoadScene("Scenes/Titlescreen");
                 break;
-        }   
+        }
     }
 }
 
 public enum Scenum{
-    None=-1,
-    Titlescreen=1,
-    RunStart=2,
-    MainMenu=3,
-    
+    None = -1,
+    Titlescreen = 1,
+    RunStart = 2,
+    MainMenu = 3,
 }
 
 [JsonObject(ItemNullValueHandling = NullValueHandling.Include)]
@@ -497,8 +497,10 @@ public class World{
     public PlanetFlags flags = PlanetFlags.None;
 
     static string[] planetNames = new string[]{
-        "Kepler", "Proxima", "Pluto","Gemini","Bezos", "Leporis", "Gliese", "Upsilon", "Librae", "Resonare", "Tau", "WASP", "Borealis", "Primus", "TESS", "CoRoT"
+        "Kepler", "Proxima", "Pluto", "Gemini", "Bezos", "Leporis", "Gliese", "Upsilon", "Librae", "Resonare", "Tau", "WASP", "Borealis", "Primus", "TESS",
+        "CoRoT"
     };
+
     //generate world
     public World(int _seed){
         seed = _seed;
@@ -507,7 +509,7 @@ public class World{
         planetType = (PlanetType)Random.Range(0, Enum.GetValues(typeof(PlanetType)).Length); //random planet type
 
         //planet name
-        name =  planetNames[Random.Range(0,planetNames.Length)] +"-" + Random.Range(0, 99) + (char)Random.Range(97, 122);
+        name = planetNames[Random.Range(0, planetNames.Length)] + "-" + Random.Range(0, 99) + (char)Random.Range(97, 122);
 
         //each flag has a 50% chance of being applied
         foreach (PlanetFlags flag in System.Enum.GetValues(typeof(PlanetFlags))){
@@ -565,8 +567,4 @@ public class GameData{
     public int level;
     public double xp;
     public double maxXp;
-    
-    
-
-
 }

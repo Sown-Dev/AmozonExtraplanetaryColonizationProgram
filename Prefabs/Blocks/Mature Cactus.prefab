@@ -199,8 +199,8 @@ MonoBehaviour:
   hasSaved: 0
   item: {fileID: 11400000, guid: 0fe1fb369b9640f48820cc810a6aa325, type: 2}
   baseYield: 1
-  baseAmount: 80
-  range: 22
+  baseAmount: 20
+  range: 8
   amount: 0
   color: {r: 0.358843, g: 0.7830189, b: 0.31394625, a: 1}
   hardness: 0
