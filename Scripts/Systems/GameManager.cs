@@ -19,6 +19,7 @@ using UI; // Add this at the top
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 using Terrain = Systems.Terrain.Terrain;
 
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour{
     public Character selectedChar;
     public Character[] allCharacters;
 
-    public WorldStats myStats;
+    [FormerlySerializedAs("myStats")] public WorldMetrics myMetrics;
 
 
     public Vector4 windowMargin = new Vector4(0, 0, 0, 60);
@@ -356,7 +357,7 @@ public class GameManager : MonoBehaviour{
 
 
     public void SaveStats(){
-        string json = JsonUtility.ToJson(myStats);
+        string json = JsonUtility.ToJson(myMetrics);
         PlayerPrefs.SetString("PlayerStats", json);
 
         PlayerPrefs.Save();
@@ -365,10 +366,10 @@ public class GameManager : MonoBehaviour{
     public void LoadStats(){
         if (PlayerPrefs.HasKey("PlayerStats")){
             string json = PlayerPrefs.GetString("PlayerStats");
-            myStats = JsonUtility.FromJson<WorldStats>(json);
+            myMetrics = JsonUtility.FromJson<WorldMetrics>(json);
         }
         else{
-            myStats = new WorldStats(); // Default if no data is saved
+            myMetrics = new WorldMetrics(); // Default if no data is saved
         }
     }
 

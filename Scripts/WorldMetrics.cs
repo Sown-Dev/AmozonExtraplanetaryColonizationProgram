@@ -6,14 +6,14 @@ using Newtonsoft.Json;
 
 [Serializable]
 [JsonObject]
-public class WorldStats
+public class WorldMetrics
 {
     public int blocksBroken;
     public int itemsPickedUp;
     public int moneyEarned;
     public List<string> itemsDiscovered;
 
-    public WorldStats()
+    public WorldMetrics()
     {
         blocksBroken = 0;
         itemsPickedUp = 0;
@@ -21,11 +21,11 @@ public class WorldStats
         itemsDiscovered = new List<string>();
     }
 
-    public static WorldStats operator +(WorldStats a, WorldStats b)
+    public static WorldMetrics operator +(WorldMetrics a, WorldMetrics b)
     {
-        var result = new WorldStats();
+        var result = new WorldMetrics();
 
-        var fields = typeof(WorldStats).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        var fields = typeof(WorldMetrics).GetFields(BindingFlags.Public | BindingFlags.Instance);
         foreach (var field in fields)
         {
             if (IsAddableType(field.FieldType))

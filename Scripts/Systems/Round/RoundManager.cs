@@ -49,7 +49,7 @@ namespace Systems.Round{
         bool lostGame;
 
 
-        [FormerlySerializedAs("roundStats")] public WorldStats runStats;
+        [FormerlySerializedAs("runStats")] [FormerlySerializedAs("roundStats")] public WorldMetrics runMetrics;
 
         public LoseGameUI loseGameUI;
 
@@ -83,7 +83,7 @@ namespace Systems.Round{
             StartCooldown(-1);
             roundNum = -1;
         
-            runStats = new WorldStats();
+            runMetrics = new WorldMetrics();
 
             
             loansTaken = 0;
@@ -159,7 +159,7 @@ namespace Systems.Round{
         public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
             
-            runStats.moneyEarned += amount;
+            runMetrics.moneyEarned += amount;
             if (amount > 0){
                 Player.Instance.Popup("+" + amount + "$", new Color(0.1f, 1f, 0.5f));
             }
@@ -415,7 +415,7 @@ namespace Systems.Round{
                 //lose for real
                 var ls = Instantiate(loseGameUI.gameObject, importantUIs).GetComponent<LoseGameUI>();
                 ls.transform.SetAsLastSibling();
-                ls.LoseScreen(runStats.moneyEarned, runStats.itemsDiscovered.Select(d => ItemManager.Instance.GetItemByID(d)).ToList());
+                ls.LoseScreen(runMetrics.moneyEarned, runMetrics.itemsDiscovered.Select(d => ItemManager.Instance.GetItemByID(d)).ToList());
             }
         }
 
@@ -475,7 +475,7 @@ namespace Systems.Round{
             currentContract = data.currentContract;
             shopTiers = data.shopTiers;
             
-            runStats = data.runStats;
+            runMetrics = data.runMetrics;
         }
     }
 
@@ -493,6 +493,6 @@ namespace Systems.Round{
         public Contract currentContract;
         public List<ShopTier> shopTiers = new();
         
-        public WorldStats runStats = new WorldStats();
+        [FormerlySerializedAs("runStats")] public WorldMetrics runMetrics = new WorldMetrics();
     }
 }
