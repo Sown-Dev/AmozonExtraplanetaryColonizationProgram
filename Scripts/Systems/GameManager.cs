@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour{
 
     [FormerlySerializedAs("myStats")] public WorldMetrics myMetrics;
 
+    //metrics for the current run
+    [HideInInspector]
+    [DoNotSerialize]
+    public WorldMetrics runMetrics;
+
 
     public Vector4 windowMargin = new Vector4(0, 0, 0, 60);
 
@@ -246,6 +251,7 @@ public class GameManager : MonoBehaviour{
 
 
     public void StartNewRun(){
+        ResetRunMetrics();
         SceneManager.LoadScene("Game");
     }
 
@@ -373,6 +379,19 @@ public class GameManager : MonoBehaviour{
         }
     }
 
+    public void ResetRunMetrics(){
+        runMetrics = new WorldMetrics();
+    }
+
+    public void ApplyRunMetrics(){
+        if(currentWorld != null){
+            currentWorld.worldMetrics += runMetrics;
+        }
+
+        myMetrics += runMetrics;
+        runMetrics = new WorldMetrics();
+    }
+
     public bool DeleteWorld(World world){
         if (worlds.Contains(world)){
             worlds.Remove(world);
@@ -478,6 +497,7 @@ public class World{
     public string playerCharacter; //player character for this world
     public PlayerData playerData; //player data for this world
     public RoundData roundData; //round data for this world
+    public WorldMetrics worldMetrics = new WorldMetrics(); //metrics persistent to this world
 
     public Vector2Int worldSize = new Vector2Int(500, 500); //default size
 
@@ -502,12 +522,19 @@ public class World{
         "CoRoT"
     };
 
+    //needed for deserialization
+    public World() {
+        worldMetrics = new WorldMetrics();
+    }
+
     //generate world
     public World(int _seed){
         seed = _seed;
         //set random seed, then generate world
         Random.InitState(seed);
         planetType = (PlanetType)Random.Range(0, Enum.GetValues(typeof(PlanetType)).Length); //random planet type
+
+        worldMetrics = new WorldMetrics();
 
         //planet name
         name = planetNames[Random.Range(0, planetNames.Length)] + "-" + Random.Range(0, 99) + (char)Random.Range(97, 122);

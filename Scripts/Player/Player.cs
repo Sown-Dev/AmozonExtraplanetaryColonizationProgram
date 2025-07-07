@@ -413,12 +413,22 @@ public partial class Player : Unit, IContainer{
         if (s == null){
             return false;
         }
+        int startAmount = s.amount;
+        string itemId = s.itemID;
 
         if (!simulate && Inventory.Insert(ref s, true) && itemNotify){
             Popup($"+{s.amount} {s.item.name}");
         }
 
         bool ret = Inventory.Insert(ref s, simulate);
+
+        if (!simulate && itemNotify){
+            int inserted = startAmount - (s?.amount ?? 0);
+            if (inserted > 0){
+                GameManager.Instance.runMetrics.itemsPickedUp += inserted;
+                GameManager.Instance.runMetrics.AddDiscoveredItem(itemId);
+            }
+        }
 
         return Inventory.Insert(s);
     }
@@ -540,8 +550,11 @@ public partial class Player : Unit, IContainer{
     private float footstepDist = 1.8f;
 
     private void FixedUpdate(){
-        if (m_Grounded)
-            distMoved += Vector3.Distance(transform.position, prevPos);
+        if (m_Grounded){
+            float delta = Vector3.Distance(transform.position, prevPos);
+            distMoved += delta;
+            GameManager.Instance.runMetrics.distanceTraveled += delta;
+        }
         prevPos = transform.position;
 
         //take a step
