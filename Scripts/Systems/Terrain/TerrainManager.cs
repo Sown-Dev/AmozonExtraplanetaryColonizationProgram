@@ -207,6 +207,8 @@ public partial class TerrainManager : MonoBehaviour{
             tickingBlocks.Remove((TickingBlock)block);
         }
 
+        GameManager.Instance.runMetrics.blocksBroken += 1;
+
         return true;
     }
 
