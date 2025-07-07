@@ -11,6 +11,7 @@ public class WorldMetrics
     public int blocksBroken;
     public int itemsPickedUp;
     public int moneyEarned;
+    public float distanceTraveled;
     public List<string> itemsDiscovered;
 
     public WorldMetrics()
@@ -18,6 +19,7 @@ public class WorldMetrics
         blocksBroken = 0;
         itemsPickedUp = 0;
         moneyEarned = 0;
+        distanceTraveled = 0f;
         itemsDiscovered = new List<string>();
     }
 

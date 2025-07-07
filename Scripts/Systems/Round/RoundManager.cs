@@ -49,7 +49,6 @@ namespace Systems.Round{
         bool lostGame;
 
 
-        [FormerlySerializedAs("runStats")] [FormerlySerializedAs("roundStats")] public WorldMetrics runMetrics;
 
         public LoseGameUI loseGameUI;
 
@@ -83,7 +82,7 @@ namespace Systems.Round{
             StartCooldown(-1);
             roundNum = -1;
         
-            runMetrics = new WorldMetrics();
+            GameManager.Instance.ResetRunMetrics();
 
             
             loansTaken = 0;
@@ -159,7 +158,10 @@ namespace Systems.Round{
         public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
             
-            runMetrics.moneyEarned += amount;
+            GameManager.Instance.runMetrics.moneyEarned += amount;
+            if(GameManager.Instance.myMetrics.moneyEarned + GameManager.Instance.runMetrics.moneyEarned >= 100000){
+                GameManager.Instance.UnlockAchievement("100000_DOLLARS");
+            }
             if (amount > 0){
                 Player.Instance.Popup("+" + amount + "$", new Color(0.1f, 1f, 0.5f));
             }
@@ -216,11 +218,11 @@ namespace Systems.Round{
             StartCooldown(50);
             GenerateNewShopTier(roundNum + 1);
             infoUI.Refresh();
-            
+
             loansTaken = 0;
             loanAmount = 100 * (roundNum + 1);
 
-        }       
+        }
 
         // Modified StartRound to handle null contracts
         private bool firstRound = true;
@@ -415,7 +417,10 @@ namespace Systems.Round{
                 //lose for real
                 var ls = Instantiate(loseGameUI.gameObject, importantUIs).GetComponent<LoseGameUI>();
                 ls.transform.SetAsLastSibling();
-                ls.LoseScreen(runMetrics.moneyEarned, runMetrics.itemsDiscovered.Select(d => ItemManager.Instance.GetItemByID(d)).ToList());
+                ls.LoseScreen(GameManager.Instance.runMetrics.moneyEarned,
+                    GameManager.Instance.runMetrics.itemsDiscovered
+                        .Select(d => ItemManager.Instance.GetItemByID(d)).ToList());
+                GameManager.Instance.ApplyRunMetrics();
             }
         }
 
@@ -474,8 +479,8 @@ namespace Systems.Round{
             loanAmount = data.loanAmount;
             currentContract = data.currentContract;
             shopTiers = data.shopTiers;
-            
-            runMetrics = data.runMetrics;
+
+            GameManager.Instance.ResetRunMetrics();
         }
     }
 
@@ -493,6 +498,5 @@ namespace Systems.Round{
         public Contract currentContract;
         public List<ShopTier> shopTiers = new();
         
-        [FormerlySerializedAs("runStats")] public WorldMetrics runMetrics = new WorldMetrics();
     }
 }
