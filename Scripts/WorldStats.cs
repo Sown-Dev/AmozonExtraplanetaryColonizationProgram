@@ -2,42 +2,36 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Systems.Items;
-using UnityEngine;
+using Newtonsoft.Json;
 
 [Serializable]
+[JsonObject]
 public class WorldStats
 {
-    public int blocksBroken = 0;
-    public int itemsPickedUp = 0;
-    public int moneyEarned = 0;
-    public HashSet<KeyValuePair<Item, bool>> ItemsDiscovered; // Use HashSet of KeyValuePair
+    public int blocksBroken;
+    public int itemsPickedUp;
+    public int moneyEarned;
+    public List<string> itemsDiscovered;
 
     public WorldStats()
     {
         blocksBroken = 0;
         itemsPickedUp = 0;
         moneyEarned = 0;
-        ItemsDiscovered = new HashSet<KeyValuePair<Item, bool>>(); // Initialize HashSet
+        itemsDiscovered = new List<string>();
     }
 
-    // Overloading the + operator using reflection
     public static WorldStats operator +(WorldStats a, WorldStats b)
     {
-        WorldStats result = new WorldStats();
+        var result = new WorldStats();
 
-        // Get all fields of the WorldStats class
-        FieldInfo[] fields = typeof(WorldStats).GetFields(BindingFlags.Public | BindingFlags.Instance);
-
-        foreach (FieldInfo field in fields)
+        var fields = typeof(WorldStats).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var field in fields)
         {
-            // If the field is addable (e.g., int, float), add the values from a and b
             if (IsAddableType(field.FieldType))
             {
-                object valueA = field.GetValue(a);
-                object valueB = field.GetValue(b);
-
-                // Perform addition without dynamic
+                var valueA = field.GetValue(a);
+                var valueB = field.GetValue(b);
                 if (field.FieldType == typeof(int))
                 {
                     field.SetValue(result, (int)valueA + (int)valueB);
@@ -57,40 +51,27 @@ public class WorldStats
             }
         }
 
-        // Merging ItemsDiscovered (non-addable field)
-        foreach (var item in a.ItemsDiscovered)
-        {
-            result.AddOrUpdateItem(item.Key, item.Value);
-        }
-
-        foreach (var item in b.ItemsDiscovered)
-        {
-            result.AddOrUpdateItem(item.Key, item.Value);
-        }
+        result.itemsDiscovered = a.itemsDiscovered
+            .Concat(b.itemsDiscovered)
+            .Distinct()
+            .ToList();
 
         return result;
     }
 
-    // Check if the field is of an addable type (e.g., int, float, double)
     private static bool IsAddableType(Type type)
     {
-        return type == typeof(int) || type == typeof(float) || type == typeof(double) || type == typeof(decimal);
+        return type == typeof(int)
+            || type == typeof(float)
+            || type == typeof(double)
+            || type == typeof(decimal);
     }
 
-    // Helper method to add or update an item in ItemsDiscovered
-    public void AddOrUpdateItem(Item item, bool discovered)
+    public void AddDiscoveredItem(string itemId)
     {
-        var existing = ItemsDiscovered.FirstOrDefault(pair => pair.Key.Equals(item));
-        if (!existing.Equals(default(KeyValuePair<Item, bool>))) // Check if found
+        if (!itemsDiscovered.Contains(itemId))
         {
-            // Update discovered status
-            var updatedPair = new KeyValuePair<Item, bool>(item, discovered || existing.Value);
-            ItemsDiscovered.Remove(existing); // Remove old pair
-            ItemsDiscovered.Add(updatedPair); // Add updated pair
-        }
-        else
-        {
-            ItemsDiscovered.Add(new KeyValuePair<Item, bool>(item, discovered)); // Add new pair
+            itemsDiscovered.Add(itemId);
         }
     }
 }

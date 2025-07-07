@@ -12,7 +12,6 @@ namespace Systems.Round{
     public class RoundManager : MonoBehaviour{
         public static RoundManager Instance;
 
-        public List<Item[]> contractItems = new List<Item[]>();
 
         //References
         [SerializeField] private RoundInfoUI infoUI;
@@ -50,7 +49,7 @@ namespace Systems.Round{
         bool lostGame;
 
 
-        public WorldStats roundStats;
+        [FormerlySerializedAs("roundStats")] public WorldStats runStats;
 
         public LoseGameUI loseGameUI;
 
@@ -60,7 +59,6 @@ namespace Systems.Round{
 
             shopTiers = new List<ShopTier>();
 
-            roundStats = new WorldStats();
             blockOffers.Sort((a, b) => a.tier.CompareTo(b.tier));
 
             if (!GameManager.Instance.currentWorld.generated){
@@ -85,7 +83,8 @@ namespace Systems.Round{
             StartCooldown(-1);
             roundNum = -1;
         
-            
+            runStats = new WorldStats();
+
             
             loansTaken = 0;
             loanAmount = 100 * (roundNum + 2);
@@ -159,7 +158,8 @@ namespace Systems.Round{
 
         public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
-
+            
+            runStats.moneyEarned += amount;
             if (amount > 0){
                 Player.Instance.Popup("+" + amount + "$", new Color(0.1f, 1f, 0.5f));
             }
@@ -415,7 +415,7 @@ namespace Systems.Round{
                 //lose for real
                 var ls = Instantiate(loseGameUI.gameObject, importantUIs).GetComponent<LoseGameUI>();
                 ls.transform.SetAsLastSibling();
-                ls.LoseScreen(roundStats.moneyEarned, roundStats.ItemsDiscovered.Select(pair => pair.Key).ToList());
+                ls.LoseScreen(runStats.moneyEarned, runStats.itemsDiscovered.Select(d => ItemManager.Instance.GetItemByID(d)).ToList());
             }
         }
 
@@ -474,6 +474,8 @@ namespace Systems.Round{
             loanAmount = data.loanAmount;
             currentContract = data.currentContract;
             shopTiers = data.shopTiers;
+            
+            runStats = data.runStats;
         }
     }
 
@@ -490,5 +492,7 @@ namespace Systems.Round{
 
         public Contract currentContract;
         public List<ShopTier> shopTiers = new();
+        
+        public WorldStats runStats = new WorldStats();
     }
 }

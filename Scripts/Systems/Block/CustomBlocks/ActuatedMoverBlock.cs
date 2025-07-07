@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Systems.Block{
     public class ActuatedMoverBlock : ContainerBlock{
-        public new ActuatedMoverBlockData data => (ActuatedMoverBlockData)base.data;
+       // public new ActuatedMoverBlockData data => (ActuatedMoverBlockData)base.data;
 
         public BlockUIButton button;
 
