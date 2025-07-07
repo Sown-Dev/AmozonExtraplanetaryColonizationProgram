@@ -159,6 +159,13 @@ namespace Systems.Round{
             money += amount;
             
             GameManager.Instance.runMetrics.moneyEarned += amount;
+
+            int totalMoney = GameManager.Instance.myMetrics.moneyEarned +
+                             GameManager.Instance.runMetrics.moneyEarned;
+            if (totalMoney >= 100000){
+                GameManager.Instance.UnlockAchievement("100000_DOLLARS");
+            }
+
             if (amount > 0){
                 Player.Instance.Popup("+" + amount + "$", new Color(0.1f, 1f, 0.5f));
             }
