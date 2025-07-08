@@ -3552,7 +3552,9 @@ MonoBehaviour:
   - MARATHON
   - DESTRUCTION
   - CORE
-  - 100000_DOLLARS
+  - 10000_DOLLARS
+  - BANK
+  - JOGGER
 --- !u!1 &2043084918
 GameObject:
   m_ObjectHideFlags: 0

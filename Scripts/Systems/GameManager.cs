@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour{
     public Character selectedChar;
     public Character[] allCharacters;
 
-    [FormerlySerializedAs("myStats")] public WorldMetrics myMetrics;
+    [FormerlySerializedAs("myStats")] public WorldMetrics myMetrics = new WorldMetrics(); 
 
     //metrics for the current run
     [HideInInspector]
@@ -285,10 +285,12 @@ public class GameManager : MonoBehaviour{
         saveIconCG.alpha = 1;
         string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
         PlayerPrefs.SetString("GameSettings", settingsJSON);
+        
+        
+        SaveStats();
 
         try{
             Debug.Log("Saving World");
-            SaveStats();
 
             //player save
             if (Player.Instance)
@@ -365,8 +367,9 @@ public class GameManager : MonoBehaviour{
     }
 
 
-    public void SaveStats(){
+    public void  SaveStats(){
         string json = JsonUtility.ToJson(myMetrics);
+        Debug.Log($"Saving PlayerStats: {json}");
         PlayerPrefs.SetString("PlayerStats", json);
 
         PlayerPrefs.Save();
@@ -381,6 +384,7 @@ public class GameManager : MonoBehaviour{
         else{
             myMetrics = new WorldMetrics(); // Default if no data is saved
         }
+        Debug.Log($"Loaded PlayerStats: {myMetrics}");
     }
 
     public void ResetRunMetrics(){
@@ -403,10 +407,12 @@ public class GameManager : MonoBehaviour{
         Steamworks.SteamUserStats.SetStat("ItemsPickedUp", total.itemsPickedUp);
         Steamworks.SteamUserStats.SetStat("MoneyEarned", total.moneyEarned);
         Steamworks.SteamUserStats.SetStat("DistanceTraveled", total.distanceTraveled);
+        
+        Steamworks.SteamUserStats.SetStat("CurrentMoneyEarned",runMetrics.moneyEarned);
         Steamworks.SteamUserStats.StoreStats();
 #endif
     }
-
+    
     public bool DeleteWorld(World world){
         if (worlds.Contains(world)){
             worlds.Remove(world);

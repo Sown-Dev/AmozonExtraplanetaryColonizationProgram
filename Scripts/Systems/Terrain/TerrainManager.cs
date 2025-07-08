@@ -206,14 +206,8 @@ public partial class TerrainManager : MonoBehaviour{
         if (block is TickingBlock){
             tickingBlocks.Remove((TickingBlock)block);
         }
-
-        GameManager.Instance.runMetrics.blocksBroken += 1;
-
-        int totalBlocks = GameManager.Instance.myMetrics.blocksBroken +
-                         GameManager.Instance.runMetrics.blocksBroken;
-        if (totalBlocks >= 100){
-            GameManager.Instance.UnlockAchievement("DESTRUCTION");
-        }
+        
+      
 
         return true;
     }

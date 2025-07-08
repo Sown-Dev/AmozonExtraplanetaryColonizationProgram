@@ -361,7 +361,11 @@ public partial class Player : Unit, IContainer{
                     destroyTimer += Time.deltaTime;
                     if (destroyTimer > destroyDuration){
                         destroyTimer = 0;
-                        TerrainManager.Instance.RemoveBlock(myCursor.currentPos);
+                       bool removed= TerrainManager.Instance.RemoveBlock(myCursor.currentPos);
+                       if (removed){
+                           GameManager.Instance.runMetrics.blocksBroken += 1;
+
+                       }
                     }
                 }
             }

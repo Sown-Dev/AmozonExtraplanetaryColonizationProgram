@@ -76,4 +76,9 @@ public class WorldMetrics
             itemsDiscovered.Add(itemId);
         }
     }
+    
+    public string ToString()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
 }
