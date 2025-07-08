@@ -218,6 +218,12 @@ public partial class TerrainManager : MonoBehaviour{
             GameManager.Instance.UnlockAchievement("DESTRUCTION");
         }
 
+        int totalBlocks = GameManager.Instance.myMetrics.blocksBroken +
+                         GameManager.Instance.runMetrics.blocksBroken;
+        if (totalBlocks >= 100){
+            GameManager.Instance.UnlockAchievement("DESTRUCTION");
+        }
+
         return true;
     }
 

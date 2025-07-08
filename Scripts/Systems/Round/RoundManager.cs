@@ -157,7 +157,7 @@ namespace Systems.Round{
 
         public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
-            
+
             GameManager.Instance.runMetrics.moneyEarned += amount;
             GameManager.Instance.myMetrics.moneyEarned += amount;
 
