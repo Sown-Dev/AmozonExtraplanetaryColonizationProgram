@@ -256,17 +256,38 @@ public partial class TerrainManager{
 
         Debug.Log($"Terrain generation took {Time.realtimeSinceStartup - terrainStartTime} seconds");
 
-        // Central area generation
-        bool inverse = centerNoise < 0.5f;
-        int a = 20;
-        for (int i = -a - 4; i <= a + 4; i++){
-            for (int j = -a - 4; j <= a + 4; j++){
-                float perlin2 = Mathf.PerlinNoise(i * 0.095f + noiseOffset * 3, j * 0.09f + noiseOffset)
-                                + Random.Range(-0.01f, 0.01f) + j / 1000f;
-                float myDist = Mathf.Sqrt(i * i + j * (j / 2));
-                float myPerlin = perlin2 + (inverse ? myDist : -myDist) / (a * 2);
-                if (inverse ? myPerlin < 0.75f : myPerlin > 0.25f){
+        // Improved spawn wall carving
+        int spawnRadius = 20;
+        FastNoiseLite carveNoise = new FastNoiseLite(currentSeed);
+        carveNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+        carveNoise.SetFrequency(0.07f);
+
+        for (int i = -spawnRadius; i <= spawnRadius; i++){
+            for (int j = -spawnRadius; j <= spawnRadius; j++){
+                float dist = Mathf.Sqrt(i * i + j * j * 0.5f);
+                float noiseVal = (carveNoise.GetNoise(i, j) + 1) * 0.5f; //0-1
+                float edge = Mathf.Lerp(spawnRadius - 4, spawnRadius, noiseVal);
+                if (dist <= edge){
                     SetWall(null, new Vector3Int(i, j, 0));
+                }
+            }
+        }
+
+        // Ensure spawn terrain has no colliders (approx 5x5 area)
+        int clearRadius = 2;
+        for (int i = -clearRadius; i <= clearRadius; i++){
+            for (int j = -clearRadius; j <= clearRadius; j++){
+                Vector2Int pos = new Vector2Int(i, j);
+                TerrainProperties props = GetTerrainProperties(pos);
+                if (props != null && props.collider){
+                    Biome biome = GetBiomeForPosition(i, j);
+                    TerrainProperties replacement = Grass;
+                    if (biome != null){
+                        var choice = biome.terrains.OrderByDescending(t => t.priority)
+                                                .FirstOrDefault(t => !t.terrain.collider);
+                        if (choice != null) replacement = choice.terrain;
+                    }
+                    SetTerrain(pos, replacement);
                 }
             }
         }
@@ -526,4 +547,10 @@ public partial class TerrainManager{
             return 0;
         }
     }
-}
+
+    private Biome GetBiomeForPosition(int x, int y){
+        foreach (var b in biomes){
+            if (CheckThreshold(b.threshold, x, y)) return b;
+        }
+        return null;
+    }}

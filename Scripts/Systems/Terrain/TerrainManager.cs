@@ -20,6 +20,8 @@ using Vector3 = UnityEngine.Vector3;
 public partial class TerrainManager : MonoBehaviour{
     public static TerrainManager Instance;
 
+    private const float SAVE_YIELD_TIME = 0.02f;
+
     [Header("Manager Stuff:")] private Layer<Block> blockLayer;
     private Layer<Terrain> terrainLayer;
     private Layer<Ore> oreLayer;
@@ -548,7 +550,7 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
 
-        int counter = 0;
+        float lastYield = Time.realtimeSinceStartup;
         //possibly a bad idea to clone list, but avoids issues when saving
         foreach (var block in blockLayer.GetDictionary().Values.ToList()){
             if (!block.hasSaved){
@@ -559,13 +561,15 @@ public partial class TerrainManager : MonoBehaviour{
                 GameManager.Instance.currentWorld.blocks.Add(blockData);
                 block.hasSaved = true;
             }
-            if (++counter % 50 == 0) yield return null;
+            if (Time.realtimeSinceStartup - lastYield > SAVE_YIELD_TIME){
+                lastYield = Time.realtimeSinceStartup;
+                yield return null;
+            }
         }
 
         Debug.Log("Saved Blocks");
 
         GameManager.Instance.currentWorld.ores.Clear();
-        counter = 0;
         foreach (var pair in oreLayer.GetDictionary()){
             OreData data = new OreData{
                 position = pair.Key,
@@ -573,18 +577,23 @@ public partial class TerrainManager : MonoBehaviour{
                 amount = pair.Value.amount
             };
             GameManager.Instance.currentWorld.ores.Add(data);
-            if (++counter % 200 == 0) yield return null;
+            if (Time.realtimeSinceStartup - lastYield > SAVE_YIELD_TIME){
+                lastYield = Time.realtimeSinceStartup;
+                yield return null;
+            }
         }
 
         // Save terrain
         GameManager.Instance.currentWorld.terrain.Clear();
-        counter = 0;
         foreach (var pair in terrainLayer.GetDictionary()){
             GameManager.Instance.currentWorld.terrain.Add(new TerrainData{
                 pos = pair.Key,
                 t = pair.Value // Store the asset name
             });
-            if (++counter % 200 == 0) yield return null;
+            if (Time.realtimeSinceStartup - lastYield > SAVE_YIELD_TIME){
+                lastYield = Time.realtimeSinceStartup;
+                yield return null;
+            }
         }
 
 
@@ -614,8 +623,12 @@ public partial class TerrainManager : MonoBehaviour{
                 }
 
                 GameManager.Instance.currentWorld.walls[flatIndex] = (short)tileIndex;
+
+                if (Time.realtimeSinceStartup - lastYield > SAVE_YIELD_TIME){
+                    lastYield = Time.realtimeSinceStartup;
+                    yield return null;
+                }
             }
-            if (i % 10 == 0) yield return null;
         }
 
 
