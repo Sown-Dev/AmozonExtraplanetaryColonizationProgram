@@ -157,8 +157,15 @@ namespace Systems.Round{
 
         public void AddMoney(int amount, bool countTowardsQuota = true){
             money += amount;
-            
+
             GameManager.Instance.runMetrics.moneyEarned += amount;
+            GameManager.Instance.myMetrics.moneyEarned += amount;
+
+            int totalMoney = GameManager.Instance.myMetrics.moneyEarned;
+            if (totalMoney >= 100000){
+                GameManager.Instance.UnlockAchievement("100000_DOLLARS");
+            }
+
             if (amount > 0){
                 Player.Instance.Popup("+" + amount + "$", new Color(0.1f, 1f, 0.5f));
             }
