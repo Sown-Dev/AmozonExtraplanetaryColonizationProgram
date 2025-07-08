@@ -292,67 +292,61 @@ public class GameManager : MonoBehaviour{
 
         SaveStats();
 
-        try{
-            Debug.Log("Saving World");
+        Debug.Log("Saving World");
 
-            if (Player.Instance)
-                currentWorld.playerData = Player.Instance.SavePlayer();
-            Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+        if (Player.Instance)
+            currentWorld.playerData = Player.Instance.SavePlayer();
+        Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
-            if (RoundManager.Instance)
-                currentWorld.roundData = RoundManager.Instance.SaveRoundData();
+        if (RoundManager.Instance)
+            currentWorld.roundData = RoundManager.Instance.SaveRoundData();
 
-            yield return StartCoroutine(TerrainManager.Instance.SaveWorldCR());
+        yield return StartCoroutine(TerrainManager.Instance.SaveWorldCR());
 
-            // Check if the current world is already in the list
-            var existingWorld = worlds.FirstOrDefault(w => w.name == currentWorld.name);
-            if (existingWorld == null){
-                // Add new world to the list
-                worlds.Add(currentWorld);
-            }
-            else{
-                // Update existing world
-                int index = worlds.IndexOf(existingWorld);
-                worlds[index] = currentWorld;
-            }
+        // Check if the current world is already in the list
+        var existingWorld = worlds.FirstOrDefault(w => w.name == currentWorld.name);
+        if (existingWorld == null){
+            // Add new world to the list
+            worlds.Add(currentWorld);
+        }
+        else{
+            // Update existing world
+            int index = worlds.IndexOf(existingWorld);
+            worlds[index] = currentWorld;
+        }
 
 
-            // Save the current world to PlayerPrefs
+        // Save the current world to PlayerPrefs
 
-            System.Threading.Tasks.Task<string> serializeTask;
+        System.Threading.Tasks.Task<string> serializeTask;
 #if UNITYSERIALIZATION1
-            serializeTask = System.Threading.Tasks.Task.Run(() => JsonUtility.ToJson(currentWorld, true));
+        serializeTask = System.Threading.Tasks.Task.Run(() => JsonUtility.ToJson(currentWorld, true));
 #else
-            serializeTask = System.Threading.Tasks.Task.Run(() => JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings));
+        serializeTask = System.Threading.Tasks.Task.Run(() => JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings));
 #endif
 
-            while(!serializeTask.IsCompleted) yield return null;
-            string json = serializeTask.Result;
-            PlayerPrefs.SetString(currentWorld.name, json);
+        while(!serializeTask.IsCompleted) yield return null;
+        string json = serializeTask.Result;
+        PlayerPrefs.SetString(currentWorld.name, json);
 
 
 #if UNITY_STANDALONE_WIN
-            try{
-                string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
-                var fileTask = System.Threading.Tasks.Task.Run(() => File.WriteAllText(filePath, json));
-                while(!fileTask.IsCompleted) yield return null;
-                Debug.Log($"World saved to text file at {filePath}");
-            }
-            catch (Exception e){
-                Debug.LogError($"Failed to save world to text file: {e}");
-            }
+        string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
+        Exception fileException = null;
+        var fileTask = System.Threading.Tasks.Task.Run(() => {
+            try{ File.WriteAllText(filePath, json); }
+            catch (Exception e){ fileException = e; }
+        });
+        while(!fileTask.IsCompleted) yield return null;
+        if (fileException != null) Debug.LogError($"Failed to save world to text file: {fileException}");
+        else Debug.Log($"World saved to text file at {filePath}");
 #endif
 
-            SaveWorlds();
+        SaveWorlds();
 
-            Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
-        }
-        catch (Exception e){
-            Debug.LogError($"Failed during save: {e}");
-        }
-        finally{
-            saveIconCG.alpha = 0;
-        }
+        Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+
+        saveIconCG.alpha = 0;
         yield break;
     }
 
