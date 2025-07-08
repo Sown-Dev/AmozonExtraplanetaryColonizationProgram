@@ -549,7 +549,8 @@ public partial class TerrainManager : MonoBehaviour{
 
 
         int counter = 0;
-        foreach (var block in blockLayer.GetDictionary().Values){
+        //possibly a bad idea to clone list, but avoids issues when saving
+        foreach (var block in blockLayer.GetDictionary().Values.ToList()){
             if (!block.hasSaved){
                 BlockLoadData blockData = new BlockLoadData{
                     data = block.Save(),

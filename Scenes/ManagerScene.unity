@@ -3517,12 +3517,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 894bb466fb0bd404fba19036e2c5a98f, type: 2}
   myMetrics:
     blocksBroken: 0
+    blocksPlaced: 0
+    terrainDestroyed: 0
     itemsPickedUp: 0
     moneyEarned: 0
     distanceTraveled: 0
     itemsDiscovered: []
   runMetrics:
     blocksBroken: 0
+    blocksPlaced: 0
+    terrainDestroyed: 0
     itemsPickedUp: 0
     moneyEarned: 0
     distanceTraveled: 0

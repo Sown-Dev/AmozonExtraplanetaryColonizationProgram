@@ -158,6 +158,8 @@ public class GameManager : MonoBehaviour{
 #if STEAMWORKS1
         try{
             Steamworks.SteamClient.Init(3305330);
+            SyncStatsWithSteam();
+
         }
         catch (Exception e){
             Debug.LogError(e);
@@ -300,7 +302,10 @@ public class GameManager : MonoBehaviour{
             //round save
             if (RoundManager.Instance)
                 currentWorld.roundData = RoundManager.Instance.SaveRoundData();
-
+        }
+        catch (Exception e){
+            Debug.LogError($"Failed to save world: {e.StackTrace}");
+        }
             // Save the current world data
             yield return StartCoroutine(TerrainManager.Instance.SaveWorldCR());
 
@@ -345,10 +350,7 @@ public class GameManager : MonoBehaviour{
             SaveWorlds();
 
             Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
-        }
-        catch (Exception e){
-            Debug.LogError($"Failed to save world: {e.StackTrace}");
-        }
+        
 
         saveIconCG.alpha = 0;
         yield return null;
@@ -407,7 +409,7 @@ public class GameManager : MonoBehaviour{
         Steamworks.SteamUserStats.SetStat("TerrainDestroyed", total.terrainDestroyed);
         Steamworks.SteamUserStats.SetStat("ItemsPickedUp", total.itemsPickedUp);
         Steamworks.SteamUserStats.SetStat("MoneyEarned", total.moneyEarned);
-        Steamworks.SteamUserStats.SetStat("DistanceTraveled", total.distanceTraveled);
+        Steamworks.SteamUserStats.SetStat("DistanceTraveled", (int)total.distanceTraveled);
 
         Steamworks.SteamUserStats.SetStat("CurrentRunMoney",runMetrics.moneyEarned);
         Steamworks.SteamUserStats.StoreStats();
@@ -542,7 +544,7 @@ public class World{
 
     static string[] planetNames = new string[]{
         "Kepler", "Proxima", "Pluto", "Gemini", "Bezos", "Leporis", "Gliese", "Upsilon", "Librae", "Resonare", "Tau", "WASP", "Borealis", "Primus", "TESS",
-        "CoRoT"
+        "CoRoT", "TRAPPIST-1", "Iora", "Gemmora", "APS", "APS2" 
     };
 
     //needed for deserialization
