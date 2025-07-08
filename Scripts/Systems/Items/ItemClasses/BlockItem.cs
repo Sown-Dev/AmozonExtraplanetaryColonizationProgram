@@ -42,5 +42,4 @@ public enum BlockCategory{
     Storage=8, //stores items
     Electrical=16, //power generation and distribution
     
-    
-}
+    }

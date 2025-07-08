@@ -302,7 +302,7 @@ public class GameManager : MonoBehaviour{
                 currentWorld.roundData = RoundManager.Instance.SaveRoundData();
 
             // Save the current world data
-            TerrainManager.Instance.SaveWorld();
+            yield return StartCoroutine(TerrainManager.Instance.SaveWorldCR());
 
             // Check if the current world is already in the list
             var existingWorld = worlds.FirstOrDefault(w => w.name == currentWorld.name);
