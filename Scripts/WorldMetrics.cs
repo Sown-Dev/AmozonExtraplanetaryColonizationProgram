@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 public class WorldMetrics
 {
     public int blocksBroken;
+    public int blocksPlaced;
+    public int terrainDestroyed;
     public int itemsPickedUp;
     public int moneyEarned;
     public float distanceTraveled;
@@ -17,6 +19,8 @@ public class WorldMetrics
     public WorldMetrics()
     {
         blocksBroken = 0;
+        blocksPlaced = 0;
+        terrainDestroyed = 0;
         itemsPickedUp = 0;
         moneyEarned = 0;
         distanceTraveled = 0f;
