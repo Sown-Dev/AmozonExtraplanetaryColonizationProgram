@@ -12,11 +12,13 @@ namespace Systems.Items{
         public override void Use(Vector2Int pos, Unit user, Slot slot){
             base.Use(pos, user,slot);
             if (TerrainManager.Instance.PlaceBlock(blockPrefab, pos,  Cursor.Instance.cursorRotation, makeSound:true)){
+                GameManager.Instance.runMetrics.blocksPlaced += 1;
+                GameManager.Instance.myMetrics.blocksPlaced += 1;
                 slot.ItemStack.amount--;
                 if (slot.ItemStack.amount <= 0){
                     slot.ItemStack = null;
                 }
-                
+
             }
         }
 
@@ -40,5 +42,4 @@ public enum BlockCategory{
     Storage=8, //stores items
     Electrical=16, //power generation and distribution
     
-    
-}
+    }
