@@ -20,6 +20,7 @@ using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using System.Threading.Tasks;
 using Random = UnityEngine.Random;
 using Terrain = Systems.Terrain.Terrain;
 
@@ -287,26 +288,20 @@ public class GameManager : MonoBehaviour{
         saveIconCG.alpha = 1;
         string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
         PlayerPrefs.SetString("GameSettings", settingsJSON);
-        
-        
+
+
         SaveStats();
 
         try{
             Debug.Log("Saving World");
 
-            //player save
             if (Player.Instance)
                 currentWorld.playerData = Player.Instance.SavePlayer();
             Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
-            //round save
             if (RoundManager.Instance)
                 currentWorld.roundData = RoundManager.Instance.SaveRoundData();
-        }
-        catch (Exception e){
-            Debug.LogError($"Failed to save world: {e.StackTrace}");
-        }
-            // Save the current world data
+
             yield return StartCoroutine(TerrainManager.Instance.SaveWorldCR());
 
             // Check if the current world is already in the list
@@ -324,36 +319,41 @@ public class GameManager : MonoBehaviour{
 
             // Save the current world to PlayerPrefs
 
-            string json = "";
+            System.Threading.Tasks.Task<string> serializeTask;
 #if UNITYSERIALIZATION1
-         json = JsonUtility.ToJson(currentWorld, true);
+            serializeTask = System.Threading.Tasks.Task.Run(() => JsonUtility.ToJson(currentWorld, true));
 #else
-            json = JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings);
+            serializeTask = System.Threading.Tasks.Task.Run(() => JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings));
 #endif
-            //string json = JsonUtility.ToJson(currentWorld);
+
+            while(!serializeTask.IsCompleted) yield return null;
+            string json = serializeTask.Result;
             PlayerPrefs.SetString(currentWorld.name, json);
-            
+
 
 #if UNITY_STANDALONE_WIN
             try{
                 string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
-                string jsonPretty = json;
-                //string jsonPretty = json; // Enable pretty print
-                File.WriteAllText(filePath, jsonPretty);
+                var fileTask = System.Threading.Tasks.Task.Run(() => File.WriteAllText(filePath, json));
+                while(!fileTask.IsCompleted) yield return null;
                 Debug.Log($"World saved to text file at {filePath}");
             }
             catch (Exception e){
-                Debug.LogError($"Failed to save world to text file: {e.StackTrace}");
+                Debug.LogError($"Failed to save world to text file: {e}");
             }
 #endif
 
             SaveWorlds();
 
             Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
-        
-
-        saveIconCG.alpha = 0;
-        yield return null;
+        }
+        catch (Exception e){
+            Debug.LogError($"Failed during save: {e}");
+        }
+        finally{
+            saveIconCG.alpha = 0;
+        }
+        yield break;
     }
 
     public void Save(){
