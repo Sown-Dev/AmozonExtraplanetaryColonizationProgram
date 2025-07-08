@@ -296,7 +296,7 @@ public class GameManager : MonoBehaviour{
 
         if (Player.Instance)
             currentWorld.playerData = Player.Instance.SavePlayer();
-        Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+        //Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
         if (RoundManager.Instance)
             currentWorld.roundData = RoundManager.Instance.SaveRoundData();
@@ -330,7 +330,7 @@ public class GameManager : MonoBehaviour{
         PlayerPrefs.SetString(currentWorld.name, json);
 
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN && SAVEWORLDTOFILE
         string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
         Exception fileException = null;
         var fileTask = System.Threading.Tasks.Task.Run(() => {
