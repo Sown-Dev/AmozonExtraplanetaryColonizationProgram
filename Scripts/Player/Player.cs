@@ -426,7 +426,13 @@ public partial class Player : Unit, IContainer{
             int inserted = startAmount - (s?.amount ?? 0);
             if (inserted > 0){
                 GameManager.Instance.runMetrics.itemsPickedUp += inserted;
+                GameManager.Instance.myMetrics.itemsPickedUp += inserted;
                 GameManager.Instance.runMetrics.AddDiscoveredItem(itemId);
+                GameManager.Instance.myMetrics.AddDiscoveredItem(itemId);
+
+                if (itemId == "Corbydine Core"){
+                    GameManager.Instance.UnlockAchievement("CORE");
+                }
             }
         }
 
@@ -550,10 +556,16 @@ public partial class Player : Unit, IContainer{
     private float footstepDist = 1.8f;
 
     private void FixedUpdate(){
-        if (m_Grounded){
+            if (m_Grounded){
             float delta = Vector3.Distance(transform.position, prevPos);
             distMoved += delta;
             GameManager.Instance.runMetrics.distanceTraveled += delta;
+            GameManager.Instance.myMetrics.distanceTraveled += delta;
+
+            float totalDistance = GameManager.Instance.myMetrics.distanceTraveled;
+            if (totalDistance >= 42190f){
+                GameManager.Instance.UnlockAchievement("MARATHON");
+            }
         }
         prevPos = transform.position;
 

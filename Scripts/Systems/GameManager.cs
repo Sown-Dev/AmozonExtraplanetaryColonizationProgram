@@ -215,6 +215,9 @@ public class GameManager : MonoBehaviour{
         if (TerrainManager.Instance != null && save){
             Save();
         }
+        else{
+            SyncStatsWithSteam();
+        }
 
         LoadTitleScreen();
     }
@@ -367,6 +370,7 @@ public class GameManager : MonoBehaviour{
         PlayerPrefs.SetString("PlayerStats", json);
 
         PlayerPrefs.Save();
+        SyncStatsWithSteam();
     }
 
     public void LoadStats(){
@@ -388,8 +392,21 @@ public class GameManager : MonoBehaviour{
             currentWorld.worldMetrics += runMetrics;
         }
 
-        myMetrics += runMetrics;
         runMetrics = new WorldMetrics();
+    }
+
+    public void SyncStatsWithSteam(){
+#if STEAMWORKS1
+        WorldMetrics total = myMetrics + runMetrics;
+        Steamworks.SteamUserStats.SetStat("BlocksBroken", total.blocksBroken);
+        Steamworks.SteamUserStats.SetStat("BlocksPlaced", total.blocksPlaced);
+        Steamworks.SteamUserStats.SetStat("TerrainDestroyed", total.terrainDestroyed);
+        Steamworks.SteamUserStats.SetStat("ItemsPickedUp", total.itemsPickedUp);
+        Steamworks.SteamUserStats.SetStat("MoneyEarned", total.moneyEarned);
+        Steamworks.SteamUserStats.SetStat("DistanceTraveled", total.distanceTraveled);
+        Steamworks.SteamUserStats.SetStat("CurrentRunMoney", runMetrics.moneyEarned);
+        Steamworks.SteamUserStats.StoreStats();
+#endif
     }
 
     public bool DeleteWorld(World world){
@@ -446,6 +463,7 @@ public class GameManager : MonoBehaviour{
             ClearAchievement(achievement);
         }
     }
+
 
     public void ToggleSettings(){
         settingsWindow.Toggle();

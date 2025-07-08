@@ -16,7 +16,11 @@ namespace Systems.Items{
                 if (slot.ItemStack.amount <= 0){
                     slot.ItemStack = null;
                 }
-                
+
+                if (user is Player){
+                    GameManager.Instance.runMetrics.blocksPlaced += 1;
+                    GameManager.Instance.myMetrics.blocksPlaced += 1;
+                }
             }
         }
 

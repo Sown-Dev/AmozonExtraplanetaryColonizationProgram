@@ -122,6 +122,9 @@ public partial class TerrainManager : MonoBehaviour{
             return;
         wallTilemap.SetTile(pos, null);
         Instantiate(blockDebrisPrefab, pos, Quaternion.identity);
+
+        GameManager.Instance.runMetrics.terrainDestroyed += 1;
+        GameManager.Instance.myMetrics.terrainDestroyed += 1;
     }
 
 
@@ -208,6 +211,12 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
         GameManager.Instance.runMetrics.blocksBroken += 1;
+        GameManager.Instance.myMetrics.blocksBroken += 1;
+
+        int totalBlocks = GameManager.Instance.myMetrics.blocksBroken;
+        if (totalBlocks >= 100){
+            GameManager.Instance.UnlockAchievement("DESTRUCTION");
+        }
 
         return true;
     }
@@ -592,14 +601,22 @@ public partial class TerrainManager : MonoBehaviour{
         for (int i = -halfX; i < halfX; i++){
             for (int j = -halfY; j < halfY; j++){
                 Vector3Int pos = new Vector3Int(i, j, 0);
-                bool hasWall = wallTilemap.GetTile(pos) != null;
+                TileBase tile = wallTilemap.GetTile(pos);
 
                 // Calculate 1D index
                 int xIndex = i + halfX;
                 int yIndex = j + halfY;
                 int flatIndex = yIndex * GameManager.Instance.currentWorld.worldSize.x + xIndex;
 
-                GameManager.Instance.currentWorld.walls[flatIndex] = (short)( hasWall ? 1:-1);
+                short index = 0;
+                if (tile != null){
+                    int regIndex = wallTilesRegistry.IndexOf(tile);
+                    if (regIndex >= 0){
+                        index = (short)(regIndex + 1);
+                    }
+                }
+
+                GameManager.Instance.currentWorld.walls[flatIndex] = index;
             }
         }
 
@@ -623,9 +640,9 @@ public partial class TerrainManager : MonoBehaviour{
                 int yIndex = j + halfY;
                 int flatIndex = yIndex * GameManager.Instance.currentWorld.worldSize.x + xIndex;
 
-                bool hasWall = GameManager.Instance.currentWorld.walls[flatIndex] >0;
-                if (hasWall){
-                    SetWall(GameManager.Instance.currentWorld.walls[flatIndex], pos);
+                short wallIndex = GameManager.Instance.currentWorld.walls[flatIndex];
+                if (wallIndex > 0){
+                    SetWall(wallIndex, pos);
                 }
             }
         }
