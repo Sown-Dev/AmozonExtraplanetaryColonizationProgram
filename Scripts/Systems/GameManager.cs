@@ -396,19 +396,20 @@ public class GameManager : MonoBehaviour{
             currentWorld.worldMetrics += runMetrics;
         }
 
-        myMetrics += runMetrics;
         runMetrics = new WorldMetrics();
     }
 
     public void SyncStatsWithSteam(){
 #if STEAMWORKS1
-        WorldMetrics total = myMetrics + runMetrics;
+        WorldMetrics total = myMetrics;
         Steamworks.SteamUserStats.SetStat("BlocksBroken", total.blocksBroken);
+        Steamworks.SteamUserStats.SetStat("BlocksPlaced", total.blocksPlaced);
+        Steamworks.SteamUserStats.SetStat("TerrainDestroyed", total.terrainDestroyed);
         Steamworks.SteamUserStats.SetStat("ItemsPickedUp", total.itemsPickedUp);
         Steamworks.SteamUserStats.SetStat("MoneyEarned", total.moneyEarned);
         Steamworks.SteamUserStats.SetStat("DistanceTraveled", total.distanceTraveled);
-        
-        Steamworks.SteamUserStats.SetStat("CurrentMoneyEarned",runMetrics.moneyEarned);
+
+        Steamworks.SteamUserStats.SetStat("CurrentRunMoney",runMetrics.moneyEarned);
         Steamworks.SteamUserStats.StoreStats();
 #endif
     }

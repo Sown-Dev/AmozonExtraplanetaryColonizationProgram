@@ -159,6 +159,7 @@ namespace Systems.Round{
             money += amount;
             
             GameManager.Instance.runMetrics.moneyEarned += amount;
+            GameManager.Instance.myMetrics.moneyEarned += amount;
 
             int totalMoney = GameManager.Instance.myMetrics.moneyEarned +
                              GameManager.Instance.runMetrics.moneyEarned;
