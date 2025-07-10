@@ -4,7 +4,6 @@ using MemoryPack;
 
 namespace Systems.Items{
     [Serializable]
-    [MemoryPackable]
     public partial struct ContainerProperties{
         public int size;
         public string name;

@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour{
         if (Instance == null){
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            MemoryPack.MemoryPackFormatterProvider.Register<Systems.Items.ContainerProperties>(new Systems.Items.ContainerPropertiesFormatter());
         }
         else{
             Destroy(gameObject);
