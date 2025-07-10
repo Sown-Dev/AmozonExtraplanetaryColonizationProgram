@@ -15,6 +15,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Bson;
 using UI; // Add this at the top
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -133,16 +134,7 @@ public class GameManager : MonoBehaviour{
 
                     foreach (var name in worldNames){
                         if (PlayerPrefs.HasKey(name)){
-                            string worldJson = PlayerPrefs.GetString(name);
-                            //World world = JsonUtility.FromJson<World>(worldJson);
-                            World world;
-#if UNITYSERIALIZATION1
-                        world = JsonUtility.FromJson<World>(worldJson);
-#else
-
-                            world = JsonConvert.DeserializeObject<World>(worldJson, JSONsettings);
-#endif
-
+                            World world = BsonPlayerPrefsUtility.Load<World>(name, JSONsettings);
                             worlds.Add(world);
                             Debug.Log($"Loaded world: {world.name}");
                         }
@@ -340,12 +332,8 @@ public class GameManager : MonoBehaviour{
 
         // Save the current world to PlayerPrefs
 
-        System.Threading.Tasks.Task<string> serializeTask;
-#if UNITYSERIALIZATION1
-        serializeTask = System.Threading.Tasks.Task.Run(() => JsonUtility.ToJson(currentWorld, true));
-#else
-        serializeTask = System.Threading.Tasks.Task.Run(() => JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings), saveCancellation.Token);
-#endif
+        System.Threading.Tasks.Task<byte[]> serializeTask;
+        serializeTask = System.Threading.Tasks.Task.Run(() => BsonPlayerPrefsUtility.Serialize(currentWorld, JSONsettings), saveCancellation.Token);
 
         while(!serializeTask.IsCompleted){
             if(saveCancellation.IsCancellationRequested){
@@ -354,14 +342,15 @@ public class GameManager : MonoBehaviour{
             }
             yield return null;
         }
-        string json;
+        byte[] bson;
         try{
-            json = serializeTask.Result;
+            bson = serializeTask.Result;
         }catch(AggregateException ae) when(ae.InnerException is OperationCanceledException){
             CleanupSavingState();
             yield break;
         }
-        PlayerPrefs.SetString(currentWorld.name, json);
+        string base64 = Convert.ToBase64String(bson);
+        PlayerPrefs.SetString(currentWorld.name, base64);
 
 
 #if UNITY_STANDALONE_WIN && SAVEWORLDTOFILE
@@ -370,7 +359,7 @@ public class GameManager : MonoBehaviour{
         var fileTask = System.Threading.Tasks.Task.Run(() => {
             try{
                 if(!saveCancellation.IsCancellationRequested)
-                    File.WriteAllText(filePath, json);
+                    File.WriteAllBytes(filePath, bson);
             }
             catch (Exception e){ fileException = e; }
         }, saveCancellation.Token);
@@ -446,15 +435,18 @@ public class GameManager : MonoBehaviour{
 
 #if UNITYSERIALIZATION1
         string json = JsonUtility.ToJson(currentWorld, true);
-#else
-        string json = JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings);
-#endif
         PlayerPrefs.SetString(currentWorld.name, json);
+        byte[] saveBytes = System.Text.Encoding.UTF8.GetBytes(json);
+#else
+        byte[] saveBytes = BsonPlayerPrefsUtility.Serialize(currentWorld, JSONsettings);
+        string base64 = Convert.ToBase64String(saveBytes);
+        PlayerPrefs.SetString(currentWorld.name, base64);
+#endif
 
 #if UNITY_STANDALONE_WIN && SAVEWORLDTOFILE
         string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
         try{
-            File.WriteAllText(filePath, json);
+            File.WriteAllBytes(filePath, saveBytes);
             Debug.Log($"World saved to text file at {filePath}");
         } catch (Exception e){
             Debug.LogError($"Failed to save world to text file: {e}");
