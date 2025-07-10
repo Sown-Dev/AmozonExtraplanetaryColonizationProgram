@@ -604,7 +604,7 @@ public class GameManager : MonoBehaviour{
     {
         var serializer = JsonSerializer.Create(settings);
         using var ms = new MemoryStream();
-        using var writer = new BsonDataWriter(ms);
+        using var writer = new BsonWriter(ms);
         serializer.Serialize(writer, obj);
         writer.Flush();
         return ms.ToArray();
@@ -614,7 +614,7 @@ public class GameManager : MonoBehaviour{
     {
         var serializer = JsonSerializer.Create(settings);
         using var ms = new MemoryStream(data);
-        using var reader = new BsonDataReader(ms);
+        using var reader = new BsonReader(ms);
         return serializer.Deserialize<T>(reader);
     }
 }
