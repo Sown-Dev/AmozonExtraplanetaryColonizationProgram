@@ -31,8 +31,9 @@ namespace Systems.Items{
         item = it;
         amount = amt;
         }*/
+        [MemoryPackConstructor]
         public ItemStack(){
-            
+
         }
 
         public ItemStack(Item it, int amt){

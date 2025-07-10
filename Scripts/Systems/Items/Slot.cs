@@ -9,7 +9,6 @@ namespace Systems.Items{
     [MemoryPackable]
     public partial class Slot{
         public ItemStack ItemStack = null;
-        public ItemStack ItemStack = null;
 
         public Filter filter = null;
         
@@ -22,6 +21,7 @@ namespace Systems.Items{
         public bool
             dirty = true; //true by default so we atleast render once. worst case we render once more than needed on awake
         
+        [MemoryPackConstructor]
         public Slot(){
             //ItemStack = null;
             //OnChange += ()=>{dirty = true;};

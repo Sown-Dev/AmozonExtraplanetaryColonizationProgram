@@ -73,6 +73,11 @@ public partial class BuildingProgress : IBlockUI
         OnBuildComplete = null;
     }
 
+    [MemoryPackConstructor]
+    public BuildingProgress()
+    {
+    }
+
     public BuildingProgress(ItemStack[] requirements)
     {
         resourcesNeeded = requirements;

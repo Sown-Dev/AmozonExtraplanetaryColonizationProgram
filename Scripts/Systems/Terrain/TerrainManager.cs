@@ -536,7 +536,7 @@ public partial class TerrainManager : MonoBehaviour{
         Gizmos.color = Color.green;
         if (blockLayer == null)
             return;
-        foreach (var pair in blockLayer.GetDictionary()){
+        foreach (var pair in blockLayer.GetAll()){
             //Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.origin);
         }
     }
@@ -547,14 +547,14 @@ public partial class TerrainManager : MonoBehaviour{
         var world = GameManager.Instance.currentWorld;
         world.ticksElapsed = totalTicksElapsed; // Save the total ticks elapsed
         // Save blocks
-        foreach (var block in blockLayer.GetDictionary().Values){
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value)){
             block.hasSaved = false; // Reset the hasSaved flag for all blocks
         }
 
         float lastYield = Time.realtimeSinceStartup;
         var newBlocks = new List<BlockLoadData>();
         //possibly a bad idea to clone list, but avoids issues when saving
-        foreach (var block in blockLayer.GetDictionary().Values.ToList()){
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value).ToList()){
             if (!block.hasSaved){
                 BlockLoadData blockData = new BlockLoadData{
                     data = block.Save(),
@@ -572,7 +572,7 @@ public partial class TerrainManager : MonoBehaviour{
         Debug.Log("Saved Blocks");
 
         var newOres = new List<OreData>();
-        foreach (var pair in oreLayer.GetDictionary()){
+        foreach (var pair in oreLayer.GetAll()){
             OreData data = new OreData{
                 position = pair.Key,
                 oreName = pair.Value.myProperties.name, // Store the asset name
@@ -587,7 +587,7 @@ public partial class TerrainManager : MonoBehaviour{
 
         // Save terrain
         var newTerrain = new List<TerrainData>();
-        foreach (var pair in terrainLayer.GetDictionary()){
+        foreach (var pair in terrainLayer.GetAll()){
             newTerrain.Add(new TerrainData{
                 pos = pair.Key,
                 t = pair.Value // Store the asset name
@@ -645,12 +645,12 @@ public partial class TerrainManager : MonoBehaviour{
         var world = GameManager.Instance.currentWorld;
         world.ticksElapsed = totalTicksElapsed;
 
-        foreach (var block in blockLayer.GetDictionary().Values){
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value)){
             block.hasSaved = false;
         }
 
         var newBlocks = new List<BlockLoadData>();
-        foreach (var block in blockLayer.GetDictionary().Values.ToList()){
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value).ToList()){
             if (!block.hasSaved){
                 BlockLoadData blockData = new BlockLoadData{
                     data = block.Save(),
@@ -665,7 +665,7 @@ public partial class TerrainManager : MonoBehaviour{
         Debug.Log("Saved Blocks");
 
         var newOres = new List<OreData>();
-        foreach (var pair in oreLayer.GetDictionary()){
+        foreach (var pair in oreLayer.GetAll()){
             OreData data = new OreData{
                 position = pair.Key,
                 oreName = pair.Value.myProperties.name,
@@ -676,7 +676,7 @@ public partial class TerrainManager : MonoBehaviour{
         world.ores = newOres;
 
         var newTerrain = new List<TerrainData>();
-        foreach (var pair in terrainLayer.GetDictionary()){
+        foreach (var pair in terrainLayer.GetAll()){
             newTerrain.Add(new TerrainData{
                 pos = pair.Key,
                 t = pair.Value

@@ -19,6 +19,7 @@ namespace Systems.Round{
         public float TimeGiven;
         public Sponsor sponsor;
 
+        [MemoryPackConstructor]
         public Contract(){ }
 
         public Contract(int tier, int itemsAmt, Sponsor s){

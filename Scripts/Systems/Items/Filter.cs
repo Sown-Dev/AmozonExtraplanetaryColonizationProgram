@@ -23,6 +23,7 @@ namespace Systems.Items{
         }        public int Priority{ get; set; }
         public bool Hidden{ get; set; }
         
+        [MemoryPackConstructor]
         public Filter(){
             Priority = 0;
             Hidden = false;

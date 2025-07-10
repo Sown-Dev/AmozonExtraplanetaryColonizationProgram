@@ -19,6 +19,7 @@ namespace Systems.Round{
         public UpgradeOffer upgradeOffer;
 
         
+        [MemoryPackConstructor]
         public ShopTier(){
         }
 

@@ -35,6 +35,7 @@ namespace Systems.Round{
         public bool overrideCategory;
         public BlockCategory blockCategory;
 
+        [MemoryPackConstructor]
         public ShopOffer(){ }
 
         public ShopOffer(Item item, int price, int tier, int stock){
@@ -60,6 +61,7 @@ namespace Systems.Round{
         public int price;
         public bool bought;
     
+        [MemoryPackConstructor]
         public UpgradeOffer(){}
         
         public UpgradeOffer(Upgrade upgrade, int price){

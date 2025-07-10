@@ -628,6 +628,7 @@ public partial class World{
     };
 
     //needed for deserialization
+    [MemoryPackConstructor]
     public World() {
         worldMetrics = new WorldMetrics();
     }

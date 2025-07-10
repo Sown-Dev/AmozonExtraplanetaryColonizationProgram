@@ -13,6 +13,7 @@ namespace Systems.Items{
         
         //not currently being used
         [HideInInspector]public ContainerType type;
+        [MemoryPackConstructor]
         public ContainerProperties(int _size, string _name=""){
             size = _size;
             gridWidth = 8;

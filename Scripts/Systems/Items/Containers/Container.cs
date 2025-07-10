@@ -50,6 +50,7 @@ namespace Systems.Items{
         /*public void AddOnInsert(Action<ItemStack> _OnInsert){
             OnInsert += _OnInsert;
         }*/
+        [MemoryPackConstructor]
         public Container(){
             /*properties = new ContainerProperties();
             containerList = new Slot[properties.size];
