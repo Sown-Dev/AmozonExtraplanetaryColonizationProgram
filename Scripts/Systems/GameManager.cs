@@ -58,6 +58,15 @@ public class GameManager : MonoBehaviour{
     public PauseManager pauseManager;
     public UIWindow settingsWindow;
 
+    // Track asynchronous saves
+    [HideInInspector]
+    [DoNotSerialize]
+    private Coroutine saveCoroutine;
+    [HideInInspector]
+    [DoNotSerialize]
+    private bool isSaving;
+    public bool IsSaving => isSaving;
+
     [HideInInspector]
     [DoNotSerialize]
     public World currentWorld{
@@ -197,7 +206,8 @@ public class GameManager : MonoBehaviour{
     public void Quit(){
         //this is a bit iffy
         if (TerrainManager.Instance != null){
-            Save();
+            if(isSaving) CancelSave();
+            SaveImmediate();
         }
 
         Application.Quit();
@@ -215,6 +225,8 @@ public class GameManager : MonoBehaviour{
     }
 
     public void ExitToMain(bool save = true){
+        if(isSaving) CancelSave();
+
         if (TerrainManager.Instance != null && save){
             SaveImmediate();
         }
@@ -285,6 +297,7 @@ public class GameManager : MonoBehaviour{
 
 
     public IEnumerator SaveCR(){
+        isSaving = true;
         saveIconCG.alpha = 1;
         string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
         PlayerPrefs.SetString("GameSettings", settingsJSON);
@@ -347,14 +360,27 @@ public class GameManager : MonoBehaviour{
         Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
         saveIconCG.alpha = 0;
+        isSaving = false;
+        saveCoroutine = null;
         yield break;
     }
 
     public void Save(){
-        StartCoroutine(SaveCR());
+        if(isSaving) return;
+        saveCoroutine = StartCoroutine(SaveCR());
+    }
+
+    public void CancelSave(){
+        if(saveCoroutine != null){
+            StopCoroutine(saveCoroutine);
+            saveCoroutine = null;
+        }
+        isSaving = false;
+        saveIconCG.alpha = 0;
     }
 
     public void SaveImmediate(){
+        isSaving = true;
         saveIconCG.alpha = 1;
 
         string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
@@ -399,6 +425,7 @@ public class GameManager : MonoBehaviour{
         Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
         saveIconCG.alpha = 0;
+        isSaving = false;
     }
 
     private void SaveWorlds(){
@@ -475,7 +502,8 @@ public class GameManager : MonoBehaviour{
         Steamworks.SteamClient.Shutdown();
 #endif
         if (TerrainManager.Instance != null){
-            Save();
+            if(isSaving) CancelSave();
+            SaveImmediate();
         }
     }
 
