@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Systems.Items;
+using MemoryPack;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Systems.Round{
     [Serializable]
-    public class Contract{
+    [MemoryPackable]
+    public partial class Contract{
         public int quota;
         public int requiredQuota;
         public List<string> sellList;
@@ -17,6 +19,7 @@ namespace Systems.Round{
         public float TimeGiven;
         public Sponsor sponsor;
 
+        [MemoryPackConstructor]
         public Contract(){ }
 
         public Contract(int tier, int itemsAmt, Sponsor s){

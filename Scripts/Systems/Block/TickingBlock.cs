@@ -1,5 +1,6 @@
 ﻿using System;
 using UI.BlockUI;
+using MemoryPack;
 using UnityEngine;
 
 namespace Systems.Block
@@ -61,7 +62,8 @@ namespace Systems.Block
         }
     }
     [Serializable]
-    public class TickingBlockData : BlockData
+    [MemoryPackable]
+    public partial class TickingBlockData : BlockData
     {
         public bool actuatedThisTick = false;
     }

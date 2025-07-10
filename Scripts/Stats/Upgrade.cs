@@ -1,12 +1,13 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 [Serializable]
-public class Upgrade : ICloneable, IToolTippable{
+[MemoryPackable]
+public partial class Upgrade : ICloneable, IToolTippable{
     
 
     public Stats stats;
@@ -31,11 +32,11 @@ public class Upgrade : ICloneable, IToolTippable{
     [SerializeField] public string iconPath;
 
     // Cache the loaded Sprite (do not serialize this)
-     [JsonIgnore] [FormerlySerializedAs("icon")]
+     [MemoryPackIgnore] [FormerlySerializedAs("icon")]
     public Sprite iconField;
 
     // Property that loads the Sprite from Resources on first access.
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public Sprite icon{
         get{
             

@@ -536,7 +536,7 @@ public partial class TerrainManager : MonoBehaviour{
         Gizmos.color = Color.green;
         if (blockLayer == null)
             return;
-        foreach (var pair in blockLayer.GetDictionary()){
+        foreach (var pair in blockLayer.GetAll()){
             //Gizmos.DrawLine((Vector2)pair.Key, (Vector2)pair.Value.origin);
         }
     }
@@ -544,23 +544,23 @@ public partial class TerrainManager : MonoBehaviour{
     //SAVE/LOAD
 
     public IEnumerator SaveWorldCR(){
-        GameManager.Instance.currentWorld.blocks.Clear();
-        GameManager.Instance.currentWorld.ticksElapsed = totalTicksElapsed; // Save the total ticks elapsed
+        var world = GameManager.Instance.currentWorld;
+        world.ticksElapsed = totalTicksElapsed; // Save the total ticks elapsed
         // Save blocks
-        foreach (var block in blockLayer.GetDictionary().Values){
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value)){
             block.hasSaved = false; // Reset the hasSaved flag for all blocks
         }
 
-
         float lastYield = Time.realtimeSinceStartup;
+        var newBlocks = new List<BlockLoadData>();
         //possibly a bad idea to clone list, but avoids issues when saving
-        foreach (var block in blockLayer.GetDictionary().Values.ToList()){
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value).ToList()){
             if (!block.hasSaved){
                 BlockLoadData blockData = new BlockLoadData{
                     data = block.Save(),
                     addressableKey = block.addressableKey,
                 };
-                GameManager.Instance.currentWorld.blocks.Add(blockData);
+                newBlocks.Add(blockData);
                 block.hasSaved = true;
             }
             if (Time.realtimeSinceStartup - lastYield > SAVE_YIELD_TIME){
@@ -568,17 +568,17 @@ public partial class TerrainManager : MonoBehaviour{
                 yield return null;
             }
         }
-
+        
         Debug.Log("Saved Blocks");
 
-        GameManager.Instance.currentWorld.ores.Clear();
-        foreach (var pair in oreLayer.GetDictionary()){
+        var newOres = new List<OreData>();
+        foreach (var pair in oreLayer.GetAll()){
             OreData data = new OreData{
                 position = pair.Key,
                 oreName = pair.Value.myProperties.name, // Store the asset name
                 amount = pair.Value.amount
             };
-            GameManager.Instance.currentWorld.ores.Add(data);
+            newOres.Add(data);
             if (Time.realtimeSinceStartup - lastYield > SAVE_YIELD_TIME){
                 lastYield = Time.realtimeSinceStartup;
                 yield return null;
@@ -586,9 +586,9 @@ public partial class TerrainManager : MonoBehaviour{
         }
 
         // Save terrain
-        GameManager.Instance.currentWorld.terrain.Clear();
-        foreach (var pair in terrainLayer.GetDictionary()){
-            GameManager.Instance.currentWorld.terrain.Add(new TerrainData{
+        var newTerrain = new List<TerrainData>();
+        foreach (var pair in terrainLayer.GetAll()){
+            newTerrain.Add(new TerrainData{
                 pos = pair.Key,
                 t = pair.Value // Store the asset name
             });
@@ -604,7 +604,7 @@ public partial class TerrainManager : MonoBehaviour{
 
         // Initialize flattened walls array
         int totalCells = GameManager.Instance.currentWorld.worldSize.x * GameManager.Instance.currentWorld.worldSize.y;
-        GameManager.Instance.currentWorld.walls = new short[totalCells];
+        var newWalls = new short[totalCells];
 
         int halfX = GameManager.Instance.currentWorld.worldSize.x / 2;
         int halfY = GameManager.Instance.currentWorld.worldSize.y / 2;
@@ -624,7 +624,7 @@ public partial class TerrainManager : MonoBehaviour{
                     tileIndex = idx >= 0 ? idx + 1 : 0;
                 }
 
-                GameManager.Instance.currentWorld.walls[flatIndex] = (short)tileIndex;
+                newWalls[flatIndex] = (short)tileIndex;
 
                 if (Time.realtimeSinceStartup - lastYield > SAVE_YIELD_TIME){
                     lastYield = Time.realtimeSinceStartup;
@@ -633,6 +633,84 @@ public partial class TerrainManager : MonoBehaviour{
             }
         }
 
+        world.blocks = newBlocks;
+        world.ores = newOres;
+        world.terrain = newTerrain;
+        world.walls = newWalls;
+
+        Debug.Log("Saved Terrain");
+    }
+
+    public void SaveWorldImmediate(){
+        var world = GameManager.Instance.currentWorld;
+        world.ticksElapsed = totalTicksElapsed;
+
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value)){
+            block.hasSaved = false;
+        }
+
+        var newBlocks = new List<BlockLoadData>();
+        foreach (var block in blockLayer.GetAll().Select(p => p.Value).ToList()){
+            if (!block.hasSaved){
+                BlockLoadData blockData = new BlockLoadData{
+                    data = block.Save(),
+                    addressableKey = block.addressableKey,
+                };
+                newBlocks.Add(blockData);
+                block.hasSaved = true;
+            }
+        }
+        world.blocks = newBlocks;
+
+        Debug.Log("Saved Blocks");
+
+        var newOres = new List<OreData>();
+        foreach (var pair in oreLayer.GetAll()){
+            OreData data = new OreData{
+                position = pair.Key,
+                oreName = pair.Value.myProperties.name,
+                amount = pair.Value.amount
+            };
+            newOres.Add(data);
+        }
+        world.ores = newOres;
+
+        var newTerrain = new List<TerrainData>();
+        foreach (var pair in terrainLayer.GetAll()){
+            newTerrain.Add(new TerrainData{
+                pos = pair.Key,
+                t = pair.Value
+            });
+        }
+        world.terrain = newTerrain;
+
+        Debug.Log("Saved Terrain and Ores");
+
+        int totalCells = GameManager.Instance.currentWorld.worldSize.x * GameManager.Instance.currentWorld.worldSize.y;
+        var newWalls = new short[totalCells];
+
+        int halfX = GameManager.Instance.currentWorld.worldSize.x / 2;
+        int halfY = GameManager.Instance.currentWorld.worldSize.y / 2;
+
+        for (int i = -halfX; i < halfX; i++){
+            for (int j = -halfY; j < halfY; j++){
+                Vector3Int pos = new Vector3Int(i, j, 0);
+
+                int xIndex = i + halfX;
+                int yIndex = j + halfY;
+                int flatIndex = yIndex * GameManager.Instance.currentWorld.worldSize.x + xIndex;
+
+                TileBase tile = wallTilemap.GetTile(pos);
+                int tileIndex = 0;
+                if (tile != null){
+                    int idx = wallTilesRegistry.IndexOf(tile);
+                    tileIndex = idx >= 0 ? idx + 1 : 0;
+                }
+
+                newWalls[flatIndex] = (short)tileIndex;
+            }
+        }
+        world.walls = newWalls;
 
         Debug.Log("Saved Terrain");
     }

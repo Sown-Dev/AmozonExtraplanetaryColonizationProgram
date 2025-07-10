@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.Block.BlockStates;
 using Systems.Items;
 using UI.BlockUI;

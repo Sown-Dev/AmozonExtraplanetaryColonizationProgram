@@ -1,19 +1,20 @@
 ﻿// BuildingProgress.cs
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.BlockUI;
 using Systems.Items;
 using UnityEngine;
 
 [Serializable]
-public class BuildingProgress : IBlockUI
+[MemoryPackable]
+public partial class BuildingProgress : IBlockUI
 {
     public ItemStack[] resourcesNeeded;
     public int[] progress;
     
     // Callback with container reference for potential partial completion handling
-    [JsonIgnore]public Action OnBuildComplete;
+    [MemoryPackIgnore]public Action OnBuildComplete;
 
     public int Priority { get; set; }
     public bool Hidden { get; set; }
@@ -70,6 +71,11 @@ public class BuildingProgress : IBlockUI
     public void ClearCallbacks()
     {
         OnBuildComplete = null;
+    }
+
+    [MemoryPackConstructor]
+    public BuildingProgress()
+    {
     }
 
     public BuildingProgress(ItemStack[] requirements)

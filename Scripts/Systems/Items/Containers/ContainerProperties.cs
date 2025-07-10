@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using MemoryPack;
 
 namespace Systems.Items{
     [Serializable]
-    public struct ContainerProperties{
+    public partial struct ContainerProperties{
         public int size;
         public string name;
         public int gridWidth;
@@ -11,6 +12,7 @@ namespace Systems.Items{
         
         //not currently being used
         [HideInInspector]public ContainerType type;
+        [MemoryPackConstructor]
         public ContainerProperties(int _size, string _name=""){
             size = _size;
             gridWidth = 8;

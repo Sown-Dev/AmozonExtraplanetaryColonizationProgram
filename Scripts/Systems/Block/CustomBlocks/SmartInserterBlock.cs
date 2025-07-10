@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using MemoryPack;
 using Systems.Items;
 using UI;
 
@@ -22,12 +22,12 @@ namespace Systems.Block
 
         public override BlockData Save(){
             BlockData d = base.Save();
-            d.data.SetString( "filter", JsonConvert.SerializeObject( filter, GameManager.JSONsettings ) );
+            d.data.Set("filter", filter);
             return d;
         }
         public override void Load(BlockData d){
             base.Load(d);
-            filter = JsonConvert.DeserializeObject<Filter>( d.data.GetString( "filter" ), GameManager.JSONsettings );
+            filter = d.data.Get<Filter>( "filter" );
             mySlot.filter = filter;
         }
     }

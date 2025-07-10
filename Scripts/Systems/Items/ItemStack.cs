@@ -1,17 +1,18 @@
 ﻿using System;
 using JetBrains.Annotations;
-using Newtonsoft.Json;
+using MemoryPack;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Systems.Items{
     [Serializable]
+    [MemoryPackable]
     [CanBeNull]
-    public class ItemStack{
+    public partial class ItemStack{
         public string itemID=null;
 
-        [FormerlySerializedAs("item")][JsonIgnore]public Item itemSO;
-        [JsonIgnore]public Item item{
+        [FormerlySerializedAs("item")][MemoryPackIgnore]public Item itemSO;
+        [MemoryPackIgnore]public Item item{
             get{
                 if (itemSO != null && String.IsNullOrEmpty(itemID))
                     itemID = itemSO.name;
@@ -30,9 +31,9 @@ namespace Systems.Items{
         item = it;
         amount = amt;
         }*/
-        [JsonConstructor]
+        [MemoryPackConstructor]
         public ItemStack(){
-            
+
         }
 
         public ItemStack(Item it, int amt){

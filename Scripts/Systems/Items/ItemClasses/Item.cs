@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MemoryPack;
 using UnityEngine;
 using UnityEngine.Serialization;
 

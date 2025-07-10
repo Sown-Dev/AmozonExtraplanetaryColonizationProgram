@@ -1,18 +1,19 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.Items;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Systems.Round{
     [Serializable]
-    public class ShopOffer{
+    [MemoryPackable]
+    public partial class ShopOffer{
         public string itemID = null;
 
-        [FormerlySerializedAs("item")] [JsonIgnore]
+        [FormerlySerializedAs("item")] [MemoryPackIgnore]
         public Item itemSO;
 
-        [JsonIgnore]
+        [MemoryPackIgnore]
         public Item item{
             get{
                 if (itemSO != null && String.IsNullOrEmpty(itemID))
@@ -34,6 +35,7 @@ namespace Systems.Round{
         public bool overrideCategory;
         public BlockCategory blockCategory;
 
+        [MemoryPackConstructor]
         public ShopOffer(){ }
 
         public ShopOffer(Item item, int price, int tier, int stock){
@@ -53,11 +55,13 @@ namespace Systems.Round{
     }
 
     [Serializable]
-    public class UpgradeOffer{
+    [MemoryPackable]
+    public partial class UpgradeOffer{
         public Upgrade upgrade;
         public int price;
         public bool bought;
     
+        [MemoryPackConstructor]
         public UpgradeOffer(){}
         
         public UpgradeOffer(Upgrade upgrade, int price){

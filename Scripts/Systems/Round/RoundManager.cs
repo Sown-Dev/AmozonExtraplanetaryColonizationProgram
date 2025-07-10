@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.Items;
 using UI;
 using UnityEngine;
@@ -485,7 +485,8 @@ namespace Systems.Round{
     }
 
     [Serializable]
-    public class RoundData{
+    [MemoryPackable]
+    public partial class RoundData{
         public int roundNum;
         public bool isInCooldown;
         public float roundTime;
