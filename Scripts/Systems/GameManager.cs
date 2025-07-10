@@ -20,6 +20,7 @@ using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Random = UnityEngine.Random;
 using Terrain = Systems.Terrain.Terrain;
@@ -62,6 +63,9 @@ public class GameManager : MonoBehaviour{
     [HideInInspector]
     [DoNotSerialize]
     private Coroutine saveCoroutine;
+    [HideInInspector]
+    [DoNotSerialize]
+    private CancellationTokenSource saveCancellation;
     [HideInInspector]
     [DoNotSerialize]
     private bool isSaving;
@@ -299,6 +303,7 @@ public class GameManager : MonoBehaviour{
     public IEnumerator SaveCR(){
         isSaving = true;
         saveIconCG.alpha = 1;
+        saveCancellation = new CancellationTokenSource();
         string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
         PlayerPrefs.SetString("GameSettings", settingsJSON);
 
@@ -315,6 +320,10 @@ public class GameManager : MonoBehaviour{
             currentWorld.roundData = RoundManager.Instance.SaveRoundData();
 
         yield return StartCoroutine(TerrainManager.Instance.SaveWorldCR());
+        if(saveCancellation.IsCancellationRequested){
+            CleanupSavingState();
+            yield break;
+        }
 
         // Check if the current world is already in the list
         var existingWorld = worlds.FirstOrDefault(w => w.name == currentWorld.name);
@@ -335,11 +344,23 @@ public class GameManager : MonoBehaviour{
 #if UNITYSERIALIZATION1
         serializeTask = System.Threading.Tasks.Task.Run(() => JsonUtility.ToJson(currentWorld, true));
 #else
-        serializeTask = System.Threading.Tasks.Task.Run(() => JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings));
+        serializeTask = System.Threading.Tasks.Task.Run(() => JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings), saveCancellation.Token);
 #endif
 
-        while(!serializeTask.IsCompleted) yield return null;
-        string json = serializeTask.Result;
+        while(!serializeTask.IsCompleted){
+            if(saveCancellation.IsCancellationRequested){
+                CleanupSavingState();
+                yield break;
+            }
+            yield return null;
+        }
+        string json;
+        try{
+            json = serializeTask.Result;
+        }catch(AggregateException ae) when(ae.InnerException is OperationCanceledException){
+            CleanupSavingState();
+            yield break;
+        }
         PlayerPrefs.SetString(currentWorld.name, json);
 
 
@@ -347,21 +368,31 @@ public class GameManager : MonoBehaviour{
         string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
         Exception fileException = null;
         var fileTask = System.Threading.Tasks.Task.Run(() => {
-            try{ File.WriteAllText(filePath, json); }
+            try{
+                if(!saveCancellation.IsCancellationRequested)
+                    File.WriteAllText(filePath, json);
+            }
             catch (Exception e){ fileException = e; }
-        });
-        while(!fileTask.IsCompleted) yield return null;
+        }, saveCancellation.Token);
+        while(!fileTask.IsCompleted){
+            if(saveCancellation.IsCancellationRequested){
+                CleanupSavingState();
+                yield break;
+            }
+            yield return null;
+        }
         if (fileException != null) Debug.LogError($"Failed to save world to text file: {fileException}");
-        else Debug.Log($"World saved to text file at {filePath}");
+        else if(!saveCancellation.IsCancellationRequested) Debug.Log($"World saved to text file at {filePath}");
 #endif
 
         SaveWorlds();
 
         Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
-        saveIconCG.alpha = 0;
-        isSaving = false;
+        CleanupSavingState();
         saveCoroutine = null;
+        saveCancellation.Dispose();
+        saveCancellation = null;
         yield break;
     }
 
@@ -375,6 +406,15 @@ public class GameManager : MonoBehaviour{
             StopCoroutine(saveCoroutine);
             saveCoroutine = null;
         }
+        if(saveCancellation != null){
+            saveCancellation.Cancel();
+            saveCancellation.Dispose();
+            saveCancellation = null;
+        }
+        CleanupSavingState();
+    }
+
+    private void CleanupSavingState(){
         isSaving = false;
         saveIconCG.alpha = 0;
     }
@@ -382,7 +422,7 @@ public class GameManager : MonoBehaviour{
     public void SaveImmediate(){
         isSaving = true;
         saveIconCG.alpha = 1;
-
+        
         string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
         PlayerPrefs.SetString("GameSettings", settingsJSON);
 
@@ -424,8 +464,7 @@ public class GameManager : MonoBehaviour{
         SaveWorlds();
         Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
-        saveIconCG.alpha = 0;
-        isSaving = false;
+        CleanupSavingState();
     }
 
     private void SaveWorlds(){
