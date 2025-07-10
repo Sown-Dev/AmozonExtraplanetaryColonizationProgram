@@ -1,6 +1,7 @@
 ﻿// BuildingBlock.cs
 
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using UnityEngine;
 using Systems.Block;
 using Systems.Items;
@@ -49,13 +50,13 @@ namespace Systems.Block
 
         public override BlockData Save(){
             BlockData d = base.Save();
-            d.data.SetString( "buildingProgress", JsonConvert.SerializeObject(buildingProgress.progress, GameManager.JSONsettings));
+            d.data.SetString( "buildingProgress", JsonSerializer.Serialize(buildingProgress.progress, GameManager.JSONoptions));
             return d;
         }
         
         public override void Load(BlockData d){
             base.Load(d);
-            buildingProgress.progress = JsonConvert.DeserializeObject<int[]>(d.data.GetString("buildingProgress"), GameManager.JSONsettings);
+            buildingProgress.progress = JsonSerializer.Deserialize<int[]>(d.data.GetString("buildingProgress"), GameManager.JSONoptions);
         }
     }
     public class BuildingBlockData : BlockData

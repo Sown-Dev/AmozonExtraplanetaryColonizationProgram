@@ -1,7 +1,7 @@
 ﻿// BuildingProgress.cs
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using Systems.BlockUI;
 using Systems.Items;
 using UnityEngine;

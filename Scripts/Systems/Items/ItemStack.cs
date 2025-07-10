@@ -1,6 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using UnityEngine;
 using UnityEngine.Serialization;
 

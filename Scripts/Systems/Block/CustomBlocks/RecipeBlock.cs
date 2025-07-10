@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Systems.Block.CustomBlocks;
 using Systems.Items;
 using UnityEngine;
@@ -136,14 +137,14 @@ namespace Systems.Block{
         public override BlockData Save(){
             BlockData d = base.Save();
             d.data.SetInt( "selectedRecipe", recipeSelector.currentRecipeIndex);
-            d.data.SetString( "input", JsonConvert.SerializeObject( input, GameManager.JSONsettings ) );
+            d.data.SetString( "input", JsonSerializer.Serialize( input, GameManager.JSONoptions ) );
 return d;
         }
 
         public override void Load(BlockData d){
             base.Load(d);
-            //recipeSelector.SelectRecipe( JsonConvert.DeserializeObject<Recipe>( d.data.GetString( "selectedRecipe" ), GameManager.JSONsettings ) );
-            input = JsonConvert.DeserializeObject<Container>( d.data.GetString( "input" ), GameManager.JSONsettings );
+            //recipeSelector.SelectRecipe( JsonSerializer.Deserialize<Recipe>( d.data.GetString( "selectedRecipe" ), GameManager.JSONoptions ) );
+            input = JsonSerializer.Deserialize<Container>( d.data.GetString( "input" ), GameManager.JSONoptions );
             recipeSelector.SelectRecipe( d.data.GetInt( "selectedRecipe" ) );
             SetRecipe();
         }

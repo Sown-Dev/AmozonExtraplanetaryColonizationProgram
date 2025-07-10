@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Linq;
 using NewRunMenu;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Systems.Block;
 using Systems.Block.CustomBlocks;
 using Systems.Items;
@@ -133,7 +134,7 @@ public partial class Player : Unit, IContainer{
         y = data.y;
 
         //print inventory
-        Debug.Log("loaded:" + JsonConvert.SerializeObject(data, GameManager.JSONsettings));
+        Debug.Log("loaded:" + JsonSerializer.Serialize(data, GameManager.JSONoptions));
         Inventory = new Container(data.Inventory);
         //Inventory = inventorySave;
 
@@ -162,7 +163,7 @@ public partial class Player : Unit, IContainer{
             }
         }
 
-        Debug.Log(JsonConvert.SerializeObject(data.Inventory, GameManager.JSONsettings));
+        Debug.Log(JsonSerializer.Serialize(data.Inventory, GameManager.JSONoptions));
 
 
         return data;
