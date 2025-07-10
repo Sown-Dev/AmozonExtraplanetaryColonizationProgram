@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour{
 
     public void ExitToMain(bool save = true){
         if (TerrainManager.Instance != null && save){
-            Save();
+            SaveImmediate();
         }
         else{
             SyncStatsWithSteam();
@@ -352,6 +352,53 @@ public class GameManager : MonoBehaviour{
 
     public void Save(){
         StartCoroutine(SaveCR());
+    }
+
+    public void SaveImmediate(){
+        saveIconCG.alpha = 1;
+
+        string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
+        PlayerPrefs.SetString("GameSettings", settingsJSON);
+
+        SaveStats();
+
+        if (Player.Instance)
+            currentWorld.playerData = Player.Instance.SavePlayer();
+
+        if (RoundManager.Instance)
+            currentWorld.roundData = RoundManager.Instance.SaveRoundData();
+
+        TerrainManager.Instance.SaveWorldImmediate();
+
+        var existingWorld = worlds.FirstOrDefault(w => w.name == currentWorld.name);
+        if (existingWorld == null){
+            worlds.Add(currentWorld);
+        } else {
+            int index = worlds.IndexOf(existingWorld);
+            worlds[index] = currentWorld;
+        }
+
+#if UNITYSERIALIZATION1
+        string json = JsonUtility.ToJson(currentWorld, true);
+#else
+        string json = JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings);
+#endif
+        PlayerPrefs.SetString(currentWorld.name, json);
+
+#if UNITY_STANDALONE_WIN && SAVEWORLDTOFILE
+        string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
+        try{
+            File.WriteAllText(filePath, json);
+            Debug.Log($"World saved to text file at {filePath}");
+        } catch (Exception e){
+            Debug.LogError($"Failed to save world to text file: {e}");
+        }
+#endif
+
+        SaveWorlds();
+        Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+
+        saveIconCG.alpha = 0;
     }
 
     private void SaveWorlds(){
