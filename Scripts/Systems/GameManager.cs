@@ -134,7 +134,9 @@ public class GameManager : MonoBehaviour{
 
                     foreach (var name in worldNames){
                         if (PlayerPrefs.HasKey(name)){
-                            World world = BsonPlayerPrefsUtility.Load<World>(name, JSONsettings);
+                            string base64 = PlayerPrefs.GetString(name);
+                            byte[] bytes = Convert.FromBase64String(base64);
+                            World world = DeserializeFromBson<World>(bytes, JSONsettings);
                             worlds.Add(world);
                             Debug.Log($"Loaded world: {world.name}");
                         }
@@ -333,7 +335,7 @@ public class GameManager : MonoBehaviour{
         // Save the current world to PlayerPrefs
 
         System.Threading.Tasks.Task<byte[]> serializeTask;
-        serializeTask = System.Threading.Tasks.Task.Run(() => BsonPlayerPrefsUtility.Serialize(currentWorld, JSONsettings), saveCancellation.Token);
+        serializeTask = System.Threading.Tasks.Task.Run(() => SerializeToBson(currentWorld, JSONsettings), saveCancellation.Token);
 
         while(!serializeTask.IsCompleted){
             if(saveCancellation.IsCancellationRequested){
@@ -438,7 +440,7 @@ public class GameManager : MonoBehaviour{
         PlayerPrefs.SetString(currentWorld.name, json);
         byte[] saveBytes = System.Text.Encoding.UTF8.GetBytes(json);
 #else
-        byte[] saveBytes = BsonPlayerPrefsUtility.Serialize(currentWorld, JSONsettings);
+        byte[] saveBytes = SerializeToBson(currentWorld, JSONsettings);
         string base64 = Convert.ToBase64String(saveBytes);
         PlayerPrefs.SetString(currentWorld.name, base64);
 #endif
@@ -596,6 +598,24 @@ public class GameManager : MonoBehaviour{
                 SceneManager.LoadScene("Scenes/Titlescreen");
                 break;
         }
+    }
+
+    private static byte[] SerializeToBson<T>(T obj, JsonSerializerSettings settings)
+    {
+        var serializer = JsonSerializer.Create(settings);
+        using var ms = new MemoryStream();
+        using var writer = new BsonDataWriter(ms);
+        serializer.Serialize(writer, obj);
+        writer.Flush();
+        return ms.ToArray();
+    }
+
+    private static T DeserializeFromBson<T>(byte[] data, JsonSerializerSettings settings)
+    {
+        var serializer = JsonSerializer.Create(settings);
+        using var ms = new MemoryStream(data);
+        using var reader = new BsonDataReader(ms);
+        return serializer.Deserialize<T>(reader);
     }
 }
 
