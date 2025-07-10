@@ -604,6 +604,8 @@ public partial class Player : Unit, IContainer{
         if (firstLand){
             firstLand = false;
             RoundManager.Instance.StartCooldown(30);
+            
+            GameManager.Instance.Save();
 
             TutorialManager.Instance.StartTutorial("controls", 1);
             Instantiate(DropPodDestroy, DropPod.transform.position, quaternion.identity);

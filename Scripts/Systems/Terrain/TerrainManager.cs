@@ -65,7 +65,9 @@ public partial class TerrainManager : MonoBehaviour{
         if (!GameManager.Instance.currentWorld.generated){
             //generate world
             GenerateWorld();
-            GameManager.Instance.Save();
+            
+            //we don't wanna save immediately on gen, instead we save after landing
+            //GameManager.Instance.Save();
         }
         else{
             //load world
