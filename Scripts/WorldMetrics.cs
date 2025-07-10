@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 [Serializable]
-[JsonObject]
 public class WorldMetrics
 {
     public int blocksBroken;
@@ -83,6 +83,6 @@ public class WorldMetrics
     
     public string ToString()
     {
-        return JsonConvert.SerializeObject(this, Formatting.Indented);
+        return JsonSerializer.Serialize(this, GameManager.JSONoptionsIndented);
     }
 }

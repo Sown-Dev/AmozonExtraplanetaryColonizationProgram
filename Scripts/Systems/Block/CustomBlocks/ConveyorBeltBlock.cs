@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Systems.Items;
 using UI.BlockUI;
 using Unity.VisualScripting;
@@ -155,13 +156,13 @@ namespace Systems.Block.CustomBlocks{
 
         public override BlockData Save(){
             BlockData d = base.Save();
-            d.data.SetString( "ConveyorContainer", JsonConvert.SerializeObject(ConveyorContainer,GameManager.JSONsettings));
+            d.data.SetString( "ConveyorContainer", JsonSerializer.Serialize(ConveyorContainer, GameManager.JSONoptions));
             
             return d;
         }
         public override void Load(BlockData d){
             base.Load(d);
-            ConveyorContainer = JsonConvert.DeserializeObject<List<ConveyorSlot>>(d.data.GetString("ConveyorContainer"),GameManager.JSONsettings);
+            ConveyorContainer = JsonSerializer.Deserialize<List<ConveyorSlot>>(d.data.GetString("ConveyorContainer"), GameManager.JSONoptions);
         }
 
 

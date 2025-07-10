@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using Systems.Items;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;

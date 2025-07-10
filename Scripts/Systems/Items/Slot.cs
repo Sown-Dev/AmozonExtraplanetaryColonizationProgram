@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using UI;
 using UnityEngine;
 
 namespace Systems.Items{
     [Serializable]
     public class Slot{
-        [JsonProperty("ItemStack", NullValueHandling = NullValueHandling.Include)]
-        public ItemStack ItemStack = null;
+        [JsonInclude] public ItemStack ItemStack = null;
 
         public Filter filter = null;
         

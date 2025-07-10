@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using Systems.BlockUI;
 using UnityEngine.Serialization;
 

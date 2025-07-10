@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Systems.Items;
 using Systems.Block;
 
@@ -45,12 +46,12 @@ namespace Systems.Block.CustomBlocks{
         
         public override BlockData Save(){
             BlockData d= base.Save();
-            d.data.SetString("burner", JsonConvert.SerializeObject(burner, GameManager.JSONsettings));
+            d.data.SetString("burner", JsonSerializer.Serialize(burner, GameManager.JSONoptions));
             return d;
         }
         public override void Load(BlockData d){
             base.Load(d);
-            burner = JsonConvert.DeserializeObject<Burner>(d.data.GetString("burner"), GameManager.JSONsettings);
+            burner = JsonSerializer.Deserialize<Burner>(d.data.GetString("burner"), GameManager.JSONoptions);
         }
     }
 
