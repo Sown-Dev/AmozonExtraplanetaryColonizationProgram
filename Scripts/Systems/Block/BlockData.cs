@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Systems.Items;
+using MemoryPack;
 using UnityEngine;
 
 namespace Systems.Block{
     [Serializable]
-    public class BlockData{
+    [MemoryPackable]
+    public partial class BlockData{
         public List<ItemStack> lootTable = new();
 
         public Orientation rotation;

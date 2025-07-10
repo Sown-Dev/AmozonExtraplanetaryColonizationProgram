@@ -1,15 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.BlockUI;
 using UnityEngine.Serialization;
 
 namespace Systems.Items{
     [Serializable]
-    public class Filter: IBlockUI{
+    [MemoryPackable]
+    public partial class Filter: IBlockUI{
 
         public string filterID;
 
-        [JsonIgnore]
+        [MemoryPackIgnore]
         public Item filter {
             get {
                 if (string.IsNullOrEmpty(filterID))

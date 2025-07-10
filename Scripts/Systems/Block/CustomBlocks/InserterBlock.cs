@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.BlockUI;
 using Systems.Items;
 using UnityEngine;
@@ -142,14 +142,14 @@ namespace Systems.Block
 
         public override BlockData Save(){
             BlockData save = base.Save();
-            save.data.SetString( "DirSelect", JsonConvert.SerializeObject(DirSelect,GameManager.JSONsettings));
+            save.data.Set("DirSelect", DirSelect);
             save.data.SetInt( "toFace", (int)toFace);
             return save;
         }
-        
+
         public override void Load(BlockData save){
             base.Load(save);
-            DirSelect = JsonConvert.DeserializeObject<DirectionSelect>(save.data.GetString("DirSelect"),GameManager.JSONsettings);
+            DirSelect = save.data.Get<DirectionSelect>("DirSelect");
             toFace = (Orientation)save.data.GetInt("toFace");
         }
     }

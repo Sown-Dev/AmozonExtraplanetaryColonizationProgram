@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
+using MemoryPack;
 
 [Serializable]
-[JsonObject]
-public class WorldMetrics
+[MemoryPackable]
+public partial class WorldMetrics
 {
     public int blocksBroken;
     public int blocksPlaced;
@@ -81,8 +81,8 @@ public class WorldMetrics
         }
     }
     
-    public string ToString()
+    public override string ToString()
     {
-        return JsonConvert.SerializeObject(this, Formatting.Indented);
+        return $"BlocksBroken: {blocksBroken}, BlocksPlaced: {blocksPlaced}";
     }
 }

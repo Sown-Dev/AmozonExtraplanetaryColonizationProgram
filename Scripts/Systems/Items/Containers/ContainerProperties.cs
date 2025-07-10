@@ -1,9 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using MemoryPack;
 
 namespace Systems.Items{
     [Serializable]
-    public struct ContainerProperties{
+    [MemoryPackable]
+    public partial struct ContainerProperties{
         public int size;
         public string name;
         public int gridWidth;

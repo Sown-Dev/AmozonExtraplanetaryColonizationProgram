@@ -13,8 +13,7 @@ using Systems.Terrain;
 using UI.BlockUI;
 using Unity.VisualScripting;
 using UnityEditor;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using MemoryPack;
 using UI; // Add this at the top
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -80,16 +79,6 @@ public class GameManager : MonoBehaviour{
 
     public bool inGame;
 
-    public static JsonSerializerSettings JSONsettings = new JsonSerializerSettings{
-        NullValueHandling = NullValueHandling.Include,
-        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-
-        //DefaultValueHandling = DefaultValueHandling.Ignore,
-        ContractResolver = new DefaultContractResolver{
-            // Ensure Unity serialization attributes are ignored
-            IgnoreSerializableAttribute = true
-        }
-    };
 
     private void Awake(){
         if (Instance == null){
@@ -114,8 +103,8 @@ public class GameManager : MonoBehaviour{
 
         //load settings
         if (PlayerPrefs.HasKey("GameSettings")){
-            string json = PlayerPrefs.GetString("GameSettings");
-            settings = JsonUtility.FromJson<GameSettings>(json);
+            byte[] bytes = Convert.FromBase64String(PlayerPrefs.GetString("GameSettings"));
+            settings = MemoryPackSerializer.Deserialize<GameSettings>(bytes);
         }
         else{
             settings = new GameSettings();
@@ -125,23 +114,15 @@ public class GameManager : MonoBehaviour{
         //load all worlds from PlayerPrefs
         try{
             if (PlayerPrefs.HasKey("AllWorlds")){
-                string json = PlayerPrefs.GetString("AllWorlds");
-                var worldNamesWrapper = JsonUtility.FromJson<Wrapper<List<string>>>(json);
-                if (worldNamesWrapper != null && worldNamesWrapper.data != null){
-                    List<string> worldNames = worldNamesWrapper.data;
+                byte[] listBytes = Convert.FromBase64String(PlayerPrefs.GetString("AllWorlds"));
+                var worldNames = MemoryPackSerializer.Deserialize<List<string>>(listBytes);
+                if (worldNames != null){
                     Debug.Log($"Loaded {worldNames.Count} world names from PlayerPrefs");
 
                     foreach (var name in worldNames){
                         if (PlayerPrefs.HasKey(name)){
-                            string worldJson = PlayerPrefs.GetString(name);
-                            //World world = JsonUtility.FromJson<World>(worldJson);
-                            World world;
-#if UNITYSERIALIZATION1
-                        world = JsonUtility.FromJson<World>(worldJson);
-#else
-
-                            world = JsonConvert.DeserializeObject<World>(worldJson, JSONsettings);
-#endif
+                            byte[] worldBytes = Convert.FromBase64String(PlayerPrefs.GetString(name));
+                            World world = MemoryPackSerializer.Deserialize<World>(worldBytes);
 
                             worlds.Add(world);
                             Debug.Log($"Loaded world: {world.name}");
@@ -159,8 +140,8 @@ public class GameManager : MonoBehaviour{
 
         //load gamedata
         if (PlayerPrefs.HasKey("GameData")){
-            string json = PlayerPrefs.GetString("GameData");
-            gameData = JsonUtility.FromJson<GameData>(json);
+            byte[] gbytes = Convert.FromBase64String(PlayerPrefs.GetString("GameData"));
+            gameData = MemoryPackSerializer.Deserialize<GameData>(gbytes);
         }
         else{
             gameData = new GameData(); // Default if no data is saved
@@ -291,7 +272,7 @@ public class GameManager : MonoBehaviour{
     public void LoadWorld(World world){
         inGame = true;
         currentWorld = world;
-        Debug.Log("loading world:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+        Debug.Log($"loading world: {currentWorld.name}");
         SceneManager.LoadScene("Game");
     }
 
@@ -304,8 +285,8 @@ public class GameManager : MonoBehaviour{
         isSaving = true;
         saveIconCG.alpha = 1;
         saveCancellation = new CancellationTokenSource();
-        string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
-        PlayerPrefs.SetString("GameSettings", settingsJSON);
+        byte[] settingsBytes = MemoryPackSerializer.Serialize(settings);
+        PlayerPrefs.SetString("GameSettings", Convert.ToBase64String(settingsBytes));
 
 
         SaveStats();
@@ -314,7 +295,6 @@ public class GameManager : MonoBehaviour{
 
         if (Player.Instance)
             currentWorld.playerData = Player.Instance.SavePlayer();
-        //Debug.Log("saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
 
         if (RoundManager.Instance)
             currentWorld.roundData = RoundManager.Instance.SaveRoundData();
@@ -339,13 +319,7 @@ public class GameManager : MonoBehaviour{
 
 
         // Save the current world to PlayerPrefs
-
-        System.Threading.Tasks.Task<string> serializeTask;
-#if UNITYSERIALIZATION1
-        serializeTask = System.Threading.Tasks.Task.Run(() => JsonUtility.ToJson(currentWorld, true));
-#else
-        serializeTask = System.Threading.Tasks.Task.Run(() => JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings), saveCancellation.Token);
-#endif
+        System.Threading.Tasks.Task<byte[]> serializeTask = System.Threading.Tasks.Task.Run(() => MemoryPackSerializer.Serialize(currentWorld), saveCancellation.Token);
 
         while(!serializeTask.IsCompleted){
             if(saveCancellation.IsCancellationRequested){
@@ -354,14 +328,14 @@ public class GameManager : MonoBehaviour{
             }
             yield return null;
         }
-        string json;
+        byte[] worldBytes;
         try{
-            json = serializeTask.Result;
+            worldBytes = serializeTask.Result;
         }catch(AggregateException ae) when(ae.InnerException is OperationCanceledException){
             CleanupSavingState();
             yield break;
         }
-        PlayerPrefs.SetString(currentWorld.name, json);
+        PlayerPrefs.SetString(currentWorld.name, Convert.ToBase64String(worldBytes));
 
 
 #if UNITY_STANDALONE_WIN && SAVEWORLDTOFILE
@@ -370,7 +344,7 @@ public class GameManager : MonoBehaviour{
         var fileTask = System.Threading.Tasks.Task.Run(() => {
             try{
                 if(!saveCancellation.IsCancellationRequested)
-                    File.WriteAllText(filePath, json);
+                    File.WriteAllBytes(filePath, worldBytes);
             }
             catch (Exception e){ fileException = e; }
         }, saveCancellation.Token);
@@ -387,7 +361,7 @@ public class GameManager : MonoBehaviour{
 
         SaveWorlds();
 
-        Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+        Debug.Log("finished saving world");
 
         CleanupSavingState();
         saveCoroutine = null;
@@ -423,8 +397,8 @@ public class GameManager : MonoBehaviour{
         isSaving = true;
         saveIconCG.alpha = 1;
         
-        string settingsJSON = JsonConvert.SerializeObject(settings, JSONsettings);
-        PlayerPrefs.SetString("GameSettings", settingsJSON);
+        byte[] settingsBytes = MemoryPackSerializer.Serialize(settings);
+        PlayerPrefs.SetString("GameSettings", Convert.ToBase64String(settingsBytes));
 
         SaveStats();
 
@@ -445,16 +419,15 @@ public class GameManager : MonoBehaviour{
         }
 
 #if UNITYSERIALIZATION1
-        string json = JsonUtility.ToJson(currentWorld, true);
-#else
-        string json = JsonConvert.SerializeObject(currentWorld, Formatting.Indented, JSONsettings);
+        // not used
 #endif
-        PlayerPrefs.SetString(currentWorld.name, json);
+        byte[] worldBytes = MemoryPackSerializer.Serialize(currentWorld);
+        PlayerPrefs.SetString(currentWorld.name, Convert.ToBase64String(worldBytes));
 
 #if UNITY_STANDALONE_WIN && SAVEWORLDTOFILE
         string filePath = Path.Combine(Application.persistentDataPath, "WorldSave.txt");
         try{
-            File.WriteAllText(filePath, json);
+            File.WriteAllBytes(filePath, worldBytes);
             Debug.Log($"World saved to text file at {filePath}");
         } catch (Exception e){
             Debug.LogError($"Failed to save world to text file: {e}");
@@ -462,7 +435,7 @@ public class GameManager : MonoBehaviour{
 #endif
 
         SaveWorlds();
-        Debug.Log("finished saving saved:" + JsonConvert.SerializeObject(currentWorld.playerData, JSONsettings));
+        Debug.Log("finished saving world");
 
         CleanupSavingState();
     }
@@ -470,16 +443,15 @@ public class GameManager : MonoBehaviour{
     private void SaveWorlds(){
         // Save all world names to PlayerPrefs
         List<string> worldNames = worlds.Select(w => w.name).ToList();
-        string json = JsonUtility.ToJson(new Wrapper<List<string>>{ data = worldNames });
-        PlayerPrefs.SetString("AllWorlds", json);
+        byte[] listBytes = MemoryPackSerializer.Serialize(worldNames);
+        PlayerPrefs.SetString("AllWorlds", Convert.ToBase64String(listBytes));
         PlayerPrefs.Save();
     }
 
 
     public void  SaveStats(){
-        string json = JsonUtility.ToJson(myMetrics);
-        Debug.Log($"Saving PlayerStats: {json}");
-        PlayerPrefs.SetString("PlayerStats", json);
+        byte[] bytes = MemoryPackSerializer.Serialize(myMetrics);
+        PlayerPrefs.SetString("PlayerStats", Convert.ToBase64String(bytes));
 
         PlayerPrefs.Save();
         SyncStatsWithSteam();
@@ -487,8 +459,8 @@ public class GameManager : MonoBehaviour{
 
     public void LoadStats(){
         if (PlayerPrefs.HasKey("PlayerStats")){
-            string json = PlayerPrefs.GetString("PlayerStats");
-            myMetrics = JsonUtility.FromJson<WorldMetrics>(json);
+            byte[] bytes = Convert.FromBase64String(PlayerPrefs.GetString("PlayerStats"));
+            myMetrics = MemoryPackSerializer.Deserialize<WorldMetrics>(bytes);
         }
         else{
             myMetrics = new WorldMetrics(); // Default if no data is saved
@@ -614,9 +586,9 @@ public enum Scenum{
     MainMenu = 3,
 }
 
-[JsonObject(ItemNullValueHandling = NullValueHandling.Include)]
+[MemoryPackable]
 [Serializable]
-public class World{
+public partial class World{
     //[JsonProperty] public Guid InstanceId = Guid.NewGuid();
 
     public string name;
@@ -704,26 +676,30 @@ public class Wrapper<T>{
 }
 
 [Serializable]
-public class BlockLoadData{
+[MemoryPackable]
+public partial class BlockLoadData{
     public BlockData data;
     public string addressableKey;
 }
 
 [Serializable]
-public class OreData{
+[MemoryPackable]
+public partial class OreData{
     public Vector2Int position;
     public string oreName; // Name of the OreProperties asset
     public int amount;
 }
 
 [Serializable]
-public class TerrainData{
+[MemoryPackable]
+public partial class TerrainData{
     public Terrain t;
     public Vector2Int pos;
 }
 
 [Serializable]
-public class GameData{
+[MemoryPackable]
+public partial class GameData{
     //level
     public int level;
     public double xp;

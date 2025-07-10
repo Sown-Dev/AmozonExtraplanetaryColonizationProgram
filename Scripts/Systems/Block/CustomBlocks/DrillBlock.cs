@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.Items;
 using UnityEngine;
 
@@ -84,12 +84,12 @@ namespace Systems.Block{
 
         public override BlockData Save(){
             BlockData d =base.Save();
-            d.data.SetString( "progressBar", JsonConvert.SerializeObject( progressBar, GameManager.JSONsettings));
+            d.data.Set("progressBar", progressBar);
             return d;
         }
         public override void Load(BlockData d){
             base.Load(d);
-            progressBar = JsonConvert.DeserializeObject<ProgressBar>(d.data.GetString("progressBar"), GameManager.JSONsettings);
+            progressBar = d.data.Get<ProgressBar>("progressBar");
         }
     }
     [Serializable]

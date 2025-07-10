@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.BlockUI;
 using Systems.Items;
 using UnityEngine;
 
 namespace Systems.Items{
     [Serializable]
-    public class Container : IBlockUI, IContainer{
+    [MemoryPackable]
+    public partial class Container : IBlockUI, IContainer{
         public List<Item> filterList = new List<Item>();
         public bool blackList = true;
 
@@ -16,7 +17,7 @@ namespace Systems.Items{
         public ContainerProperties properties;
 
         
-        [JsonIgnore]
+        [MemoryPackIgnore]
         public int Size{
             get => containerList.Length;
             private set{ } //TODO add resize
@@ -49,7 +50,6 @@ namespace Systems.Items{
         /*public void AddOnInsert(Action<ItemStack> _OnInsert){
             OnInsert += _OnInsert;
         }*/
-        [JsonConstructor]
         public Container(){
             /*properties = new ContainerProperties();
             containerList = new Slot[properties.size];

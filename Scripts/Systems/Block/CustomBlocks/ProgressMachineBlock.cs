@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MemoryPack;
 using UnityEngine;
 
 namespace Systems.Block.CustomBlocks{
@@ -56,12 +56,12 @@ namespace Systems.Block.CustomBlocks{
         
         public override void Load(BlockData d){
             base.Load(d);
-            progressBar = JsonConvert.DeserializeObject<ProgressBar>(d.data.GetString("progressBar"), GameManager.JSONsettings);
+            progressBar = d.data.Get<ProgressBar>("progressBar");
         }
-        
+
         public override BlockData Save(){
             BlockData b = base.Save();
-            b.data.SetString( "progressBar", JsonConvert.SerializeObject(progressBar, GameManager.JSONsettings));
+            b.data.Set("progressBar", progressBar);
             return b;
         }
         

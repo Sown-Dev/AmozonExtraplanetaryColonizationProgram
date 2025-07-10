@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MemoryPack;
 using Systems.Block;
 using Systems.Items;
 
@@ -40,12 +40,12 @@ public class ContainerBlock: TickingBlock, IContainerBlock{
 
     public override void Load(BlockData d){
         base.Load(d);
-        output = JsonConvert.DeserializeObject<Container>(d.data.GetString("output"), GameManager.JSONsettings);
+        output = d.data.Get<Container>("output");
     }
 
     public override BlockData Save(){
         BlockData b = base.Save();
-        b.data.SetString( "output", JsonConvert.SerializeObject(output, GameManager.JSONsettings));
+        b.data.Set("output", output);
         return b;
 
     }

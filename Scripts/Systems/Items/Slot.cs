@@ -1,27 +1,27 @@
 ﻿using System;
 using System.ComponentModel;
-using Newtonsoft.Json;
+using MemoryPack;
 using UI;
 using UnityEngine;
 
 namespace Systems.Items{
     [Serializable]
-    public class Slot{
-        [JsonProperty("ItemStack", NullValueHandling = NullValueHandling.Include)]
+    [MemoryPackable]
+    public partial class Slot{
+        public ItemStack ItemStack = null;
         public ItemStack ItemStack = null;
 
         public Filter filter = null;
         
         public int Stacksize = 1000;
 
-        [JsonIgnore]public bool Selected;
-       [JsonIgnore]public Action OnChange;
+        [MemoryPackIgnore]public bool Selected;
+       [MemoryPackIgnore]public Action OnChange;
 
         //Temp solution for rendering performance: when changing, we mark the slot as dirty, and when we render we clean, so we only render when we change the slot
         public bool
             dirty = true; //true by default so we atleast render once. worst case we render once more than needed on awake
         
-        [JsonConstructor]
         public Slot(){
             //ItemStack = null;
             //OnChange += ()=>{dirty = true;};

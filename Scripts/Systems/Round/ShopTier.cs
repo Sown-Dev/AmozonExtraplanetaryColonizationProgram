@@ -1,9 +1,11 @@
 ﻿
 using System;
+using MemoryPack;
 
 namespace Systems.Round{
     [Serializable]
-    public class ShopTier{
+    [MemoryPackable]
+    public partial class ShopTier{
         public int tier;
         public ShopOffer[] logistics;
         public ShopOffer[] electrical;
