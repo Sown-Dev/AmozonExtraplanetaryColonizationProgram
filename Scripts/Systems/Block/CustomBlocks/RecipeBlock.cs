@@ -144,7 +144,7 @@ return d;
             base.Load(d);
             //recipeSelector.SelectRecipe( JsonConvert.DeserializeObject<Recipe>( d.data.GetString( "selectedRecipe" ), GameManager.JSONsettings ) );
             input = JsonConvert.DeserializeObject<Container>( d.data.GetString( "input" ), GameManager.JSONsettings );
-            recipeSelector.SelectRecipe( d.data.GetInt( "selectedRecipe" ) );
+           // recipeSelector.SelectRecipe( d.data.GetInt( "selectedRecipe" ) );
             SetRecipe();
         }
     }

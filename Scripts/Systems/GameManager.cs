@@ -22,6 +22,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 using Terrain = Systems.Terrain.Terrain;
 
@@ -92,6 +93,8 @@ public class GameManager : MonoBehaviour{
     };
 
     private void Awake(){
+
+        Application.targetFrameRate = 60;
         if (Instance == null){
             Instance = this;
             DontDestroyOnLoad(gameObject);

@@ -188,7 +188,7 @@ public partial class TerrainManager{
 
         // Initial block placements
         //PlaceBlock(SellBlock, new Vector2Int(0, 1));
-        PlaceBlock(SupplyCrate, new Vector2Int(Random.Range(-2, 2), -1));
+        PlaceBlock(SupplyCrate, new Vector2Int(Random.Range(-2, 2), 2));
 
         if (GameManager.Instance.settings.DevMode){
             PlaceBlock(BigCrate, new Vector2Int(0, -4));
@@ -256,41 +256,6 @@ public partial class TerrainManager{
 
         Debug.Log($"Terrain generation took {Time.realtimeSinceStartup - terrainStartTime} seconds");
 
-        // Improved spawn wall carving
-        int spawnRadius = 20;
-        FastNoiseLite carveNoise = new FastNoiseLite(currentSeed);
-        carveNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-        carveNoise.SetFrequency(0.07f);
-
-        for (int i = -spawnRadius; i <= spawnRadius; i++){
-            for (int j = -spawnRadius; j <= spawnRadius; j++){
-                float dist = Mathf.Sqrt(i * i + j * j * 0.5f);
-                float noiseVal = (carveNoise.GetNoise(i, j) + 1) * 0.5f; //0-1
-                float edge = Mathf.Lerp(spawnRadius - 4, spawnRadius, noiseVal);
-                if (dist <= edge){
-                    SetWall(null, new Vector3Int(i, j, 0));
-                }
-            }
-        }
-
-        // Ensure spawn terrain has no colliders (approx 5x5 area)
-        int clearRadius = 2;
-        for (int i = -clearRadius; i <= clearRadius; i++){
-            for (int j = -clearRadius; j <= clearRadius; j++){
-                Vector2Int pos = new Vector2Int(i, j);
-                TerrainProperties props = GetTerrainProperties(pos);
-                if (props != null && props.collider){
-                    Biome biome = GetBiomeForPosition(i, j);
-                    TerrainProperties replacement = Grass;
-                    if (biome != null){
-                        var choice = biome.terrains.OrderByDescending(t => t.priority)
-                                                .FirstOrDefault(t => !t.terrain.collider);
-                        if (choice != null) replacement = choice.terrain;
-                    }
-                    SetTerrain(pos, replacement);
-                }
-            }
-        }
 
         // Random block placement
         for (int i = 0; i < (halfSize * halfSize) / 130; i++){
@@ -402,11 +367,13 @@ public partial class TerrainManager{
 
         if (((perlin2 * perlin2 < 0.35f * wallModifier && perlin2 > 0.03f) || (perlin1 < 0.25f * wallModifier && perlin2 < 0.42f * wallModifier)) &&
             perlin3 * wallModifier > 0.25f){
-            if (biome?.customWallTile != null){
-                SetWall(biome.customWallTile, (Vector3Int)position);
-            }
-            else{
-                SetWall(rockWall, (Vector3Int)position);
+            if (Vector2.Distance(position, Vector2Int.zero) > 4){
+                if (biome?.customWallTile != null){
+                    SetWall(biome.customWallTile, (Vector3Int)position);
+                }
+                else{
+                    SetWall(rockWall, (Vector3Int)position);
+                }
             }
 
             if (Random.value > 0.5f){
@@ -552,5 +519,7 @@ public partial class TerrainManager{
         foreach (var b in biomes){
             if (CheckThreshold(b.threshold, x, y)) return b;
         }
+
         return null;
-    }}
+    }
+}

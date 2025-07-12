@@ -121,7 +121,7 @@ public class RoundCompleteUI : MonoBehaviour
     {
         earnedBarText.text = (int)earned + " / " + RoundManager.Instance.currentContract.requiredQuota;
         earnedBarFill.rectTransform.offsetMax = 
-            new Vector2(-2 + ((1 - (earned / RoundManager.Instance.currentContract.requiredQuota)) * -156), -2);
+            new Vector2(-2 + ((1 - (earned / RoundManager.Instance.currentContract.requiredQuota)) * -128), -2);
 
         timeText.text =
             $"Time Remaining: <color=#226633ff>{(int)(timeRemaining / 60)}:{(timeRemaining % 60):00}</color>\nTime Bonus:    <color=#118811ff>+${(int)timeBonus}</color>";
