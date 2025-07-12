@@ -18,6 +18,8 @@ public partial class TerrainManager{
     [FormerlySerializedAs("size")] [SerializeField]
     private int worldSize = 500;
 
+    private const int SPAWN_RADIUS = 4;
+
     [Header("Biomes")] [SerializeField] private List<Biome> allBiomes;
     [SerializeField] private List<Biome> biomes;
 
@@ -57,9 +59,16 @@ public partial class TerrainManager{
     private float startTime;
     private bool generatedWorld;
 
-    private float noiseOffset = 0;
+    private float noiseOffset;
+    private float noiseOffset2;
 
-    public void GenerateWorld(){
+    private Random.State savedRandomState;
+
+    private NoiseMap noiseMap;
+    public Dictionary<string, float[][]> worldMaps => noiseMap.Maps;
+
+    private void InitializeGeneration()
+    {
         startTime = Time.realtimeSinceStartup;
         generatedWorld = true;
         _terrainTileBuffer.Clear();
@@ -67,37 +76,19 @@ public partial class TerrainManager{
         allBiomes = Resources.LoadAll<Biome>("Biomes").ToList();
         biomes = allBiomes;
 
-        Random.State originalState = Random.state;
+        savedRandomState = Random.state;
         currentSeed = GameManager.Instance.currentWorld.seed;
         Debug.Log($"Generating terrain with seed {currentSeed}");
         Random.InitState(currentSeed);
 
-        BoundsInt bounds = new BoundsInt(
-            new Vector3Int(-worldSize, -worldSize, 0),
-            new Vector3Int(worldSize * 2, worldSize * 2, 1)
-        );
+        noiseOffset = 50000 * Random.value + 10000;
+        noiseOffset2 = 5000 * Random.value + 22000;
+    }
 
-        float noiseTime = Time.realtimeSinceStartup;
-
-        float noiseOffset = 50000 * Random.value + 10000;
-        float noiseOffset2 = 5000 * Random.value + 22000;
-
-
-        string[] keys = new string[]{ "perlin1", "perlin2", "perlin3", "height", "wetness", "heat", "wind", "simplex" };
-
-        // Initialize the dictionary with empty jagged arrays.
-        worldMaps.Clear();
-        foreach (string key in keys){
-            // Create a jagged array with 'dimension' rows.
-            float[][] map = new float[bounds.size.x][];
-            for (int i = 0; i < bounds.size.x; i++){
-                // Allocate each row as a new float array.
-                map[i] = new float[bounds.size.y];
-            }
-
-            worldMaps.Add(key, map);
-        }
-
+    private void BuildNoiseMaps()
+    {
+        string[] keys = { "perlin1", "perlin2", "perlin3", "height", "wetness", "heat", "wind", "simplex" };
+        noiseMap = new NoiseMap(worldSize, keys);
 
         FastNoiseLite noise = new FastNoiseLite();
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2S);
@@ -105,13 +96,11 @@ public partial class TerrainManager{
 
         float maxHeat = 1;
         float minHeat = 0.25f;
-
         float maxWetness = 1;
         float minWetness = 0;
 
-        switch (GameManager.Instance.currentWorld.planetType){
-            case PlanetType.GasGiant:
-                break;
+        switch (GameManager.Instance.currentWorld.planetType)
+        {
             case PlanetType.Ocean:
                 minWetness = 0.3f;
                 break;
@@ -122,210 +111,212 @@ public partial class TerrainManager{
                 minHeat = 0f;
                 maxHeat = 0.9f;
                 break;
-            default:
-                minHeat = 0.25f;
-                break;
         }
 
-        //generate noise maps:
-        for (int i = -worldSize; i < worldSize; i++){
-            for (int j = -worldSize; j < worldSize; j++){
-                Vector2Int position = new Vector2Int(i, j);
-                float perlin1 = Mathf.PerlinNoise(i * 0.09f - (noiseOffset / 3 * 3), j * 0.09f - noiseOffset * 2)
-                                + Random.Range(-0.01f, 0.01f);
-                float perlin2 = Mathf.PerlinNoise(i * 0.08f + (noiseOffset * 3), j * 0.08f + (noiseOffset * 3))
-                                + Random.Range(-0.01f, 0.01f);
-                float perlin3 = Mathf.PerlinNoise(i * 0.04f - noiseOffset, j * 0.04f + (noiseOffset / 2));
+        float noiseTime = Time.realtimeSinceStartup;
+        for (int i = -worldSize; i < worldSize; i++)
+        {
+            float ix09 = i * 0.09f;
+            float ix08 = i * 0.08f;
+            float ix04 = i * 0.04f;
+            float ix02 = i * 0.02f;
+            float ix008 = i * 0.008f;
+            float ix015 = i * 0.015f;
+            float ix03 = i * 0.03f;
+            for (int j = -worldSize; j < worldSize; j++)
+            {
+                float perlin1 = Mathf.PerlinNoise(ix09 - (noiseOffset / 3 * 3), j * 0.09f - noiseOffset * 2) + Random.Range(-0.01f, 0.01f);
+                float perlin2 = Mathf.PerlinNoise(ix08 + (noiseOffset * 3), j * 0.08f + (noiseOffset * 3)) + Random.Range(-0.01f, 0.01f);
+                float perlin3 = Mathf.PerlinNoise(ix04 - noiseOffset, j * 0.04f + (noiseOffset / 2));
 
-
-                //heat is from 0-1, but we want this to be in our scale of max and minheat, ie if max is 2, itll be from 0-2, etc
-                float heat = Mathf.PerlinNoise(i * 0.02f - noiseOffset2, j * 0.02f - noiseOffset2);
+                float heat = Mathf.PerlinNoise(ix02 - noiseOffset2, j * 0.02f - noiseOffset2);
                 heat = Mathf.Lerp(minHeat, maxHeat, heat);
 
-
-                float height = Mathf.PerlinNoise(i * 0.008f - noiseOffset2, j * 0.008f - noiseOffset2);
-                float wetness = Mathf.PerlinNoise(i * 0.015f - noiseOffset2, j * 0.015f - noiseOffset2);
+                float height = Mathf.PerlinNoise(ix008 - noiseOffset2, j * 0.008f - noiseOffset2);
+                float wetness = Mathf.PerlinNoise(ix015 - noiseOffset2, j * 0.015f - noiseOffset2);
                 wetness = Mathf.Lerp(minWetness, maxWetness, wetness);
-                float wind = Mathf.PerlinNoise(i * 0.03f - noiseOffset2, j * 0.03f - noiseOffset2);
+                float wind = Mathf.PerlinNoise(ix03 - noiseOffset2, j * 0.03f - noiseOffset2);
                 float simplex = noise.GetNoise(i, j);
 
-                worldMaps["perlin1"][i + worldSize][j + worldSize] = perlin1;
-                worldMaps["perlin2"][i + worldSize][j + worldSize] = perlin2;
-                worldMaps["perlin3"][i + worldSize][j + worldSize] = perlin3;
-
-                worldMaps["height"][i + worldSize][j + worldSize] = height;
-                worldMaps["wetness"][i + worldSize][j + worldSize] = wetness;
-                worldMaps["heat"][i + worldSize][j + worldSize] = heat;
-                worldMaps["wind"][i + worldSize][j + worldSize] = wind;
-                worldMaps["simplex"][i + worldSize][j + worldSize] = simplex;
+                noiseMap.Set("perlin1", i, j, perlin1);
+                noiseMap.Set("perlin2", i, j, perlin2);
+                noiseMap.Set("perlin3", i, j, perlin3);
+                noiseMap.Set("height", i, j, height);
+                noiseMap.Set("wetness", i, j, wetness);
+                noiseMap.Set("heat", i, j, heat);
+                noiseMap.Set("wind", i, j, wind);
+                noiseMap.Set("simplex", i, j, simplex);
             }
         }
-
         Debug.Log($"Noise generation took {Time.realtimeSinceStartup - noiseTime} seconds");
+    }
 
-
-        int numSites = Mathf.FloorToInt((worldSize * worldSize) / 2000f);
-        numSites = Mathf.Clamp(numSites, 1, 20); // Limit maximum sites
-        numSites = 13;
-        List<Vector2Int> placedSites = new List<Vector2Int>();
-
-        int halfSize = worldSize / 2;
-
-
-        //set resource blocks based on flags:
-        resourceBlocks = new List<Block>();
-        resourceBlocks.Add(Tree);
-        resourceBlocks.Add(Crystal);
-
-        if (GameManager.Instance.currentWorld.flags.HasFlag(PlanetFlags.RockCoal)){
+    private void PlaceInitialBlocks()
+    {
+        resourceBlocks = new List<Block> { Tree, Crystal };
+        if (GameManager.Instance.currentWorld.flags.HasFlag(PlanetFlags.RockCoal))
             resourceBlocks.Add(CoalNode);
-        }
-
-        if (GameManager.Instance.currentWorld.flags.HasFlag(PlanetFlags.StoneNodes)){
+        if (GameManager.Instance.currentWorld.flags.HasFlag(PlanetFlags.StoneNodes))
             resourceBlocks.Add(rockNode);
-        }
 
-
-        // Initial block placements
-        //PlaceBlock(SellBlock, new Vector2Int(0, 1));
         PlaceBlock(SupplyCrate, new Vector2Int(Random.Range(-2, 2), 2));
-
-        if (GameManager.Instance.settings.DevMode){
+        if (GameManager.Instance.settings.DevMode)
+        {
             PlaceBlock(BigCrate, new Vector2Int(0, -4));
-            if (GetBlock(new Vector2Int(0, -4)) is ContainerBlock c){
-                foreach (List<Item> list in ItemManager.Instance.itemDict.Values){
-                    foreach (Item item in list){
-                        ItemStack i = new ItemStack(item, item.stackSize);
-                        c.Insert(ref i);
+            if (GetBlock(new Vector2Int(0, -4)) is ContainerBlock c)
+            {
+                foreach (var list in ItemManager.Instance.itemDict.Values)
+                {
+                    foreach (Item item in list)
+                    {
+                        ItemStack stack = new ItemStack(item, item.stackSize);
+                        c.Insert(ref stack);
                     }
                 }
             }
         }
+    }
 
+    private void PlaceConstructionSites(List<Vector2Int> placedSites, int numSites, int halfSize)
+    {
         float siteStartTime = Time.realtimeSinceStartup;
-        while (placedSites.Count < numSites){
+        while (placedSites.Count < numSites)
+        {
             int randomX = Random.Range(-halfSize, halfSize);
             int randomY = Random.Range(-halfSize, halfSize);
-
             Vector2Int pos = new Vector2Int(randomX, randomY);
-            float perlin2 = Mathf.PerlinNoise(randomX * 0.2f - (noiseOffset / 3 * 3), randomY * 0.2f - noiseOffset * 2)
-                            + Random.Range(-0.01f, 0.01f);
-            if (perlin2 > 0.7f && constructionSites.Length > 0 && placedSites.Count < numSites){
+            float perlin2 = Mathf.PerlinNoise(randomX * 0.2f - (noiseOffset / 3 * 3), randomY * 0.2f - noiseOffset * 2) + Random.Range(-0.01f, 0.01f);
+            if (perlin2 > 0.7f && constructionSites.Length > 0 && placedSites.Count < numSites)
+            {
                 bool validPosition = true;
-
-                // Check minimum distance from other sites
-                foreach (var site in placedSites){
-                    if (Vector2Int.Distance(pos, site) < 40){
+                foreach (var site in placedSites)
+                {
+                    if (Vector2Int.Distance(pos, site) < 40)
+                    {
                         validPosition = false;
                         break;
                     }
                 }
-
-                if (validPosition){
-                    Debug.Log($"Placing construction site at {pos}");
-
-                    // Place random construction site
+                if (validPosition)
+                {
                     Block sitePrefab = constructionSites[Random.Range(0, constructionSites.Length)];
                     PlaceBlock(sitePrefab, pos);
                     placedSites.Add(pos);
                 }
             }
         }
-
         Debug.Log($"Placed {placedSites.Count} construction sites in {Time.realtimeSinceStartup - siteStartTime} seconds");
+    }
 
-        float terrainStartTime = Time.realtimeSinceStartup;
-
-        // World gen
-        float centerNoise = 0;
-        for (int i = -halfSize; i < halfSize; i++){
-            for (int j = -halfSize; j < halfSize; j++){
-                Vector2Int position = new Vector2Int(i, j);
-                try{
+    private void GenerateTerrain(int halfSize)
+    {
+        for (int i = -halfSize; i < halfSize; i++)
+        {
+            for (int j = -halfSize; j < halfSize; j++)
+            {
+                try
+                {
                     GeneratePosition(i, j);
-
-                    if (i == 0 && j == 0){
-                        centerNoise = 0;
-                    }
                 }
-                catch (Exception e){
-                    Debug.LogError($"Error at {position}: {e.StackTrace}");
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error at {(i, j)}: {e}");
                 }
             }
         }
+    }
 
-        Debug.Log($"Terrain generation took {Time.realtimeSinceStartup - terrainStartTime} seconds");
-
-
-        // Random block placement
-        for (int i = 0; i < (halfSize * halfSize) / 130; i++){
-            Vector2Int pos = new Vector2Int(
-                Random.Range(-halfSize, halfSize),
-                Random.Range(-halfSize, halfSize)
-            );
-
-            if (IsWall((Vector3Int)pos)){
+    private void ScatterRandomBlocks(int halfSize)
+    {
+        for (int i = 0; i < (halfSize * halfSize) / 130; i++)
+        {
+            Vector2Int pos = new Vector2Int(Random.Range(-halfSize, halfSize), Random.Range(-halfSize, halfSize));
+            if (IsWall((Vector3Int)pos))
+            {
                 i--;
                 continue;
             }
 
-            if (Random.value < 0.065f){
+            if (Random.value < 0.065f)
+            {
                 PlaceBlock(LootCrate, pos);
                 continue;
             }
 
             if (GetTerrainProperties(pos) == Grass) PlaceBlock(Tree, pos);
-            else{
-                PlaceBlock(resourceBlocks[Random.Range(0, resourceBlocks.Count)], pos);
-            }
+            else PlaceBlock(resourceBlocks[Random.Range(0, resourceBlocks.Count)], pos);
         }
 
-        // Crystal cluster generation
-        for (int i = 0; i < 25; i++){
-            Vector2Int pos = new Vector2Int(
-                Random.Range(-halfSize, halfSize),
-                Random.Range(-halfSize, halfSize)
-            );
-
+        for (int i = 0; i < 25; i++)
+        {
+            Vector2Int pos = new Vector2Int(Random.Range(-halfSize, halfSize), Random.Range(-halfSize, halfSize));
             SetWall(null, (Vector3Int)pos);
-            for (int j = 0; j < 9; j++){
-                SetWall(null, (Vector3Int)pos +
-                              Vector3Int.RoundToInt(Random.insideUnitCircle * Random.Range(0.5f, 2.2f)));
-            }
-
+            for (int j = 0; j < 9; j++)
+                SetWall(null, (Vector3Int)pos + Vector3Int.RoundToInt(Random.insideUnitCircle * Random.Range(0.5f, 2.2f)));
             PlaceBlock(Crystal, pos);
         }
+    }
 
-        foreach (Vector2Int site in placedSites){
-            for (int i = -12; i <= 12; i++){
-                for (int j = -12; j <= 12; j++){
+    private void FinalizeGeneration()
+    {
+        GameManager.Instance.currentWorld.generated = true;
+        Random.state = savedRandomState;
+        ApplyBufferedTiles();
+    }
+
+    public void GenerateWorld()
+    {
+        InitializeGeneration();
+        BuildNoiseMaps();
+
+        int numSites = Mathf.FloorToInt((worldSize * worldSize) / 2000f);
+        numSites = Mathf.Clamp(numSites, 1, 20);
+        numSites = 13;
+        List<Vector2Int> placedSites = new List<Vector2Int>();
+
+        int halfSize = worldSize / 2;
+
+        PlaceInitialBlocks();
+        PlaceConstructionSites(placedSites, numSites, halfSize);
+
+        float terrainStartTime = Time.realtimeSinceStartup;
+        GenerateTerrain(halfSize);
+        Debug.Log($"Terrain generation took {Time.realtimeSinceStartup - terrainStartTime} seconds");
+
+        ScatterRandomBlocks(halfSize);
+
+        foreach (Vector2Int site in placedSites)
+        {
+            for (int i = -12; i <= 12; i++)
+            {
+                for (int j = -12; j <= 12; j++)
+                {
                     float distance = Mathf.Sqrt(i * i + j * j);
-
-                    // Function: Completely remove walls within radius 5, taper off from 5 to 10
                     float falloff = Mathf.Clamp01(1 - (distance - 5) / 5);
                     float zoom = 0.05f;
                     float perlin = Mathf.PerlinNoise((site.x + i) * zoom, (site.y + j) * zoom);
-                    if ((falloff > 0.25 && perlin > 0.5) || falloff > 0.8f){
+                    if ((falloff > 0.25 && perlin > 0.5) || falloff > 0.8f)
+                    {
                         SetWall(null, new Vector3Int(site.x + i, site.y + j, 0));
-                        if (Random.value < 0.8f && distance < 2){
+                        if (Random.value < 0.8f && distance < 2)
                             SetTerrain(new Vector2Int(site.x + i, site.y + j), Sand);
-                        }
                     }
                 }
             }
         }
 
-        GameManager.Instance.currentWorld.generated = true;
-
-        Random.state = originalState;
-
-        ApplyBufferedTiles();
-        GC.Collect();
+        FinalizeGeneration();
     }
 
     public void GeneratePosition(int i, int j){
         bool placedOre = false;
         Vector2Int position = new Vector2Int(i, j);
+
+        if (Vector2.Distance(position, Vector2Int.zero) <= SPAWN_RADIUS)
+        {
+            SetTerrain(position, Stone);
+            return;
+        }
 
         float perlin2 = worldMaps["perlin2"][i + worldSize][j + worldSize];
         float perlin1 = worldMaps["perlin1"][i + worldSize][j + worldSize];
@@ -367,7 +358,7 @@ public partial class TerrainManager{
 
         if (((perlin2 * perlin2 < 0.35f * wallModifier && perlin2 > 0.03f) || (perlin1 < 0.25f * wallModifier && perlin2 < 0.42f * wallModifier)) &&
             perlin3 * wallModifier > 0.25f){
-            if (Vector2.Distance(position, Vector2Int.zero) > 4){
+            if (Vector2.Distance(position, Vector2Int.zero) > SPAWN_RADIUS){
                 if (biome?.customWallTile != null){
                     SetWall(biome.customWallTile, (Vector3Int)position);
                 }
