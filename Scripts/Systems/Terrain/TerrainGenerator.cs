@@ -18,6 +18,8 @@ public partial class TerrainManager{
     [FormerlySerializedAs("size")] [SerializeField]
     private int worldSize = 500;
 
+    private const int SPAWN_RADIUS = 4;
+
     [Header("Biomes")] [SerializeField] private List<Biome> allBiomes;
     [SerializeField] private List<Biome> biomes;
 
@@ -327,6 +329,12 @@ public partial class TerrainManager{
         bool placedOre = false;
         Vector2Int position = new Vector2Int(i, j);
 
+        if (Vector2.Distance(position, Vector2Int.zero) <= SPAWN_RADIUS)
+        {
+            SetTerrain(position, Stone);
+            return;
+        }
+
         float perlin2 = worldMaps["perlin2"][i + worldSize][j + worldSize];
         float perlin1 = worldMaps["perlin1"][i + worldSize][j + worldSize];
         float perlin3 = worldMaps["perlin3"][i + worldSize][j + worldSize];
@@ -367,7 +375,7 @@ public partial class TerrainManager{
 
         if (((perlin2 * perlin2 < 0.35f * wallModifier && perlin2 > 0.03f) || (perlin1 < 0.25f * wallModifier && perlin2 < 0.42f * wallModifier)) &&
             perlin3 * wallModifier > 0.25f){
-            if (Vector2.Distance(position, Vector2Int.zero) > 4){
+            if (Vector2.Distance(position, Vector2Int.zero) > SPAWN_RADIUS){
                 if (biome?.customWallTile != null){
                     SetWall(biome.customWallTile, (Vector3Int)position);
                 }

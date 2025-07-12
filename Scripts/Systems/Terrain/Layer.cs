@@ -4,45 +4,72 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 [Serializable]
-public class Layer<ObjectType> where ObjectType: class{
+public class Layer<ObjectType> where ObjectType : class
+{
+    private readonly Dictionary<long, ObjectType> layer;
 
-
-    private Dictionary<Vector2Int, ObjectType> layer;
-
-
-    public Layer(){
-        layer = new Dictionary<Vector2Int, ObjectType>();
+    public Layer(int capacity = 0)
+    {
+        layer = capacity > 0 ? new Dictionary<long, ObjectType>(capacity) : new Dictionary<long, ObjectType>();
     }
-    
+
+    private static long Encode(Vector2Int pos)
+    {
+        return ((long)pos.x << 32) | (uint)pos.y;
+    }
+
+    private static Vector2Int Decode(long key)
+    {
+        return new Vector2Int((int)(key >> 32), (int)key);
+    }
+
     [CanBeNull]
-    public ObjectType Get(Vector2Int position){
-        if(layer.ContainsKey(position)){
-            return layer[position];
-        }
-        return null;
+    public ObjectType Get(Vector2Int position)
+    {
+        layer.TryGetValue(Encode(position), out var obj);
+        return obj;
     }
-    
-    public void Set(Vector2Int position, ObjectType obj){
-        layer[position] = obj;
+
+    public void Set(Vector2Int position, ObjectType obj)
+    {
+        layer[Encode(position)] = obj;
     }
-    
-    //TODO: NOT THIS
-    public void Remove(ObjectType obj){
-        foreach (var pair in layer){
-            if (pair.Value == obj){
-                layer.Remove(pair.Key);
-                return;
+
+    public void Remove(ObjectType obj)
+    {
+        long removeKey = -1;
+        foreach (var pair in layer)
+        {
+            if (ReferenceEquals(pair.Value, obj))
+            {
+                removeKey = pair.Key;
+                break;
             }
         }
-    }
-    
-    public void Remove(Vector2Int position){
-        if(layer.ContainsKey(position)){
-            layer.Remove(position);
-        }
-    }
-    public Dictionary<Vector2Int, ObjectType> GetDictionary(){
-        return layer;
+
+        if (removeKey != -1)
+            layer.Remove(removeKey);
     }
 
+    public void Remove(Vector2Int position)
+    {
+        layer.Remove(Encode(position));
+    }
+
+    public IEnumerable<KeyValuePair<Vector2Int, ObjectType>> Pairs()
+    {
+        foreach (var pair in layer)
+            yield return new KeyValuePair<Vector2Int, ObjectType>(Decode(pair.Key), pair.Value);
+    }
+
+    public IEnumerable<ObjectType> Values => layer.Values;
+
+    // Legacy compatibility
+    public Dictionary<Vector2Int, ObjectType> GetDictionary()
+    {
+        var dict = new Dictionary<Vector2Int, ObjectType>(layer.Count);
+        foreach (var pair in layer)
+            dict.Add(Decode(pair.Key), pair.Value);
+        return dict;
+    }
 }
