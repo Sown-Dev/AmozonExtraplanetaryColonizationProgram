@@ -132,7 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cg: {fileID: 7430962746876372956}
   am: {fileID: 181144837441494825}
-  settingsWindow: {fileID: 0}
   saveButton: {fileID: 2419713288003452167}
 --- !u!225 &7430962746876372956
 CanvasGroup:
@@ -240,7 +239,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 124, y: 100}
+  m_SizeDelta: {x: 124, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4311728632087644572
 CanvasRenderer:

@@ -11,26 +11,30 @@ namespace UI
         // The offset in canvas local coordinates between the pointer and the window's anchoredPosition.
         private Vector2 offset;
         // Cache the window's RectTransform.
-        protected RectTransform windowRectTransform;
+        [HideInInspector][SerializeField]protected RectTransform windowRectTransform;
         // Cache the parent Canvas's RectTransform.
-        private RectTransform canvasRectTransform;
+        [HideInInspector][SerializeField]private RectTransform canvasRectTransform;
         
 
         [HideInInspector]
         public WindowManager manager;
         public Shadow shadow;
         
-        private CanvasGroup cg;
-        protected bool DragAllow = true;
+        [HideInInspector][SerializeField]private CanvasGroup cg;
+        [HideInInspector][SerializeField]protected bool DragAllow = true;
 
         public Action OnClose;
 
-        public virtual void Awake()
+        public void OnValidate()
         {
             cg = GetComponent<CanvasGroup>();
             windowRectTransform = transform as RectTransform;
-            // Assumes the window is a child of a Canvas.
             canvasRectTransform = GetComponentInParent<Canvas>().transform as RectTransform;
+
+        }
+        
+        public virtual void Awake()
+        {
            
         }
 
